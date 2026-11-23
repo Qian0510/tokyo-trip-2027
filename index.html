@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#142b35">
+<title>TOKYO TRIP 2027｜東京六日五夜</title>
+<style>
+:root{--ink:#172d35;--muted:#6b7d82;--paper:#f5f3ed;--card:#fffefa;--line:#e7e3d9;--accent:#bd684d;--sage:#637d70;--nav:#142b35;--gold:#d8b77a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC",sans-serif;padding-bottom:calc(82px + env(safe-area-inset-bottom))}
+a{color:inherit}.hero{background:linear-gradient(145deg,#142b35,#36545a);color:#fff;padding:34px 22px 26px;border-radius:0 0 28px 28px;position:relative;overflow:hidden}.hero:after{content:"富士山";position:absolute;right:-8px;bottom:-28px;font-size:84px;letter-spacing:5px;color:#ffffff12;font-weight:800}.eyebrow{font-size:11px;letter-spacing:3px;color:#d9c49b;font-weight:700}.hero h1{font-family:Georgia,serif;font-size:34px;letter-spacing:1px;margin:12px 0 5px}.hero p{margin:0;color:#d9e2df;font-size:13px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:24px}.stat{background:#ffffff14;border:1px solid #ffffff20;border-radius:13px;padding:11px 9px}.stat b{display:block;font-size:15px}.stat span{font-size:10px;color:#d9e2df}
+main{max-width:760px;margin:auto;padding:18px 15px 28px}.section-head{display:flex;align-items:end;justify-content:space-between;margin:12px 2px 12px}.section-head h2{font-size:19px;margin:0}.section-head small{color:var(--muted);font-size:11px}.card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:16px;margin-bottom:12px;box-shadow:0 3px 12px #1c34300a}.day-card{overflow:hidden;padding:0}.day-top{padding:16px 16px 13px;background:#e9eee9}.day-top .dayno{font-size:10px;letter-spacing:2px;color:var(--sage);font-weight:800}.day-top h3{font-size:18px;margin:5px 0 3px}.day-top p{font-size:12px;color:var(--muted);margin:0}.timeline{padding:5px 16px 13px}.event{display:grid;grid-template-columns:82px 1fr;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}.event:last-child{border:0}.time{font-size:12px;font-weight:750;color:var(--accent);font-variant-numeric:tabular-nums}.event strong{font-size:13px}.event p{font-size:11px;color:var(--muted);margin:4px 0 0;line-height:1.55}.tag{display:inline-block;font-size:10px;padding:3px 7px;border-radius:20px;background:#f1e7dc;color:#8c513d;margin-left:5px}.muted{color:var(--muted)}.notice{border-left:3px solid var(--gold);background:#f7f1e5;padding:11px 12px;border-radius:0 10px 10px 0;font-size:12px;line-height:1.65;margin:10px 0}.links{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.maplink{display:inline-flex;align-items:center;text-decoration:none;background:#edf1ed;color:#34574d;border-radius:9px;padding:8px 10px;font-size:11px;font-weight:650}.maplink:before{content:"↗";margin-right:5px}.rowline{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);font-size:13px}.rowline:last-child{border:0}.rowline span:last-child{text-align:right;font-weight:650}.pill{font-size:10px;border-radius:20px;padding:4px 8px;background:#f2e8d8;color:#835c2d}.subhead{font-size:13px;font-weight:800;margin:15px 0 6px}.checklist label{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}.checklist input{accent-color:var(--sage);width:17px;height:17px;margin:0}.checklist label:has(input:checked) span{text-decoration:line-through;color:#9aa5a3}.progress{height:6px;background:#e9e7df;border-radius:10px;overflow:hidden;margin:10px 0 4px}.progress div{height:100%;width:0;background:var(--sage);transition:width .2s}.budget-total{font-size:26px;font-weight:800;color:var(--sage);margin:4px 0}.budget-note{font-size:11px;color:var(--muted);line-height:1.6}.tabbar{position:fixed;bottom:0;left:0;right:0;background:#fffefaee;backdrop-filter:blur(14px);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding:8px 5px calc(8px + env(safe-area-inset-bottom));z-index:10}.tabbar button{border:0;background:none;color:#778589;font-size:10px;padding:5px 0;display:flex;flex-direction:column;gap:4px;align-items:center}.tabbar button .ico{font-size:19px}.tabbar button.active{color:var(--accent);font-weight:800}.panel{display:none}.panel.active{display:block}.smallprint{font-size:10px;color:var(--muted);line-height:1.6}.hotel{display:flex;gap:12px;align-items:flex-start}.hotel .num{width:30px;height:30px;border-radius:10px;background:#e9eee9;color:var(--sage);display:grid;place-items:center;font-weight:800;flex:none}.hotel h3{font-size:14px;margin:0 0 4px}.hotel p{font-size:11px;color:var(--muted);margin:0;line-height:1.6}.money{font-variant-numeric:tabular-nums}
+@media(min-width:650px){.hero{padding:44px max(28px,calc((100% - 700px)/2)) 30px}.hero h1{font-size:42px}.stats{max-width:700px}.tabbar{left:50%;transform:translateX(-50%);width:min(100%,760px);border-radius:16px 16px 0 0}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="eyebrow">JAPAN · WINTER JOURNEY</div>
+  <h1>TOKYO TRIP 2027</h1>
+  <p>東京六日五夜・6 位成人同行</p>
+  <div class="stats">
+    <div class="stat"><b>01.14 — 01.19</b><span>旅行日期</span></div>
+    <div class="stat"><b>NT$30–40K</b><span>每人總預算</span></div>
+    <div class="stat"><b>6 DAYS</b><span>5 晚住宿</span></div>
+  </div>
+</header>
+<main>
+<section id="daily" class="panel active">
+  <div class="section-head"><h2>每日行程</h2><small>DAILY ITINERARY</small></div>
+  <article class="card day-card">
+    <div class="day-top"><div class="dayno">DAY 01 · THU · 01/14</div><h3>抵達東京・晴空塔</h3><p>押上住宿｜抵達日保留體力</p></div>
+    <div class="timeline">
+      <div class="event"><div class="time">08:20–10:50</div><div><strong>台中出發、前往桃園機場</strong></div></div>
+      <div class="event"><div class="time">10:50–12:50</div><div><strong>桃園機場 T1 報到、出境</strong></div></div>
+      <div class="event"><div class="time">12:50–16:55</div><div><strong>桃園飛往東京成田</strong><p>去程起飛時間已確認為 12:50；航空公司及航班號待補。</p></div></div>
+      <div class="event"><div class="time">16:55–18:00</div><div><strong>入境、領取行李</strong></div></div>
+      <div class="event"><div class="time">18:00–19:30</div><div><strong>成田機場前往 Wise Owl Nest</strong><p>建議評估京成 Access Express；實際班次依抵達航廈與當日運行確認。</p></div></div>
+      <div class="event"><div class="time">19:30–19:45</div><div><strong>入住、整理行李</strong></div></div>
+      <div class="event"><div class="time">19:55–21:00</div><div><strong>東京晴空塔、Solamachi、Disney Store</strong><p>商店可能提早打烊，先確認當日營業時間。</p></div></div>
+      <div class="event"><div class="time">21:00–22:00</div><div><strong>超市採買、晚餐</strong><p>以住宿附近超市為主。</p></div></div>
+      <div class="event"><div class="time">22:00</div><div><strong>返回住宿休息</strong></div></div>
+    </div>
+    <div style="padding:0 16px 15px"><div class="links">
+      <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Tokyo+Skytree">東京晴空塔</a>
+      <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Tokyo+Solamachi">Solamachi</a>
+      <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=WISE+OWL+NEST+Oshiage">第一間住宿</a>
+    </div></div>
+  </article>
+  <article class="card day-card">
+    <div class="day-top"><div class="dayno">DAY 02 · FRI · 01/15</div><h3>淺草・和服體驗</h3><p>雷門、淺草寺、仲見世通</p></div>
+    <div class="timeline">
+      <div class="event"><div class="time">08:30–09:15</div><div><strong>早餐、前往淺草</strong></div></div>
+      <div class="event"><div class="time">09:30–10:30</div><div><strong>OUKA KIMONO 換裝</strong><p>六人建議事先預約同一時段。</p></div></div>
+      <div class="event"><div class="time">10:30–11:00</div><div><strong>淺草雷門拍照</strong></div></div>
+      <div class="event"><div class="time">11:00–12:00</div><div><strong>淺草寺參拜</strong></div></div>
+      <div class="event"><div class="time">12:00–13:00</div><div><strong>淺草周邊午餐</strong></div></div>
+      <div class="event"><div class="time">13:00–14:30</div><div><strong>仲見世通、淺草街區拍照</strong></div></div>
+      <div class="event"><div class="time">14:30–15:00</div><div><strong>淺草琥珀堂、日式甜點</strong><p>作為甜點站；明るい農村店家資訊尚待確認。</p></div></div>
+      <div class="event"><div class="time">15:00–16:00</div><div><strong>淺草拉麵與煎餃</strong></div></div>
+      <div class="event"><div class="time">16:00–16:30</div><div><strong>歸還和服</strong></div></div>
+      <div class="event"><div class="time">16:30–19:00</div><div><strong>淺草、押上自由活動及晚餐</strong></div></div>
+    </div>
+    <div style="padding:0 16px 15px"><div class="links">
+      <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=OUKA+KIMONO+Asakusa">OUKA KIMONO</a>
+      <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Kaminarimon+Asakusa">雷門</a>
+      <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Sensoji+Temple">淺草寺</a>
+      <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Asakusa+Kohakudo">淺草琥珀堂</a>
+    </div></div>
+  </article>
+  <article class="card day-card">
+    <div class="day-top"><div class="dayno">DAY 03 · SAT · 01/16</div><h3>東京大神宮・小網神社・搬住宿</h3><p>押上退房 → 新宿入住</p></div>
+    <div class="timeline">
+      <div class="event"><div class="time">08:00–09:00</div><div><strong>早餐、退房</strong></div></div>
+      <div class="event"><div class="time">09:00–09:45</div><div><strong>押上前往東京大神宮</strong></div></div>
+      <div class="event"><div class="time">09:45–10:30</div><div><strong>東京大神宮參拜</strong></div></div>
+      <div class="event"><div class="time">10:30–11:00</div><div><strong>前往人形町</strong></div></div>
+      <div class="event"><div class="time">11:00–12:00</div><div><strong>小網神社參拜</strong></div></div>
+      <div class="event"><div class="time">12:30–13:15</div><div><strong>美奈福關東煮</strong><p>營業時間與當日供餐需出發前確認。</p></div></div>
+      <div class="event"><div class="time">13:15–14:00</div><div><strong>人形町周邊散步</strong></div></div>
+      <div class="event"><div class="time">14:00–16:00</div><div><strong>前往新宿、寄放行李及入住</strong><p>先向第二間飯店確認能否提早寄放；否則使用車站置物櫃或行李配送。</p></div></div>
+      <div class="event"><div class="time">16:00–19:30</div><div><strong>新宿自由活動、晚餐</strong></div></div>
+    </div>
+    <div style="padding:0 16px 15px"><div class="links">
+      <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Tokyo+Daijingu">東京大神宮</a>
+      <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Koami+Shrine">小網神社</a>
+      <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Minahuku+Ningyocho">美奈福</a>
+      <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hotel+Livemax+Shinjuku+East">第二間住宿</a>
+    </div></div>
+  </article>
+  <article class="card day-card">
+    <div class="day-top"><div class="dayno">DAY 04 · SUN · 01/17</div><h3>秋葉原・御徒町・春日部</h3><p>動漫購物、蠟筆小新、溫泉</p></div>
+    <div class="timeline">
+      <div class="event"><div class="time">08:30–09:30</div><div><strong>早餐、新宿出發</strong></div></div>
+      <div class="event"><div class="time">09:30–11:30</div><div><strong>秋葉原動漫、電器商品</strong></div></div>
+      <div class="event"><div class="time">11:30–12:30</div><div><strong>御徒町、二木の菓子、OS Drug</strong></div></div>
+      <div class="event"><div class="time">12:30–13:15</div><div><strong>午餐、章魚燒及街邊小吃</strong></div></div>
+      <div class="event"><div class="time">13:15–14:15</div><div><strong>前往春日部</strong></div></div>
+      <div class="event"><div class="time">14:15–15:30</div><div><strong>蠟筆小新相關景點</strong><p>優先確認 LaLa Garden 的 Buri-buri Cinema Studio 當日開放情況。</p></div></div>
+      <div class="event"><div class="time">15:30–16:00</div><div><strong>LaLa Garden Kasukabe</strong></div></div>
+      <div class="event"><div class="time">16:00–18:00</div><div><strong>春日部溫泉</strong><p>入場費、營業時間及交通需再次確認。</p></div></div>
+      <div class="event"><div class="time">18:00–20:15</div><div><strong>晚餐、返回新宿住宿</strong></div></div>
+    </div>
+    <div style="padding:0 16px 15px"><div class="links">
+      <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Akihabara+Tokyo">秋葉原</a>
+      <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Okachimachi+Tokyo">御徒町</a>
+      <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Niki+no+Kashi+Okachimachi">二木の菓子</a>
+      <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=OS+Drug+Okachimachi">OS Drug</a>
+      <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Lala+Garden+Kasukabe">LaLa Garden</a>
+      <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Kasukabe+Onsen+Yuraku+no+Sato">春日部溫泉</a>
+    </div></div>
+  </article>
+  <article class="card day-card">
+    <div class="day-top"><div class="dayno">DAY 05 · MON · 01/18</div><h3>富士山・河口湖包車</h3><p>包車 ¥72,000／6 人｜當晚入住成田機場</p></div>
+    <div class="timeline">
+      <div class="event"><div class="time">07:00–07:45</div><div><strong>早餐、整理行李、退房</strong></div></div>
+      <div class="event"><div class="time">08:00–10:00</div><div><strong>新宿出發、前往富士山</strong><p>車程受路況及天候影響。</p></div></div>
+      <div class="event"><div class="time">10:00–11:15</div><div><strong>忍野八海</strong></div></div>
+      <div class="event"><div class="time">11:15–12:00</div><div><strong>前往河口湖</strong></div></div>
+      <div class="event"><div class="time">12:00–13:00</div><div><strong>河口湖午餐</strong></div></div>
+      <div class="event"><div class="time">13:00–14:00</div><div><strong>大石公園、富士山拍照</strong></div></div>
+      <div class="event"><div class="time">14:00–15:30</div><div><strong>河口湖周邊景點</strong></div></div>
+      <div class="event"><div class="time">15:30–18:00</div><div><strong>包車行程預計結束</strong><p>原始資料預計 18:00 結束；結束地點與是否可直接送成田尚未確認。</p></div></div>
+      <div class="event"><div class="time">晚上</div><div><strong>前往東橫INN成田機場本館、入住</strong><p>需與包車公司確認是否包含河口湖直送成田、超時費及高速公路費。</p></div></div>
+    </div>
+    <div class="notice">御殿場 Outlet 暫列備選，不放入固定路線，以免壓縮河口湖停留時間及增加前往成田的風險。</div>
+    <div style="padding:0 16px 15px"><div class="links">
+      <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Oshino+Hakkai">忍野八海</a>
+      <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Lake+Kawaguchi">河口湖</a>
+      <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Oishi+Park+Kawaguchiko">大石公園</a>
+      <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Gotemba+Premium+Outlets">御殿場 Outlet（備選）</a>
+    </div></div>
+  </article>
+  <article class="card day-card">
+    <div class="day-top"><div class="dayno">DAY 06 · TUE · 01/19</div><h3>成田機場・返台</h3><p>早班機｜建議搭乘 05:10 飯店接駁</p></div>
+    <div class="timeline">
+      <div class="event"><div class="time">04:50</div><div><strong>起床、整理行李</strong></div></div>
+      <div class="event"><div class="time">05:10</div><div><strong>東橫INN 免費接駁巴士</strong><p>班次及乘車處以飯店最新公告為準，六人建議提早到站候車。</p></div></div>
+      <div class="event"><div class="time">05:30–05:50</div><div><strong>預計抵達成田機場</strong></div></div>
+      <div class="event"><div class="time">05:50–06:30</div><div><strong>報到、行李託運</strong></div></div>
+      <div class="event"><div class="time">06:30–08:00</div><div><strong>安檢、出境、候機</strong></div></div>
+      <div class="event"><div class="time">08:30</div><div><strong>成田起飛</strong></div></div>
+      <div class="event"><div class="time">11:50</div><div><strong>抵達桃園機場</strong></div></div>
+    </div>
+    <div class="links" style="padding:0 16px 15px">
+      <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Toyoko+Inn+Narita+Airport+Honkan">東橫INN成田機場本館</a>
+      <a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Narita+International+Airport">成田機場</a>
+    </div>
+  </article>
+</section>
+
+<section id="transport" class="panel">
+  <div class="section-head"><h2>交通資訊</h2><small>TRANSPORTATION</small></div>
+  <div class="card">
+    <div class="subhead">交通原則</div>
+    <div class="rowline"><span>東京市區</span><span>JR＋東京 Metro＋都營地鐵</span></div>
+    <div class="rowline"><span>富士山</span><span>六人包車 ¥72,000</span></div>
+    <div class="rowline"><span>1/19 飯店至機場</span><span>東橫INN免費接駁巴士</span></div>
+    <div class="rowline"><span>租車</span><span>不租車</span></div>
+  </div>
+  <div class="card">
+    <div class="subhead">路線與待確認費用</div>
+    <div class="rowline"><span>成田 → 押上</span><span>京成 Access Express<br><small class="muted">票價、班次待查</small></span></div>
+    <div class="rowline"><span>東京市區</span><span>Suica／PASMO<br><small class="muted">依實際搭乘計費</small></span></div>
+    <div class="rowline"><span>新宿 → 春日部</span><span>JR／私鐵轉乘<br><small class="muted">路線及票價待核對</small></span></div>
+    <div class="rowline"><span>新宿 → 富士山</span><span>包車<br><small class="muted">費用包含項目待確認</small></span></div>
+    <div class="rowline"><span>富士山 → 成田住宿</span><span>優先詢問包車直送<br><small class="muted">尚未確認是否包含</small></span></div>
+  </div>
+  <div class="notice">2027 年票價、班次可能調整。搭乘前以 JR、東京 Metro、都營地鐵及京成電鐵官方資訊為準。</div>
+  <div class="card">
+    <div class="subhead">常用交通查詢</div>
+    <div class="links">
+      <a class="maplink" target="_blank" href="https://www.jreast.co.jp/multi/en/">JR East</a>
+      <a class="maplink" target="_blank" href="https://www.tokyometro.jp/en/">Tokyo Metro</a>
+      <a class="maplink" target="_blank" href="https://www.keisei.co.jp/keisei/tetudou/skyliner/us/">京成電鐵</a>
+      <a class="maplink" target="_blank" href="https://www.toyoko-inn.com/eng/">東橫INN</a>
+    </div>
+  </div>
+</section>
+
+<section id="hotel" class="panel">
+  <div class="section-head"><h2>住宿資訊</h2><small>ACCOMMODATION</small></div>
+  <div class="card">
+    <div class="hotel"><div class="num">01</div><div><h3>Wise Owl Nest</h3><p>入住 1/14｜退房 1/16<br>每人 NT$1,241<br>押上區域；完整地址及入住規則以 Agoda 訂單為準。</p><div class="links"><a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=WISE+OWL+NEST+Oshiage+Tokyo">Google Maps</a></div></div></div>
+  </div>
+  <div class="card">
+    <div class="hotel"><div class="num">02</div><div><h3>HOTEL LiVEMAX Shinjuku East</h3><p>入住 1/16｜退房 1/18<br>每人 NT$2,107<br>新宿東側；完整地址及入住規則以 Agoda 訂單為準。</p><div class="links"><a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hotel+Livemax+Shinjuku+East">Google Maps</a></div></div></div>
+  </div>
+  <div class="card">
+    <div class="hotel"><div class="num">03</div><div><h3>東橫INN成田機場本館</h3><p>入住 1/18｜退房 1/19<br>每人 NT$994<br>隔日搭乘飯店免費接駁巴士前往成田機場。</p><div class="links"><a class="maplink" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Toyoko+Inn+Narita+Airport+Honkan">Google Maps</a></div></div></div>
+  </div>
+  <div class="card">
+    <div class="rowline"><span>住宿合計／人</span><span class="money">NT$4,342</span></div>
+    <p class="smallprint">1/16、1/18 為住宿更換日。六人行李請事先確認寄放、配送及包車行李容量。</p>
+  </div>
+</section>
+
+<section id="packing" class="panel">
+  <div class="section-head"><h2>行李清單</h2><small>PACKING CHECKLIST</small></div>
+  <div class="card checklist">
+    <div style="font-weight:800">證件與財務</div>
+    <div class="progress"><div id="progressbar"></div></div><p class="smallprint" id="progresslabel">已完成 0 / 15</p>
+    <label><input type="checkbox"><span>護照（確認有效期限）</span></label>
+    <label><input type="checkbox"><span>機票及三間住宿訂單</span></label>
+    <label><input type="checkbox"><span>信用卡、日幣現金</span></label>
+    <label><input type="checkbox"><span>旅遊保險資料</span></label>
+    <label><input type="checkbox"><span>手機、充電器、行動電源</span></label>
+    <label><input type="checkbox"><span>日本 eSIM</span></label>
+    <label><input type="checkbox"><span>耳機、轉接插頭</span></label>
+    <label><input type="checkbox"><span>常備藥品</span></label>
+    <label><input type="checkbox"><span>液體夾鏈袋</span></label>
+    <label><input type="checkbox"><span>保暖外套</span></label>
+    <label><input type="checkbox"><span>發熱衣、長褲</span></label>
+    <label><input type="checkbox"><span>圍巾、手套</span></label>
+    <label><input type="checkbox"><span>好走、防滑的鞋子</span></label>
+    <label><input type="checkbox"><span>替換襪子及內衣</span></label>
+    <label><input type="checkbox"><span>富士山防風保暖配件</span></label>
+  </div>
+</section>
+
+<section id="budget" class="panel">
+  <div class="section-head"><h2>預算管理</h2><small>BUDGET</small></div>
+  <div class="card">
+    <div class="muted" style="font-size:11px">每人總預算目標</div>
+    <div class="budget-total">NT$30,000–40,000</div>
+    <div class="budget-note">以下是規劃額度，機票實際金額尚未補入；購物也包含在總預算內。</div>
+  </div>
+  <div class="card">
+    <div class="rowline"><span>住宿 5 晚</span><span class="money">NT$4,342</span></div>
+    <div class="rowline"><span>富士山包車</span><span class="money">約 NT$2,100</span></div>
+    <div class="rowline"><span>機票</span><span>待補實際金額</span></div>
+    <div class="rowline"><span>東京市區交通</span><span class="money">暫估 NT$3,000</span></div>
+    <div class="rowline"><span>餐飲</span><span class="money">暫估 NT$6,000</span></div>
+    <div class="rowline"><span>和服、溫泉、景點</span><span class="money">暫估 NT$2,500</span></div>
+    <div class="rowline"><span>eSIM、保險</span><span class="money">暫估 NT$1,000</span></div>
+    <div class="rowline"><span>購物</span><span class="money">暫估 NT$5,000</span></div>
+    <div class="rowline"><span>預備金</span><span class="money">暫估 NT$2,000</span></div>
+  </div>
+  <div class="card">
+    <div class="muted" style="font-size:11px">已規劃項目小計（不含機票）</div>
+    <div class="budget-total">NT$25,942</div>
+    <p class="smallprint">機票、包車額外費用、交通及各項實際消費仍需依訂單與現場價格更新。六人合計目標 NT$180,000～240,000。</p>
+  </div>
+</section>
+<p class="smallprint" style="text-align:center;margin:22px 6px 8px">TOKYO TRIP 2027 · 行程資訊以實際訂單及官方公告為準</p>
+</main>
+<nav class="tabbar" aria-label="主要導覽">
+  <button class="active" data-tab="daily"><span class="ico">🗓</span>每日行程</button>
+  <button data-tab="transport"><span class="ico">🚆</span>交通</button>
+  <button data-tab="hotel"><span class="ico">🏨</span>住宿</button>
+  <button data-tab="packing"><span class="ico">🧳</span>行李</button>
+  <button data-tab="budget"><span class="ico">💴</span>預算</button>
+</nav>
+<script>
+const tabs=[...document.querySelectorAll('.tabbar button')];
+const panels=[...document.querySelectorAll('.panel')];
+tabs.forEach(btn=>btn.addEventListener('click',()=>{
+  tabs.forEach(b=>b.classList.toggle('active',b===btn));
+  panels.forEach(p=>p.classList.toggle('active',p.id===btn.dataset.tab));
+  window.scrollTo({top:0,behavior:'smooth'});
+}));
+const checks=[...document.querySelectorAll('.checklist input')];
+function updateProgress(){
+  const n=checks.filter(c=>c.checked).length;
+  document.getElementById('progressbar').style.width=(n/checks.length*100)+'%';
+  document.getElementById('progresslabel').textContent=`已完成 ${n} / ${checks.length}`;
+}
+checks.forEach(c=>c.addEventListener('change',updateProgress));
+</script>
+</body>
+</html>
