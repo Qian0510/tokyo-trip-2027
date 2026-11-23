@@ -2,160 +2,1146 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#172b3a">
-<title>TOKYO TRIP 2027｜東京六日五夜</title>
+<title>TOKYO TRIP 2027｜東京六日五夜手機版行程 App</title>
 <link rel="preconnect" href="https://unpkg.com">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
-:root{--ink:#182b3a;--muted:#647583;--paper:#f5f4ef;--card:#fff;--line:#e5e8e8;--accent:#d66b4d;--blue:#456b83;--green:#587b68}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;line-height:1.65}
-a{color:inherit}.hero{padding:52px max(22px,calc((100% - 1120px)/2));background:linear-gradient(130deg,#172b3a,#36566a);color:#fff}.eyebrow{letter-spacing:.18em;font-size:12px;color:#c9d7dd}.hero h1{font-family:Georgia,serif;font-size:clamp(38px,7vw,68px);line-height:1.05;margin:12px 0}.hero p{color:#dce5e8;margin:12px 0 25px}.stats{display:flex;gap:10px;flex-wrap:wrap}.stat{border:1px solid #ffffff45;border-radius:12px;padding:9px 14px;font-size:13px}.nav{position:sticky;top:0;z-index:900;background:#ffffffed;backdrop-filter:blur(12px);border-bottom:1px solid var(--line);display:flex;gap:18px;overflow:auto;padding:12px max(18px,calc((100% - 1120px)/2));white-space:nowrap}.nav a{text-decoration:none;font-size:13px;color:var(--muted)}main{max-width:1120px;margin:auto;padding:34px 20px 70px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:38px 0 18px}.section-head h2{font-size:25px;margin:0}.section-head small{color:var(--muted)}.day{background:var(--card);border:1px solid var(--line);border-radius:18px;margin:18px 0 28px;overflow:hidden;box-shadow:0 5px 22px #172b3a08}.daytop{padding:22px 24px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:15px;align-items:start}.daynum{font-size:12px;letter-spacing:.13em;color:var(--accent);font-weight:700}.day h3{font-size:23px;margin:3px 0}.sub{color:var(--muted);font-size:14px}.daybody{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.9fr);gap:22px;padding:22px}.timeline{display:grid;gap:0}.event{display:grid;grid-template-columns:105px 1fr;gap:12px;padding:0 0 18px;position:relative}.event time{font-size:13px;font-weight:700;color:var(--blue);padding-top:2px}.event strong{display:block;font-size:15px}.event p{margin:3px 0;color:var(--muted);font-size:13px}.event:before{content:"";position:absolute;left:112px;top:8px;bottom:-2px;width:1px;background:#dce3e5}.event:after{content:"";position:absolute;left:108px;top:7px;width:9px;height:9px;border-radius:50%;background:var(--accent);border:2px solid white;box-shadow:0 0 0 1px #e6b3a5}.event:last-child:before{display:none}.route{background:#f5f8f8;border:1px solid #e3ebec;border-radius:13px;padding:13px 14px;margin:0 0 12px}.routehead{display:flex;justify-content:space-between;gap:10px;align-items:center}.routehead b{font-size:14px}.tag{font-size:11px;background:#e7efef;color:#426477;border-radius:30px;padding:3px 8px;white-space:nowrap}.route p{font-size:13px;color:var(--muted);margin:7px 0}.route-steps{margin:10px 0 8px;padding:0;list-style:none;counter-reset:step}.route-steps li{counter-increment:step;display:grid;grid-template-columns:25px 1fr;gap:8px;padding:7px 0;border-top:1px dashed #dce5e7;font-size:13px;color:#344b59}.route-steps li:before{content:counter(step);width:22px;height:22px;border-radius:50%;background:#e5edef;color:#36566a;font-size:11px;font-weight:700;display:grid;place-items:center}.route-steps b{color:var(--ink)}.route-meta{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0}.route-meta span{font-size:11px;color:#426477;background:#e7efef;border-radius:30px;padding:3px 8px}.route-warning{font-size:12px;color:#87613b;background:#fbf2e7;padding:8px 10px;border-radius:8px;margin-top:8px}.route a,.maplinks a,.linkbtn{display:inline-block;font-size:12px;color:#fff;background:var(--ink);padding:7px 11px;border-radius:8px;text-decoration:none;margin:3px 5px 0 0}.route a.secondary,.maplinks a.secondary{background:#e8eef0;color:var(--ink)}.mapwrap{position:sticky;top:65px;align-self:start}.maptitle{font-weight:700;margin:0 0 9px;font-size:14px}.map{height:370px;border-radius:13px;overflow:hidden;border:1px solid var(--line);background:#e8eeee}.mapnote{font-size:11px;color:var(--muted);margin:7px 2px}.maplinks{margin-top:9px}.maplinks a{background:var(--blue)}.note{font-size:12px;color:#7a6851;background:#fbf6ed;border-radius:10px;padding:10px 12px;margin-top:12px}.general{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.info{background:#fff;border:1px solid var(--line);border-radius:14px;padding:17px}.info h3{font-size:15px;margin:0 0 7px}.info p{font-size:13px;color:var(--muted);margin:0}.budget{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden}.budget td{padding:11px 14px;border-bottom:1px solid var(--line);font-size:14px}.budget td:last-child{text-align:right;font-variant-numeric:tabular-nums}.checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;background:#fff;padding:18px;border-radius:14px}.checklist label{font-size:13px;color:#425461}.checklist input{accent-color:var(--green);margin-right:7px}footer{text-align:center;color:var(--muted);font-size:12px;padding:28px}
-@media(max-width:760px){.hero{padding:38px 20px}.daybody{grid-template-columns:1fr;padding:16px}.mapwrap{position:static}.map{height:310px}.daytop{padding:18px}.general{grid-template-columns:1fr}.event{grid-template-columns:88px 1fr}.event:before{left:95px}.event:after{left:91px}.event time{font-size:12px}.checklist{grid-template-columns:1fr}}
+:root{
+  --ink:#172b3a;
+  --muted:#5f7280;
+  --paper:#f4f3ee;
+  --card:#ffffff;
+  --line:#e3e7e8;
+  --accent:#d66b4d;
+  --blue:#3b637c;
+  --green:#4f7763;
+  --amber:#b86b24;
+  --amber-bg:#fdf4e7;
+  --amber-border:#f1d3a6;
+  --nav-h:68px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;
+  line-height:1.65;
+  padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom) + 18px);
+}
+a{color:inherit}
+
+/* Hero Section with Japanese subtle wave / Mt. Fuji motif */
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:42px max(20px,calc((100% - 1080px)/2)) 46px;
+  background:linear-gradient(135deg,#152736 0%,#2b4a5e 60%,#3c6075 100%);
+  color:#fff;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  right:-30px;
+  bottom:-18px;
+  width:260px;
+  height:140px;
+  background:radial-gradient(circle at 50% 0%,#ffffff24 0%,#ffffff10 42%,transparent 43%);
+  clip-path:polygon(50% 0%,100% 100%,0% 100%);
+  pointer-events:none;
+}
+.eyebrow{letter-spacing:.18em;font-size:11px;color:#c9d7dd;font-weight:600}
+.hero h1{font-family:Georgia,serif;font-size:clamp(34px,7vw,62px);line-height:1.06;margin:10px 0}
+.hero p{color:#dce5e8;margin:8px 0 20px;font-size:15px}
+.stats{display:flex;gap:8px;flex-wrap:wrap}
+.stat{border:1px solid #ffffff3d;background:#ffffff12;border-radius:12px;padding:7px 12px;font-size:12px}
+
+main{max-width:1080px;margin:auto;padding:20px 16px 36px}
+
+/* Tab Sections */
+.tab-panel{display:none;animation:fadeIn .22s ease}
+.tab-panel.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:10px 0 16px;flex-wrap:wrap}
+.section-head h2{font-size:22px;margin:0}
+.section-head small{color:var(--muted);font-size:12px;letter-spacing:.06em}
+
+/* Day Switcher Pills */
+.day-pills{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding:4px 2px 12px;
+  margin-bottom:8px;
+  scrollbar-width:none;
+}
+.day-pills::-webkit-scrollbar{display:none}
+.day-pill{
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--muted);
+  border-radius:999px;
+  padding:7px 14px;
+  font-size:13px;
+  font-weight:600;
+  white-space:nowrap;
+  cursor:pointer;
+  transition:all .15s;
+}
+.day-pill.active{
+  background:var(--ink);
+  color:#fff;
+  border-color:var(--ink);
+}
+
+/* Day Card */
+.day{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  margin:0 0 24px;
+  overflow:hidden;
+  box-shadow:0 4px 18px #172b3a08;
+}
+.daytop{
+  padding:18px 20px 14px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:flex-start;
+  flex-wrap:wrap;
+}
+.daynum{font-size:12px;letter-spacing:.12em;color:var(--accent);font-weight:700}
+.day h3{font-size:21px;margin:3px 0}
+.sub{color:var(--muted);font-size:13px}
+.tag{font-size:11px;background:#e7efef;color:#3b5f73;border-radius:999px;padding:4px 10px;white-space:nowrap;font-weight:600}
+.tag.warn{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border)}
+
+.daybody{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(290px,.92fr);gap:20px;padding:18px 20px}
+
+/* Timeline */
+.timeline{display:grid;gap:0}
+.event{display:grid;grid-template-columns:96px 1fr;gap:12px;padding:0 0 16px;position:relative}
+.event time{font-size:12.5px;font-weight:700;color:var(--blue);padding-top:2px;font-variant-numeric:tabular-nums}
+.event strong{display:block;font-size:14.5px}
+.event p{margin:3px 0;color:var(--muted);font-size:13px}
+.event:before{content:"";position:absolute;left:102px;top:8px;bottom:-2px;width:1px;background:#dce3e5}
+.event:after{content:"";position:absolute;left:98px;top:7px;width:9px;height:9px;border-radius:50%;background:var(--accent);border:2px solid #fff;box-shadow:0 0 0 1px #e6b3a5}
+.event:last-child:before{display:none}
+
+/* Route Cards */
+.route-section-title{margin:10px 0 10px;font-size:15px;display:flex;align-items:center;gap:6px}
+.route{background:#f7f9fa;border:1px solid #e1eaec;border-radius:14px;padding:14px;margin:0 0 12px}
+.routehead{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;flex-wrap:wrap}
+.routehead b{font-size:14px;line-height:1.4}
+.route p{font-size:13px;color:var(--muted);margin:6px 0}
+.route-meta{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.route-meta span{font-size:11px;color:#36586b;background:#e4eef1;border-radius:999px;padding:3px 9px;font-weight:500}
+.route-meta span.fare{background:#e7f2ec;color:#35634d}
+.route-meta span.xfer{background:#eef0f7;color:#47537a}
+
+.route-steps{margin:8px 0 8px;padding:0;list-style:none;counter-reset:step}
+.route-steps li{
+  counter-increment:step;
+  display:grid;
+  grid-template-columns:24px 1fr;
+  gap:8px;
+  padding:7px 0;
+  border-top:1px dashed #d8e2e5;
+  font-size:13px;
+  color:#2f4553;
+}
+.route-steps li:before{
+  content:counter(step);
+  width:21px;
+  height:21px;
+  border-radius:50%;
+  background:#e1ecef;
+  color:#2d4f63;
+  font-size:11px;
+  font-weight:700;
+  display:grid;
+  place-items:center;
+  margin-top:2px;
+}
+.line-badge{
+  display:inline-block;
+  font-size:11px;
+  font-weight:700;
+  padding:1px 7px;
+  border-radius:5px;
+  margin-right:4px;
+  vertical-align:baseline;
+}
+.jr-yamanote{background:#e6f4ea;color:#1e6b34;border:1px solid #b7dfc2}
+.jr-sobu{background:#fef7e0;color:#8a6100;border:1px solid #f3dc96}
+.jr-joban{background:#e3f2fd;color:#155a96;border:1px solid #b3d7f7}
+.jr-saikyo{background:#e0f2f1;color:#0f5c54;border:1px solid #a8dcd7}
+.metro-line{background:#e8f0fe;color:#1a56b0;border:1px solid #bdd3fb}
+.toei-line{background:#fce8e6;color:#a52714;border:1px solid #f4bdb8}
+.private-line{background:#f3e8fd;color:#68249c;border:1px solid #dec0f9}
+
+.route-alert{
+  font-size:12px;
+  color:#7c4d18;
+  background:var(--amber-bg);
+  border:1px solid var(--amber-border);
+  padding:8px 10px;
+  border-radius:9px;
+  margin-top:8px;
+}
+.btn-row{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
+.navbtn{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  font-size:12px;
+  font-weight:600;
+  color:#fff;
+  background:var(--ink);
+  padding:8px 12px;
+  border-radius:9px;
+  text-decoration:none;
+}
+.navbtn.blue{background:var(--blue)}
+.navbtn.secondary{background:#e7eef0;color:var(--ink)}
+
+/* Map */
+.mapwrap{position:sticky;top:16px;align-self:start}
+.maptitle{font-weight:700;margin:0 0 8px;font-size:14px}
+.map{height:340px;border-radius:13px;overflow:hidden;border:1px solid var(--line);background:#e8eeee}
+.mapnote{font-size:11.5px;color:var(--muted);margin:7px 2px}
+
+/* General Cards & Grids */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.info{background:#fff;border:1px solid var(--line);border-radius:15px;padding:16px}
+.info h3{font-size:15.5px;margin:0 0 8px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.info p{font-size:13px;color:var(--muted);margin:0 0 8px}
+.info ul{margin:6px 0 0;padding-left:18px;font-size:13px;color:#3a4e5c}
+.info li{margin-bottom:5px}
+
+.note{font-size:12.5px;color:#6f5738;background:#fbf5eb;border:1px solid #eedbc0;border-radius:12px;padding:12px 14px;margin-top:14px}
+
+/* Pending Verification Box */
+.pending-box{
+  background:#fff;
+  border:1.5px solid var(--amber-border);
+  border-radius:16px;
+  padding:16px 18px;
+  margin-bottom:18px;
+}
+.pending-box h3{margin:0 0 8px;font-size:15px;color:#8c5219;display:flex;align-items:center;gap:6px}
+.pending-list{margin:0;padding-left:18px;font-size:13px;color:#4a3c2c}
+.pending-list li{margin-bottom:6px}
+
+/* Budget Table */
+.budget-card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.budget{width:100%;border-collapse:collapse}
+.budget td,.budget th{padding:12px 15px;border-bottom:1px solid var(--line);font-size:13.5px;text-align:left}
+.budget th{background:#f7f9fa;font-size:12px;color:var(--muted)}
+.budget td:last-child,.budget th:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.budget tr.total td{background:#f4f7f8;font-weight:700;font-size:14.5px}
+
+/* Checklist */
+.pack-progress{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:12px 16px;
+  margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  font-size:13px;
+}
+.progress-bar{flex:1;height:8px;background:#e8eeee;border-radius:999px;overflow:hidden}
+.progress-fill{height:100%;background:var(--green);width:0%;transition:width .2s}
+.checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;background:#fff;padding:16px;border:1px solid var(--line);border-radius:15px}
+.checklist label{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-size:13.5px;
+  color:#364957;
+  padding:8px 10px;
+  border-radius:10px;
+  background:#f8fafa;
+  cursor:pointer;
+}
+.checklist input{accent-color:var(--green);width:17px;height:17px;margin:0}
+
+/* Bottom Navigation Bar (Mobile App Style) */
+.bottom-nav{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:1000;
+  background:#fffffffa;
+  backdrop-filter:blur(14px);
+  border-top:1px solid var(--line);
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  padding:6px 4px calc(6px + env(safe-area-inset-bottom));
+  box-shadow:0 -4px 16px #172b3a0d;
+}
+.bnav-btn{
+  border:none;
+  background:none;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+  padding:5px 2px;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:600;
+  cursor:pointer;
+}
+.bnav-btn .ico{font-size:18px;line-height:1}
+.bnav-btn.active{color:var(--accent)}
+
+footer{text-align:center;color:var(--muted);font-size:12px;padding:16px 16px 24px}
+
+@media(max-width:760px){
+  .hero{padding:32px 18px 36px}
+  .daybody{grid-template-columns:1fr;padding:15px}
+  .mapwrap{position:static}
+  .map{height:280px}
+  .daytop{padding:16px}
+  .grid-3,.grid-2{grid-template-columns:1fr}
+  .event{grid-template-columns:84px 1fr;gap:10px}
+  .event:before{left:89px}
+  .event:after{left:85px}
+  .event time{font-size:11.5px}
+  .checklist{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
-<header class="hero">
- <div class="eyebrow">JAPAN · WINTER JOURNEY</div><h1>TOKYO TRIP<br>2027</h1>
- <p>東京六日五夜・6 位成人同行</p>
- <div class="stats"><span class="stat">01.14 — 01.19</span><span class="stat">6 DAYS · 5 NIGHTS</span><span class="stat">每人預算 NT$30–40K</span></div>
-</header>
-<nav class="nav"><a href="#itinerary">每日行程</a><a href="#transport">交通總覽</a><a href="#stay">住宿</a><a href="#packing">行李清單</a><a href="#budget">預算</a></nav>
-<main>
-<div class="section-head" id="itinerary"><h2>每日行程</h2><small>DAILY ITINERARY · 地圖可縮放、拖曳</small></div>
-<div id="days"></div>
 
-<div class="section-head" id="transport"><h2>交通總覽</h2><small>TRANSPORTATION</small></div>
-<div class="general">
- <div class="info"><h3>東京市區</h3><p>依每日路線使用 JR、東京 Metro、都營地鐵及私鐵。Suica／PASMO 可依實際搭乘扣款。</p></div>
- <div class="info"><h3>富士山包車</h3><p>六人包車預算 ¥72,000。需確認是否包含河口湖直送成田、超時費、高速公路費及行李容量。</p></div>
- <div class="info"><h3>成田機場</h3><p>去程評估京成 Access Express；回程預計搭乘東橫INN免費接駁巴士，班次以飯店公告為準。</p></div>
-</div>
-<div class="note">交通攻略已改成逐步指引：上車站、路線代號、搭乘方向、轉乘站、下車站及步行方式都列在各段卡片內。Google Maps 保留作為備用核對工具。2027 年班次、月台、出口及臨時營運狀況仍可能調整；住宿與部分店家地址尚待訂單確認，地址未確認的路段會明確標示，不會假設精確出口。</div>
-<div class="section-head" id="stay"><h2>住宿資訊</h2><small>ACCOMMODATION</small></div>
-<div class="general">
- <div class="info"><h3>01｜Wise Owl Nest</h3><p>入住 1/14｜退房 1/16<br>每人 NT$1,241<br>押上區域，完整地址依 Agoda 訂單。</p><a class="linkbtn" href="https://www.google.com/maps/search/?api=1&query=Wise+Owl+Nest+Tokyo" target="_blank" rel="noopener">Google Maps</a></div>
- <div class="info"><h3>02｜HOTEL LiVEMAX Shinjuku East</h3><p>入住 1/16｜退房 1/18<br>每人 NT$2,107<br>新宿東側，完整地址依訂單。</p><a class="linkbtn" href="https://www.google.com/maps/search/?api=1&query=HOTEL+LiVEMAX+Shinjuku+East" target="_blank" rel="noopener">Google Maps</a></div>
- <div class="info"><h3>03｜東橫INN成田機場本館</h3><p>入住 1/18｜退房 1/19<br>每人 NT$994<br>隔日搭乘飯店免費接駁巴士。</p><a class="linkbtn" href="https://www.google.com/maps/search/?api=1&query=Toyoko+Inn+Narita+Airport+Honkan" target="_blank" rel="noopener">Google Maps</a></div>
-</div>
-<div class="section-head" id="packing"><h2>行李清單</h2><small>PACKING CHECKLIST · 可勾選</small></div>
-<div class="checklist" id="checks"></div>
-<div class="section-head" id="budget"><h2>預算管理</h2><small>BUDGET · 每人</small></div>
-<table class="budget"><tbody>
-<tr><td>住宿 5 晚</td><td>NT$4,342</td></tr><tr><td>富士山包車（估）</td><td>NT$2,100</td></tr><tr><td>機票</td><td>待補實際金額</td></tr><tr><td>東京市區交通（估）</td><td>NT$3,000</td></tr><tr><td>餐飲（估）</td><td>NT$6,000</td></tr><tr><td>和服、溫泉、景點（估）</td><td>NT$2,500</td></tr><tr><td>eSIM、保險（估）</td><td>NT$1,000</td></tr><tr><td>購物（估）</td><td>NT$5,000</td></tr><tr><td>預備金（估）</td><td>NT$2,000</td></tr><tr><td><b>已規劃小計（不含機票）</b></td><td><b>NT$25,942</b></td></tr>
-</tbody></table>
+<header class="hero">
+  <div class="eyebrow">JAPAN · WINTER JOURNEY 2027</div>
+  <h1>TOKYO TRIP<br>2027</h1>
+  <p>東京六日五夜・6 位成人同行｜JR・地鐵轉乘與包車手冊</p>
+  <div class="stats">
+    <span class="stat">📅 01.14 — 01.19</span>
+    <span class="stat">👥 6 位成人</span>
+    <span class="stat">🚃 JR・地鐵＋富士山包車</span>
+    <span class="stat">💰 預算 NT$30–40K/人</span>
+  </div>
+</header>
+
+<main>
+  <!-- TAB 1: 每日行程 -->
+  <section class="tab-panel active" id="panel-itinerary">
+    <div class="section-head">
+      <h2>每日行程與逐步交通</h2>
+      <small>點擊天數快速切換・地圖可縮放</small>
+    </div>
+    <div class="day-pills" id="dayPills">
+      <button class="day-pill active" data-day="all">全部 6 天</button>
+      <button class="day-pill" data-day="0">D1 1/14 抵達</button>
+      <button class="day-pill" data-day="1">D2 1/15 淺草</button>
+      <button class="day-pill" data-day="2">D3 1/16 神社/搬家</button>
+      <button class="day-pill" data-day="3">D4 1/17 秋葉原/春日部</button>
+      <button class="day-pill" data-day="4">D5 1/18 富士山包車</button>
+      <button class="day-pill" data-day="5">D6 1/19 返台</button>
+    </div>
+    <div id="days"></div>
+  </section>
+
+  <!-- TAB 2: 交通總覽 -->
+  <section class="tab-panel" id="panel-transport">
+    <div class="section-head">
+      <h2>交通總覽與轉乘守則</h2>
+      <small>JR・地鐵・包車・機場接駁</small>
+    </div>
+
+    <div class="pending-box">
+      <h3>⚠️ 出發前必須確認的交通與訂單項目</h3>
+      <ul class="pending-list">
+        <li><b>D5 包車是否直送成田機場：</b>目前包車（¥72,000／6 人）預計 18:00 結束，但當晚入住「東橫INN成田機場本館」。務必向包車公司確認<b>是否包含河口湖直送成田</b>、過路費／停車費／超時費計算方式，以及 6 人＋6 件大行李的車型容量。</li>
+        <li><b>去回程電子機票細節：</b>目前暫列去程 1/14 13:50–16:55、回程 1/19 08:30–11:50，實際航空公司、航班編號、成田航廈（T1/T2/T3）請以最終電子機票為準。</li>
+        <li><b>D6 飯店免費接駁巴士：</b>東橫INN成田機場本館接駁車班次（暫抓 05:10）與乘車處請於 1/18 入住時向櫃檯二次確認，6 人建議提早 15 分鐘排隊。</li>
+        <li><b>尚未核對地址的店家（不假設精確地鐵出口）：</b>D2 的 <b>OUKA KIMONO</b> 分店、<b>淺草琥珀堂</b>、<b>明るい農村</b>；D3 的 <b>美奈福</b>；D4 的 <b>春日部溫泉</b> 正式店名與地址。</li>
+      </ul>
+    </div>
+
+    <div class="grid-3">
+      <div class="info">
+        <h3>🚃 東京市區鐵道（JR・地鐵・私鐵）</h3>
+        <p>東京鐵道分屬不同系統（<b>JR 東日本</b>、<b>東京 Metro</b>、<b>都營地鐵</b>、<b>東武鐵道</b>），跨公司轉乘通常需經過閘門重新感應 IC 卡。</p>
+        <ul>
+          <li><b>支付建議：</b>6 人每人手機綁定 <b>Apple Pay Suica / PASMO</b> 或實體 IC 卡，儲值 ¥3,000～4,000 即可免去每次排隊買票。</li>
+          <li><b>6 人行動技巧：</b>上下車前先約好「車廂編號（例如第 4 節車廂）」與「下一站轉乘站名」，避免人多被車門隔開。</li>
+        </ul>
+      </div>
+      <div class="info">
+        <h3>🚐 D5 富士山六人包車</h3>
+        <p>1/18 全日包車（08:00–18:00），報價 <b>¥72,000／6 人</b>（每人約 ¥12,000，約 NT$2,100）。</p>
+        <ul>
+          <li><b>行程優先順序：</b>新宿東側飯店接送 → 忍野八海 → 河口湖午餐 → 大石公園／河口湖周邊。</li>
+          <li><b>取捨原則：</b>御殿場 Outlet 列為備選；若需趕往成田機場住宿，建議把時間留給河口湖與車程緩衝。</li>
+        </ul>
+      </div>
+      <div class="info">
+        <h3>✈️ 成田機場往返交通</h3>
+        <p>去程與回程皆經由<b>成田國際機場（NRT）</b>，依行李數量選擇最順路線。</p>
+        <ul>
+          <li><b>D1 去程（成田 → 押上）：</b>搭乘 <b>京成 Narita Sky Access 線「Access Express」</b>（認明往押上／羽田／西馬込方向），可直通都營淺草線免轉車抵達<b>押上站（A20）</b>，車程約 60–75 分鐘，單程約 ¥1,200–1,350。</li>
+          <li><b>D6 回程（飯店 → 成田）：</b>搭乘<b>東橫INN成田機場本館免費接駁巴士</b>（車程約 10–20 分鐘）。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:14px">
+      <div class="info">
+        <h3>🧳 兩次換飯店（1/16、1/18）行李對策</h3>
+        <ul>
+          <li><b>1/16（押上 → 新宿東側）：</b>早上退房後可先寄放 Wise Owl Nest（若可寄放）或直接拖去<b>押上站／新宿站大型置物櫃</b>；6 人行李多，轉乘地鐵請優先找<b>電梯（エレベーター）</b>標示。</li>
+          <li><b>1/18（新宿東側 → 富士山 → 成田）：</b>早上退房直接把 6 人行李全部放上包車後車廂，省去拖行李搭電車的辛苦。</li>
+        </ul>
+      </div>
+      <div class="info">
+        <h3>❄️ 1 月冬季交通與營業備案</h3>
+        <ul>
+          <li><b>天氣備案：</b>1 月中旬河口湖與富士山周邊偶有降雪或路面結冰，出發前一晚與包車司機確認路況。</li>
+          <li><b>店家公休備案：</b>人形町「美奈福」及淺草部分小吃店可能有不定期公休或排隊人潮，建議在 Google Maps 預存 1～2 間備選餐廳。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 3: 住宿 -->
+  <section class="tab-panel" id="panel-stay">
+    <div class="section-head">
+      <h2>住宿資訊與最近車站</h2>
+      <small>5 晚合計每人 NT$4,342（多退少補）</small>
+    </div>
+    <div class="grid-3">
+      <div class="info">
+        <h3>01｜Wise Owl Nest <span class="tag">1/14–1/16 · 2晚</span></h3>
+        <p><b>費用：</b>每人 NT$1,241（Agoda 訂房）<br>
+        <b>區域：</b>東京都墨田區押上周邊（完整門牌依 Agoda 訂單）<br>
+        <b>最近車站：</b>押上站（都營淺草線 A20 / 東京 Metro 半藏門線 Z14 / 京成押上線）</p>
+        <div class="btn-row">
+          <a class="navbtn" href="https://www.google.com/maps/search/?api=1&query=Wise+Owl+Nest+Tokyo" target="_blank" rel="noopener">Google Maps 導航 ↗</a>
+        </div>
+      </div>
+      <div class="info">
+        <h3>02｜HOTEL LiVEMAX Shinjuku East <span class="tag">1/16–1/18 · 2晚</span></h3>
+        <p><b>費用：</b>每人 NT$2,107（Agoda 訂房）<br>
+        <b>區域：</b>新宿東側／東新宿周邊（完整門牌依 Agoda 訂單）<br>
+        <b>最近車站：</b>東新宿站（東京 Metro 副都心線 F12 / 都營大江戶線 E02），步行約 2–5 分鐘；距 JR 新宿站步行約 12–15 分鐘</p>
+        <div class="btn-row">
+          <a class="navbtn" href="https://www.google.com/maps/search/?api=1&query=HOTEL+LiVEMAX+Shinjuku+East" target="_blank" rel="noopener">Google Maps 導航 ↗</a>
+        </div>
+      </div>
+      <div class="info">
+        <h3>03｜東橫INN成田機場本館 <span class="tag">1/18–1/19 · 1晚</span></h3>
+        <p><b>費用：</b>每人 NT$994（Trip.com 訂房）<br>
+        <b>區域：</b>成田國際機場周邊<br>
+        <b>機場接駁：</b>提供飯店免費接駁巴士往返成田機場各航廈（班次依飯店公告為準）</p>
+        <div class="btn-row">
+          <a class="navbtn" href="https://www.google.com/maps/search/?api=1&query=Toyoko+Inn+Narita+Airport+Honkan" target="_blank" rel="noopener">Google Maps 導航 ↗</a>
+        </div>
+      </div>
+    </div>
+    <div class="note">
+      <b>入住提醒：</b>日本飯店通常 15:00 後辦理 Check-in、10:00 前 Check-out（東橫INN 一般為 16:00 入住／10:00 退房）。6 人團體辦理入住時請提前備妥 6 本護照與訂房確認單。
+    </div>
+  </section>
+
+  <!-- TAB 4: 行李清單 -->
+  <section class="tab-panel" id="panel-packing">
+    <div class="section-head">
+      <h2>行前準備與冬季行李清單</h2>
+      <small>勾選狀態自動儲存在手機瀏覽器</small>
+    </div>
+    <div class="pack-progress">
+      <span id="packCount">已完成 0 / 16 項</span>
+      <div class="progress-bar"><div class="progress-fill" id="packFill"></div></div>
+      <button type="button" class="navbtn secondary" id="resetPack" style="border:none;cursor:pointer">重設</button>
+    </div>
+    <div class="checklist" id="checks"></div>
+    <div class="note">
+      <b>1 月東京與富士山穿搭提醒：</b>市區白天約 5–10°C、早晚接近 0°C，電車與商場暖氣很強，建議採「洋蔥式穿法」（發熱衣＋針織/大學T＋防風保暖外套）；1/18 前往河口湖氣溫常在 0°C 以下，務必帶手套、圍巾與防滑好走的鞋子。
+    </div>
+  </section>
+
+  <!-- TAB 5: 預算 -->
+  <section class="tab-panel" id="panel-budget">
+    <div class="section-head">
+      <h2>每人預算與花費總表</h2>
+      <small>目標總預算：NT$30,000～40,000 / 人</small>
+    </div>
+    <div class="budget-card">
+      <table class="budget">
+        <thead>
+          <tr><th>預算項目</th><th>說明與備註</th><th>每人預估 (NT$)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>住宿（5 晚）</b></td><td>押上 2 晚 $1,241 ＋ 新宿 2 晚 $2,107 ＋ 成田 1 晚 $994（已訂）</td><td>NT$4,342</td></tr>
+          <tr><td><b>富士山包車（1/18）</b></td><td>總價 ¥72,000 ÷ 6 人 ＝ ¥12,000/人（未含可能超時費）</td><td>NT$2,100</td></tr>
+          <tr><td><b>來回機票</b></td><td>桃園 ↔ 東京成田（已訂，請補實際刷卡金額）</td><td>待補金額</td></tr>
+          <tr><td><b>日本交通（JR/地鐵/機場線）</b></td><td>含成田 Access Express、市區 JR/Metro/都營、春日部往返（約 ¥11,000–13,000）</td><td>NT$2,800</td></tr>
+          <tr><td><b>餐飲（6 天）</b></td><td>含早餐、拉麵、關東煮、小吃、河口湖午餐、晚餐（平均每日約 ¥4,500–5,000）</td><td>NT$6,000</td></tr>
+          <tr><td><b>體驗與門票</b></td><td>淺草 OUKA 和服租借、春日部溫泉入浴費等</td><td>NT$2,500</td></tr>
+          <tr><td><b>網路 eSIM 與旅平險</b></td><td>6 日日本上網 eSIM ＋ 海外醫療／不便險</td><td>NT$1,000</td></tr>
+          <tr><td><b>購物與伴手禮</b></td><td>晴空塔、Disney Store、秋葉原、御徒町、新宿等（依個人彈性）</td><td>NT$5,000</td></tr>
+          <tr><td><b>緊急預備金</b></td><td>包車可能過路/超時分攤、計程車或臨時支出</td><td>NT$2,000</td></tr>
+          <tr class="total"><td colspan="2">已規劃支出小計（不含機票）</td><td>NT$25,742</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      <b>預算評估：</b>不含機票目前已抓 NT$25,742／人；若來回機票落在 NT$10,000～14,000 區間，整趟總花費約 <b>NT$35,700～39,700／人</b>，剛好落在每人 <b>NT$30,000～40,000</b> 的目標範圍內！建議每人準備約 <b>¥35,000～50,000 日幣現金</b>（用於包車現金結算、神社參拜、老店小吃與和服/溫泉），其餘刷卡或用 Apple Pay Suica。
+    </div>
+  </section>
 </main>
-<footer>TOKYO TRIP 2027 · 行程資訊以實際訂單及官方公告為準</footer>
+
+<footer>TOKYO TRIP 2027 · 班次、票價與店家營業資訊請以 2027 年官方公告及實際訂單為準</footer>
+
+<!-- Bottom Navigation Bar -->
+<nav class="bottom-nav" aria-label="主導航列">
+  <button class="bnav-btn active" data-target="panel-itinerary"><span class="ico">🗓️</span><span>每日行程</span></button>
+  <button class="bnav-btn" data-target="panel-transport"><span class="ico">🚃</span><span>交通</span></button>
+  <button class="bnav-btn" data-target="panel-stay"><span class="ico">🏨</span><span>住宿</span></button>
+  <button class="bnav-btn" data-target="panel-packing"><span class="ico">🎒</span><span>行李</span></button>
+  <button class="bnav-btn" data-target="panel-budget"><span class="ico">💰</span><span>預算</span></button>
+</nav>
+
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 const days = [
-{date:"THU · 01/14",title:"抵達東京・晴空塔",sub:"押上住宿｜抵達日保留體力",events:[
-["08:20–10:50","台中出發、前往桃園機場","前往桃園機場。"],
-["10:50–12:50","桃園機場 T1 報到、出境","報到及出境。"],
-["13:50–16:55","桃園飛往東京成田","去程起飛時間已確認為 13:50；航空公司及航班號待補。"],
-["16:55–18:00","入境、領取行李","預留入境及行李時間。"],
-["18:00–19:30","成田機場 → Wise Owl Nest","建議評估京成 Access Express；依抵達航廈及當日班次確認。"],
-["19:30–19:45","入住、整理行李",""],
-["19:55–21:00","東京晴空塔、Solamachi、Disney Store","商店可能提早打烊，先確認當日營業時間。"],
-["21:00–22:00","超市採買、晚餐","以住宿附近超市為主。"],["22:00","返回住宿休息",""]],routes:[
-["桃園機場 T1","成田國際機場","飛機","去程航班暫列 13:50–16:55；依電子機票確認航廈及航班。",["桃園機場第一航廈辦理報到、託運及出境。","抵達成田後依入境指標通過證照查驗、領取行李。"],"航班時間以電子機票為準"],
-["成田機場","押上站／Wise Owl Nest","京成 Narita Sky Access・Access Express","搭乘可直通都營淺草線的 Access Express；不是所有列車都相同，上車前確認電子看板目的地及停靠站。",["依航廈指標前往 Keisei Line／Access Express 月台。","選擇往押上、羽田機場或西馬込方向，且列車資訊有停靠 Oshiage（押上）的 Access Express。","不需在青砥或其他站下車轉乘；直通列車在押上站 A20 下車。","出站後依住宿地址步行或搭車前往 Wise Owl Nest。"],"約 60–75 分鐘，依班次及航廈而異"],
-["Wise Owl Nest","東京晴空塔／Solamachi","步行","住宿位於押上區域，先依實際住宿門牌確認步行入口。",["從住宿步行前往東京晴空塔／東京 Solamachi。","逛完後可步行回住宿，沿途超市依當日營業時間選擇。"],"步行約 5–15 分鐘，依住宿門牌而異"]],places:[
-["成田國際機場",35.7720,140.3929],["Wise Owl Nest Tokyo",35.7108,139.8130],["東京晴空塔",35.7101,139.8107],["東京 Solamachi",35.7103,139.8128]]},
-{date:"FRI · 01/15",title:"淺草・和服體驗",sub:"雷門、淺草寺、仲見世通",events:[
-["08:30–09:15","早餐、前往淺草","從押上出發；可搭都營淺草線至淺草站，實際依住宿位置導航。"],
-["09:30–10:30","OUKA KIMONO 換裝","六人建議事先預約同一時段。"],
-["10:30–11:00","淺草雷門拍照",""],
-["11:00–12:00","淺草寺參拜",""],
-["12:00–13:00","淺草周邊午餐",""],
-["13:00–14:30","仲見世通、淺草街區拍照",""],
-["14:30–15:00","淺草琥珀堂、日式甜點","明るい農村店家資訊尚待確認。"],
-["15:00–16:00","淺草拉麵與煎餃",""],
-["16:00–16:30","歸還和服",""],
-["16:30–19:00","淺草、押上自由活動及晚餐",""]],routes:[
-["押上站 Oshiage A20","淺草站 Asakusa A18","都營淺草線 A 線・直達","這段不用轉車，搭兩站即可到淺草。",["從押上站進入都營淺草線，認明 A20。","搭往西馬込／羽田機場方向的列車。","經本所吾妻橋 A19，下一站淺草 A18 下車。","出站後依 OUKA KIMONO 預約地址步行；店家分店地址確認後再選出口。"],"車程約 3–4 分鐘；另加步行時間"],
-["OUKA KIMONO","雷門","步行","和服店實際分店地址尚待預約資料確認。",["換裝完成後開啟店家地址導航。","步行前往雷門，沿途留意穿和服步行速度及拍照時間。"],"依店家地址約 5–15 分鐘，待地址確認"],
-["雷門","淺草寺／仲見世通","步行","三個景點位於同一區域，不需要搭地鐵。",["從雷門穿過仲見世通商店街。","沿商店街直走至淺草寺參拜。","回程可沿仲見世通逛街及用餐。"],"步行約 5–10 分鐘，不含逛街時間"],
-["淺草周邊","淺草琥珀堂／甜點店","步行","店家名稱及地址請以預約或官方資訊核對，現階段不指定出口。",["先確認店家完整地址及營業時間。","由淺草寺周邊步行前往；若店家不在淺草寺周邊，需重新安排路線。"],"店家地址待確認"],
-["淺草站 A18","押上站 A20","都營淺草線 A 線・直達","回程搭反方向，兩站即抵達。",["前往都營淺草線月台，選擇往押上方向。","經本所吾妻橋 A19，於押上 A20 下車。","依住宿地址步行返回。"],"車程約 3–4 分鐘"]],places:[
-["押上站",35.7107,139.8130],["OUKA KIMONO（地址待確認）",35.7120,139.7965],["雷門",35.7110,139.7965],["淺草寺",35.7148,139.7967],["仲見世通",35.7118,139.7965],["淺草琥珀堂（地址待確認）",35.7125,139.7970]]},
-{date:"SAT · 01/16",title:"東京大神宮・小網神社・搬住宿",sub:"押上退房 → 新宿入住",events:[
-["08:00–09:00","早餐、退房","行李先確認可否寄放或使用置物櫃。"],
-["09:00–09:45","押上前往東京大神宮","地鐵轉乘路線依出發時間確認。"],
-["09:45–10:30","東京大神宮參拜",""],
-["10:30–11:00","前往人形町",""],
-["11:00–12:00","小網神社參拜",""],
-["12:30–13:15","美奈福關東煮","營業時間與當日供餐需出發前確認。"],
-["13:15–14:00","人形町周邊散步",""],
-["14:00–16:00","前往新宿、寄放行李及入住","先向第二間飯店確認能否提早寄放；否則使用車站置物櫃或行李配送。"],
-["16:00–19:30","新宿自由活動、晚餐",""]],routes:[
-["押上站 Oshiage Z14","飯田橋站 Iidabashi T06","東京 Metro 半藏門線 Z → 東西線 T・轉乘 1 次","前往東京大神宮，抵達飯田橋後步行。",["押上站搭東京 Metro 半藏門線，往澀谷方向。","搭到九段下站 Kudanshita Z06 下車。","站內依指標轉乘東西線，搭往中野方向一站。","飯田橋站 Iidabashi T06 下車，依東京大神宮指標出站，再步行約 5–10 分鐘。"],"電車約 20–25 分鐘；含轉乘及步行約 35 分鐘"],
-["飯田橋站 Iidabashi T06","人形町站 Ningyocho H14","東京 Metro 東西線 T → 日比谷線 H・轉乘 1 次","由東京大神宮回飯田橋站搭車，到人形町前往小網神社。",["飯田橋站搭東西線，往西船橋方向。","搭到茅場町站 Kayabacho T11 下車。","轉乘日比谷線，選擇往北千住方向。","搭一站至人形町 Ningyocho H14 下車，步行約 5–8 分鐘到小網神社。"],"電車約 15–20 分鐘；含轉乘及步行約 30 分鐘"],
-["小網神社","美奈福關東煮","步行","兩處都在人形町周邊；美奈福完整地址及營業日請先核對。",["從小網神社依店家地址步行前往。","若店家當日休息，建議在出發前準備附近替代餐廳。"],"步行時間依店家地址而定"],
-["人形町站 Ningyocho A14","東新宿站 Higashi-shinjuku F12","都營淺草線 A → 都營新宿線 S → 副都心線 F・轉乘 2 次","前往 HOTEL LiVEMAX Shinjuku East；飯店最近車站為東新宿。",["人形町站搭都營淺草線，往西馬込方向，一站至東日本橋 A15。","依站內轉乘指標步行至都營新宿線馬喰橫山 S09。","搭都營新宿線往笹塚方向，至新宿三丁目 S02 下車。","轉乘東京 Metro 副都心線，搭往和光市／池袋方向一站。","東新宿 F12 下車，依飯店地址及出口指標步行約 2–5 分鐘。"],"電車約 25–30 分鐘；含站內轉乘及步行約 40 分鐘"]],places:[
-["押上站",35.7107,139.8130],["東京大神宮",35.6995,139.7460],["小網神社",35.6867,139.7795],["美奈福（地址待確認）",35.6865,139.7820],["HOTEL LiVEMAX Shinjuku East",35.6965,139.7060]]},
-{date:"SUN · 01/17",title:"秋葉原・御徒町・春日部",sub:"動漫購物、蠟筆小新、溫泉",events:[
-["08:30–09:30","早餐、新宿出發",""],
-["09:30–11:30","秋葉原動漫、電器商品",""],
-["11:30–12:30","御徒町、二木の菓子、OS Drug",""],
-["12:30–13:15","午餐、章魚燒及街邊小吃",""],
-["13:15–14:15","前往春日部","新宿至春日部需跨區移動，建議預留轉乘緩衝。"],
-["14:15–15:30","蠟筆小新相關景點","優先確認 LaLa Garden 的 Buri-buri Cinema Studio 當日開放情況。"],
-["15:30–16:00","LaLa Garden Kasukabe",""],
-["16:00–18:00","春日部溫泉","入場費、營業時間及交通需再次確認。"],
-["18:00–20:15","晚餐、返回新宿住宿",""]],routes:[
-["東新宿站 Higashi-shinjuku F12","新宿站 Shinjuku","副都心線 F → JR 中央・總武線各站停車・轉乘 1 次","先搭一站到新宿三丁目，再步行轉 JR 新宿站。",["東新宿站搭副都心線往澀谷方向，一站到新宿三丁目 F13。","出站後依 JR 新宿站指標步行至 JR 新宿站，預留約 8–12 分鐘。","進入 JR 月台，找黃色車身的中央・總武線各站停車（往千葉／津田沼方向）。","搭乘至秋葉原站下車，沿電氣街口／中央改札等指標前往購物區。"],"全程約 30–40 分鐘，含轉乘步行"],
-["秋葉原站 Akihabara","御徒町站 Okachimachi","JR 山手線／京濱東北線・直達一站","兩站很近，若購物區位置合適也可直接步行。",["從秋葉原站進 JR 月台。","搭山手線往上野／池袋方向，或京濱東北線往大宮方向。","下一站御徒町下車；也可步行約 10–15 分鐘。"],"電車約 2 分鐘；步行約 10–15 分鐘"],
-["御徒町站 Okachimachi","春日部站 Kasukabe","JR 山手線 → JR 常磐線快速 → 東武晴空塔線・轉乘 2 次","建議走上野、北千住轉乘；抵達春日部後前往 LaLa Garden。",["從御徒町搭 JR 山手線往上野方向，一站到上野。","在上野轉 JR 常磐線快速，搭往取手／成田方向，於北千住下車（依當日停靠及列車種類確認）。","在北千住依指標轉乘東武晴空塔線，搭往春日部／東武動物公園方向，確認列車停靠春日部。","春日部站下車，從西口出站步行前往 LaLa Garden。"],"約 50–65 分鐘；依列車種類及候車時間而異"],
-["春日部站","LaLa Garden Kasukabe","步行","商場位於春日部站周邊，依現場指標前往。",["從春日部站出站後，依 LaLa Garden 指標及地圖步行。"],"約 5–10 分鐘，依出站位置而異"],
-["LaLa Garden Kasukabe","春日部溫泉","步行／計程車","溫泉的正式店名及地址尚未提供，先不虛構地鐵站或步行時間。",["請先確認溫泉完整店名及地址。","地址確認後再補上最近車站、出口及步行路線；若距離較遠，六人可比較計程車。"],"地址待確認"],
-["春日部站 Kasukabe","東新宿站 Higashi-shinjuku F12","東武 Urban Park Line → JR 埼京線 → 副都心線・轉乘 2 次","回程走大宮、池袋，最後搭副都心線到飯店最近站。",["春日部站搭東武 Urban Park Line（野田線）往大宮方向，至大宮下車。","在大宮轉 JR 埼京線，搭往新宿／大崎方向，至池袋下車。","在池袋轉東京 Metro 副都心線，搭往澀谷方向，經雜司谷、西早稻田。","東新宿 F12 下車，步行返回 HOTEL LiVEMAX Shinjuku East。"],"約 65–85 分鐘，依班次及轉乘時間而異"]],places:[
-["新宿東側住宿",35.6965,139.7060],["秋葉原站",35.6984,139.7731],["御徒町站",35.7074,139.7747],["春日部站",35.9798,139.7520],["LaLa Garden Kasukabe",35.9750,139.7540],["春日部溫泉（店名待確認）",35.9780,139.7560]]},
-{date:"MON · 01/18",title:"富士山・河口湖包車",sub:"包車 ¥72,000／6 人｜當晚入住成田機場",events:[
-["07:00–07:45","早餐、整理行李、退房","確認六人行李可全數放入車輛。"],
-["08:00–10:00","新宿出發、前往富士山","車程受路況及天候影響。"],
-["10:00–11:15","忍野八海",""],
-["11:15–12:00","前往河口湖",""],
-["12:00–13:00","河口湖午餐",""],
-["13:00–14:00","大石公園、富士山拍照",""],
-["14:00–15:30","河口湖周邊景點",""],
-["15:30–18:00","包車行程預計結束","原始資料預計 18:00 結束；結束地點及是否可直送成田尚未確認。"],
-["晚上","前往東橫INN成田機場本館、入住","需與包車公司確認是否包含河口湖直送成田、超時費及高速公路費。"]],routes:[
-["HOTEL LiVEMAX Shinjuku East","忍野八海","六人包車","此日不搭地鐵，請司機依約定時間至飯店門口接送。",["前一晚先確認司機姓名、車牌、集合位置及行李件數。","上車前確認包車費 ¥72,000 是否含高速公路費、停車費、超時費。"],"車程約 1.5–2 小時，視路況及天候"],
-["忍野八海","河口湖／午餐地點","六人包車","由司機依當天路況安排停車及用餐位置。",["依原行程預留 45 分鐘至 1 小時移動及用餐緩衝。"],"車程依餐廳位置而異"],
-["河口湖","大石公園","六人包車","湖畔景點以包車移動最方便。",["請司機導航至大石公園停車場。","下車前確認集合時間及上車位置。"],"車程約 10–20 分鐘，視上下車地點而異"],
-["大石公園／河口湖","東橫INN成田機場本館","六人包車（待確認）","這段是全程最需要先確認的交通：包車是否包含河口湖直送成田。",["若包車含直送：確認最晚出發時間、抵達飯店時間及高速公路費。","若不含直送：需另安排河口湖站搭巴士／電車前往成田，六人及行李需預留更多時間。","未取得包車公司確認前，不要把 18:00 視為一定能抵達成田。"],"直送車程約 3 小時以上，依路況而異"]],places:[
-["新宿東側住宿",35.6965,139.7060],["忍野八海",35.4602,138.8324],["河口湖",35.5170,138.7500],["大石公園",35.5335,138.7460],["東橫INN成田機場本館",35.7720,140.3860]],note:"御殿場 Outlet 暫列備選，不放入固定路線，以免壓縮河口湖停留時間及增加前往成田的風險。"},
-{date:"TUE · 01/19",title:"成田機場・返台",sub:"早班機｜建議搭乘 05:10 飯店接駁",events:[
-["04:50","起床、整理行李",""],
-["05:10","東橫INN 免費接駁巴士","班次及乘車處以飯店最新公告為準，六人建議提早到站候車。"],
-["05:30–05:50","預計抵達成田機場",""],
-["05:50–06:30","報到、行李託運",""],
-["06:30–08:00","安檢、出境、候機",""],
-["08:30","成田起飛",""],
-["11:50","抵達桃園機場",""]],routes:[
-["東橫INN成田機場本館","成田國際機場","飯店免費接駁巴士","不用搭地鐵，直接搭飯店接駁車。",["前一晚向櫃台確認 05:10 班次是否適用當日、上車位置及停靠航廈。","提早 10–15 分鐘到接駁車乘車處等候。","抵達航廈後依航空公司櫃檯指標辦理報到及託運。"],"車程約 10–20 分鐘，依航廈及路況而異"],
-["成田國際機場","桃園國際機場","飛機","回程暫列 08:30 起飛、11:50 抵達；以電子機票為準。",["確認航空公司櫃檯、航廈及登機門。","完成出境、安檢後前往登機門。"],"航班時間以電子機票為準"]],places:[
-["東橫INN成田機場本館",35.7720,140.3860],["成田國際機場",35.7720,140.3929],["桃園國際機場",25.0797,121.2342]]}
+  {
+    date:"THU · 01/14",
+    title:"抵達東京・晴空塔採買",
+    sub:"押上住宿（Wise Owl Nest）｜抵達日保留體力",
+    events:[
+      ["08:20–10:50","台中組出發、前往桃園機場","台中出發並停靠豐原接駁前往桃園機場。"],
+      ["10:50–12:50","桃園機場 T1 報到、託運與出境","六人同行建議提前抵達第一航廈櫃檯集合。"],
+      ["13:50–16:55","桃園飛往東京成田（NRT）","去程時間暫列 13:50–16:55，實際航班編號與降落航廈以電子機票為準。"],
+      ["16:55–18:00","入境通關、領取行李","預留約 1 小時辦理入境與領行李，順便確認手機 eSIM 連線。"],
+      ["18:00–19:30","成田機場 → 押上站／Wise Owl Nest","搭乘京成 Access Express 直通都營淺草線至押上站（免轉車）。"],
+      ["19:30–19:45","辦理入住、休息整理行李","6 人備妥護照辦理入住。"],
+      ["19:55–21:00","東京晴空塔、Solamachi、Disney Store","商場多數店鋪 21:00 打烊，優先逛 Disney Store 與衣物。"],
+      ["21:00–22:00","超市採買晚餐（打烊折扣）","晴空塔或押上站周邊超市購買熟食回住處享用。"],
+      ["22:00","返回住宿休息","養精蓄銳準備隔天和服體驗。"]
+    ],
+    routes:[
+      {
+        from:"桃園機場 T1",
+        to:"成田國際機場 (NRT)",
+        line:"中華／長榮／星宇等國際航班（待確認）",
+        summary:"航程約 3 小時 5 分鐘（日本比台灣快 1 小時）。",
+        time:"約 3 小時 5 分鐘",
+        fare:"已訂（金額待補）",
+        transfer:"直飛",
+        steps:[
+          "於桃園機場第一航廈指定櫃檯辦理報到與行李直掛。",
+          "抵達成田機場後跟隨「Arrival / 到着」指標完成入境審查與海關申報。"
+        ],
+        alert:"航班編號與抵達成田 T1/T2 航廈請以最終電子機票為準。"
+      },
+      {
+        from:"成田國際機場 (T1 / T2·T3)",
+        to:"押上站 Oshiage (A20 / KS45)",
+        line:"京成電鐵 Narita Sky Access 線「Access Express」",
+        summary:"認明往「押上／羽田機場／西馬込」方向且有停靠押上的班次，直通都營淺草線完全免轉車！",
+        time:"約 55–70 分鐘",
+        fare:"約 ¥1,200–1,350 / 人",
+        transfer:"直通免轉乘",
+        steps:[
+          "<span class='line-badge private-line'>京成電鐵</span> 依機場指標下樓至 B1「鐵道（Railways）」月台，刷 Suica 或購票進站。",
+          "確認電子看板標示為 <b>Access Express（アクセス特急）</b>，且終點為<b>押上、羽田機場或西馬込</b>（切勿搭錯往京成上野的 Skyliner 或本線列車）。",
+          "沿途經成田湯川、千葉新城中央、東松戶、高砂、青砥，直接駛入押上站，全程不必下車換月台。",
+          "於 <b>押上站（Oshiage / A20）</b> 下車，搭電梯至地面層後依 Agoda 訂單地址步行前往 <b>Wise Owl Nest</b>。"
+        ],
+        alert:"若錯過 Access Express 也可搭京成本線特急至「青砥站」同月台對面轉乘押上線；具體出口依 Wise Owl Nest 完整門牌決定。"
+      },
+      {
+        from:"Wise Owl Nest（押上）",
+        to:"東京晴空塔 / Tokyo Solamachi",
+        line:"步行前往",
+        summary:"住宿位於押上區域，步行即可抵達晴空塔商場與 Disney Store。",
+        time:"約 5–15 分鐘",
+        fare:"免費（步行）",
+        transfer:"步行",
+        steps:[
+          "從住宿出發步行前往東京晴空塔城（Tokyo Solamachi），Disney Store 位於商場 3 樓。",
+          "21:00 商場打烊前後，可前往 Solamachi 2 樓或押上站周邊超市（如 Life 超市）採買晚餐。"
+        ],
+        alert:"完整步行路線請依 Agoda 訂單上的 Wise Owl Nest 實際門牌導航。"
+      }
+    ],
+    places:[
+      ["成田國際機場",35.7720,140.3929],
+      ["押上站 (Oshiage)",35.7107,139.8130],
+      ["Wise Owl Nest Tokyo",35.7108,139.8130],
+      ["東京晴空塔 / Solamachi",35.7101,139.8107]
+    ]
+  },
+  {
+    date:"FRI · 01/15",
+    title:"淺草・和服體驗・押上散策",
+    sub:"雷門、淺草寺、仲見世通、拉麵煎餃",
+    events:[
+      ["08:30–09:15","早餐、從押上前往淺草","搭都營淺草線僅 2 站（約 3 分鐘）即達淺草。"],
+      ["09:30–10:30","OUKA KIMONO 櫻花和服換裝","6 人建議預約同一時段，預留約 1 小時選衣與髮型。"],
+      ["10:30–11:00","淺草雷門拍照","經典大燈籠地標合照。"],
+      ["11:00–12:00","仲見世通散步、淺草寺參拜","抽籤、買御守、逛百年老街。"],
+      ["12:00–13:00","淺草周邊午餐","視現場排隊狀況選擇定食或小吃。"],
+      ["13:00–14:30","淺草街區外拍、逛街","可往傳法院通、花月堂周邊取景。"],
+      ["14:30–15:00","淺草琥珀堂 / 日式甜點（蕨餅）","店家分店位置與營業時間出發前先核對。"],
+      ["15:00–16:00","淺草名代拉麵、煎餃","補充熱食暖胃。"],
+      ["16:00–16:30","返回 OUKA KIMONO 歸還和服","留意店家最晚歸還時間以免產生延遲費。"],
+      ["16:30–19:00","淺草或搭車回押上周邊自由活動","晚餐可於淺草或晴空塔周邊享用。"]
+    ],
+    routes:[
+      {
+        from:"押上站 Oshiage (A20)",
+        to:"淺草站 Asakusa (A18)",
+        line:"都營淺草線（Asakusa Line · 粉紅色 A 線）",
+        summary:"直達僅 2 站，車程只要 3 分鐘。",
+        time:"約 3–4 分鐘（另加步行）",
+        fare:"¥180 / 人",
+        transfer:"直達免轉乘",
+        steps:[
+          "<span class='line-badge toei-line'>都營淺草線 A</span> 從押上站進站，前往往<b>西馬込／羽田機場／三崎口</b>方向月台。",
+          "搭乘任一班次（各站停車、急行、特急皆有停靠淺草），經本所吾妻橋（A19），下一站於 <b>淺草站（Asakusa / A18）</b> 下車。",
+          "出站後依 <b>OUKA KIMONO</b> 預約確認信上的分店地址步行前往。"
+        ],
+        alert:"OUKA KIMONO 在淺草有不同分店，請確認預約分店地址後再選擇對應地鐵出口（如 A4、A5 或 1 號出口）。"
+      },
+      {
+        from:"OUKA KIMONO → 雷門 → 淺草寺",
+        to:"淺草商圈 / 琥珀堂 / 拉麵店",
+        line:"全區步行",
+        summary:"所有淺草景點皆集中於步行圈內，穿和服慢慢走即可。",
+        time:"各點間約 5–12 分鐘",
+        fare:"免費（步行）",
+        transfer:"步行",
+        steps:[
+          "換裝後步行至<b>雷門</b>拍照，接著沿<b>仲見世通</b>一路逛至<b>淺草寺本堂</b>。",
+          "下午前往<b>淺草琥珀堂</b>品嚐蕨餅甜點，以及名代拉麵／煎餃用餐，最後準時返回和服店歸還衣物。"
+        ],
+        alert:"「淺草琥珀堂」與「明るい農村」具體分店門牌與當日營業時間尚待核對，建議出發前存好地圖標記。"
+      },
+      {
+        from:"淺草站 Asakusa (A18)",
+        to:"押上站 Oshiage (A20)",
+        line:"都營淺草線（Asakusa Line · 粉紅色 A 線）",
+        summary:"回程搭反方向 2 站即回到押上住宿區。",
+        time:"約 3–4 分鐘",
+        fare:"¥180 / 人",
+        transfer:"直達免轉乘",
+        steps:[
+          "<span class='line-badge toei-line'>都營淺草線 A</span> 進入淺草站，搭往<b>押上／成田機場／青砥</b>方向列車。",
+          "經本所吾妻橋（A19），於 <b>押上站（A20）</b> 下車步行回飯店。"
+        ]
+      }
+    ],
+    places:[
+      ["押上站 (Oshiage)",35.7107,139.8130],
+      ["淺草站 (Asakusa)",35.7106,139.7975],
+      ["OUKA KIMONO（分店地址待確認）",35.7120,139.7965],
+      ["淺草雷門",35.7110,139.7965],
+      ["仲見世通",35.7118,139.7965],
+      ["淺草寺",35.7148,139.7967],
+      ["淺草琥珀堂（地址待確認）",35.7125,139.7970]
+    ]
+  },
+  {
+    date:"SAT · 01/16",
+    title:"東京大神宮・小網神社・搬遷至新宿",
+    sub:"押上退房 → 神社巡禮 → 入住 HOTEL LiVEMAX Shinjuku East",
+    events:[
+      ["08:00–09:00","早餐、整理行李、退房","退房後行李可先寄放押上住宿（若允許）或直接帶至車站置物櫃。"],
+      ["09:00–09:45","押上前往東京大神宮","搭半藏門線轉東西線至飯田橋站。"],
+      ["09:45–10:30","東京大神宮參拜","東京知名結緣神社，參拜與買御守。"],
+      ["10:30–11:00","飯田橋前往人形町","搭東西線轉日比谷線至人形町站。"],
+      ["11:00–12:00","小網神社參拜（洗錢祈福）","週六參拜人潮較多，預留排隊時間。"],
+      ["12:30–13:15","美奈福關東煮午餐","出發前先確認週六營業時間與是否需排隊。"],
+      ["13:15–14:00","人形町甘酒橫丁散步","可順道買人形燒等點心。"],
+      ["14:00–16:00","返回押上取行李 → 搬往新宿東側住宿","從押上搭都營線前往東新宿站最順路！"],
+      ["16:00–19:30","HOTEL LiVEMAX Shinjuku East 入住、新宿晚餐","晚上可逛歌舞伎町、新宿東口商圈。"]
+    ],
+    routes:[
+      {
+        from:"押上站 Oshiage (Z14)",
+        to:"飯田橋站 Iidabashi (T06)／東京大神宮",
+        line:"東京 Metro 半藏門線 (Z) → 東西線 (T)",
+        summary:"同為東京 Metro 系統，於九段下站站內轉乘 1 次。",
+        time:"約 25 分鐘（含步行約 35 分鐘）",
+        fare:"¥210 / 人（IC 卡）",
+        transfer:"轉乘 1 次（九段下）",
+        steps:[
+          "<span class='line-badge metro-line'>Metro 半藏門線 Z</span> 從押上站（Z14）搭往<b>澀谷／中央林間</b>方向列車。",
+          "搭乘 8 站至 <b>九段下站（Kudanshita / Z06）</b> 下車，依站內指標轉乘「東西線」。",
+          "<span class='line-badge metro-line'>Metro 東西線 T</span> 搭往<b>中野／三鷹</b>方向 1 站，於 <b>飯田橋站（Iidabashi / T06）</b> 下車。",
+          "由 <b>B2a 出口</b>（或 JR 西口方向）出站，步行約 5–7 分鐘即達<b>東京大神宮</b>。"
+        ]
+      },
+      {
+        from:"飯田橋站 Iidabashi (T06)",
+        to:"人形町站 Ningyocho (H14)／小網神社",
+        line:"東京 Metro 東西線 (T) → 日比谷線 (H)",
+        summary:"於茅場町站站內轉乘日比谷線，再步行至小網神社。",
+        time:"約 15–20 分鐘（含步行約 28 分鐘）",
+        fare:"¥180 / 人（IC 卡）",
+        transfer:"轉乘 1 次（茅場町）",
+        steps:[
+          "<span class='line-badge metro-line'>Metro 東西線 T</span> 從飯田橋站（T06）搭往<b>西船橋／東葉勝田台</b>方向。",
+          "搭乘 5 站至 <b>茅場町站（Kayabacho / T11）</b> 下車，站內轉乘「日比谷線」。",
+          "<span class='line-badge metro-line'>Metro 日比谷線 H</span> 搭往<b>北千住／東武動物公園</b>方向 1 站，於 <b>人形町站（Ningyocho / H14）</b> 下車。",
+          "從 <b>A2 出口</b> 出站步行約 5 分鐘抵達<b>小網神社</b>；參拜後依地址步行前往<b>美奈福關東煮</b>。"
+        ],
+        alert:"美奈福關東煮完整地址與週六營業狀況請出發前再次確認，若遇公休可改吃人形町周邊親子丼或拉麵。"
+      },
+      {
+        from:"人形町／押上取行李 → 東新宿站 (F12 / E02)",
+        to:"HOTEL LiVEMAX Shinjuku East",
+        line:"都營淺草線 (A) → 都營新宿線 (S) → 副都心線 (F)",
+        summary:"下午回押上取行李後，直接從押上（或人形町）搭車前往飯店最近的「東新宿站」。",
+        time:"約 35–45 分鐘（含轉乘與步行）",
+        fare:"約 ¥320–420 / 人",
+        transfer:"轉乘 1–2 次",
+        steps:[
+          "<b>【路線 A：從押上取完行李直接出發（推薦！）】</b> 從押上站（Z14）搭 <span class='line-badge metro-line'>Metro 半藏門線 Z</span> 往澀谷方向至 <b>新宿三丁目站（F13）</b>，站內轉乘 <span class='line-badge metro-line'>Metro 副都心線 F</span> 往和光市／池袋方向 1 站至 <b>東新宿站（F12）</b>下車。",
+          "<b>【路線 B：若行李隨身直接從人形町出發】</b> 從人形町（A14）搭 <span class='line-badge toei-line'>都營淺草線 A</span> 1 站至東日本橋，站內連通至馬喰橫山（S09）轉 <span class='line-badge toei-line'>都營新宿線 S</span> 往笹塚方向至 <b>新宿三丁目（S02）</b>，再轉 <span class='line-badge metro-line'>Metro 副都心線 F</span> 1 站至 <b>東新宿站（F12）</b>。",
+          "抵達 <b>東新宿站</b> 後，依 Agoda 訂單門牌與電梯出口指標步行約 2–5 分鐘抵達 <b>HOTEL LiVEMAX Shinjuku East</b>。"
+        ],
+        alert:"6 人拉大行李強烈建議走「路線 A（押上→新宿三丁目→東新宿）」，全程幾乎在東京 Metro 系統內轉乘，比跨都營／JR 少走很多樓梯！"
+      }
+    ],
+    places:[
+      ["押上站 (Oshiage)",35.7107,139.8130],
+      ["飯田橋站 (Iidabashi)",35.7021,139.7450],
+      ["東京大神宮",35.6995,139.7460],
+      ["人形町站 (Ningyocho)",35.6863,139.7823],
+      ["小網神社",35.6867,139.7795],
+      ["美奈福（地址待確認）",35.6865,139.7820],
+      ["東新宿站 (Higashi-shinjuku)",35.6977,139.7076],
+      ["HOTEL LiVEMAX Shinjuku East",35.6965,139.7060]
+    ]
+  },
+  {
+    date:"SUN · 01/17",
+    title:"秋葉原・御徒町・春日部小新巡禮",
+    sub:"動漫電器、二木の菓子、LaLa Garden、溫泉",
+    events:[
+      ["08:30–09:30","早餐、從東新宿出發前往秋葉原","步行至 JR 新宿站搭黃色總武線直達秋葉原。"],
+      ["09:30–11:30","秋葉原電器街、動漫公仔巡禮","週日中央通午後可能實施步行者天國。"],
+      ["11:30–12:30","御徒町採買：二木の菓子、OS Drug","伴手禮零食與藥妝一次補齊（留意 OS Drug 多數只收現金）。"],
+      ["12:30–13:15","阿美橫丁／御徒町章魚燒與街邊小吃","午餐邊走邊吃。"],
+      ["13:15–14:15","搭車前往埼玉縣春日部","從上野轉 JR 常磐線至北千住，再轉東武晴空塔線。"],
+      ["14:15–15:30","春日部蠟筆小新景點、LaLa Garden","先確認 3 樓 Buri-buri Cinema Studio 當日開放狀況。"],
+      ["15:30–16:00","LaLa Garden Kasukabe 逛街",""],
+      ["16:00–18:00","春日部溫泉泡湯、喝瓶裝牛奶","溫泉正式店名與位置請出發前確認。"],
+      ["18:00–20:30","十勝亭晚餐、搭車返回新宿住宿","回程走大宮→池袋→東新宿。"]
+    ],
+    routes:[
+      {
+        from:"HOTEL LiVEMAX Shinjuku East／JR 新宿站",
+        to:"JR 秋葉原站 Akihabara",
+        line:"JR 中央・總武線各站停車（黃色車身 JB 線）",
+        summary:"步行至 JR 新宿站後，搭黃色總武線直達秋葉原免轉乘！",
+        time:"步行約 12–15 分 ＋ 車程約 18 分鐘",
+        fare:"¥180 / 人（JR IC 卡）",
+        transfer:"JR 直達（新宿→秋葉原）",
+        steps:[
+          "從飯店步行約 12–15 分鐘前往 <b>JR 新宿站（東口／東南口）</b>（或先搭副都心線 1 站至新宿三丁目再步行進 JR 站）。",
+          "<span class='line-badge jr-sobu'>JR 中央・總武線（黃色）</span> 進入 JR 閘門後，找 <b>13 號月台「中央・總武線（各站停車）」往御茶之水・秋葉原・千葉方向</b>（不要搭成橘色的中央線快速，快速不停秋葉原！）。",
+          "搭乘 7 站（經代代木、千駄谷、信濃町、四谷、市谷、飯田橋、水道橋、御茶之水），於 <b>JR 秋葉原站（Akihabara）</b> 下車，走「電氣街口」出站。"
+        ],
+        alert:"關鍵提醒：JR 新宿站務必搭「黃色車身的中央・總武線各站停車」，若誤搭橘色中央線快速會直接過站不停秋葉原。"
+      },
+      {
+        from:"JR 秋葉原站 Akihabara",
+        to:"JR 御徒町站 Okachimachi",
+        line:"JR 山手線（綠色）或 JR 京濱東北線（藍色）",
+        summary:"僅 1 站距離，搭車 2 分鐘；沿高架橋下逛過去步行也只要 12 分鐘。",
+        time:"車程約 2 分鐘（或步行 12 分鐘）",
+        fare:"¥150 / 人（JR IC 卡）",
+        transfer:"JR 直達 1 站",
+        steps:[
+          "<span class='line-badge jr-yamanote'>JR 山手線／京濱東北線</span> 從 JR 秋葉原站上月台，搭往<b>上野・池袋・大宮</b>方向。",
+          "搭 1 站於 <b>JR 御徒町站（Okachimachi）</b> 下車，走「北口」出站即達阿美橫丁、<b>二木の菓子</b>與 <b>OS Drug</b>。"
+        ]
+      },
+      {
+        from:"JR 御徒町站 Okachimachi",
+        to:"東武 春日部站 Kasukabe",
+        line:"JR 山手線 → JR 常磐線快速 → 東武晴空塔線",
+        summary:"經由上野、北千住兩次轉乘，約 50–60 分鐘抵達春日部。",
+        time:"約 50–65 分鐘",
+        fare:"約 ¥660 / 人（JR ¥180 ＋ 東武 ¥480）",
+        transfer:"轉乘 2 次（上野、北千住）",
+        steps:[
+          "<span class='line-badge jr-yamanote'>JR 山手線</span> 從御徒町搭往<b>上野</b>方向 1 站至 <b>JR 上野站</b>。",
+          "<span class='line-badge jr-joban'>JR 常磐線快速（藍綠色）</span> 在上野站內轉乘常磐線快速（往取手／土浦／成田方向），搭 3 站至 <b>北千住站（Kita-senju）</b> 下車。",
+          "<span class='line-badge private-line'>東武晴空塔線（TS）</span> 依指標通過轉乘閘門進入東武線月台，搭「急行」或「區間急行」往<b>久喜／南栗橋／東武動物公園</b>方向，於 <b>春日部站（Kasukabe / TS27）</b> 下車。",
+          "從春日部站<b>西口</b>出站，步行約 5–8 分鐘抵達 <b>LaLa Garden Kasukabe</b>。"
+        ],
+        alert:"東武晴空塔線在北千住站請確認列車車種（急行、區間急行、準急皆有停春日部；部分付費特急需另購特急券）。"
+      },
+      {
+        from:"LaLa Garden Kasukabe",
+        to:"春日部溫泉 → 十勝亭",
+        line:"步行／視溫泉位置改搭計程車",
+        summary:"溫泉正式店名與地址尚待確認；十勝亭位於春日部站西口步行圈內。",
+        time:"依溫泉地址而定",
+        fare:"待確認",
+        transfer:"步行或計程車",
+        steps:[
+          "「春日部溫泉」的正式設施名稱與門牌尚待確認，確定地址後再決定步行或 6 人分乘 2 台計程車前往。",
+          "晚餐<b>十勝亭（春日部市中央1-47-1）</b>位於春日部站西口步行約 4 分鐘處。"
+        ],
+        alert:"出發前請務必確認「春日部溫泉」的正確店名、地址與營業時間（例如是否為「かすかべ湯元温泉」，該館需搭接駁車或計程車）。"
+      },
+      {
+        from:"東武 春日部站 Kasukabe",
+        to:"東新宿站 Higashi-shinjuku (F12)",
+        line:"東武野田線 (TD) → JR 埼京線 (JA) → Metro 副都心線 (F)",
+        summary:"回程走大宮、池袋路線，直達飯店最近的東新宿站。",
+        time:"約 65–80 分鐘",
+        fare:"約 ¥850 / 人",
+        transfer:"轉乘 2 次（大宮、池袋）",
+        steps:[
+          "<span class='line-badge private-line'>東武野田線（Urban Park Line）</span> 從春日部站搭往<b>大宮（Omiya）</b>方向，搭至終點站 <b>大宮站</b> 下車。",
+          "<span class='line-badge jr-saikyo'>JR 埼京線（深綠色 JA）</span> 出東武閘門後進 JR 大宮站，搭往<b>池袋・新宿・大崎</b>方向（快速或各站停車皆可），於 <b>JR 池袋站</b> 下車。",
+          "<span class='line-badge metro-line'>Metro 副都心線 F</span> 出 JR 閘門轉乘東京 Metro 副都心線，搭往<b>澀谷／元町・中華街</b>方向 3 站，於 <b>東新宿站（F12）</b> 下車步行回飯店。"
+        ]
+      }
+    ],
+    places:[
+      ["JR 新宿站",35.6896,139.7006],
+      ["JR 秋葉原站",35.6984,139.7731],
+      ["JR 御徒町站",35.7074,139.7747],
+      ["二木の菓子 御徒町",35.7082,139.7745],
+      ["春日部站",35.9798,139.7520],
+      ["LaLa Garden Kasukabe",35.9750,139.7540],
+      ["十勝亭 春日部",35.9788,139.7495]
+    ]
+  },
+  {
+    date:"MON · 01/18",
+    title:"富士山・河口湖一日包車",
+    sub:"包車 ¥72,000／6 人｜當晚入住東橫INN成田機場本館",
+    events:[
+      ["07:00–07:45","早餐、整理大件行李、退房","退房時將 6 人所有行李箱一起帶下樓準備上車。"],
+      ["08:00–10:00","新宿飯店門口集合出發 → 前往富士山","包車司機於 HOTEL LiVEMAX Shinjuku East 門口接送。"],
+      ["10:00–11:15","忍野八海散步拍照","冬季清澈湧泉與富士山同框，地面偶有結冰請小心慢行。"],
+      ["11:15–12:00","移動前往河口湖周邊",""],
+      ["12:00–13:15","河口湖當地美食午餐","可品嚐山梨鄉土料理「餺飥（ほうとう）」暖身。"],
+      ["13:15–14:30","大石公園、富士山湖景拍照","若天候晴朗可拍到完整逆富士或湖畔雪頂富士山。"],
+      ["14:30–16:00","河口湖周邊景點（視時間與路況調整）","御殿場 Outlet 列為備選，優先確保趕往成田的時間充裕。"],
+      ["16:00–19:00","結束富士山行程 → 前往成田機場住宿","務必確認包車是否包含直送東橫INN成田機場本館。"],
+      ["晚上","抵達東橫INN成田機場本館、辦理入住","向櫃檯確認隔日 05:10 免費接駁巴士時間與乘車處。"]
+    ],
+    routes:[
+      {
+        from:"HOTEL LiVEMAX Shinjuku East（新宿）",
+        to:"忍野八海 → 河口湖 → 大石公園",
+        line:"六人專屬包車（全日 10 小時制）",
+        summary:"全程專車接送免轉車，6 人行李直接放車上。",
+        time:"新宿→富士山單程約 1.5–2 小時（視中央道車況）",
+        fare:"¥72,000 ÷ 6 人 ＝ 約 ¥12,000 / 人",
+        transfer:"包車點對點",
+        steps:[
+          "前一晚與包車客服／司機確認車牌號碼、司機聯絡方式與 08:00 飯店門口上車點。",
+          "依序走訪<b>忍野八海</b>、<b>河口湖午餐</b>、<b>大石公園</b>；每次下車前與司機約好上車時間與停車位置。"
+        ],
+        alert:"冬季山區氣溫極低且偶有路面管制，請預留行車彈性時間。"
+      },
+      {
+        from:"河口湖 / 大石公園",
+        to:"東橫INN成田機場本館",
+        line:"六人包車直送（需事前向包車公司確認！）",
+        summary:"河口湖至成田機場距離約 170 公里，車程約 2.5–3.5 小時。",
+        time:"約 2.5–3.5 小時（視首都高與東關東道車況）",
+        fare:"含於包車或依合約補遠途／超時／高速費（待確認）",
+        transfer:"包車直送或轉乘備案",
+        steps:[
+          "<b>【情況 A：包車合約含河口湖直送成田】</b> 建議最晚 <b>15:30–16:00</b> 從河口湖出發，避免超過 10 小時包車時數產生高額超時費，並事先確認高速公路過路費是否自理。",
+          "<b>【情況 B：包車僅回東京市區】</b> 請司機送至 <b>JR 東京站八重洲口</b> 或 <b>京成上野站</b>，改搭高速巴士（LCB 約 ¥1,500）或京成 Skyliner（¥2,580）前往成田機場，再轉飯店接駁車。"
+        ],
+        alert:"這是整趟旅程最關鍵的交通確認點！出發前務必白紙黑字與包車業者確認「終點為東橫INN成田機場本館」及所有附加費用。"
+      }
+    ],
+    places:[
+      ["HOTEL LiVEMAX Shinjuku East",35.6965,139.7060],
+      ["忍野八海",35.4602,138.8324],
+      ["河口湖",35.5170,138.7500],
+      ["大石公園",35.5335,138.7460],
+      ["東橫INN成田機場本館",35.7720,140.3860]
+    ],
+    note:"御殿場 Outlet 暫列彈性備選，因當晚需拉車至成田機場，建議優先把時間留給河口湖美景與路程緩衝。"
+  },
+  {
+    date:"TUE · 01/19",
+    title:"成田機場・快樂返台",
+    sub:"早班機｜建議搭乘 05:10 飯店免費接駁巴士",
+    events:[
+      ["04:45–05:00","起床、最後檢查護照與隨身物品","退房時將房卡交還櫃檯。"],
+      ["05:10","搭乘東橫INN免費接駁巴士前往機場","6 人建議提早 10–15 分鐘至門口乘車處排隊。"],
+      ["05:30–05:50","抵達成田國際機場指定航廈","車程約 10–20 分鐘。"],
+      ["05:50–06:30","航空公司櫃檯報到、行李託運",""],
+      ["06:30–08:00","安全檢查、出境審查、免稅店最後採買",""],
+      ["08:30","成田國際機場起飛","回程暫列 08:30–11:50，實際以電子機票為準。"],
+      ["11:50","抵達桃園國際機場、解散返家",""]
+    ],
+    routes:[
+      {
+        from:"東橫INN成田機場本館",
+        to:"成田國際機場 (T1 / T2 / T3)",
+        line:"東橫INN 免費接駁巴士",
+        summary:"飯店門口直達機場航廈，免搬行李搭電車。",
+        time:"約 10–20 分鐘（依航廈順序而異）",
+        fare:"免費（房客專用）",
+        transfer:"飯店接駁車直達",
+        steps:[
+          "1/18 晚上入住時向櫃檯確認 <b>05:10</b> 首班接駁車是否需領號碼牌或現場排隊，以及停靠的航廈位置。",
+          "04:55 前退房並將 6 件大行李推至飯店門口候車處，上車時向司機確認下車航廈（第一或第二航廈）。"
+        ],
+        alert:"若 05:10 班次客滿，飯店通常每隔 15–20 分鐘有一班車，或可請櫃檯協助叫兩台計程車（車程約 10 分鐘，車資約 ¥1,500–2,000／台）。"
+      },
+      {
+        from:"成田國際機場 (NRT)",
+        to:"桃園國際機場 (TPE)",
+        line:"回程國際航班（待確認）",
+        summary:"航程約 3 小時 50 分鐘至 4 小時 20 分鐘（冬季逆風飛行時間略長）。",
+        time:"約 4 小時 20 分鐘",
+        fare:"已訂（金額待補）",
+        transfer:"直飛",
+        steps:[
+          "依電子機票確認報到航廈與櫃檯，完成託運後通過安檢與日本出境審查。",
+          "留意登機門開放時間，準時登機返台。"
+        ],
+        alert:"起降時間（暫列 08:30–11:50）與降落航廈請以最終電子機票為準。"
+      }
+    ],
+    places:[
+      ["東橫INN成田機場本館",35.7720,140.3860],
+      ["成田國際機場",35.7720,140.3929],
+      ["桃園國際機場",25.0797,121.2342]
+    ]
+  }
 ];
-function mapsUrl(a,b,mode="transit"){return "https://www.google.com/maps/dir/?api=1&origin="+encodeURIComponent(a)+"&destination="+encodeURIComponent(b)+"&travelmode="+mode}
-function searchUrl(q){return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q)}
-const host=document.getElementById("days");
-days.forEach((d,i)=>{
- const sec=document.createElement("section");sec.className="day";
- const top=document.createElement("div");top.className="daytop";top.innerHTML=`<div><div class="daynum">DAY 0${i+1} · ${d.date}</div><h3>${d.title}</h3><div class="sub">${d.sub}</div></div><span class="tag">${d.places.length} 個地圖標記</span>`;
- const body=document.createElement("div");body.className="daybody";
- const left=document.createElement("div");left.innerHTML='<div class="timeline"></div><h4 style="margin:8px 0 10px">交通攻略｜照步驟搭車</h4><div class="routes"></div>';
- const timeline=left.querySelector(".timeline");
- d.events.forEach(e=>{const el=document.createElement("div");el.className="event";el.innerHTML=`<time>${e[0]}</time><div><strong>${e[1]}</strong>${e[2]?`<p>${e[2]}</p>`:""}</div>`;timeline.appendChild(el)});
- const routes=left.querySelector(".routes");
- d.routes.forEach(r=>{const el=document.createElement("div");el.className="route";const steps=(r[4]||[]).map(v=>`<li>${v}</li>`).join("");el.innerHTML=`<div class="routehead"><b>${r[0]} → ${r[1]}</b><span class="tag">${r[2]}</span></div><p>${r[3]}</p><div class="route-meta"><span>預估：${r[5]||"依當日路況"}</span></div><ol class="route-steps">${steps}</ol><a href="${mapsUrl(r[0],r[1])}" target="_blank" rel="noopener">Google Maps 備用導航 ↗</a>`;routes.appendChild(el)});
- const right=document.createElement("div");right.className="mapwrap";right.innerHTML=`<p class="maptitle">DAY 0${i+1}｜景點地圖</p><div class="map" id="map${i}"></div><p class="mapnote">地圖標記依景點名稱定位；部分住宿／店家地址尚待訂單或預約確認，標記為區域參考位置。</p><div class="maplinks"><a href="${searchUrl(d.places.map(p=>p[0]+" Tokyo").join(" "))}" target="_blank" rel="noopener">Google Maps 查看當日景點 ↗</a></div>`;
- body.append(left,right);sec.append(top,body);if(d.note){const n=document.createElement("div");n.className="note";n.style.margin="0 22px 18px";n.textContent=d.note;sec.appendChild(n)}host.appendChild(sec);
+
+function mapsDirUrl(origin, dest, mode="transit"){
+  return "https://www.google.com/maps/dir/?api=1&origin=" + encodeURIComponent(origin) + "&destination=" + encodeURIComponent(dest) + "&travelmode=" + mode;
+}
+function mapsSearchUrl(q){
+  return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
+}
+
+const daysHost = document.getElementById("days");
+const mapInstances = [];
+
+days.forEach((d, i) => {
+  const sec = document.createElement("section");
+  sec.className = "day";
+  sec.dataset.dayIdx = String(i);
+
+  const top = document.createElement("div");
+  top.className = "daytop";
+  top.innerHTML = `
+    <div>
+      <div class="daynum">DAY 0${i+1} · ${d.date}</div>
+      <h3>${d.title}</h3>
+      <div class="sub">${d.sub}</div>
+    </div>
+    <span class="tag">${d.places.length} 個地點標記</span>
+  `;
+
+  const body = document.createElement("div");
+  body.className = "daybody";
+
+  const left = document.createElement("div");
+  left.innerHTML = `
+    <div class="timeline"></div>
+    <h4 class="route-section-title">🚃 交通攻略｜起訖站與逐步轉乘</h4>
+    <div class="routes"></div>
+  `;
+
+  const timeline = left.querySelector(".timeline");
+  d.events.forEach(e => {
+    const el = document.createElement("div");
+    el.className = "event";
+    el.innerHTML = `<time>${e[0]}</time><div><strong>${e[1]}</strong>${e[2] ? `<p>${e[2]}</p>` : ""}</div>`;
+    timeline.appendChild(el);
+  });
+
+  const routes = left.querySelector(".routes");
+  d.routes.forEach(r => {
+    const el = document.createElement("div");
+    el.className = "route";
+    const stepsHtml = (r.steps || []).map(s => `<li><div>${s}</div></li>`).join("");
+    const mode = r.line.includes("包車") ? "driving" : (r.line.includes("步行") ? "walking" : "transit");
+    el.innerHTML = `
+      <div class="routehead">
+        <b>${r.from} → ${r.to}</b>
+        <span class="tag">${r.line}</span>
+      </div>
+      <p>${r.summary}</p>
+      <div class="route-meta">
+        <span>⏱ ${r.time}</span>
+        <span class="fare">💴 ${r.fare}</span>
+        <span class="xfer">🔄 ${r.transfer}</span>
+      </div>
+      <ol class="route-steps">${stepsHtml}</ol>
+      ${r.alert ? `<div class="route-alert">⚠️ ${r.alert}</div>` : ""}
+      <div class="btn-row">
+        <a class="navbtn" href="${mapsDirUrl(r.from, r.to, mode)}" target="_blank" rel="noopener">開啟 Google Maps 導航 ↗</a>
+      </div>
+    `;
+    routes.appendChild(el);
+  });
+
+  const right = document.createElement("div");
+  right.className = "mapwrap";
+  const placeBtns = d.places.map((p, idx) =>
+    `<a class="navbtn secondary" href="${mapsSearchUrl(p[0])}" target="_blank" rel="noopener">${idx+1}. ${p[0].replace(/（.*?）/g,"")} ↗</a>`
+  ).join("");
+
+  right.innerHTML = `
+    <p class="maptitle">📍 DAY 0${i+1}｜景點相對位置地圖</p>
+    <div class="map" id="map${i}"></div>
+    <p class="mapnote">點擊下方按鈕可直接開啟手機 Google Maps 單點導航；標註「待確認」者為區域參考位置。</p>
+    <div class="btn-row">${placeBtns}</div>
+  `;
+
+  body.append(left, right);
+  sec.append(top, body);
+
+  if (d.note) {
+    const n = document.createElement("div");
+    n.className = "note";
+    n.style.margin = "0 20px 18px";
+    n.textContent = "💡 備註：" + d.note;
+    sec.appendChild(n);
+  }
+
+  daysHost.appendChild(sec);
 });
-function drawMaps(){if(!window.L)return;days.forEach((d,i)=>{const map=L.map("map"+i,{scrollWheelZoom:false}).setView([d.places[0][1],d.places[0][2]],12);L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);const bounds=[];d.places.forEach((p,j)=>{const pos=[p[1],p[2]];bounds.push(pos);L.marker(pos).addTo(map).bindPopup(`<b>${j+1}. ${p[0]}</b><br><a href="${searchUrl(p[0]+" Tokyo")}" target="_blank">Google Maps 導航</a>`)});if(bounds.length>1)map.fitBounds(bounds,{padding:[24,24]});else map.setView(bounds[0],14);});}
-if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",drawMaps);else drawMaps();
-const items=["護照（確認有效期限）","機票及三間住宿訂單","信用卡、日幣現金","旅遊保險資料","手機、充電器、行動電源","日本 eSIM","耳機、轉接插頭","常備藥品","液體夾鏈袋","保暖外套","發熱衣、長褲","圍巾、手套","好走、防滑的鞋子","替換襪子及內衣","富士山防風保暖配件"];
-const checks=document.getElementById("checks");items.forEach((v,i)=>{const label=document.createElement("label");label.innerHTML=`<input type="checkbox" id="c${i}">${v}`;checks.appendChild(label)});
+
+function drawMaps() {
+  if (!window.L) return;
+  days.forEach((d, i) => {
+    const map = L.map("map" + i, { scrollWheelZoom: false }).setView([d.places[0][1], d.places[0][2]], 12);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; OpenStreetMap'
+    }).addTo(map);
+    const bounds = [];
+    d.places.forEach((p, j) => {
+      const pos = [p[1], p[2]];
+      bounds.push(pos);
+      L.marker(pos).addTo(map).bindPopup(`<b>${j+1}. ${p[0]}</b><br><a href="${mapsSearchUrl(p[0])}" target="_blank">開啟 Google Maps 導航</a>`);
+    });
+    if (bounds.length > 1) map.fitBounds(bounds, { padding: [26, 26] });
+    else map.setView(bounds[0], 14);
+    mapInstances.push(map);
+  });
+}
+if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", drawMaps);
+else drawMaps();
+
+// Day Filter Pills
+document.getElementById("dayPills").addEventListener("click", e => {
+  const btn = e.target.closest(".day-pill");
+  if (!btn) return;
+  document.querySelectorAll(".day-pill").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  const target = btn.dataset.day;
+  document.querySelectorAll(".day").forEach(card => {
+    card.style.display = (target === "all" || card.dataset.dayIdx === target) ? "block" : "none";
+  });
+  setTimeout(() => mapInstances.forEach(m => m.invalidateSize()), 80);
+});
+
+// Bottom Navigation Tabs
+document.querySelectorAll(".bnav-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".bnav-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    const targetId = btn.dataset.target;
+    document.querySelectorAll(".tab-panel").forEach(p => {
+      p.classList.toggle("active", p.id === targetId);
+    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (targetId === "panel-itinerary") {
+      setTimeout(() => mapInstances.forEach(m => m.invalidateSize()), 100);
+    }
+  });
+});
+
+// Interactive Packing Checklist with localStorage
+const packItems = [
+  "護照（確認效期 6 個月以上）",
+  "去回程電子機票（確認航廈與時間）",
+  "三間住宿訂單確認單（押上/新宿/成田）",
+  "富士山包車訂單與司機聯絡方式",
+  "信用卡（海外回饋高）與日幣現金 ¥4萬+",
+  "旅遊平安險與班機延誤不便險保單",
+  "手機、充電線、行動電源（務必隨身帶上機）",
+  "日本上網 eSIM（出發前確認啟用教學）",
+  "個人常備藥品（感冒、腸胃、暈車、止痛）",
+  "隨身保濕護唇膏、乳液（東京冬季極乾燥）",
+  "防風保暖大衣／羽絨外套",
+  "發熱衣、保暖長褲（D1 機場舒服穿搭）",
+  "毛帽、圍巾、防風手套（富士山必備）",
+  "好走且具備防滑鞋底的休閒鞋／靴子",
+  "暖暖包（貼式＋手握式）",
+  "折疊購物袋（超市採買與藥妝伴手禮）"
+];
+
+const STORAGE_KEY = "tokyo2027_packing_v1";
+let savedChecks = {};
+try { savedChecks = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); } catch (e) {}
+
+const checksHost = document.getElementById("checks");
+const packCount = document.getElementById("packCount");
+const packFill = document.getElementById("packFill");
+
+function updatePackProgress() {
+  const total = packItems.length;
+  const done = Object.values(savedChecks).filter(Boolean).length;
+  packCount.textContent = `已完成 ${done} / ${total} 項`;
+  packFill.style.width = `${Math.round((done / total) * 100)}%`;
+}
+
+packItems.forEach((text, i) => {
+  const label = document.createElement("label");
+  const cb = document.createElement("input");
+  cb.type = "checkbox";
+  cb.checked = !!savedChecks[i];
+  cb.addEventListener("change", () => {
+    savedChecks[i] = cb.checked;
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(savedChecks)); } catch (e) {}
+    updatePackProgress();
+  });
+  label.append(cb, document.createTextNode(text));
+  checksHost.appendChild(label);
+});
+updatePackProgress();
+
+document.getElementById("resetPack").addEventListener("click", () => {
+  savedChecks = {};
+  try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+  checksHost.querySelectorAll("input[type=checkbox]").forEach(cb => cb.checked = false);
+  updatePackProgress();
+});
 </script>
-</body></html>
+</body>
+</html>
