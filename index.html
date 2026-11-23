@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#172b3a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>TOKYO TRIP 2027｜東京六日五夜手機版行程 App</title>
+<title>TOKYO TRIP 2027｜東京六日五夜</title>
 <link rel="preconnect" href="https://unpkg.com">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
@@ -130,12 +130,13 @@ main{max-width:1080px;margin:auto;padding:18px 16px 36px}
 
 /* Timeline */
 .timeline{display:grid;gap:0}
-.event{display:grid;grid-template-columns:94px 1fr;gap:12px;padding:0 0 15px;position:relative}
+.event{display:grid;grid-template-columns:98px 1fr;gap:12px;padding:0 0 15px;position:relative}
 .event time{font-size:12.5px;font-weight:700;color:var(--blue);padding-top:2px;font-variant-numeric:tabular-nums}
 .event strong{display:block;font-size:14.5px}
 .event p{margin:3px 0;color:var(--muted);font-size:13px}
-.event:before{content:"";position:absolute;left:100px;top:8px;bottom:-2px;width:1px;background:#dce3e5}
-.event:after{content:"";position:absolute;left:96px;top:7px;width:9px;height:9px;border-radius:50%;background:var(--accent);border:2px solid #fff;box-shadow:0 0 0 1px #e6b3a5}
+.event-link{display:inline-block;margin-top:4px;font-size:12px;color:var(--blue);font-weight:600;text-decoration:none}
+.event:before{content:"";position:absolute;left:104px;top:8px;bottom:-2px;width:1px;background:#dce3e5}
+.event:after{content:"";position:absolute;left:100px;top:7px;width:9px;height:9px;border-radius:50%;background:var(--accent);border:2px solid #fff;box-shadow:0 0 0 1px #e6b3a5}
 .event:last-child:before{display:none}
 
 /* Route Cards */
@@ -486,9 +487,9 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:12px 16px 24p
   .map{height:270px}
   .daytop{padding:16px}
   .grid-3,.grid-2,.phrase-grid{grid-template-columns:1fr}
-  .event{grid-template-columns:82px 1fr;gap:10px}
-  .event:before{left:87px}
-  .event:after{left:83px}
+  .event{grid-template-columns:86px 1fr;gap:10px}
+  .event:before{left:91px}
+  .event:after{left:87px}
   .event time{font-size:11.5px}
   .checklist{grid-template-columns:1fr}
   .split-form{grid-template-columns:1fr 1fr}
@@ -503,11 +504,11 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:12px 16px 24p
 <header class="hero">
   <div class="eyebrow">JAPAN · WINTER JOURNEY 2027</div>
   <h1>TOKYO TRIP<br>2027</h1>
-  <p>東京六日五夜・6 位成人同行｜JR・地鐵轉乘與包車手冊</p>
+  <p>東京六日五夜・6 位成人同行｜依 Notion 行程表與 Navitime 校準</p>
   <div class="stats">
     <span class="stat">📅 01.14 — 01.19</span>
     <span class="stat">👥 6 位成人</span>
-    <span class="stat">🚃 JR・地鐵＋富士山包車</span>
+    <span class="stat">🚃 淺草・人形町・秋葉原・上野・春日部・新宿</span>
     <span class="stat">📲 可加入手機主畫面</span>
   </div>
 </header>
@@ -517,14 +518,14 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:12px 16px 24p
   <section class="tab-panel active" id="panel-itinerary">
     <div class="section-head">
       <h2>每日行程與逐步交通</h2>
-      <small id="dayFilterHint">預設顯示單日・點地圖解鎖可縮放</small>
+      <small id="dayFilterHint">已依 Notion 行程表校準 D2、D3 時間與景點</small>
     </div>
     <div class="day-pills" id="dayPills">
-      <button class="day-pill" data-day="0">D1 1/14 抵達</button>
-      <button class="day-pill" data-day="1">D2 1/15 淺草</button>
-      <button class="day-pill" data-day="2">D3 1/16 神社/搬家</button>
-      <button class="day-pill" data-day="3">D4 1/17 秋葉原/春日部</button>
-      <button class="day-pill" data-day="4">D5 1/18 富士山包車</button>
+      <button class="day-pill" data-day="0">D1 1/14 抵達/晴空塔</button>
+      <button class="day-pill" data-day="1">D2 1/15 淺草/神社/秋葉原/上野</button>
+      <button class="day-pill" data-day="2">D3 1/16 春日部/新宿</button>
+      <button class="day-pill" data-day="3">D4 1/17 新宿自由活動</button>
+      <button class="day-pill" data-day="4">D5 1/18 富士山一日遊</button>
       <button class="day-pill" data-day="5">D6 1/19 返台</button>
       <button class="day-pill" data-day="all">展開全部 6 天</button>
     </div>
@@ -535,42 +536,44 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:12px 16px 24p
   <section class="tab-panel" id="panel-transport">
     <div class="section-head">
       <h2>交通總覽與轉乘守則</h2>
-      <small>JR・地鐵・包車・機場接駁</small>
+      <small>依 Navitime 截圖與 Notion 行程表整理</small>
     </div>
 
     <div class="pending-box">
-      <h3>⚠️ 出發前必須確認的交通與訂單項目</h3>
+      <h3>⚠️ 行程表校準與出發前確認提醒</h3>
       <ul class="pending-list">
-        <li><b>D5 包車是否直送成田機場：</b>目前包車（¥72,000／6 人）預計 18:00 結束，但當晚入住「東橫INN成田機場本館」。務必向包車公司確認<b>是否包含河口湖直送成田</b>、過路費／停車費／超時費計算方式，以及 6 人＋6 件大行李的車型容量。</li>
-        <li><b>去回程電子機票細節：</b>目前暫列去程 1/14 13:50–16:55、回程 1/19 08:30–11:50，實際航空公司、航班編號、成田航廈（T1/T2/T3）請以最終電子機票為準。</li>
-        <li><b>D6 飯店免費接駁巴士：</b>東橫INN成田機場本館接駁車班次（暫抓 05:10）與乘車處請於 1/18 入住時向櫃檯二次確認，6 人建議提早 15 分鐘排隊。</li>
-        <li><b>尚未核對地址的店家（不假設精確地鐵出口）：</b>D2 的 <b>OUKA KIMONO</b> 分店、<b>淺草琥珀堂</b>、<b>明るい農村</b>；D3 的 <b>美奈福</b>；D4 的 <b>春日部溫泉</b> 正式店名與地址。</li>
+        <li><b>D2（1/15）與 D3（1/16）已依 Notion 行程表修正：</b>D2 為「押上 → 淺草（09:21–09:24 都營淺草線特急 ¥180）→ 櫻花和服、淺草雷門、淺草名代拉麵 → 人形町小網神社、美奈福 → 東京大神宮 → 秋葉原 → 御徒町往上野逛、鳥貴族 → 回押上」；D3 為「押上 → 春日部（09:13–09:55 東武伊勢崎線/晴空塔線急行 ¥490）→ 蠟筆小新景點、LaLa Garden、十勝亭（營業至13:00）、春日部温泉 湯楽の里 → 春日部-大宮-新宿（16:48–17:48 東武野田線急行轉 JR湘南新宿線 ¥860）→ 抵達 Hotel Livemax 新宿歌舞伎町、牛たんの檸檬」。</li>
+        <li><b>D3 下午回程路線：</b>依 Navitime 截圖為 <b>16:48 春日部 → 17:03 大宮（埼玉縣）</b> 搭「東武野田線 [Urban Park Line] 急行」（8 號月台，¥330 / IC ¥324，15 分鐘），<b>17:16 大宮 → 17:48 新宿</b> 搭「JR湘南新宿線（往逗子，經由新宿）」（4 號月台，¥530 / IC ¥528，32 分鐘），合計 JPY 860 / IC JPY 852。</li>
+        <li><b>D4（1/17）與 D5（1/18）留白確認：</b>Notion 中 1/17 目前有「10:00–12:00 出門逛新宿」、「12:00–13:30 午餐自理」；1/18 標示「🗻 富士山一日遊」尚未填入細部時間與景點，出發前請補齊細項與包車接送安排。</li>
       </ul>
     </div>
 
     <div class="grid-3">
       <div class="info">
-        <h3>🚃 東京市區鐵道（JR・地鐵・私鐵）</h3>
-        <p>東京鐵道分屬不同系統（<b>JR 東日本</b>、<b>東京 Metro</b>、<b>都營地鐵</b>、<b>東武鐵道</b>），跨公司轉乘通常需經過閘門重新感應 IC 卡。</p>
+        <h3>🚃 D2 市區鐵道串聯（押上→淺草→人形町→飯田橋→秋葉原→上野→押上）</h3>
+        <p>第二天行程橫跨都營淺草線、日比谷線、東西線、JR 中央總武線、JR 山手線／京濱東北線與銀座線。</p>
         <ul>
-          <li><b>支付建議：</b>6 人每人手機綁定 <b>Apple Pay Suica / PASMO</b> 或實體 IC 卡，儲值 ¥3,000～4,000 即可免去每次排隊買票。</li>
-          <li><b>6 人行動技巧：</b>上下車前先約好「車廂編號（例如第 4 節車廂）」與「下一站轉乘站名」，避免人多被車門隔開。</li>
+          <li><b>押上 → 淺草（09:21–09:24）：</b>都營淺草線特急（往京急久里濱等方向，2 站約 3 分鐘，¥180 / IC ¥178）。</li>
+          <li><b>淺草 → 人形町（14:35–14:41）：</b>都營淺草線（約 5 分鐘一班，¥180）。</li>
+          <li><b>人形町 → 茅場町 → 飯田橋（15:52–16:12）：</b>日比谷線轉東西線（¥180）。</li>
+          <li><b>飯田橋 → 秋葉原（17:18–17:25）：</b>JR 中央總武線（¥160）；<b>秋葉原 → 御徒町（18:45–18:47）：</b>京濱東北·根岸線或山手線（¥160）；<b>上野 → 淺草 → 押上：</b>銀座線轉都營淺草線（¥290）。</li>
         </ul>
       </div>
       <div class="info">
-        <h3>🚐 D5 富士山六人包車</h3>
-        <p>1/18 全日包車（08:00–18:00），報價 <b>¥72,000／6 人</b>（每人約 ¥12,000，約 NT$2,100）。</p>
+        <h3>🚆 D3 春日部往返與新宿路線</h3>
+        <p>第三天一早從押上出發前往春日部，傍晚經大宮轉乘 JR 湘南新宿線前往新宿。</p>
         <ul>
-          <li><b>行程優先順序：</b>新宿東側飯店接送 → 忍野八海 → 河口湖午餐 → 大石公園／河口湖周邊。</li>
-          <li><b>取捨原則：</b>御殿場 Outlet 列為備選；若需趕往成田機場住宿，建議把時間留給河口湖與車程緩衝。</li>
+          <li><b>押上 → 春日部（09:13–09:55）：</b>東武伊勢崎線 [晴空塔線] 急行（¥490）。</li>
+          <li><b>春日部站東口 → 幸松第二公民館（16:16–16:25）：</b>搭公車（¥180），前往春日部車站搭車。</li>
+          <li><b>春日部 → 大宮 → 新宿（16:48–17:48）：</b>東武野田線急行至大宮，轉乘 JR 湘南新宿線至新宿（¥860 / IC ¥852）。</li>
         </ul>
       </div>
       <div class="info">
-        <h3>✈️ 成田機場往返交通</h3>
-        <p>去程與回程皆經由<b>成田國際機場（NRT）</b>，依行李數量選擇最順路線。</p>
+        <h3>✈️ 機場與住宿銜接提醒</h3>
+        <p>D1 抵達成田機場後前往押上 <b>WISE OWL NEST</b>；D3 傍晚抵達 <b>Hotel Livemax 新宿歌舞伎町</b>。</p>
         <ul>
-          <li><b>D1 去程（成田 → 押上）：</b>搭乘 <b>京成 Narita Sky Access 線「Access Express」</b>（認明往押上／羽田／西馬込方向），可直通都營淺草線免轉車抵達<b>押上站（A20）</b>，車程約 60–75 分鐘，單程約 ¥1,200–1,350。</li>
-          <li><b>D6 回程（飯店 → 成田）：</b>搭乘<b>東橫INN成田機場本館免費接駁巴士</b>（車程約 10–20 分鐘）。</li>
+          <li><b>D1 入境與接駁（16:55–19:30）：</b>完成出境／入境流程後前往住宿，預留 6 人同行與行李移動時間。</li>
+          <li><b>D6 返台航班：</b>請依最終電子機票再次核對出發日期、起飛時間與成田航廈。</li>
         </ul>
       </div>
     </div>
@@ -586,48 +589,32 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:12px 16px 24p
   <section class="tab-panel" id="panel-stay">
     <div class="section-head">
       <h2>住宿資訊與日文站名／地址複製</h2>
-      <small>5 晚合計每人 NT$4,342（多退少補）</small>
+      <small>押上 WISE OWL NEST → 新宿 Hotel Livemax</small>
     </div>
-    <div class="grid-3">
+    <div class="grid-2">
       <div class="info">
-        <h3>01｜Wise Owl Nest <span class="tag">1/14–1/16 · 2晚</span></h3>
-        <p><b>費用：</b>每人 NT$1,241（Agoda 訂房）<br>
-        <b>最近車站：</b>押上站（都營淺草線 A20 / Metro 半藏門線 Z14 / 京成押上線）</p>
+        <h3>01｜WISE OWL NEST <span class="tag">1/14 起住・押上／晴空塔周邊</span></h3>
+        <p><b>行程銜接：</b>D1（1/14）19:30–19:45 抵達，步行前往晴空塔商場與超市；D2（1/15）一早搭都營淺草線前往淺草；D3（1/16）一早搭東武晴空塔線急行前往春日部。</p>
         <div class="jp-box">
-          <span class="jp-text">Wise Owl Nest Tokyo（押上駅周辺）</span>
-          <span>完整門牌依 Agoda 訂單為準</span>
+          <span class="jp-text">WISE OWL NEST（押上駅・とうきょうスカイツリー駅周辺）</span>
+          <span>實際地址與入住方式依訂單為準</span>
         </div>
         <div class="btn-row">
           <a class="navbtn" href="https://www.google.com/maps/search/?api=1&query=Wise+Owl+Nest+Tokyo" target="_blank" rel="noopener">Google Maps ↗</a>
-          <button type="button" class="navbtn copy" data-copy="Wise Owl Nest Tokyo 押上">📋 複製名稱</button>
+          <button type="button" class="navbtn copy" data-copy="WISE OWL NEST 押上">📋 複製名稱</button>
         </div>
       </div>
 
       <div class="info">
-        <h3>02｜HOTEL LiVEMAX Shinjuku East <span class="tag">1/16–1/18 · 2晚</span></h3>
-        <p><b>費用：</b>每人 NT$2,107（Agoda 訂房）<br>
-        <b>最近車站：</b>東新宿站（Metro 副都心線 F12 / 都營大江戶線 E02），步行約 2–5 分鐘</p>
+        <h3>02｜Hotel Livemax 新宿歌舞伎町 <span class="tag">1/16 傍晚抵達</span></h3>
+        <p><b>行程銜接：</b>D3（1/16）16:48–17:48 搭車至新宿後，17:48–18:00 抵達辦理入住，18:00–18:30 休息，19:00–20:30 前往「牛たんの檸檬」。</p>
         <div class="jp-box">
-          <span class="jp-text">ホテルリブマックス新宿EAST（東新宿駅）</span>
-          <span>完整門牌依 Agoda 訂單為準</span>
+          <span class="jp-text">ホテルリブマックス新宿歌舞伎町（新宿駅・西武新宿駅周辺）</span>
+          <span>實際門牌依訂房確認單為準</span>
         </div>
         <div class="btn-row">
-          <a class="navbtn" href="https://www.google.com/maps/search/?api=1&query=HOTEL+LiVEMAX+Shinjuku+East" target="_blank" rel="noopener">Google Maps ↗</a>
-          <button type="button" class="navbtn copy" data-copy="ホテルリブマックス新宿EAST">📋 複製日文店名</button>
-        </div>
-      </div>
-
-      <div class="info">
-        <h3>03｜東橫INN成田機場本館 <span class="tag">1/18–1/19 · 1晚</span></h3>
-        <p><b>費用：</b>每人 NT$994（Trip.com 訂房）<br>
-        <b>機場接駁：</b>提供飯店免費接駁巴士往返成田機場各航廈（班次依公告）</p>
-        <div class="jp-box">
-          <span class="jp-text">東横INN成田空港本館（千葉県成田市取香560）</span>
-          <span>包車終點溝通可直接出示此日文名稱</span>
-        </div>
-        <div class="btn-row">
-          <a class="navbtn" href="https://www.google.com/maps/search/?api=1&query=Toyoko+Inn+Narita+Airport+Honkan" target="_blank" rel="noopener">Google Maps ↗</a>
-          <button type="button" class="navbtn copy" data-copy="東横INN成田空港本館 千葉県成田市取香560">📋 複製日文地址</button>
+          <a class="navbtn" href="https://www.google.com/maps/search/?api=1&query=Hotel+Livemax+Shinjuku+Kabukicho" target="_blank" rel="noopener">Google Maps ↗</a>
+          <button type="button" class="navbtn copy" data-copy="ホテルリブマックス新宿歌舞伎町">📋 複製日文店名</button>
         </div>
       </div>
     </div>
@@ -652,15 +639,15 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:12px 16px 24p
     </div>
     <div class="checklist" id="checks"></div>
     <div class="note">
-      <b>1 月東京與富士山穿搭提醒：</b>市區白天約 5–10°C、早晚接近 0°C，電車與商場暖氣很強，建議採「洋蔥式穿法」（發熱衣＋針織/大學T＋防風保暖外套）；1/18 前往河口湖氣溫常在 0°C 以下，務必帶手套、圍巾與防滑好走的鞋子。
+      <b>1 月東京與冬季穿搭提醒：</b>市區白天氣溫偏低、早晚更冷，室內與電車暖氣較強，建議採洋蔥式穿搭；前往春日部泡湯或富士山等戶外景點時，務必留意保暖與防滑鞋款。
     </div>
   </section>
 
   <!-- TAB 5: 預算 & 6人分帳記帳工具 -->
   <section class="tab-panel" id="panel-budget">
     <div class="section-head">
-      <h2>6 人分帳記帳與預算總表</h2>
-      <small>目標總預算：NT$30,000～40,000 / 人</small>
+      <h2>6 人分帳記帳與交通車資參考</h2>
+      <small>支援日幣／台幣即時換算與 6 人均分</small>
     </div>
 
     <!-- 6-Person Shared Expense Tracker -->
@@ -675,7 +662,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:12px 16px 24p
       </div>
 
       <form class="split-form" id="expForm">
-        <input type="text" id="expTitle" placeholder="項目（例：富士山包車尾款、拉麵、計程車）" required>
+        <input type="text" id="expTitle" placeholder="項目（例：淺草名代拉麵、牛たんの檸檬、車資）" required>
         <input type="number" id="expAmount" placeholder="金額" min="1" step="any" required>
         <select id="expCurrency">
           <option value="JPY">JPY ¥</option>
@@ -718,25 +705,25 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:12px 16px 24p
     </div>
 
     <div class="section-head">
-      <h2>行前每人預算總表</h2>
-      <small>單人預估明細</small>
+      <h2>行程表已標註之交通車資明細</h2>
+      <small>依 Notion 東京行程表與 Navitime 截圖</small>
     </div>
     <div class="budget-card">
       <table class="budget">
         <thead>
-          <tr><th>預算項目</th><th>說明與備註</th><th>每人預估 (NT$)</th></tr>
+          <tr><th>日期</th><th>路段／路線</th><th>單人車資</th></tr>
         </thead>
         <tbody>
-          <tr><td><b>住宿（5 晚）</b></td><td>押上 2 晚 $1,241 ＋ 新宿 2 晚 $2,107 ＋ 成田 1 晚 $994（已訂）</td><td>NT$4,342</td></tr>
-          <tr><td><b>富士山包車（1/18）</b></td><td>總價 ¥72,000 ÷ 6 人 ＝ ¥12,000/人（未含可能超時費）</td><td>NT$2,100</td></tr>
-          <tr><td><b>來回機票</b></td><td>桃園 ↔ 東京成田（已訂，請補實際刷卡金額）</td><td>待補金額</td></tr>
-          <tr><td><b>日本交通（JR/地鐵/機場線）</b></td><td>含成田 Access Express、市區 JR/Metro/都營、春日部往返（約 ¥11,000–13,000）</td><td>NT$2,800</td></tr>
-          <tr><td><b>餐飲（6 天）</b></td><td>含早餐、拉麵、關東煮、小吃、河口湖午餐、晚餐（平均每日約 ¥4,500–5,000）</td><td>NT$6,000</td></tr>
-          <tr><td><b>體驗與門票</b></td><td>淺草 OUKA 和服租借、春日部溫泉入浴費等</td><td>NT$2,500</td></tr>
-          <tr><td><b>網路 eSIM 與旅平險</b></td><td>6 日日本上網 eSIM ＋ 海外醫療／不便險</td><td>NT$1,000</td></tr>
-          <tr><td><b>購物與伴手禮</b></td><td>晴空塔、Disney Store、秋葉原、御徒町、新宿等（依個人彈性）</td><td>NT$5,000</td></tr>
-          <tr><td><b>緊急預備金</b></td><td>包車可能過路/超時分攤、計程車或臨時支出</td><td>NT$2,000</td></tr>
-          <tr class="total"><td colspan="2">已規劃支出小計（不含機票）</td><td>NT$25,742</td></tr>
+          <tr><td><b>01/15 (D2)</b></td><td>押上 → 淺草（都營淺草線特急，09:21–09:24）</td><td>¥180（IC ¥178）</td></tr>
+          <tr><td><b>01/15 (D2)</b></td><td>淺草 → 人形町（都營淺草線，14:35–14:41）</td><td>¥180</td></tr>
+          <tr><td><b>01/15 (D2)</b></td><td>人形町 → 茅場町 → 飯田橋（日比谷線轉東西線，15:52–16:12）</td><td>¥180</td></tr>
+          <tr><td><b>01/15 (D2)</b></td><td>飯田橋 → 秋葉原（中央總武線，17:18–17:25）</td><td>¥160</td></tr>
+          <tr><td><b>01/15 (D2)</b></td><td>秋葉原 → 御徒町（京濱東北·根岸線／山手線，18:45–18:47）</td><td>¥160</td></tr>
+          <tr><td><b>01/15 (D2)</b></td><td>上野 → 淺草 → 押上（銀座線轉都營淺草線）</td><td>¥290</td></tr>
+          <tr><td><b>01/16 (D3)</b></td><td>押上 → 春日部（東武伊勢崎線 [晴空塔線] 急行，09:13–09:55）</td><td>¥490</td></tr>
+          <tr><td><b>01/16 (D3)</b></td><td>幸松第二公民館 → 春日部車站東口（公車，16:16–16:25）</td><td>¥180</td></tr>
+          <tr><td><b>01/16 (D3)</b></td><td>春日部 → 大宮 → 新宿（東武野田線急行轉 JR湘南新宿線，16:48–17:48）</td><td>¥860（IC ¥852）</td></tr>
+          <tr class="total"><td colspan="2">上述已標註交通路段合計（日幣票價加總）</td><td>¥2,660</td></tr>
         </tbody>
       </table>
     </div>
@@ -745,7 +732,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:12px 16px 24p
 
 <div class="toast" id="toast">已複製到剪貼簿</div>
 
-<footer>TOKYO TRIP 2027 · 班次、票價與店家營業資訊請以 2027 年官方公告及實際訂單為準</footer>
+<footer>TOKYO TRIP 2027 · 班次、票價與店家營業資訊請以官方公告及實際訂單為準</footer>
 
 <!-- Bottom Navigation Bar -->
 <nav class="bottom-nav" aria-label="主導航列">
@@ -762,436 +749,273 @@ const days = [
   {
     isoDate:"2027-01-14",
     date:"THU · 01/14",
-    title:"抵達東京・晴空塔採買",
-    sub:"押上住宿（Wise Owl Nest）｜抵達日保留體力",
+    title:"抵達東京・晴空塔・超市晚餐",
+    sub:"押上 WISE OWL NEST｜08:20 台中出發 → 21:00 超市買晚餐",
     events:[
-      ["08:20–10:50","台中組出發、前往桃園機場","台中出發並停靠豐原接駁前往桃園機場。"],
-      ["10:50–12:50","桃園機場 T1 報到、託運與出境","六人同行建議提前抵達第一航廈櫃檯集合。"],
-      ["13:50–16:55","桃園飛往東京成田（NRT）","去程時間暫列 13:50–16:55，實際航班編號與降落航廈以電子機票為準。"],
-      ["16:55–18:00","入境通關、領取行李","預留約 1 小時辦理入境與領行李，順便確認手機 eSIM 連線。"],
-      ["18:00–19:30","成田機場 → 押上站／Wise Owl Nest","搭乘京成 Access Express 直通都營淺草線至押上站（免轉車）。"],
-      ["19:30–19:45","辦理入住、休息整理行李","6 人備妥護照辦理入住。"],
-      ["19:55–21:00","東京晴空塔、Solamachi、Disney Store","商場多數店鋪 21:00 打烊，優先逛 Disney Store 與衣物。"],
-      ["21:00–22:00","超市採買晚餐（打烊折扣）","晴空塔或押上站周邊超市購買熟食回住處享用。"],
-      ["22:00","返回住宿休息","養精蓄銳準備隔天和服體驗。"]
+      ["08:20–10:50","台中組出發-停靠豐車","重點：育任、唯瑄、祈全、恩郡、羽亭"],
+      ["10:50–12:50","桃機T1闖關","重點：不要跟丟了"],
+      ["12:50–16:55","桃園-東京",""],
+      ["16:55–18:00","出境流程",""],
+      ["18:00–19:30","交通-前往民宿","備註：搭機場接送｜重點：交通"],
+      ["19:30–19:45","抵達WISE OWL NEST","備註：步行至晴空塔商場｜重點：休息整理行李"],
+      ["19:55–21:00","晴空塔商場","備註：21:00打烊能提早出門就出門｜重點：Disney store, 買衣物, 購物", "https://maps.app.goo.gl/ioqkXbXYZLFoR2Zs8?g_st=ac"],
+      ["21:00–22:00","超市買晚餐","備註：有三間超市 都可以逛｜重點：打烊促銷！, 進餐廳", "https://maps.app.goo.gl/zETsSTkDbPFz1shz8?g_st=ac"]
     ],
     routes:[
       {
         from:"桃園機場 T1",
-        to:"成田國際機場 (NRT)",
+        to:"東京成田",
         copyStation:"成田空港駅",
-        line:"中華／長榮／星宇等國際航班（待確認）",
-        summary:"航程約 3 小時 5 分鐘（日本比台灣快 1 小時）。",
-        time:"約 3 小時 5 分鐘",
-        fare:"已訂（金額待補）",
+        line:"12:50–16:55 航班",
+        summary:"依 Notion 行程表：08:20–10:50 台中組出發（停靠豐車），10:50–12:50 桃機 T1 闖關，12:50–16:55 桃園-東京。",
+        time:"12:50–16:55",
+        fare:"依機票",
         transfer:"直飛",
         steps:[
-          "於桃園機場第一航廈指定櫃檯辦理報到與行李直掛。",
-          "抵達成田機場後跟隨「Arrival / 到着」指標完成入境審查與海關申報。"
+          "10:50–12:50 桃園機場第一航廈辦理報到與通關，6 人注意集合與不要跟丟。",
+          "16:55–18:00 辦理出境／入境與行李領取流程。"
         ],
-        alert:"航班編號與抵達成田 T1/T2 航廈請以最終電子機票為準。"
+        alert:"實際航班編號、航廈與時間請以電子機票為準。"
       },
       {
-        from:"成田國際機場 (T1 / T2·T3)",
-        to:"押上站 Oshiage (A20 / KS45)",
+        from:"東京機場／出境處",
+        to:"WISE OWL NEST（押上）",
         copyStation:"押上駅",
-        line:"京成電鐵 Narita Sky Access 線「Access Express」",
-        summary:"認明往「押上／羽田機場／西馬込」方向且有停靠押上的班次，直通都營淺草線完全免轉車！",
-        time:"約 55–70 分鐘",
-        fare:"約 ¥1,200–1,350 / 人",
-        transfer:"直通免轉乘",
+        line:"18:00–19:30 交通-前往民宿（搭機場接送）",
+        summary:"18:00–19:30 前往民宿，19:30–19:45 抵達 WISE OWL NEST 休息整理行李，隨後步行至晴空塔商場。",
+        time:"約 90 分鐘（18:00–19:30）",
+        fare:"依接送安排",
+        transfer:"機場接送 → 步行",
         steps:[
-          "<span class='line-badge private-line'>京成電鐵</span> 依機場指標下樓至 B1「鐵道（Railways）」月台，刷 Suica 或購票進站。",
-          "確認電子看板標示為 <b>Access Express（アクセス特急）</b>，且終點為<b>押上、羽田機場或西馬込</b>（切勿搭錯往京成上野的 Skyliner 或本線列車）。",
-          "沿途經成田湯川、千葉新城中央、東松戶、高砂、青砥，直接駛入押上站，全程不必下車換月台。",
-          "於 <b>押上站（Oshiage / A20）</b> 下車，搭電梯至地面層後依 Agoda 訂單地址步行前往 <b>Wise Owl Nest</b>。"
-        ],
-        alert:"若錯過 Access Express 也可搭京成本線特急至「青砥站」同月台對面轉乘押上線；具體出口依 Wise Owl Nest 完整門牌決定。"
-      },
-      {
-        from:"Wise Owl Nest（押上）",
-        to:"東京晴空塔 / Tokyo Solamachi",
-        copyStation:"東京スカイツリータウン・ソラマチ",
-        line:"步行前往",
-        summary:"住宿位於押上區域，步行即可抵達晴空塔商場與 Disney Store。",
-        time:"約 5–15 分鐘",
-        fare:"免費（步行）",
-        transfer:"步行",
-        steps:[
-          "從住宿出發步行前往東京晴空塔城（Tokyo Solamachi），Disney Store 位於商場 3 樓。",
-          "21:00 商場打烊前後，可前往 Solamachi 2 樓或押上站周邊超市（如 Life 超市）採買晚餐。"
-        ],
-        alert:"完整步行路線請依 Agoda 訂單上的 Wise Owl Nest 實際門牌導航。"
+          "18:00–19:30 搭乘機場接送前往押上區域。",
+          "19:30–19:45 抵達 <b>WISE OWL NEST</b> 辦理入住與休息整理行李，19:55 前往晴空塔商場。"
+        ]
       }
     ],
     places:[
-      ["成田國際機場",35.7720,140.3929,"成田国際空港"],
-      ["押上站 (Oshiage)",35.7107,139.8130,"押上駅"],
-      ["Wise Owl Nest Tokyo",35.7108,139.8130,"Wise Owl Nest Tokyo"],
-      ["東京晴空塔 / Solamachi",35.7101,139.8107,"東京スカイツリー"]
+      ["WISE OWL NEST（押上）",35.7108,139.8130,"Wise Owl Nest Tokyo"],
+      ["晴空塔商場",35.7101,139.8107,"東京スカイツリータウン・ソラマチ"],
+      ["押上站周邊超市",35.7107,139.8130,"押上駅 スーパー"]
     ]
   },
   {
     isoDate:"2027-01-15",
     date:"FRI · 01/15",
-    title:"淺草・和服體驗・押上散策",
-    sub:"雷門、淺草寺、仲見世通、拉麵煎餃",
+    title:"淺草和服・人形町神社・秋葉原・上野",
+    sub:"09:21 押上出發 → 淺草 → 人形町 → 飯田橋 → 秋葉原 → 御徒町/上野 → 押上",
     events:[
-      ["08:30–09:15","早餐、從押上前往淺草","搭都營淺草線僅 2 站（約 3 分鐘）即達淺草。"],
-      ["09:30–10:30","OUKA KIMONO 櫻花和服換裝","6 人建議預約同一時段，預留約 1 小時選衣與髮型。"],
-      ["10:30–11:00","淺草雷門拍照","經典大燈籠地標合照。"],
-      ["11:00–12:00","仲見世通散步、淺草寺參拜","抽籤、買御守、逛百年老街。"],
-      ["12:00–13:00","淺草周邊午餐","視現場排隊狀況選擇定食或小吃。"],
-      ["13:00–14:30","淺草街區外拍、逛街","可往傳法院通、花月堂周邊取景。"],
-      ["14:30–15:00","淺草琥珀堂 / 日式甜點（蕨餅）","店家分店位置與營業時間出發前先核對。"],
-      ["15:00–16:00","淺草名代拉麵、煎餃","補充熱食暖胃。"],
-      ["16:00–16:30","返回 OUKA KIMONO 歸還和服","留意店家最晚歸還時間以免產生延遲費。"],
-      ["16:30–19:00","淺草或搭車回押上周邊自由活動","晚餐可於淺草或晴空塔周邊享用。"]
+      ["09:21–09:24","押上-淺草","重點：¥180, 交通, 都營淺草線特急"],
+      ["09:30–10:20","ouka tokyo桜花着物-樱花和服","重點：穿和服", "https://maps.app.goo.gl/FTELvfcQopLAqrky9"],
+      ["10:20–10:40","明るい農村&浅草琥珀堂","重點：三明治, 厥餅, 早餐, 糰子, 飯糰", "https://maps.app.goo.gl/P4uy9szLDSyTfBzg6"],
+      ["10:40–13:00","淺草雷門巡禮","重點：這裡吃午餐"],
+      ["13:00–13:30","歸還和服",""],
+      ["13:30–14:30","淺草名代拉麵","重點：拉麵, 煎餃, 進餐廳", "https://maps.app.goo.gl/MMDFdSihzxEdzdzS6?g_st=ac"],
+      ["14:35–14:41","淺草-人形町","備註：都營淺草線 5分鐘就一班｜重點：¥180, 交通, 都營淺草線 5分鐘就一班"],
+      ["14:41–14:46","小網神社","重點：將錢幣放入井水清洗當作錢母增強財運", "https://maps.app.goo.gl/A6P8Sg4StFm5tWUC6?g_st=ac"],
+      ["15:30–15:45","美奈福","備註：只收現金｜重點：進餐廳, 關東煮", "https://maps.app.goo.gl/NiXSbKpmBzm7nzgM6"],
+      ["15:52–16:12","人形町-茅場町-飯田橋","重點：¥180, 交通, 日比谷線轉東西線"],
+      ["16:12–17:15","東京大神宮","重點：據說能為參拜者帶來戀愛運", "https://maps.app.goo.gl/oH3rm8xMn1UXyLEw8?g_st=ac"],
+      ["17:18–17:25","飯田橋-秋葉原","重點：¥160, 中央總武線, 交通"],
+      ["17:25–18:45","秋葉原巡禮","重點：動漫, 電器"],
+      ["18:45–18:47","秋葉原-御徒町","重點：¥160, 交通, 京濱東北·根岸線＆山手線都會到"],
+      ["18:50–22:00","御徒町往上野逛","重點：OS Drug, 二木の菓子, 章魚燒"],
+      ["20:00–22:00","鳥貴族and路邊吃",""],
+      ["晚間","上野-淺草-押上","重點：¥290, 交通, 銀座線轉都營淺草線"]
     ],
     routes:[
       {
-        from:"押上站 Oshiage (A20)",
-        to:"淺草站 Asakusa (A18)",
+        from:"押上 [東京晴空塔前] (A20)",
+        to:"淺草 (A18)",
         copyStation:"浅草駅",
-        line:"都營淺草線（Asakusa Line · 粉紅色 A 線）",
-        summary:"直達僅 2 站，車程只要 3 分鐘。",
-        time:"約 3–4 分鐘（另加步行）",
-        fare:"¥180 / 人",
-        transfer:"直達免轉乘",
+        line:"都營淺草線特急（09:21–09:24）",
+        summary:"依 Navitime 截圖：09:21 自押上搭都營淺草線特急（往京急久里濱等方向），2 站、09:24 抵達淺草，無轉乘。",
+        time:"3 分鐘（09:21–09:24）",
+        fare:"¥180（IC ¥178）",
+        transfer:"無轉乘（2 站）",
         steps:[
-          "<span class='line-badge toei-line'>都營淺草線 A</span> 從押上站進站，前往往<b>西馬込／羽田機場／三崎口</b>方向月台。",
-          "搭乘任一班次（各站停車、急行、特急皆有停靠淺草），經本所吾妻橋（A19），下一站於 <b>淺草站（Asakusa / A18）</b> 下車。",
-          "出站後依 <b>OUKA KIMONO</b> 預約確認信上的分店地址步行前往。"
-        ],
-        alert:"OUKA KIMONO 在淺草有不同分店，請確認預約分店地址後再選擇對應地鐵出口（如 A4、A5 或 1 號出口）。"
+          "<span class='line-badge toei-line'>都營淺草線特急</span> 09:21 從押上（A20）搭車，09:24 抵達淺草（A18）。",
+          "09:30–10:20 前往 ouka tokyo 桜花着物換裝，10:20–10:40 明るい農村&浅草琥珀堂，10:40–13:00 淺草雷門巡禮，13:00–13:30 歸還和服，13:30–14:30 淺草名代拉麵。"
+        ]
       },
       {
-        from:"OUKA KIMONO → 雷門 → 淺草寺",
-        to:"淺草商圈 / 琥珀堂 / 拉麵店",
-        copyStation:"浅草寺 雷門",
-        line:"全區步行",
-        summary:"所有淺草景點皆集中於步行圈內，穿和服慢慢走即可。",
-        time:"各點間約 5–12 分鐘",
-        fare:"免費（步行）",
-        transfer:"步行",
+        from:"淺草",
+        to:"人形町 → 飯田橋 → 秋葉原",
+        copyStation:"人形町駅",
+        line:"都營淺草線 → 日比谷線轉東西線 → 中央總武線",
+        summary:"14:35–14:41 淺草至人形町（¥180）參拜小網神社與美奈福；15:52–16:12 人形町經茅場町至飯田橋（日比谷線轉東西線，¥180）參拜東京大神宮；17:18–17:25 飯田橋至秋葉原（中央總武線，¥160）。",
+        time:"分段搭乘（各約 6–20 分鐘）",
+        fare:"¥180 ＋ ¥180 ＋ ¥160",
+        transfer:"依各段路線轉乘",
         steps:[
-          "換裝後步行至<b>雷門</b>拍照，接著沿<b>仲見世通</b>一路逛至<b>淺草寺本堂</b>。",
-          "下午前往<b>淺草琥珀堂</b>品嚐蕨餅甜點，以及名代拉麵／煎餃用餐，最後準時返回和服店歸還衣物。"
-        ],
-        alert:"「淺草琥珀堂」與「明るい農村」具體分店門牌與當日營業時間尚待核對，建議出發前存好地圖標記。"
+          "14:35–14:41 搭 <span class='line-badge toei-line'>都營淺草線</span> 至人形町（¥180），走訪小網神社（14:41–14:46）與美奈福（15:30–15:45，只收現金）。",
+          "15:52–16:12 搭 <span class='line-badge metro-line'>日比谷線</span> 至茅場町轉 <span class='line-badge metro-line'>東西線</span> 至飯田橋（¥180），參拜東京大神宮（16:12–17:15）。",
+          "17:18–17:25 搭 <span class='line-badge jr-sobu'>中央總武線</span> 至秋葉原（¥160），17:25–18:45 秋葉原巡禮。"
+        ]
       },
       {
-        from:"淺草站 Asakusa (A18)",
-        to:"押上站 Oshiage (A20)",
-        copyStation:"押上駅",
-        line:"都營淺草線（Asakusa Line · 粉紅色 A 線）",
-        summary:"回程搭反方向 2 站即回到押上住宿區。",
-        time:"約 3–4 分鐘",
-        fare:"¥180 / 人",
-        transfer:"直達免轉乘",
+        from:"秋葉原",
+        to:"御徒町／上野 → 淺草 → 押上",
+        copyStation:"御徒町駅",
+        line:"京濱東北·根岸線／山手線 → 銀座線轉都營淺草線",
+        summary:"18:45–18:47 秋葉原至御徒町（¥160），18:50–22:00 逛御徒町往上野（OS Drug、二木の菓子、章魚燒）與鳥貴族；晚間搭銀座線轉都營淺草線回押上（¥290）。",
+        time:"秋葉原→御徒町 2 分鐘",
+        fare:"¥160 ＋ ¥290",
+        transfer:"上野轉乘回押上",
         steps:[
-          "<span class='line-badge toei-line'>都營淺草線 A</span> 進入淺草站，搭往<b>押上／成田機場／青砥</b>方向列車。",
-          "經本所吾妻橋（A19），於 <b>押上站（A20）</b> 下車步行回飯店。"
+          "18:45–18:47 搭 <span class='line-badge jr-yamanote'>京濱東北·根岸線／山手線</span> 至御徒町（¥160）。",
+          "逛御徒町與上野（18:50–22:00），晚間搭銀座線轉都營淺草線返回押上（¥290）。"
         ]
       }
     ],
     places:[
-      ["押上站 (Oshiage)",35.7107,139.8130,"押上駅"],
-      ["淺草站 (Asakusa)",35.7106,139.7975,"浅草駅"],
-      ["OUKA KIMONO（分店地址待確認）",35.7120,139.7965,"浅草 桜花着物"],
-      ["淺草雷門",35.7110,139.7965,"雷門"],
-      ["仲見世通",35.7118,139.7965,"仲見世商店街"],
-      ["淺草寺",35.7148,139.7967,"浅草寺"],
-      ["淺草琥珀堂（地址待確認）",35.7125,139.7970,"浅草 わらび餅"]
+      ["押上站",35.7107,139.8130,"押上駅"],
+      ["淺草站／雷門",35.7106,139.7975,"浅草駅"],
+      ["人形町／小網神社",35.6867,139.7795,"小網神社"],
+      ["飯田橋／東京大神宮",35.6995,139.7460,"東京大神宮"],
+      ["秋葉原站",35.6984,139.7731,"秋葉原駅"],
+      ["御徒町／上野",35.7074,139.7747,"御徒町駅"]
     ]
   },
   {
     isoDate:"2027-01-16",
     date:"SAT · 01/16",
-    title:"東京大神宮・小網神社・搬遷至新宿",
-    sub:"押上退房 → 神社巡禮 → 入住 HOTEL LiVEMAX Shinjuku East",
+    title:"春日部蠟筆小新・溫泉・抵達新宿",
+    sub:"09:13 押上出發前往春日部 → 16:48 春日部經大宮至新宿 → Hotel Livemax",
     events:[
-      ["08:00–09:00","早餐、整理行李、退房","退房後行李可先寄放押上住宿（若允許）或直接帶至車站置物櫃。"],
-      ["09:00–09:45","押上前往東京大神宮","搭半藏門線轉東西線至飯田橋站。"],
-      ["09:45–10:30","東京大神宮參拜","東京知名結緣神社，參拜與買御守。"],
-      ["10:30–11:00","飯田橋前往人形町","搭東西線轉日比谷線至人形町站。"],
-      ["11:00–12:00","小網神社參拜（洗錢祈福）","週六參拜人潮較多，預留排隊時間。"],
-      ["12:30–13:15","美奈福關東煮午餐","出發前先確認週六營業時間與是否需排隊。"],
-      ["13:15–14:00","人形町甘酒橫丁散步","可順道買人形燒等點心。"],
-      ["14:00–16:00","返回押上取行李 → 搬往新宿東側住宿","從押上搭半藏門線轉副都心線前往東新宿站最順路！"],
-      ["16:00–19:30","HOTEL LiVEMAX Shinjuku East 入住、新宿晚餐","晚上可逛歌舞伎町、新宿東口商圈。"]
+      ["09:13–09:55","押上-春日部","重點：¥490, 交通, 東武伊勢崎線[晴空塔線]急行"],
+      ["09:55–10:05","春日部警察署 春日部駅東口交番","重點：小景點, 蠟筆小新警察局", "https://maps.app.goo.gl/vfVC7J4uH53GdKGV6"],
+      ["10:05–10:40","春日部情報發信館","重點：蠟筆小新周邊", "https://maps.app.goo.gl/1MKYsZ5nKfTXFyWB7?g_st=ac"],
+      ["10:40–12:00","Lala garden 春日部","重點：百貨公司, 蠟筆小新展區", "https://maps.app.goo.gl/7JwYFi5e95ef6tFm8?g_st=ac"],
+      ["12:00–13:00","十勝亭","備註：只營業到13：00｜重點：春日部市的人氣十勝豚丼專賣店, 營業到13：00", "https://maps.app.goo.gl/LiWndAfntW9CmFTK7"],
+      ["13:30–15:30","春日部温泉 湯楽の里","重點：喝牛奶, 天氣冷就是要泡溫泉", "https://maps.app.goo.gl/BRwCa3NEJZEZVJmF6?g_st=ac"],
+      ["16:16–16:25","幸松第二公民館-春日部車站東口","重點：¥180, 交通, 搭公車", "https://maps.app.goo.gl/7gvsUsXKiWpukBNr8?g_st=ac"],
+      ["16:48–17:48","春日部-大宮-新宿","重點：¥860, 交通, 東武野田線急行 轉 JR湘南新宿線"],
+      ["17:48–18:00","抵達Hotel Livemax新宿歌舞伎町",""],
+      ["18:00–18:30","休息",""],
+      ["19:00–20:30","牛たんの檸檬",""]
     ],
     routes:[
       {
-        from:"押上站 Oshiage (Z14)",
-        to:"飯田橋站 Iidabashi (T06)／東京大神宮",
-        copyStation:"東京大神宮",
-        line:"東京 Metro 半藏門線 (Z) → 東西線 (T)",
-        summary:"同為東京 Metro 系統，於九段下站站內轉乘 1 次。",
-        time:"約 25 分鐘（含步行約 35 分鐘）",
-        fare:"¥210 / 人（IC 卡）",
-        transfer:"轉乘 1 次（九段下）",
+        from:"押上",
+        to:"春日部",
+        copyStation:"春日部駅",
+        line:"東武伊勢崎線[晴空塔線]急行（09:13–09:55）",
+        summary:"09:13 自押上搭東武伊勢崎線 [晴空塔線] 急行，09:55 抵達春日部，單程 ¥490。",
+        time:"約 42 分鐘（09:13–09:55）",
+        fare:"¥490 / 人",
+        transfer:"急行直達春日部",
         steps:[
-          "<span class='line-badge metro-line'>Metro 半藏門線 Z</span> 從押上站（Z14）搭往<b>澀谷／中央林間</b>方向列車。",
-          "搭乘 8 站至 <b>九段下站（Kudanshita / Z06）</b> 下車，依站內指標轉乘「東西線」。",
-          "<span class='line-badge metro-line'>Metro 東西線 T</span> 搭往<b>中野／三鷹</b>方向 1 站，於 <b>飯田橋站（Iidabashi / T06）</b> 下車。",
-          "由 <b>B2a 出口</b>（或 JR 西口方向）出站，步行約 5–7 分鐘即達<b>東京大神宮</b>。"
+          "<span class='line-badge private-line'>東武伊勢崎線 [晴空塔線] 急行</span> 09:13 從押上發車，09:55 抵達春日部。",
+          "依序走訪春日部警察署春日部駅東口交番（09:55–10:05）、春日部情報發信館（10:05–10:40）、Lala garden 春日部（10:40–12:00）、十勝亭（12:00–13:00，營業至13:00）與春日部温泉 湯楽の里（13:30–15:30）。"
         ]
       },
       {
-        from:"飯田橋站 Iidabashi (T06)",
-        to:"人形町站 Ningyocho (H14)／小網神社",
-        copyStation:"小網神社",
-        line:"東京 Metro 東西線 (T) → 日比谷線 (H)",
-        summary:"於茅場町站站內轉乘日比谷線，再步行至小網神社。",
-        time:"約 15–20 分鐘（含步行約 28 分鐘）",
-        fare:"¥180 / 人（IC 卡）",
-        transfer:"轉乘 1 次（茅場町）",
+        from:"幸松第二公民館 → 春日部 (TD10)",
+        to:"大宮(埼玉縣) (TD01 / JU07) → 新宿 (JS20)",
+        copyStation:"春日部駅",
+        line:"公車 → 東武野田線[Urban Park Line]急行 → JR湘南新宿線",
+        summary:"依 Navitime 截圖：16:16–16:25 搭公車自幸松第二公民館至春日部車站東口（¥180）；16:48 搭東武野田線急行（8 號月台，2 站、15 分鐘）17:03 到大宮，17:16 搭 JR 湘南新宿線（往逗子經由新宿，4 號月台，4 站、32 分鐘）17:48 到新宿。",
+        time:"16:48–17:48（1 hour，1 次轉乘）",
+        fare:"公車 ¥180；電車 ¥860（IC ¥852）",
+        transfer:"1 次轉乘（大宮）",
         steps:[
-          "<span class='line-badge metro-line'>Metro 東西線 T</span> 從飯田橋站（T06）搭往<b>西船橋／東葉勝田台</b>方向。",
-          "搭乘 5 站至 <b>茅場町站（Kayabacho / T11）</b> 下車，站內轉乘「日比谷線」。",
-          "<span class='line-badge metro-line'>Metro 日比谷線 H</span> 搭往<b>北千住／東武動物公園</b>方向 1 站，於 <b>人形町站（Ningyocho / H14）</b> 下車。",
-          "從 <b>A2 出口</b> 出站步行約 5 分鐘抵達<b>小網神社</b>；參拜後依地址步行前往<b>美奈福關東煮</b>。"
-        ],
-        alert:"美奈福關東煮完整地址與週六營業狀況請出發前再次確認，若遇公休可改吃人形町周邊親子丼或拉麵。"
-      },
-      {
-        from:"押上站取行李 → 東新宿站 (F12 / E02)",
-        to:"HOTEL LiVEMAX Shinjuku East",
-        copyStation:"東新宿駅",
-        line:"Metro 半藏門線 (Z) → 副都心線 (F)",
-        summary:"下午回押上取行李後，直接搭東京 Metro 前往飯店最近的「東新宿站」。",
-        time:"約 35–45 分鐘（含轉乘與步行）",
-        fare:"約 ¥250–320 / 人",
-        transfer:"轉乘 1 次（新宿三丁目）",
-        steps:[
-          "<b>【路線 A：從押上取完行李直接出發（推薦！）】</b> 從押上站（Z14）搭 <span class='line-badge metro-line'>Metro 半藏門線 Z</span> 往澀谷方向至 <b>新宿三丁目站（F13）</b>，站內轉乘 <span class='line-badge metro-line'>Metro 副都心線 F</span> 往和光市／池袋方向 1 站至 <b>東新宿站（F12）</b>下車。",
-          "<b>【路線 B：若行李隨身直接從人形町出發】</b> 從人形町（A14）搭 <span class='line-badge toei-line'>都營淺草線 A</span> 1 站至東日本橋，站內連通至馬喰橫山（S09）轉 <span class='line-badge toei-line'>都營新宿線 S</span> 往笹塚方向至 <b>新宿三丁目（S02）</b>，再轉 <span class='line-badge metro-line'>Metro 副都心線 F</span> 1 站至 <b>東新宿站（F12）</b>。",
-          "抵達 <b>東新宿站</b> 後，依 Agoda 訂單門牌與電梯出口指標步行約 2–5 分鐘抵達 <b>HOTEL LiVEMAX Shinjuku East</b>。"
-        ],
-        alert:"6 人拉大行李強烈建議走「路線 A（押上→新宿三丁目→東新宿）」，全程在東京 Metro 系統內轉乘，比跨都營／JR 少走很多樓梯！"
+          "16:16–16:25 搭公車從幸松第二公民館前往春日部車站東口（¥180）。",
+          "<span class='line-badge private-line'>東武野田線 [Urban Park Line] 急行</span> 16:48 從春日部（TD10）8 號月台發車（往大宮），2 站、15 分鐘，17:03 抵達大宮（TD01）。",
+          "<span class='line-badge jr-saikyo'>JR湘南新宿線</span> 17:16 從大宮（JU07）4 號月台搭往逗子（經由新宿）方向，4 站、32 分鐘，17:48 抵達新宿（JS20）。",
+          "17:48–18:00 抵達 <b>Hotel Livemax 新宿歌舞伎町</b>，18:00–18:30 休息，19:00–20:30 前往<b>牛たんの檸檬</b>。"
+        ]
       }
     ],
     places:[
-      ["押上站 (Oshiage)",35.7107,139.8130,"押上駅"],
-      ["飯田橋站 (Iidabashi)",35.7021,139.7450,"飯田橋駅"],
-      ["東京大神宮",35.6995,139.7460,"東京大神宮"],
-      ["人形町站 (Ningyocho)",35.6863,139.7823,"人形町駅"],
-      ["小網神社",35.6867,139.7795,"小網神社"],
-      ["東新宿站 (Higashi-shinjuku)",35.6977,139.7076,"東新宿駅"],
-      ["HOTEL LiVEMAX Shinjuku East",35.6965,139.7060,"ホテルリブマックス新宿EAST"]
+      ["春日部站",35.9798,139.7520,"春日部駅"],
+      ["Lala garden 春日部",35.9750,139.7540,"ララガーデン春日部"],
+      ["十勝亭",35.9788,139.7495,"十勝亭 春日部"],
+      ["大宮站(埼玉縣)",35.9063,139.6240,"大宮駅 埼玉県"],
+      ["新宿站／Hotel Livemax 新宿歌舞伎町",35.6945,139.7015,"ホテルリブマックス新宿歌舞伎町"]
     ]
   },
   {
     isoDate:"2027-01-17",
     date:"SUN · 01/17",
-    title:"秋葉原・御徒町・春日部小新巡禮",
-    sub:"動漫電器、二木の菓子、LaLa Garden、溫泉",
+    title:"出門逛新宿・午餐自理",
+    sub:"依 Notion 行程表：10:00–12:00 出門逛新宿、12:00–13:30 午餐自理",
     events:[
-      ["08:30–09:30","早餐、從東新宿出發前往秋葉原","步行至 JR 新宿站搭黃色總武線直達秋葉原。"],
-      ["09:30–11:30","秋葉原電器街、動漫公仔巡禮","週日中央通午後可能實施步行者天國。"],
-      ["11:30–12:30","御徒町採買：二木の菓子、OS Drug","伴手禮零食與藥妝一次補齊（留意 OS Drug 多數只收現金）。"],
-      ["12:30–13:15","阿美橫丁／御徒町章魚燒與街邊小吃","午餐邊走邊吃。"],
-      ["13:15–14:15","搭車前往埼玉縣春日部","從上野轉 JR 常磐線至北千住，再轉東武晴空塔線。"],
-      ["14:15–15:30","春日部蠟筆小新景點、LaLa Garden","先確認 3 樓 Buri-buri Cinema Studio 當日開放狀況。"],
-      ["15:30–16:00","LaLa Garden Kasukabe 逛街",""],
-      ["16:00–18:00","春日部溫泉泡湯、喝瓶裝牛奶","溫泉正式店名與位置請出發前確認。"],
-      ["18:00–20:30","十勝亭晚餐、搭車返回新宿住宿","回程走大宮→池袋→東新宿。"]
+      ["10:00–12:00","出門逛新宿","重點：自由活動, 逛街"],
+      ["12:00–13:30","午餐自理","重點：進餐廳"]
     ],
     routes:[
       {
-        from:"HOTEL LiVEMAX Shinjuku East／JR 新宿站",
-        to:"JR 秋葉原站 Akihabara",
-        copyStation:"秋葉原駅",
-        line:"JR 中央・總武線各站停車（黃色車身 JB 線）",
-        summary:"步行至 JR 新宿站後，搭黃色總武線直達秋葉原免轉乘！",
-        time:"步行約 12–15 分 ＋ 車程約 18 分鐘",
-        fare:"¥180 / 人（JR IC 卡）",
-        transfer:"JR 直達（新宿→秋葉原）",
+        from:"Hotel Livemax 新宿歌舞伎町",
+        to:"新宿商圈",
+        copyStation:"新宿駅",
+        line:"步行／新宿周邊自由活動",
+        summary:"Notion 行程表 1/17 目前列有 10:00–12:00 出門逛新宿、12:00–13:30 午餐自理，其餘時段可彈性安排。",
+        time:"10:00–13:30",
+        fare:"依實際消費",
+        transfer:"自由活動",
         steps:[
-          "從飯店步行約 12–15 分鐘前往 <b>JR 新宿站（東口／東南口）</b>（或先搭副都心線 1 站至新宿三丁目再步行進 JR 站）。",
-          "<span class='line-badge jr-sobu'>JR 中央・總武線（黃色）</span> 進入 JR 閘門後，找 <b>13 號月台「中央・總武線（各站停車）」往御茶之水・秋葉原・千葉方向</b>（不要搭成橘色的中央線快速，快速不停秋葉原！）。",
-          "搭乘 7 站（經代代木、千駄谷、信濃町、四谷、市谷、飯田橋、水道橋、御茶之水），於 <b>JR 秋葉原站（Akihabara）</b> 下車，走「電氣街口」出站。"
-        ],
-        alert:"關鍵提醒：JR 新宿站務必搭「黃色車身的中央・總武線各站停車」，若誤搭橘色中央線快速會直接過站不停秋葉原。"
-      },
-      {
-        from:"JR 秋葉原站 Akihabara",
-        to:"JR 御徒町站 Okachimachi",
-        copyStation:"御徒町駅",
-        line:"JR 山手線（綠色）或 JR 京濱東北線（藍色）",
-        summary:"僅 1 站距離，搭車 2 分鐘；沿高架橋下逛過去步行也只要 12 分鐘。",
-        time:"車程約 2 分鐘（或步行 12 分鐘）",
-        fare:"¥150 / 人（JR IC 卡）",
-        transfer:"JR 直達 1 站",
-        steps:[
-          "<span class='line-badge jr-yamanote'>JR 山手線／京濱東北線</span> 從 JR 秋葉原站上月台，搭往<b>上野・池袋・大宮</b>方向。",
-          "搭 1 站於 <b>JR 御徒町站（Okachimachi）</b> 下車，走「北口」出站即達阿美橫丁、<b>二木の菓子</b>與 <b>OS Drug</b>。"
-        ]
-      },
-      {
-        from:"JR 御徒町站 Okachimachi",
-        to:"東武 春日部站 Kasukabe",
-        copyStation:"春日部駅",
-        line:"JR 山手線 → JR 常磐線快速 → 東武晴空塔線",
-        summary:"經由上野、北千住兩次轉乘，約 50–60 分鐘抵達春日部。",
-        time:"約 50–65 分鐘",
-        fare:"約 ¥660 / 人（JR ¥180 ＋ 東武 ¥480）",
-        transfer:"轉乘 2 次（上野、北千住）",
-        steps:[
-          "<span class='line-badge jr-yamanote'>JR 山手線</span> 從御徒町搭往<b>上野</b>方向 1 站至 <b>JR 上野站</b>。",
-          "<span class='line-badge jr-joban'>JR 常磐線快速（藍綠色）</span> 在上野站內轉乘常磐線快速（往取手／土浦／成田方向），搭 3 站至 <b>北千住站（Kita-senju）</b> 下車。",
-          "<span class='line-badge private-line'>東武晴空塔線（TS）</span> 依指標通過轉乘閘門進入東武線月台，搭「急行」或「區間急行」往<b>久喜／南栗橋／東武動物公園</b>方向，於 <b>春日部站（Kasukabe / TS27）</b> 下車。",
-          "從春日部站<b>西口</b>出站，步行約 5–8 分鐘抵達 <b>LaLa Garden Kasukabe</b>。"
-        ],
-        alert:"東武晴空塔線在北千住站請確認列車車種（急行、區間急行、準急皆有停春日部；部分付費特急需另購特急券）。"
-      },
-      {
-        from:"LaLa Garden Kasukabe",
-        to:"春日部溫泉 → 十勝亭",
-        copyStation:"十勝亭 春日部市中央1-47-1",
-        line:"步行／視溫泉位置改搭計程車",
-        summary:"溫泉正式店名與地址尚待確認；十勝亭位於春日部站西口步行圈內。",
-        time:"依溫泉地址而定",
-        fare:"待確認",
-        transfer:"步行或計程車",
-        steps:[
-          "「春日部溫泉」的正式設施名稱與門牌尚待確認，確定地址後再決定步行或 6 人分乘 2 台計程車前往。",
-          "晚餐<b>十勝亭（春日部市中央1-47-1）</b>位於春日部站西口步行約 4 分鐘處。"
-        ],
-        alert:"出發前請務必確認「春日部溫泉」的正確店名、地址與營業時間（例如是否為「かすかべ湯元温泉」，該館需搭接駁車或計程車）。"
-      },
-      {
-        from:"東武 春日部站 Kasukabe",
-        to:"東新宿站 Higashi-shinjuku (F12)",
-        copyStation:"東新宿駅",
-        line:"東武野田線 (TD) → JR 埼京線 (JA) → Metro 副都心線 (F)",
-        summary:"回程走大宮、池袋路線，直達飯店最近的東新宿站。",
-        time:"約 65–80 分鐘",
-        fare:"約 ¥850 / 人",
-        transfer:"轉乘 2 次（大宮、池袋）",
-        steps:[
-          "<span class='line-badge private-line'>東武野田線（Urban Park Line）</span> 從春日部站搭往<b>大宮（Omiya）</b>方向，搭至終點站 <b>大宮站</b> 下車。",
-          "<span class='line-badge jr-saikyo'>JR 埼京線（深綠色 JA）</span> 出東武閘門後進 JR 大宮站，搭往<b>池袋・新宿・大崎</b>方向（快速或各站停車皆可），於 <b>JR 池袋站</b> 下車。",
-          "<span class='line-badge metro-line'>Metro 副都心線 F</span> 出 JR 閘門轉乘東京 Metro 副都心線，搭往<b>澀谷／元町・中華街</b>方向 3 站，於 <b>東新宿站（F12）</b> 下車步行回飯店。"
+          "10:00–12:00 於新宿周邊自由逛街。",
+          "12:00–13:30 午餐自理（可依人數與排隊情況選擇餐廳）。"
         ]
       }
     ],
     places:[
-      ["JR 新宿站",35.6896,139.7006,"新宿駅"],
-      ["JR 秋葉原站",35.6984,139.7731,"秋葉原駅"],
-      ["JR 御徒町站",35.7074,139.7747,"御徒町駅"],
-      ["二木の菓子 御徒町",35.7082,139.7745,"二木の菓子 第一営業所"],
-      ["春日部站",35.9798,139.7520,"春日部駅"],
-      ["LaLa Garden Kasukabe",35.9750,139.7540,"ララガーデン春日部"],
-      ["十勝亭 春日部",35.9788,139.7495,"十勝亭 春日部"]
+      ["Hotel Livemax 新宿歌舞伎町",35.6945,139.7015,"ホテルリブマックス新宿歌舞伎町"],
+      ["新宿站",35.6896,139.7006,"新宿駅"]
     ]
   },
   {
     isoDate:"2027-01-18",
     date:"MON · 01/18",
-    title:"富士山・河口湖一日包車",
-    sub:"包車 ¥72,000／6 人｜當晚入住東橫INN成田機場本館",
+    title:"🗻 富士山一日遊",
+    sub:"Notion 行程表標註「🗻 富士山一日遊」｜細部時間與景點待補",
     events:[
-      ["07:00–07:45","早餐、整理大件行李、退房","退房時將 6 人所有行李箱一起帶下樓準備上車。"],
-      ["08:00–10:00","新宿飯店門口集合出發 → 前往富士山","包車司機於 HOTEL LiVEMAX Shinjuku East 門口接送。"],
-      ["10:00–11:15","忍野八海散步拍照","冬季清澈湧泉與富士山同框，地面偶有結冰請小心慢行。"],
-      ["11:15–12:00","移動前往河口湖周邊",""],
-      ["12:00–13:15","河口湖當地美食午餐","可品嚐山梨鄉土料理「餺飥（ほうとう）」暖身。"],
-      ["13:15–14:30","大石公園、富士山湖景拍照","若天候晴朗可拍到完整逆富士或湖畔雪頂富士山。"],
-      ["14:30–16:00","河口湖周邊景點（視時間與路況調整）","御殿場 Outlet 列為備選，優先確保趕往成田的時間充裕。"],
-      ["16:00–19:00","結束富士山行程 → 前往成田機場住宿","務必確認包車是否包含直送東橫INN成田機場本館。"],
-      ["晚上","抵達東橫INN成田機場本館、辦理入住","向櫃檯確認隔日 05:10 免費接駁巴士時間與乘車處。"]
+      ["全天安排","🗻 富士山一日遊","Notion 行程表已建立 1月18日「🗻 富士山一日遊」欄位，細部出發時間、景點與回程安排請於出發前補齊。"]
     ],
     routes:[
       {
-        from:"HOTEL LiVEMAX Shinjuku East（新宿）",
-        to:"忍野八海 → 河口湖 → 大石公園",
-        copyStation:"忍野八海 山梨県南都留郡忍野村忍草",
-        line:"六人專屬包車（全日 10 小時制）",
-        summary:"全程專車接送免轉車，6 人行李直接放車上。",
-        time:"新宿→富士山單程約 1.5–2 小時（視中央道車況）",
-        fare:"¥72,000 ÷ 6 人 ＝ 約 ¥12,000 / 人",
-        transfer:"包車點對點",
+        from:"新宿／東京出發點（待確認）",
+        to:"富士山／河口湖周邊（待確認）",
+        copyStation:"河口湖駅",
+        line:"富士山一日遊（待確認交通方式）",
+        summary:"請確認當日集合時間、交通方式（包車／巴士／鐵道）及是否更換住宿地點。",
+        time:"待確認",
+        fare:"待確認",
+        transfer:"待確認",
         steps:[
-          "前一晚與包車客服／司機確認車牌號碼、司機聯絡方式與 08:00 飯店門口上車點。",
-          "依序走訪<b>忍野八海</b>、<b>河口湖午餐</b>、<b>大石公園</b>；每次下車前與司機約好上車時間與停車位置。"
-        ],
-        alert:"冬季山區氣溫極低且偶有路面管制，請預留行車彈性時間。"
-      },
-      {
-        from:"河口湖 / 大石公園",
-        to:"東橫INN成田機場本館",
-        copyStation:"東横INN成田空港本館 千葉県成田市取香560",
-        line:"六人包車直送（需事前向包車公司確認！）",
-        summary:"河口湖至成田機場距離約 170 公里，車程約 2.5–3.5 小時。",
-        time:"約 2.5–3.5 小時（視首都高與東關東道車況）",
-        fare:"含於包車或依合約補遠途／超時／高速費（待確認）",
-        transfer:"包車直送或轉乘備案",
-        steps:[
-          "<b>【情況 A：包車合約含河口湖直送成田】</b> 建議最晚 <b>15:30–16:00</b> 從河口湖出發，避免超過 10 小時包車時數產生高額超時費，並事先確認高速公路過路費是否自理。",
-          "<b>【情況 B：包車僅回東京市區】</b> 請司機送至 <b>JR 東京站八重洲口</b> 或 <b>京成上野站</b>，改搭高速巴士（LCB 約 ¥1,500）或京成 Skyliner（¥2,580）前往成田機場，再轉飯店接駁車。"
-        ],
-        alert:"這是整趟旅程最關鍵的交通確認點！出發前務必白紙黑字與包車業者確認「終點為東橫INN成田機場本館」及所有附加費用。"
+          "於出發前補齊 1/18 富士山一日遊各時段行程、集合地點與回程交通。"
+        ]
       }
     ],
     places:[
-      ["HOTEL LiVEMAX Shinjuku East",35.6965,139.7060,"ホテルリブマックス新宿EAST"],
-      ["忍野八海",35.4602,138.8324,"忍野八海"],
       ["河口湖",35.5170,138.7500,"河口湖"],
-      ["大石公園",35.5335,138.7460,"大石公園 河口湖"],
-      ["東橫INN成田機場本館",35.7720,140.3860,"東横INN成田空港本館"]
-    ],
-    note:"御殿場 Outlet 暫列彈性備選，因當晚需拉車至成田機場，建議優先把時間留給河口湖美景與路程緩衝。"
+      ["忍野八海",35.4602,138.8324,"忍野八海"]
+    ]
   },
   {
     isoDate:"2027-01-19",
     date:"TUE · 01/19",
-    title:"成田機場・快樂返台",
-    sub:"早班機｜建議搭乘 05:10 飯店免費接駁巴士",
+    title:"返台行程",
+    sub:"Notion 行程表 DAY6｜依最終機票與返台交通確認時間",
     events:[
-      ["04:45–05:00","起床、最後檢查護照與隨身物品","退房時將房卡交還櫃檯。"],
-      ["05:10","搭乘東橫INN免費接駁巴士前往機場","6 人建議提早 10–15 分鐘至門口乘車處排隊。"],
-      ["05:30–05:50","抵達成田國際機場指定航廈","車程約 10–20 分鐘。"],
-      ["05:50–06:30","航空公司櫃檯報到、行李託運",""],
-      ["06:30–08:00","安全檢查、出境審查、免稅店最後採買",""],
-      ["08:30","成田國際機場起飛","回程暫列 08:30–11:50，實際以電子機票為準。"],
-      ["11:50","抵達桃園國際機場、解散返家",""]
+      ["依航班安排","前往機場並搭機返台","請依最終電子機票確認出發時間、機場與航廈。"]
     ],
     routes:[
       {
-        from:"東橫INN成田機場本館",
-        to:"成田國際機場 (T1 / T2 / T3)",
+        from:"住宿／市區（待確認）",
+        to:"成田國際機場 → 桃園",
         copyStation:"成田国際空港",
-        line:"東橫INN 免費接駁巴士",
-        summary:"飯店門口直達機場航廈，免搬行李搭電車。",
-        time:"約 10–20 分鐘（依航廈順序而異）",
-        fare:"免費（房客專用）",
-        transfer:"飯店接駁車直達",
+        line:"返台交通與航班（待確認）",
+        summary:"早班機建議提早確認機場接駁或鐵道首班車時間，並預留 6 人報到與通關緩衝。",
+        time:"依航班為準",
+        fare:"依實際票價",
+        transfer:"依航班為準",
         steps:[
-          "1/18 晚上入住時向櫃檯確認 <b>05:10</b> 首班接駁車是否需領號碼牌或現場排隊，以及停靠的航廈位置。",
-          "04:55 前退房並將 6 件大行李推至飯店門口候車處，上車時向司機確認下車航廈（第一或第二航廈）。"
-        ],
-        alert:"若 05:10 班次客滿，飯店通常每隔 15–20 分鐘有一班車，或可請櫃檯協助叫兩台計程車（車程約 10 分鐘，車資約 ¥1,500–2,000／台）。"
-      },
-      {
-        from:"成田國際機場 (NRT)",
-        to:"桃園國際機場 (TPE)",
-        copyStation:"桃園國際機場",
-        line:"回程國際航班（待確認）",
-        summary:"航程約 3 小時 50 分鐘至 4 小時 20 分鐘（冬季逆風飛行時間略長）。",
-        time:"約 4 小時 20 分鐘",
-        fare:"已訂（金額待補）",
-        transfer:"直飛",
-        steps:[
-          "依電子機票確認報到航廈與櫃檯，完成託運後通過安檢與日本出境審查。",
-          "留意登機門開放時間，準時登機返台。"
-        ],
-        alert:"起降時間（暫列 08:30–11:50）與降落航廈請以最終電子機票為準。"
+          "核對最終電子機票上的起飛時間與航廈，提前抵達機場辦理報到與託運。"
+        ]
       }
     ],
     places:[
-      ["東橫INN成田機場本館",35.7720,140.3860,"東横INN成田空港本館"],
       ["成田國際機場",35.7720,140.3929,"成田国際空港"],
       ["桃園國際機場",25.0797,121.2342,"桃園國際機場"]
     ]
@@ -1271,7 +1095,8 @@ days.forEach((d, i) => {
   d.events.forEach(e => {
     const el = document.createElement("div");
     el.className = "event";
-    el.innerHTML = `<time>${e[0]}</time><div><strong>${e[1]}</strong>${e[2] ? `<p>${e[2]}</p>` : ""}</div>`;
+    const mapLinkHtml = e[3] ? `<a class="event-link" href="${e[3]}" target="_blank" rel="noopener">📍 開啟地圖連結 ↗</a>` : "";
+    el.innerHTML = `<time>${e[0]}</time><div><strong>${e[1]}</strong>${e[2] ? `<p>${e[2]}</p>` : ""}${mapLinkHtml}</div>`;
     timeline.appendChild(el);
   });
 
@@ -1437,19 +1262,19 @@ document.querySelectorAll(".bnav-btn").forEach(btn => {
 // Japanese Point-and-Talk Cards
 const phrases = [
   {
-    zh:"確認電車是否停靠押上（成田機場搭車用）",
+    zh:"確認電車是否停靠押上（D2 一早搭車用）",
     jp:"すみません、この電車は「押上（おしあげ）」に止まりますか？",
     romaji:"Sumimasen, kono densha wa Oshiage ni tomarimasu ka?"
   },
   {
-    zh:"確認是黃色總武線（新宿前往秋葉原用）",
-    jp:"すみません、秋葉原に行く総武線（各駅停車）のホームはどこですか？",
-    romaji:"Sumimasen, Akihabara ni iku Sōbu-sen no hōmu wa doko desu ka?"
+    zh:"確認前往淺草的月台（都營淺草線特急）",
+    jp:"すみません、浅草に行く都営浅草線のホームはどこですか？",
+    romaji:"Sumimasen, Asakusa ni iku Toei Asakusa-sen no hōmu wa doko desu ka?"
   },
   {
-    zh:"詢問車站電梯位置（6 人拉大行李用）",
-    jp:"すみません、大きなスーツケースがあります。エレベーターはどこですか？",
-    romaji:"Sumimasen, ōkina sūtsukēsu ga arimasu. Erebētā wa doko desu ka?"
+    zh:"詢問車站電梯位置（6 人同行／行李用）",
+    jp:"すみません、大きな荷物があります。エレベーターはどこですか？",
+    romaji:"Sumimasen, ōkina nimotsu ga arimasu. Erebētā wa doko desu ka?"
   },
   {
     zh:"飯店辦理入住（6 位大人・報到用）",
@@ -1457,24 +1282,24 @@ const phrases = [
     romaji:"Chekku-in o onegai shimasu. Otona roku-mei de yoyaku shite imasu."
   },
   {
-    zh:"退房後寄放行李（1/16 換飯店用）",
-    jp:"チェックアウト後ですが、本日中に取りに戻るので荷物を預かってもらえますか？",
-    romaji:"Chekku-auto go desu ga, honjitsu-chū ni tori ni modoru node nimotsu o azukatte moraemasu ka?"
+    zh:"確認前往大宮與新宿的路線（D3 傍晚用）",
+    jp:"すみません、春日部から大宮経由で新宿に行くには、どの電車に乗ればいいですか？",
+    romaji:"Sumimasen, Kasukabe kara Ōmiya keiyu de Shinjuku ni iku ni wa, dono densha ni noreba ī desu ka?"
   },
   {
-    zh:"包車終點確認（1/18 前往成田東橫INN）",
-    jp:"本日の最終目的地は「東横INN成田空港本館」です。よろしくお願いします。",
-    romaji:"Honjitsu no saishū mokutekichi wa Toyoko Inn Narita Kūkō Honkan desu."
-  },
-  {
-    zh:"東橫INN 免費接駁巴士確認（1/19 早班機）",
-    jp:"明日の朝5時10分の成田空港行き無料シャトルバスに乗りたいです。予約は必要ですか？",
-    romaji:"Ashita no asa go-ji juppun no Narita Kūkō iki muryō shatoru basu ni noritai desu."
+    zh:"確認只收現金店家（如美奈福等）",
+    jp:"すみません、現金で支払います。大人6名ですが大丈夫ですか？",
+    romaji:"Sumimasen, genkin de shiharaimasu. Otona roku-mei desu ga daijōbu desu ka?"
   },
   {
     zh:"餐廳候位（6 位大人用餐）",
     jp:"大人6名です。席は空いていますか？分かれて座っても大丈夫です。",
     romaji:"Otona roku-mei desu. Seki wa aite imasu ka? Wakarete suwatte mo daijōbu desu."
+  },
+  {
+    zh:"請服務人員協助結帳或確認營業時間",
+    jp:"すみません、本日の営業は何時までですか？",
+    romaji:"Sumimasen, honjitsu no eigyō wa nan-ji made desu ka?"
   }
 ];
 
@@ -1499,23 +1324,23 @@ phrases.forEach(p => {
 const packItems = [
   "護照（確認效期 6 個月以上）",
   "去回程電子機票（確認航廈與時間）",
-  "三間住宿訂單確認單（押上/新宿/成田）",
-  "富士山包車訂單與司機聯絡方式",
-  "信用卡（海外回饋高）與日幣現金 ¥4萬+",
+  "住宿訂單確認單（WISE OWL NEST / Hotel Livemax）",
+  "信用卡（海外回饋高）與日幣現金（部分店家只收現金）",
   "旅遊平安險與班機延誤不便險保單",
   "手機、充電線、行動電源（務必隨身帶上機）",
   "日本上網 eSIM（出發前確認啟用教學）",
   "個人常備藥品（感冒、腸胃、暈車、止痛）",
-  "隨身保濕護唇膏、乳液（東京冬季極乾燥）",
+  "隨身保濕護唇膏、乳液（冬季乾燥）",
   "防風保暖大衣／羽絨外套",
   "發熱衣、保暖長褲（D1 機場舒服穿搭）",
-  "毛帽、圍巾、防風手套（富士山必備）",
+  "毛帽、圍巾、防風手套",
   "好走且具備防滑鞋底的休閒鞋／靴子",
   "暖暖包（貼式＋手握式）",
-  "折疊購物袋（超市採買與藥妝伴手禮）"
+  "折疊購物袋（晴空塔商場、超市、二木の菓子、OS Drug）",
+  "個人盥洗與保養用品"
 ];
 
-const PACK_KEY = "tokyo2027_packing_v2";
+const PACK_KEY = "tokyo2027_packing_v3";
 let savedChecks = {};
 try { savedChecks = JSON.parse(localStorage.getItem(PACK_KEY) || "{}"); } catch (e) {}
 
