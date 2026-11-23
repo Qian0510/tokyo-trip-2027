@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#172b3a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>TOKYO TRIP 2027｜東京六日五夜手機版行程 App</title>
 <link rel="preconnect" href="https://unpkg.com">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -30,45 +32,45 @@ body{
   color:var(--ink);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;
   line-height:1.65;
-  padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom) + 18px);
+  padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom) + 20px);
 }
 a{color:inherit}
 
-/* Hero Section with Japanese subtle wave / Mt. Fuji motif */
+/* Hero Section with subtle Mt. Fuji motif */
 .hero{
   position:relative;
   overflow:hidden;
-  padding:42px max(20px,calc((100% - 1080px)/2)) 46px;
+  padding:38px max(20px,calc((100% - 1080px)/2)) 42px;
   background:linear-gradient(135deg,#152736 0%,#2b4a5e 60%,#3c6075 100%);
   color:#fff;
 }
 .hero::after{
   content:"";
   position:absolute;
-  right:-30px;
-  bottom:-18px;
-  width:260px;
-  height:140px;
-  background:radial-gradient(circle at 50% 0%,#ffffff24 0%,#ffffff10 42%,transparent 43%);
+  right:-24px;
+  bottom:-16px;
+  width:250px;
+  height:135px;
+  background:radial-gradient(circle at 50% 0%,#ffffff28 0%,#ffffff12 42%,transparent 43%);
   clip-path:polygon(50% 0%,100% 100%,0% 100%);
   pointer-events:none;
 }
 .eyebrow{letter-spacing:.18em;font-size:11px;color:#c9d7dd;font-weight:600}
-.hero h1{font-family:Georgia,serif;font-size:clamp(34px,7vw,62px);line-height:1.06;margin:10px 0}
-.hero p{color:#dce5e8;margin:8px 0 20px;font-size:15px}
+.hero h1{font-family:Georgia,serif;font-size:clamp(32px,7vw,58px);line-height:1.06;margin:8px 0}
+.hero p{color:#dce5e8;margin:6px 0 18px;font-size:14.5px}
 .stats{display:flex;gap:8px;flex-wrap:wrap}
-.stat{border:1px solid #ffffff3d;background:#ffffff12;border-radius:12px;padding:7px 12px;font-size:12px}
+.stat{border:1px solid #ffffff3d;background:#ffffff12;border-radius:12px;padding:6px 11px;font-size:12px}
 
-main{max-width:1080px;margin:auto;padding:20px 16px 36px}
+main{max-width:1080px;margin:auto;padding:18px 16px 36px}
 
 /* Tab Sections */
-.tab-panel{display:none;animation:fadeIn .22s ease}
+.tab-panel{display:none;animation:fadeIn .2s ease}
 .tab-panel.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 
-.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:10px 0 16px;flex-wrap:wrap}
-.section-head h2{font-size:22px;margin:0}
-.section-head small{color:var(--muted);font-size:12px;letter-spacing:.06em}
+.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:8px 0 14px;flex-wrap:wrap}
+.section-head h2{font-size:21px;margin:0}
+.section-head small{color:var(--muted);font-size:12px;letter-spacing:.05em}
 
 /* Day Switcher Pills */
 .day-pills{
@@ -97,13 +99,16 @@ main{max-width:1080px;margin:auto;padding:20px 16px 36px}
   color:#fff;
   border-color:var(--ink);
 }
+.day-pill.today-badge{
+  border-color:var(--accent);
+}
 
 /* Day Card */
 .day{
   background:var(--card);
   border:1px solid var(--line);
   border-radius:18px;
-  margin:0 0 24px;
+  margin:0 0 22px;
   overflow:hidden;
   box-shadow:0 4px 18px #172b3a08;
 }
@@ -117,21 +122,20 @@ main{max-width:1080px;margin:auto;padding:20px 16px 36px}
   flex-wrap:wrap;
 }
 .daynum{font-size:12px;letter-spacing:.12em;color:var(--accent);font-weight:700}
-.day h3{font-size:21px;margin:3px 0}
+.day h3{font-size:20px;margin:3px 0}
 .sub{color:var(--muted);font-size:13px}
 .tag{font-size:11px;background:#e7efef;color:#3b5f73;border-radius:999px;padding:4px 10px;white-space:nowrap;font-weight:600}
-.tag.warn{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border)}
 
 .daybody{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(290px,.92fr);gap:20px;padding:18px 20px}
 
 /* Timeline */
 .timeline{display:grid;gap:0}
-.event{display:grid;grid-template-columns:96px 1fr;gap:12px;padding:0 0 16px;position:relative}
+.event{display:grid;grid-template-columns:94px 1fr;gap:12px;padding:0 0 15px;position:relative}
 .event time{font-size:12.5px;font-weight:700;color:var(--blue);padding-top:2px;font-variant-numeric:tabular-nums}
 .event strong{display:block;font-size:14.5px}
 .event p{margin:3px 0;color:var(--muted);font-size:13px}
-.event:before{content:"";position:absolute;left:102px;top:8px;bottom:-2px;width:1px;background:#dce3e5}
-.event:after{content:"";position:absolute;left:98px;top:7px;width:9px;height:9px;border-radius:50%;background:var(--accent);border:2px solid #fff;box-shadow:0 0 0 1px #e6b3a5}
+.event:before{content:"";position:absolute;left:100px;top:8px;bottom:-2px;width:1px;background:#dce3e5}
+.event:after{content:"";position:absolute;left:96px;top:7px;width:9px;height:9px;border-radius:50%;background:var(--accent);border:2px solid #fff;box-shadow:0 0 0 1px #e6b3a5}
 .event:last-child:before{display:none}
 
 /* Route Cards */
@@ -176,7 +180,6 @@ main{max-width:1080px;margin:auto;padding:20px 16px 36px}
   padding:1px 7px;
   border-radius:5px;
   margin-right:4px;
-  vertical-align:baseline;
 }
 .jr-yamanote{background:#e6f4ea;color:#1e6b34;border:1px solid #b7dfc2}
 .jr-sobu{background:#fef7e0;color:#8a6100;border:1px solid #f3dc96}
@@ -207,14 +210,52 @@ main{max-width:1080px;margin:auto;padding:20px 16px 36px}
   padding:8px 12px;
   border-radius:9px;
   text-decoration:none;
+  border:none;
+  cursor:pointer;
 }
 .navbtn.blue{background:var(--blue)}
 .navbtn.secondary{background:#e7eef0;color:var(--ink)}
+.navbtn.copy{background:#edf2f5;color:#234154;border:1px solid #d5e0e5}
 
-/* Map */
+/* Map with Touch Lock Overlay */
 .mapwrap{position:sticky;top:16px;align-self:start}
-.maptitle{font-weight:700;margin:0 0 8px;font-size:14px}
-.map{height:340px;border-radius:13px;overflow:hidden;border:1px solid var(--line);background:#e8eeee}
+.maptitle{font-weight:700;margin:0 0 8px;font-size:14px;display:flex;justify-content:space-between;align-items:center}
+.map-container{position:relative;border-radius:13px;overflow:hidden;border:1px solid var(--line);background:#e8eeee}
+.map{height:320px;width:100%}
+.map-lock-overlay{
+  position:absolute;
+  inset:0;
+  z-index:500;
+  background:rgba(23,43,58,0.18);
+  backdrop-filter:blur(1px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:opacity .2s;
+}
+.map-lock-overlay.unlocked{
+  display:none;
+}
+.map-lock-pill{
+  background:rgba(23,43,58,0.9);
+  color:#fff;
+  font-size:12.5px;
+  font-weight:600;
+  padding:9px 15px;
+  border-radius:999px;
+  box-shadow:0 4px 14px rgba(0,0,0,0.2);
+}
+.map-relock-btn{
+  font-size:11px;
+  background:#e7eef0;
+  color:var(--ink);
+  border:none;
+  border-radius:999px;
+  padding:4px 10px;
+  cursor:pointer;
+  font-weight:600;
+}
 .mapnote{font-size:11.5px;color:var(--muted);margin:7px 2px}
 
 /* General Cards & Grids */
@@ -225,6 +266,32 @@ main{max-width:1080px;margin:auto;padding:20px 16px 36px}
 .info p{font-size:13px;color:var(--muted);margin:0 0 8px}
 .info ul{margin:6px 0 0;padding-left:18px;font-size:13px;color:#3a4e5c}
 .info li{margin-bottom:5px}
+
+.jp-box{
+  background:#f6f8f9;
+  border:1px solid #dfe7ea;
+  border-radius:10px;
+  padding:9px 11px;
+  margin:8px 0;
+  font-size:12.5px;
+}
+.jp-box .jp-text{font-weight:700;color:var(--ink);display:block;margin-bottom:2px}
+
+/* Point-and-Talk Japanese Phrase Cards */
+.phrase-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:10px}
+.phrase-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:15px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:8px;
+}
+.phrase-zh{font-size:12.5px;color:var(--accent);font-weight:700}
+.phrase-jp{font-size:17px;font-weight:700;color:var(--ink);line-height:1.45}
+.phrase-romaji{font-size:11.5px;color:var(--muted)}
 
 .note{font-size:12.5px;color:#6f5738;background:#fbf5eb;border:1px solid #eedbc0;border-radius:12px;padding:12px 14px;margin-top:14px}
 
@@ -240,13 +307,94 @@ main{max-width:1080px;margin:auto;padding:20px 16px 36px}
 .pending-list{margin:0;padding-left:18px;font-size:13px;color:#4a3c2c}
 .pending-list li{margin-bottom:6px}
 
-/* Budget Table */
-.budget-card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+/* Budget Table & 6-Person Split Expense Tool */
+.budget-card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:18px}
 .budget{width:100%;border-collapse:collapse}
-.budget td,.budget th{padding:12px 15px;border-bottom:1px solid var(--line);font-size:13.5px;text-align:left}
+.budget td,.budget th{padding:11px 14px;border-bottom:1px solid var(--line);font-size:13px;text-align:left}
 .budget th{background:#f7f9fa;font-size:12px;color:var(--muted)}
 .budget td:last-child,.budget th:last-child{text-align:right;font-variant-numeric:tabular-nums}
-.budget tr.total td{background:#f4f7f8;font-weight:700;font-size:14.5px}
+.budget tr.total td{background:#f4f7f8;font-weight:700;font-size:14px}
+
+.split-box{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:18px;
+  margin-bottom:16px;
+}
+.split-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px}
+.split-header h3{margin:0;font-size:16.5px}
+.rate-control{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--muted);background:#f5f8f9;padding:5px 10px;border-radius:999px}
+.rate-control input{width:62px;border:1px solid #cfd9dd;border-radius:6px;padding:3px 6px;font-size:12.5px;text-align:right}
+
+.split-form{
+  display:grid;
+  grid-template-columns:1.4fr 1fr .8fr 1fr auto;
+  gap:8px;
+  margin-bottom:14px;
+}
+.split-form input,.split-form select{
+  width:100%;
+  padding:9px 10px;
+  border:1px solid #d5dfe3;
+  border-radius:10px;
+  font-size:13.5px;
+  background:#fff;
+  color:var(--ink);
+}
+.split-summary{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-bottom:14px;
+}
+.sum-pill{
+  background:#f4f8f9;
+  border:1px solid #e1eaed;
+  border-radius:12px;
+  padding:10px 12px;
+}
+.sum-pill small{display:block;font-size:11px;color:var(--muted)}
+.sum-pill strong{font-size:15.5px;color:var(--ink);font-variant-numeric:tabular-nums}
+
+.payer-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-bottom:14px;
+}
+.payer-card{
+  background:#fafbfb;
+  border:1px solid #e6ecee;
+  border-radius:10px;
+  padding:8px 10px;
+  font-size:12.5px;
+}
+.payer-card b{display:block;font-size:13px;margin-bottom:2px}
+.bal-pos{color:var(--green);font-weight:700}
+.bal-neg{color:var(--accent);font-weight:700}
+
+.expense-list{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.expense-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  background:#f8fafa;
+  border:1px solid #e6ecee;
+  border-radius:11px;
+  font-size:13px;
+}
+.del-exp{
+  border:none;
+  background:#fdeceb;
+  color:#b43225;
+  border-radius:7px;
+  padding:4px 8px;
+  font-size:11.5px;
+  cursor:pointer;
+}
 
 /* Checklist */
 .pack-progress{
@@ -277,7 +425,27 @@ main{max-width:1080px;margin:auto;padding:20px 16px 36px}
 }
 .checklist input{accent-color:var(--green);width:17px;height:17px;margin:0}
 
-/* Bottom Navigation Bar (Mobile App Style) */
+/* Toast Notification */
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:calc(var(--nav-h) + env(safe-area-inset-bottom) + 14px);
+  transform:translateX(-50%) translateY(20px);
+  background:rgba(23,43,58,0.94);
+  color:#fff;
+  padding:9px 16px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:600;
+  opacity:0;
+  pointer-events:none;
+  transition:all .2s ease;
+  z-index:2000;
+  white-space:nowrap;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* Bottom Navigation Bar */
 .bottom-nav{
   position:fixed;
   left:0;
@@ -309,20 +477,24 @@ main{max-width:1080px;margin:auto;padding:20px 16px 36px}
 .bnav-btn .ico{font-size:18px;line-height:1}
 .bnav-btn.active{color:var(--accent)}
 
-footer{text-align:center;color:var(--muted);font-size:12px;padding:16px 16px 24px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:12px 16px 24px}
 
 @media(max-width:760px){
-  .hero{padding:32px 18px 36px}
+  .hero{padding:30px 18px 34px}
   .daybody{grid-template-columns:1fr;padding:15px}
   .mapwrap{position:static}
-  .map{height:280px}
+  .map{height:270px}
   .daytop{padding:16px}
-  .grid-3,.grid-2{grid-template-columns:1fr}
-  .event{grid-template-columns:84px 1fr;gap:10px}
-  .event:before{left:89px}
-  .event:after{left:85px}
+  .grid-3,.grid-2,.phrase-grid{grid-template-columns:1fr}
+  .event{grid-template-columns:82px 1fr;gap:10px}
+  .event:before{left:87px}
+  .event:after{left:83px}
   .event time{font-size:11.5px}
   .checklist{grid-template-columns:1fr}
+  .split-form{grid-template-columns:1fr 1fr}
+  .split-form input:first-child{grid-column:1 / -1}
+  .split-form button{grid-column:1 / -1}
+  .split-summary,.payer-grid{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
@@ -336,7 +508,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:16px 16px 24p
     <span class="stat">📅 01.14 — 01.19</span>
     <span class="stat">👥 6 位成人</span>
     <span class="stat">🚃 JR・地鐵＋富士山包車</span>
-    <span class="stat">💰 預算 NT$30–40K/人</span>
+    <span class="stat">📲 可加入手機主畫面</span>
   </div>
 </header>
 
@@ -345,21 +517,21 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:16px 16px 24p
   <section class="tab-panel active" id="panel-itinerary">
     <div class="section-head">
       <h2>每日行程與逐步交通</h2>
-      <small>點擊天數快速切換・地圖可縮放</small>
+      <small id="dayFilterHint">預設顯示單日・點地圖解鎖可縮放</small>
     </div>
     <div class="day-pills" id="dayPills">
-      <button class="day-pill active" data-day="all">全部 6 天</button>
       <button class="day-pill" data-day="0">D1 1/14 抵達</button>
       <button class="day-pill" data-day="1">D2 1/15 淺草</button>
       <button class="day-pill" data-day="2">D3 1/16 神社/搬家</button>
       <button class="day-pill" data-day="3">D4 1/17 秋葉原/春日部</button>
       <button class="day-pill" data-day="4">D5 1/18 富士山包車</button>
       <button class="day-pill" data-day="5">D6 1/19 返台</button>
+      <button class="day-pill" data-day="all">展開全部 6 天</button>
     </div>
     <div id="days"></div>
   </section>
 
-  <!-- TAB 2: 交通總覽 -->
+  <!-- TAB 2: 交通總覽 + 日文手指會話卡 -->
   <section class="tab-panel" id="panel-transport">
     <div class="section-head">
       <h2>交通總覽與轉乘守則</h2>
@@ -403,61 +575,67 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:16px 16px 24p
       </div>
     </div>
 
-    <div class="grid-2" style="margin-top:14px">
-      <div class="info">
-        <h3>🧳 兩次換飯店（1/16、1/18）行李對策</h3>
-        <ul>
-          <li><b>1/16（押上 → 新宿東側）：</b>早上退房後可先寄放 Wise Owl Nest（若可寄放）或直接拖去<b>押上站／新宿站大型置物櫃</b>；6 人行李多，轉乘地鐵請優先找<b>電梯（エレベーター）</b>標示。</li>
-          <li><b>1/18（新宿東側 → 富士山 → 成田）：</b>早上退房直接把 6 人行李全部放上包車後車廂，省去拖行李搭電車的辛苦。</li>
-        </ul>
-      </div>
-      <div class="info">
-        <h3>❄️ 1 月冬季交通與營業備案</h3>
-        <ul>
-          <li><b>天氣備案：</b>1 月中旬河口湖與富士山周邊偶有降雪或路面結冰，出發前一晚與包車司機確認路況。</li>
-          <li><b>店家公休備案：</b>人形町「美奈福」及淺草部分小吃店可能有不定期公休或排隊人潮，建議在 Google Maps 預存 1～2 間備選餐廳。</li>
-        </ul>
-      </div>
+    <div class="section-head" style="margin-top:26px">
+      <h2>🗣️ 現場日文手指會話卡（直接拿給站務員／司機／店員看）</h2>
+      <small>點擊可複製日文句子</small>
     </div>
+    <div class="phrase-grid" id="phraseGrid"></div>
   </section>
 
   <!-- TAB 3: 住宿 -->
   <section class="tab-panel" id="panel-stay">
     <div class="section-head">
-      <h2>住宿資訊與最近車站</h2>
+      <h2>住宿資訊與日文站名／地址複製</h2>
       <small>5 晚合計每人 NT$4,342（多退少補）</small>
     </div>
     <div class="grid-3">
       <div class="info">
         <h3>01｜Wise Owl Nest <span class="tag">1/14–1/16 · 2晚</span></h3>
         <p><b>費用：</b>每人 NT$1,241（Agoda 訂房）<br>
-        <b>區域：</b>東京都墨田區押上周邊（完整門牌依 Agoda 訂單）<br>
-        <b>最近車站：</b>押上站（都營淺草線 A20 / 東京 Metro 半藏門線 Z14 / 京成押上線）</p>
+        <b>最近車站：</b>押上站（都營淺草線 A20 / Metro 半藏門線 Z14 / 京成押上線）</p>
+        <div class="jp-box">
+          <span class="jp-text">Wise Owl Nest Tokyo（押上駅周辺）</span>
+          <span>完整門牌依 Agoda 訂單為準</span>
+        </div>
         <div class="btn-row">
-          <a class="navbtn" href="https://www.google.com/maps/search/?api=1&query=Wise+Owl+Nest+Tokyo" target="_blank" rel="noopener">Google Maps 導航 ↗</a>
+          <a class="navbtn" href="https://www.google.com/maps/search/?api=1&query=Wise+Owl+Nest+Tokyo" target="_blank" rel="noopener">Google Maps ↗</a>
+          <button type="button" class="navbtn copy" data-copy="Wise Owl Nest Tokyo 押上">📋 複製名稱</button>
         </div>
       </div>
+
       <div class="info">
         <h3>02｜HOTEL LiVEMAX Shinjuku East <span class="tag">1/16–1/18 · 2晚</span></h3>
         <p><b>費用：</b>每人 NT$2,107（Agoda 訂房）<br>
-        <b>區域：</b>新宿東側／東新宿周邊（完整門牌依 Agoda 訂單）<br>
-        <b>最近車站：</b>東新宿站（東京 Metro 副都心線 F12 / 都營大江戶線 E02），步行約 2–5 分鐘；距 JR 新宿站步行約 12–15 分鐘</p>
+        <b>最近車站：</b>東新宿站（Metro 副都心線 F12 / 都營大江戶線 E02），步行約 2–5 分鐘</p>
+        <div class="jp-box">
+          <span class="jp-text">ホテルリブマックス新宿EAST（東新宿駅）</span>
+          <span>完整門牌依 Agoda 訂單為準</span>
+        </div>
         <div class="btn-row">
-          <a class="navbtn" href="https://www.google.com/maps/search/?api=1&query=HOTEL+LiVEMAX+Shinjuku+East" target="_blank" rel="noopener">Google Maps 導航 ↗</a>
+          <a class="navbtn" href="https://www.google.com/maps/search/?api=1&query=HOTEL+LiVEMAX+Shinjuku+East" target="_blank" rel="noopener">Google Maps ↗</a>
+          <button type="button" class="navbtn copy" data-copy="ホテルリブマックス新宿EAST">📋 複製日文店名</button>
         </div>
       </div>
+
       <div class="info">
         <h3>03｜東橫INN成田機場本館 <span class="tag">1/18–1/19 · 1晚</span></h3>
         <p><b>費用：</b>每人 NT$994（Trip.com 訂房）<br>
-        <b>區域：</b>成田國際機場周邊<br>
-        <b>機場接駁：</b>提供飯店免費接駁巴士往返成田機場各航廈（班次依飯店公告為準）</p>
+        <b>機場接駁：</b>提供飯店免費接駁巴士往返成田機場各航廈（班次依公告）</p>
+        <div class="jp-box">
+          <span class="jp-text">東横INN成田空港本館（千葉県成田市取香560）</span>
+          <span>包車終點溝通可直接出示此日文名稱</span>
+        </div>
         <div class="btn-row">
-          <a class="navbtn" href="https://www.google.com/maps/search/?api=1&query=Toyoko+Inn+Narita+Airport+Honkan" target="_blank" rel="noopener">Google Maps 導航 ↗</a>
+          <a class="navbtn" href="https://www.google.com/maps/search/?api=1&query=Toyoko+Inn+Narita+Airport+Honkan" target="_blank" rel="noopener">Google Maps ↗</a>
+          <button type="button" class="navbtn copy" data-copy="東横INN成田空港本館 千葉県成田市取香560">📋 複製日文地址</button>
         </div>
       </div>
     </div>
+
     <div class="note">
-      <b>入住提醒：</b>日本飯店通常 15:00 後辦理 Check-in、10:00 前 Check-out（東橫INN 一般為 16:00 入住／10:00 退房）。6 人團體辦理入住時請提前備妥 6 本護照與訂房確認單。
+      <b>📲 手機加入主畫面教學：</b><br>
+      • <b>iPhone (Safari)：</b>點底部中間「分享 ↑」按鈕 → 往下滑選「加入主畫面」→ 按「新增」，桌面就會出現 App 圖示。<br>
+      • <b>Android (Chrome)：</b>點右上角「⋮」選單 → 選「加到主畫面」或「安裝應用程式」即可像原生 App 一樣一鍵開啟。
     </div>
   </section>
 
@@ -470,7 +648,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:16px 16px 24p
     <div class="pack-progress">
       <span id="packCount">已完成 0 / 16 項</span>
       <div class="progress-bar"><div class="progress-fill" id="packFill"></div></div>
-      <button type="button" class="navbtn secondary" id="resetPack" style="border:none;cursor:pointer">重設</button>
+      <button type="button" class="navbtn secondary" id="resetPack">重設</button>
     </div>
     <div class="checklist" id="checks"></div>
     <div class="note">
@@ -478,11 +656,70 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:16px 16px 24p
     </div>
   </section>
 
-  <!-- TAB 5: 預算 -->
+  <!-- TAB 5: 預算 & 6人分帳記帳工具 -->
   <section class="tab-panel" id="panel-budget">
     <div class="section-head">
-      <h2>每人預算與花費總表</h2>
+      <h2>6 人分帳記帳與預算總表</h2>
       <small>目標總預算：NT$30,000～40,000 / 人</small>
+    </div>
+
+    <!-- 6-Person Shared Expense Tracker -->
+    <div class="split-box">
+      <div class="split-header">
+        <h3>🧾 現場公費／代墊分帳計算機（6 人均分）</h3>
+        <div class="rate-control">
+          <span>匯率 1 JPY =</span>
+          <input type="number" id="jpyRate" step="0.001" value="0.215">
+          <span>TWD</span>
+        </div>
+      </div>
+
+      <form class="split-form" id="expForm">
+        <input type="text" id="expTitle" placeholder="項目（例：富士山包車尾款、拉麵、計程車）" required>
+        <input type="number" id="expAmount" placeholder="金額" min="1" step="any" required>
+        <select id="expCurrency">
+          <option value="JPY">JPY ¥</option>
+          <option value="TWD">TWD $</option>
+        </select>
+        <select id="expPayer">
+          <option value="成員 1（易謙）">墊付：成員 1（易謙）</option>
+          <option value="成員 2（育任）">墊付：成員 2（育任）</option>
+          <option value="成員 3（唯瑄）">墊付：成員 3（唯瑄）</option>
+          <option value="成員 4（祈全）">墊付：成員 4（祈全）</option>
+          <option value="成員 5（恩郡）">墊付：成員 5（恩郡）</option>
+          <option value="成員 6（羽亭）">墊付：成員 6（羽亭）</option>
+        </select>
+        <button type="submit" class="navbtn">＋ 新增</button>
+      </form>
+
+      <div class="split-summary">
+        <div class="sum-pill">
+          <small>共同支出總計（日幣換算）</small>
+          <strong id="totalJpy">¥0</strong>
+        </div>
+        <div class="sum-pill">
+          <small>共同支出總計（台幣換算）</small>
+          <strong id="totalTwd">NT$0</strong>
+        </div>
+        <div class="sum-pill">
+          <small>每人應分攤（÷ 6 人）</small>
+          <strong id="perPersonTwd">NT$0</strong>
+        </div>
+      </div>
+
+      <div class="payer-grid" id="payerGrid"></div>
+
+      <ul class="expense-list" id="expenseList"></ul>
+
+      <div class="btn-row" style="margin-top:12px">
+        <button type="button" class="navbtn copy" id="copySplitReport">📋 複製分帳明細貼到 LINE 群組</button>
+        <button type="button" class="navbtn secondary" id="clearExpenses">清空紀錄</button>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <h2>行前每人預算總表</h2>
+      <small>單人預估明細</small>
     </div>
     <div class="budget-card">
       <table class="budget">
@@ -503,27 +740,27 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:16px 16px 24p
         </tbody>
       </table>
     </div>
-    <div class="note">
-      <b>預算評估：</b>不含機票目前已抓 NT$25,742／人；若來回機票落在 NT$10,000～14,000 區間，整趟總花費約 <b>NT$35,700～39,700／人</b>，剛好落在每人 <b>NT$30,000～40,000</b> 的目標範圍內！建議每人準備約 <b>¥35,000～50,000 日幣現金</b>（用於包車現金結算、神社參拜、老店小吃與和服/溫泉），其餘刷卡或用 Apple Pay Suica。
-    </div>
   </section>
 </main>
+
+<div class="toast" id="toast">已複製到剪貼簿</div>
 
 <footer>TOKYO TRIP 2027 · 班次、票價與店家營業資訊請以 2027 年官方公告及實際訂單為準</footer>
 
 <!-- Bottom Navigation Bar -->
 <nav class="bottom-nav" aria-label="主導航列">
   <button class="bnav-btn active" data-target="panel-itinerary"><span class="ico">🗓️</span><span>每日行程</span></button>
-  <button class="bnav-btn" data-target="panel-transport"><span class="ico">🚃</span><span>交通</span></button>
+  <button class="bnav-btn" data-target="panel-transport"><span class="ico">🚃</span><span>交通/日文</span></button>
   <button class="bnav-btn" data-target="panel-stay"><span class="ico">🏨</span><span>住宿</span></button>
   <button class="bnav-btn" data-target="panel-packing"><span class="ico">🎒</span><span>行李</span></button>
-  <button class="bnav-btn" data-target="panel-budget"><span class="ico">💰</span><span>預算</span></button>
+  <button class="bnav-btn" data-target="panel-budget"><span class="ico">💰</span><span>分帳/預算</span></button>
 </nav>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 const days = [
   {
+    isoDate:"2027-01-14",
     date:"THU · 01/14",
     title:"抵達東京・晴空塔採買",
     sub:"押上住宿（Wise Owl Nest）｜抵達日保留體力",
@@ -542,6 +779,7 @@ const days = [
       {
         from:"桃園機場 T1",
         to:"成田國際機場 (NRT)",
+        copyStation:"成田空港駅",
         line:"中華／長榮／星宇等國際航班（待確認）",
         summary:"航程約 3 小時 5 分鐘（日本比台灣快 1 小時）。",
         time:"約 3 小時 5 分鐘",
@@ -556,6 +794,7 @@ const days = [
       {
         from:"成田國際機場 (T1 / T2·T3)",
         to:"押上站 Oshiage (A20 / KS45)",
+        copyStation:"押上駅",
         line:"京成電鐵 Narita Sky Access 線「Access Express」",
         summary:"認明往「押上／羽田機場／西馬込」方向且有停靠押上的班次，直通都營淺草線完全免轉車！",
         time:"約 55–70 分鐘",
@@ -572,6 +811,7 @@ const days = [
       {
         from:"Wise Owl Nest（押上）",
         to:"東京晴空塔 / Tokyo Solamachi",
+        copyStation:"東京スカイツリータウン・ソラマチ",
         line:"步行前往",
         summary:"住宿位於押上區域，步行即可抵達晴空塔商場與 Disney Store。",
         time:"約 5–15 分鐘",
@@ -585,13 +825,14 @@ const days = [
       }
     ],
     places:[
-      ["成田國際機場",35.7720,140.3929],
-      ["押上站 (Oshiage)",35.7107,139.8130],
-      ["Wise Owl Nest Tokyo",35.7108,139.8130],
-      ["東京晴空塔 / Solamachi",35.7101,139.8107]
+      ["成田國際機場",35.7720,140.3929,"成田国際空港"],
+      ["押上站 (Oshiage)",35.7107,139.8130,"押上駅"],
+      ["Wise Owl Nest Tokyo",35.7108,139.8130,"Wise Owl Nest Tokyo"],
+      ["東京晴空塔 / Solamachi",35.7101,139.8107,"東京スカイツリー"]
     ]
   },
   {
+    isoDate:"2027-01-15",
     date:"FRI · 01/15",
     title:"淺草・和服體驗・押上散策",
     sub:"雷門、淺草寺、仲見世通、拉麵煎餃",
@@ -611,6 +852,7 @@ const days = [
       {
         from:"押上站 Oshiage (A20)",
         to:"淺草站 Asakusa (A18)",
+        copyStation:"浅草駅",
         line:"都營淺草線（Asakusa Line · 粉紅色 A 線）",
         summary:"直達僅 2 站，車程只要 3 分鐘。",
         time:"約 3–4 分鐘（另加步行）",
@@ -626,6 +868,7 @@ const days = [
       {
         from:"OUKA KIMONO → 雷門 → 淺草寺",
         to:"淺草商圈 / 琥珀堂 / 拉麵店",
+        copyStation:"浅草寺 雷門",
         line:"全區步行",
         summary:"所有淺草景點皆集中於步行圈內，穿和服慢慢走即可。",
         time:"各點間約 5–12 分鐘",
@@ -640,6 +883,7 @@ const days = [
       {
         from:"淺草站 Asakusa (A18)",
         to:"押上站 Oshiage (A20)",
+        copyStation:"押上駅",
         line:"都營淺草線（Asakusa Line · 粉紅色 A 線）",
         summary:"回程搭反方向 2 站即回到押上住宿區。",
         time:"約 3–4 分鐘",
@@ -652,16 +896,17 @@ const days = [
       }
     ],
     places:[
-      ["押上站 (Oshiage)",35.7107,139.8130],
-      ["淺草站 (Asakusa)",35.7106,139.7975],
-      ["OUKA KIMONO（分店地址待確認）",35.7120,139.7965],
-      ["淺草雷門",35.7110,139.7965],
-      ["仲見世通",35.7118,139.7965],
-      ["淺草寺",35.7148,139.7967],
-      ["淺草琥珀堂（地址待確認）",35.7125,139.7970]
+      ["押上站 (Oshiage)",35.7107,139.8130,"押上駅"],
+      ["淺草站 (Asakusa)",35.7106,139.7975,"浅草駅"],
+      ["OUKA KIMONO（分店地址待確認）",35.7120,139.7965,"浅草 桜花着物"],
+      ["淺草雷門",35.7110,139.7965,"雷門"],
+      ["仲見世通",35.7118,139.7965,"仲見世商店街"],
+      ["淺草寺",35.7148,139.7967,"浅草寺"],
+      ["淺草琥珀堂（地址待確認）",35.7125,139.7970,"浅草 わらび餅"]
     ]
   },
   {
+    isoDate:"2027-01-16",
     date:"SAT · 01/16",
     title:"東京大神宮・小網神社・搬遷至新宿",
     sub:"押上退房 → 神社巡禮 → 入住 HOTEL LiVEMAX Shinjuku East",
@@ -673,13 +918,14 @@ const days = [
       ["11:00–12:00","小網神社參拜（洗錢祈福）","週六參拜人潮較多，預留排隊時間。"],
       ["12:30–13:15","美奈福關東煮午餐","出發前先確認週六營業時間與是否需排隊。"],
       ["13:15–14:00","人形町甘酒橫丁散步","可順道買人形燒等點心。"],
-      ["14:00–16:00","返回押上取行李 → 搬往新宿東側住宿","從押上搭都營線前往東新宿站最順路！"],
+      ["14:00–16:00","返回押上取行李 → 搬往新宿東側住宿","從押上搭半藏門線轉副都心線前往東新宿站最順路！"],
       ["16:00–19:30","HOTEL LiVEMAX Shinjuku East 入住、新宿晚餐","晚上可逛歌舞伎町、新宿東口商圈。"]
     ],
     routes:[
       {
         from:"押上站 Oshiage (Z14)",
         to:"飯田橋站 Iidabashi (T06)／東京大神宮",
+        copyStation:"東京大神宮",
         line:"東京 Metro 半藏門線 (Z) → 東西線 (T)",
         summary:"同為東京 Metro 系統，於九段下站站內轉乘 1 次。",
         time:"約 25 分鐘（含步行約 35 分鐘）",
@@ -695,6 +941,7 @@ const days = [
       {
         from:"飯田橋站 Iidabashi (T06)",
         to:"人形町站 Ningyocho (H14)／小網神社",
+        copyStation:"小網神社",
         line:"東京 Metro 東西線 (T) → 日比谷線 (H)",
         summary:"於茅場町站站內轉乘日比谷線，再步行至小網神社。",
         time:"約 15–20 分鐘（含步行約 28 分鐘）",
@@ -709,33 +956,34 @@ const days = [
         alert:"美奈福關東煮完整地址與週六營業狀況請出發前再次確認，若遇公休可改吃人形町周邊親子丼或拉麵。"
       },
       {
-        from:"人形町／押上取行李 → 東新宿站 (F12 / E02)",
+        from:"押上站取行李 → 東新宿站 (F12 / E02)",
         to:"HOTEL LiVEMAX Shinjuku East",
-        line:"都營淺草線 (A) → 都營新宿線 (S) → 副都心線 (F)",
-        summary:"下午回押上取行李後，直接從押上（或人形町）搭車前往飯店最近的「東新宿站」。",
+        copyStation:"東新宿駅",
+        line:"Metro 半藏門線 (Z) → 副都心線 (F)",
+        summary:"下午回押上取行李後，直接搭東京 Metro 前往飯店最近的「東新宿站」。",
         time:"約 35–45 分鐘（含轉乘與步行）",
-        fare:"約 ¥320–420 / 人",
-        transfer:"轉乘 1–2 次",
+        fare:"約 ¥250–320 / 人",
+        transfer:"轉乘 1 次（新宿三丁目）",
         steps:[
           "<b>【路線 A：從押上取完行李直接出發（推薦！）】</b> 從押上站（Z14）搭 <span class='line-badge metro-line'>Metro 半藏門線 Z</span> 往澀谷方向至 <b>新宿三丁目站（F13）</b>，站內轉乘 <span class='line-badge metro-line'>Metro 副都心線 F</span> 往和光市／池袋方向 1 站至 <b>東新宿站（F12）</b>下車。",
           "<b>【路線 B：若行李隨身直接從人形町出發】</b> 從人形町（A14）搭 <span class='line-badge toei-line'>都營淺草線 A</span> 1 站至東日本橋，站內連通至馬喰橫山（S09）轉 <span class='line-badge toei-line'>都營新宿線 S</span> 往笹塚方向至 <b>新宿三丁目（S02）</b>，再轉 <span class='line-badge metro-line'>Metro 副都心線 F</span> 1 站至 <b>東新宿站（F12）</b>。",
           "抵達 <b>東新宿站</b> 後，依 Agoda 訂單門牌與電梯出口指標步行約 2–5 分鐘抵達 <b>HOTEL LiVEMAX Shinjuku East</b>。"
         ],
-        alert:"6 人拉大行李強烈建議走「路線 A（押上→新宿三丁目→東新宿）」，全程幾乎在東京 Metro 系統內轉乘，比跨都營／JR 少走很多樓梯！"
+        alert:"6 人拉大行李強烈建議走「路線 A（押上→新宿三丁目→東新宿）」，全程在東京 Metro 系統內轉乘，比跨都營／JR 少走很多樓梯！"
       }
     ],
     places:[
-      ["押上站 (Oshiage)",35.7107,139.8130],
-      ["飯田橋站 (Iidabashi)",35.7021,139.7450],
-      ["東京大神宮",35.6995,139.7460],
-      ["人形町站 (Ningyocho)",35.6863,139.7823],
-      ["小網神社",35.6867,139.7795],
-      ["美奈福（地址待確認）",35.6865,139.7820],
-      ["東新宿站 (Higashi-shinjuku)",35.6977,139.7076],
-      ["HOTEL LiVEMAX Shinjuku East",35.6965,139.7060]
+      ["押上站 (Oshiage)",35.7107,139.8130,"押上駅"],
+      ["飯田橋站 (Iidabashi)",35.7021,139.7450,"飯田橋駅"],
+      ["東京大神宮",35.6995,139.7460,"東京大神宮"],
+      ["人形町站 (Ningyocho)",35.6863,139.7823,"人形町駅"],
+      ["小網神社",35.6867,139.7795,"小網神社"],
+      ["東新宿站 (Higashi-shinjuku)",35.6977,139.7076,"東新宿駅"],
+      ["HOTEL LiVEMAX Shinjuku East",35.6965,139.7060,"ホテルリブマックス新宿EAST"]
     ]
   },
   {
+    isoDate:"2027-01-17",
     date:"SUN · 01/17",
     title:"秋葉原・御徒町・春日部小新巡禮",
     sub:"動漫電器、二木の菓子、LaLa Garden、溫泉",
@@ -754,6 +1002,7 @@ const days = [
       {
         from:"HOTEL LiVEMAX Shinjuku East／JR 新宿站",
         to:"JR 秋葉原站 Akihabara",
+        copyStation:"秋葉原駅",
         line:"JR 中央・總武線各站停車（黃色車身 JB 線）",
         summary:"步行至 JR 新宿站後，搭黃色總武線直達秋葉原免轉乘！",
         time:"步行約 12–15 分 ＋ 車程約 18 分鐘",
@@ -769,6 +1018,7 @@ const days = [
       {
         from:"JR 秋葉原站 Akihabara",
         to:"JR 御徒町站 Okachimachi",
+        copyStation:"御徒町駅",
         line:"JR 山手線（綠色）或 JR 京濱東北線（藍色）",
         summary:"僅 1 站距離，搭車 2 分鐘；沿高架橋下逛過去步行也只要 12 分鐘。",
         time:"車程約 2 分鐘（或步行 12 分鐘）",
@@ -782,6 +1032,7 @@ const days = [
       {
         from:"JR 御徒町站 Okachimachi",
         to:"東武 春日部站 Kasukabe",
+        copyStation:"春日部駅",
         line:"JR 山手線 → JR 常磐線快速 → 東武晴空塔線",
         summary:"經由上野、北千住兩次轉乘，約 50–60 分鐘抵達春日部。",
         time:"約 50–65 分鐘",
@@ -798,6 +1049,7 @@ const days = [
       {
         from:"LaLa Garden Kasukabe",
         to:"春日部溫泉 → 十勝亭",
+        copyStation:"十勝亭 春日部市中央1-47-1",
         line:"步行／視溫泉位置改搭計程車",
         summary:"溫泉正式店名與地址尚待確認；十勝亭位於春日部站西口步行圈內。",
         time:"依溫泉地址而定",
@@ -812,6 +1064,7 @@ const days = [
       {
         from:"東武 春日部站 Kasukabe",
         to:"東新宿站 Higashi-shinjuku (F12)",
+        copyStation:"東新宿駅",
         line:"東武野田線 (TD) → JR 埼京線 (JA) → Metro 副都心線 (F)",
         summary:"回程走大宮、池袋路線，直達飯店最近的東新宿站。",
         time:"約 65–80 分鐘",
@@ -825,16 +1078,17 @@ const days = [
       }
     ],
     places:[
-      ["JR 新宿站",35.6896,139.7006],
-      ["JR 秋葉原站",35.6984,139.7731],
-      ["JR 御徒町站",35.7074,139.7747],
-      ["二木の菓子 御徒町",35.7082,139.7745],
-      ["春日部站",35.9798,139.7520],
-      ["LaLa Garden Kasukabe",35.9750,139.7540],
-      ["十勝亭 春日部",35.9788,139.7495]
+      ["JR 新宿站",35.6896,139.7006,"新宿駅"],
+      ["JR 秋葉原站",35.6984,139.7731,"秋葉原駅"],
+      ["JR 御徒町站",35.7074,139.7747,"御徒町駅"],
+      ["二木の菓子 御徒町",35.7082,139.7745,"二木の菓子 第一営業所"],
+      ["春日部站",35.9798,139.7520,"春日部駅"],
+      ["LaLa Garden Kasukabe",35.9750,139.7540,"ララガーデン春日部"],
+      ["十勝亭 春日部",35.9788,139.7495,"十勝亭 春日部"]
     ]
   },
   {
+    isoDate:"2027-01-18",
     date:"MON · 01/18",
     title:"富士山・河口湖一日包車",
     sub:"包車 ¥72,000／6 人｜當晚入住東橫INN成田機場本館",
@@ -853,6 +1107,7 @@ const days = [
       {
         from:"HOTEL LiVEMAX Shinjuku East（新宿）",
         to:"忍野八海 → 河口湖 → 大石公園",
+        copyStation:"忍野八海 山梨県南都留郡忍野村忍草",
         line:"六人專屬包車（全日 10 小時制）",
         summary:"全程專車接送免轉車，6 人行李直接放車上。",
         time:"新宿→富士山單程約 1.5–2 小時（視中央道車況）",
@@ -867,6 +1122,7 @@ const days = [
       {
         from:"河口湖 / 大石公園",
         to:"東橫INN成田機場本館",
+        copyStation:"東横INN成田空港本館 千葉県成田市取香560",
         line:"六人包車直送（需事前向包車公司確認！）",
         summary:"河口湖至成田機場距離約 170 公里，車程約 2.5–3.5 小時。",
         time:"約 2.5–3.5 小時（視首都高與東關東道車況）",
@@ -880,15 +1136,16 @@ const days = [
       }
     ],
     places:[
-      ["HOTEL LiVEMAX Shinjuku East",35.6965,139.7060],
-      ["忍野八海",35.4602,138.8324],
-      ["河口湖",35.5170,138.7500],
-      ["大石公園",35.5335,138.7460],
-      ["東橫INN成田機場本館",35.7720,140.3860]
+      ["HOTEL LiVEMAX Shinjuku East",35.6965,139.7060,"ホテルリブマックス新宿EAST"],
+      ["忍野八海",35.4602,138.8324,"忍野八海"],
+      ["河口湖",35.5170,138.7500,"河口湖"],
+      ["大石公園",35.5335,138.7460,"大石公園 河口湖"],
+      ["東橫INN成田機場本館",35.7720,140.3860,"東横INN成田空港本館"]
     ],
     note:"御殿場 Outlet 暫列彈性備選，因當晚需拉車至成田機場，建議優先把時間留給河口湖美景與路程緩衝。"
   },
   {
+    isoDate:"2027-01-19",
     date:"TUE · 01/19",
     title:"成田機場・快樂返台",
     sub:"早班機｜建議搭乘 05:10 飯店免費接駁巴士",
@@ -905,6 +1162,7 @@ const days = [
       {
         from:"東橫INN成田機場本館",
         to:"成田國際機場 (T1 / T2 / T3)",
+        copyStation:"成田国際空港",
         line:"東橫INN 免費接駁巴士",
         summary:"飯店門口直達機場航廈，免搬行李搭電車。",
         time:"約 10–20 分鐘（依航廈順序而異）",
@@ -919,6 +1177,7 @@ const days = [
       {
         from:"成田國際機場 (NRT)",
         to:"桃園國際機場 (TPE)",
+        copyStation:"桃園國際機場",
         line:"回程國際航班（待確認）",
         summary:"航程約 3 小時 50 分鐘至 4 小時 20 分鐘（冬季逆風飛行時間略長）。",
         time:"約 4 小時 20 分鐘",
@@ -932,9 +1191,9 @@ const days = [
       }
     ],
     places:[
-      ["東橫INN成田機場本館",35.7720,140.3860],
-      ["成田國際機場",35.7720,140.3929],
-      ["桃園國際機場",25.0797,121.2342]
+      ["東橫INN成田機場本館",35.7720,140.3860,"東横INN成田空港本館"],
+      ["成田國際機場",35.7720,140.3929,"成田国際空港"],
+      ["桃園國際機場",25.0797,121.2342,"桃園國際機場"]
     ]
   }
 ];
@@ -946,6 +1205,39 @@ function mapsSearchUrl(q){
   return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
 }
 
+// Toast helper
+const toastEl = document.getElementById("toast");
+let toastTimer = null;
+function showToast(msg) {
+  toastEl.textContent = msg;
+  toastEl.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toastEl.classList.remove("show"), 2000);
+}
+
+function copyText(text) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => showToast("已複製：" + text)).catch(() => fallbackCopy(text));
+  } else {
+    fallbackCopy(text);
+  }
+}
+function fallbackCopy(text) {
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  document.body.appendChild(ta);
+  ta.select();
+  document.execCommand("copy");
+  document.body.removeChild(ta);
+  showToast("已複製：" + text);
+}
+
+document.addEventListener("click", e => {
+  const copyBtn = e.target.closest("[data-copy]");
+  if (copyBtn) copyText(copyBtn.dataset.copy);
+});
+
+// Render Days
 const daysHost = document.getElementById("days");
 const mapInstances = [];
 
@@ -1003,7 +1295,8 @@ days.forEach((d, i) => {
       <ol class="route-steps">${stepsHtml}</ol>
       ${r.alert ? `<div class="route-alert">⚠️ ${r.alert}</div>` : ""}
       <div class="btn-row">
-        <a class="navbtn" href="${mapsDirUrl(r.from, r.to, mode)}" target="_blank" rel="noopener">開啟 Google Maps 導航 ↗</a>
+        <a class="navbtn" href="${mapsDirUrl(r.from, r.to, mode)}" target="_blank" rel="noopener">Google Maps 路線 ↗</a>
+        ${r.copyStation ? `<button type="button" class="navbtn copy" data-copy="${r.copyStation}">📋 複製「${r.copyStation}」</button>` : ""}
       </div>
     `;
     routes.appendChild(el);
@@ -1011,14 +1304,23 @@ days.forEach((d, i) => {
 
   const right = document.createElement("div");
   right.className = "mapwrap";
-  const placeBtns = d.places.map((p, idx) =>
-    `<a class="navbtn secondary" href="${mapsSearchUrl(p[0])}" target="_blank" rel="noopener">${idx+1}. ${p[0].replace(/（.*?）/g,"")} ↗</a>`
-  ).join("");
+  const placeBtns = d.places.map((p, idx) => {
+    const jpQuery = p[3] || p[0];
+    return `<a class="navbtn secondary" href="${mapsSearchUrl(jpQuery)}" target="_blank" rel="noopener">${idx+1}. ${p[0].replace(/（.*?）/g,"")} ↗</a>`;
+  }).join("");
 
   right.innerHTML = `
-    <p class="maptitle">📍 DAY 0${i+1}｜景點相對位置地圖</p>
-    <div class="map" id="map${i}"></div>
-    <p class="mapnote">點擊下方按鈕可直接開啟手機 Google Maps 單點導航；標註「待確認」者為區域參考位置。</p>
+    <div class="maptitle">
+      <span>📍 DAY 0${i+1}｜景點相對位置地圖</span>
+      <button type="button" class="map-relock-btn" data-lock-idx="${i}">🔒 鎖定滑動</button>
+    </div>
+    <div class="map-container">
+      <div class="map-lock-overlay" id="lock${i}">
+        <span class="map-lock-pill">👆 點擊解鎖地圖縮放／拖曳</span>
+      </div>
+      <div class="map" id="map${i}"></div>
+    </div>
+    <p class="mapnote">為避免滑動網頁時誤觸，地圖預設鎖定；點擊下方按鈕可直接開啟手機 Google Maps 精準導航。</p>
     <div class="btn-row">${placeBtns}</div>
   `;
 
@@ -1039,36 +1341,82 @@ days.forEach((d, i) => {
 function drawMaps() {
   if (!window.L) return;
   days.forEach((d, i) => {
-    const map = L.map("map" + i, { scrollWheelZoom: false }).setView([d.places[0][1], d.places[0][2]], 12);
+    const map = L.map("map" + i, { scrollWheelZoom: false, dragging: false, touchZoom: false }).setView([d.places[0][1], d.places[0][2]], 12);
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution: '&copy; OpenStreetMap'
     }).addTo(map);
     const bounds = [];
     d.places.forEach((p, j) => {
       const pos = [p[1], p[2]];
+      const jpQuery = p[3] || p[0];
       bounds.push(pos);
-      L.marker(pos).addTo(map).bindPopup(`<b>${j+1}. ${p[0]}</b><br><a href="${mapsSearchUrl(p[0])}" target="_blank">開啟 Google Maps 導航</a>`);
+      L.marker(pos).addTo(map).bindPopup(`<b>${j+1}. ${p[0]}</b><br><a href="${mapsSearchUrl(jpQuery)}" target="_blank">開啟 Google Maps 導航</a>`);
     });
     if (bounds.length > 1) map.fitBounds(bounds, { padding: [26, 26] });
     else map.setView(bounds[0], 14);
-    mapInstances.push(map);
+    mapInstances[i] = map;
+
+    const overlay = document.getElementById("lock" + i);
+    overlay.addEventListener("click", () => {
+      overlay.classList.add("unlocked");
+      map.dragging.enable();
+      map.touchZoom.enable();
+    });
   });
 }
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", drawMaps);
 else drawMaps();
 
-// Day Filter Pills
-document.getElementById("dayPills").addEventListener("click", e => {
-  const btn = e.target.closest(".day-pill");
-  if (!btn) return;
-  document.querySelectorAll(".day-pill").forEach(b => b.classList.remove("active"));
-  btn.classList.add("active");
-  const target = btn.dataset.day;
+document.addEventListener("click", e => {
+  const relockBtn = e.target.closest("[data-lock-idx]");
+  if (!relockBtn) return;
+  const idx = Number(relockBtn.dataset.lockIdx);
+  const overlay = document.getElementById("lock" + idx);
+  const map = mapInstances[idx];
+  if (overlay && map) {
+    overlay.classList.remove("unlocked");
+    map.dragging.disable();
+    map.touchZoom.disable();
+    showToast("已鎖定地圖，可安心滑動頁面");
+  }
+});
+
+// Day Filter Logic (Auto-detect today's trip date, fallback to DAY 1)
+function setActiveDay(target) {
+  document.querySelectorAll(".day-pill").forEach(b => {
+    b.classList.toggle("active", b.dataset.day === target);
+  });
   document.querySelectorAll(".day").forEach(card => {
     card.style.display = (target === "all" || card.dataset.dayIdx === target) ? "block" : "none";
   });
-  setTimeout(() => mapInstances.forEach(m => m.invalidateSize()), 80);
+  setTimeout(() => mapInstances.forEach(m => m && m.invalidateSize()), 80);
+}
+
+document.getElementById("dayPills").addEventListener("click", e => {
+  const btn = e.target.closest(".day-pill");
+  if (!btn) return;
+  setActiveDay(btn.dataset.day);
 });
+
+(function initDefaultDay() {
+  const now = new Date();
+  const yyyy = now.getFullYear();
+  const mm = String(now.getMonth() + 1).padStart(2, "0");
+  const dd = String(now.getDate()).padStart(2, "0");
+  const todayStr = `${yyyy}-${mm}-${dd}`;
+  const matchIdx = days.findIndex(d => d.isoDate === todayStr);
+  if (matchIdx !== -1) {
+    const pill = document.querySelector(`.day-pill[data-day="${matchIdx}"]`);
+    if (pill) {
+      pill.textContent = "📍今天 " + pill.textContent;
+      pill.classList.add("today-badge");
+    }
+    setActiveDay(String(matchIdx));
+    document.getElementById("dayFilterHint").textContent = "已自動切換至今日行程・點地圖解鎖可縮放";
+  } else {
+    setActiveDay("0");
+  }
+})();
 
 // Bottom Navigation Tabs
 document.querySelectorAll(".bnav-btn").forEach(btn => {
@@ -1081,12 +1429,73 @@ document.querySelectorAll(".bnav-btn").forEach(btn => {
     });
     window.scrollTo({ top: 0, behavior: "smooth" });
     if (targetId === "panel-itinerary") {
-      setTimeout(() => mapInstances.forEach(m => m.invalidateSize()), 100);
+      setTimeout(() => mapInstances.forEach(m => m && m.invalidateSize()), 100);
     }
   });
 });
 
-// Interactive Packing Checklist with localStorage
+// Japanese Point-and-Talk Cards
+const phrases = [
+  {
+    zh:"確認電車是否停靠押上（成田機場搭車用）",
+    jp:"すみません、この電車は「押上（おしあげ）」に止まりますか？",
+    romaji:"Sumimasen, kono densha wa Oshiage ni tomarimasu ka?"
+  },
+  {
+    zh:"確認是黃色總武線（新宿前往秋葉原用）",
+    jp:"すみません、秋葉原に行く総武線（各駅停車）のホームはどこですか？",
+    romaji:"Sumimasen, Akihabara ni iku Sōbu-sen no hōmu wa doko desu ka?"
+  },
+  {
+    zh:"詢問車站電梯位置（6 人拉大行李用）",
+    jp:"すみません、大きなスーツケースがあります。エレベーターはどこですか？",
+    romaji:"Sumimasen, ōkina sūtsukēsu ga arimasu. Erebētā wa doko desu ka?"
+  },
+  {
+    zh:"飯店辦理入住（6 位大人・報到用）",
+    jp:"チェックインをお願いします。大人6名で予約しています。",
+    romaji:"Chekku-in o onegai shimasu. Otona roku-mei de yoyaku shite imasu."
+  },
+  {
+    zh:"退房後寄放行李（1/16 換飯店用）",
+    jp:"チェックアウト後ですが、本日中に取りに戻るので荷物を預かってもらえますか？",
+    romaji:"Chekku-auto go desu ga, honjitsu-chū ni tori ni modoru node nimotsu o azukatte moraemasu ka?"
+  },
+  {
+    zh:"包車終點確認（1/18 前往成田東橫INN）",
+    jp:"本日の最終目的地は「東横INN成田空港本館」です。よろしくお願いします。",
+    romaji:"Honjitsu no saishū mokutekichi wa Toyoko Inn Narita Kūkō Honkan desu."
+  },
+  {
+    zh:"東橫INN 免費接駁巴士確認（1/19 早班機）",
+    jp:"明日の朝5時10分の成田空港行き無料シャトルバスに乗りたいです。予約は必要ですか？",
+    romaji:"Ashita no asa go-ji juppun no Narita Kūkō iki muryō shatoru basu ni noritai desu."
+  },
+  {
+    zh:"餐廳候位（6 位大人用餐）",
+    jp:"大人6名です。席は空いていますか？分かれて座っても大丈夫です。",
+    romaji:"Otona roku-mei desu. Seki wa aite imasu ka? Wakarete suwatte mo daijōbu desu."
+  }
+];
+
+const phraseGrid = document.getElementById("phraseGrid");
+phrases.forEach(p => {
+  const card = document.createElement("div");
+  card.className = "phrase-card";
+  card.innerHTML = `
+    <div>
+      <div class="phrase-zh">${p.zh}</div>
+      <div class="phrase-jp">${p.jp}</div>
+      <div class="phrase-romaji">${p.romaji}</div>
+    </div>
+    <div>
+      <button type="button" class="navbtn copy" data-copy="${p.jp}">📋 複製日文</button>
+    </div>
+  `;
+  phraseGrid.appendChild(card);
+});
+
+// Interactive Packing Checklist
 const packItems = [
   "護照（確認效期 6 個月以上）",
   "去回程電子機票（確認航廈與時間）",
@@ -1106,9 +1515,9 @@ const packItems = [
   "折疊購物袋（超市採買與藥妝伴手禮）"
 ];
 
-const STORAGE_KEY = "tokyo2027_packing_v1";
+const PACK_KEY = "tokyo2027_packing_v2";
 let savedChecks = {};
-try { savedChecks = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); } catch (e) {}
+try { savedChecks = JSON.parse(localStorage.getItem(PACK_KEY) || "{}"); } catch (e) {}
 
 const checksHost = document.getElementById("checks");
 const packCount = document.getElementById("packCount");
@@ -1128,7 +1537,7 @@ packItems.forEach((text, i) => {
   cb.checked = !!savedChecks[i];
   cb.addEventListener("change", () => {
     savedChecks[i] = cb.checked;
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(savedChecks)); } catch (e) {}
+    try { localStorage.setItem(PACK_KEY, JSON.stringify(savedChecks)); } catch (e) {}
     updatePackProgress();
   });
   label.append(cb, document.createTextNode(text));
@@ -1138,10 +1547,160 @@ updatePackProgress();
 
 document.getElementById("resetPack").addEventListener("click", () => {
   savedChecks = {};
-  try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+  try { localStorage.removeItem(PACK_KEY); } catch (e) {}
   checksHost.querySelectorAll("input[type=checkbox]").forEach(cb => cb.checked = false);
   updatePackProgress();
 });
+
+// 6-Person Shared Expense Splitter
+const MEMBERS = [
+  "成員 1（易謙）",
+  "成員 2（育任）",
+  "成員 3（唯瑄）",
+  "成員 4（祈全）",
+  "成員 5（恩郡）",
+  "成員 6（羽亭）"
+];
+const EXP_KEY = "tokyo2027_expenses_v1";
+const RATE_KEY = "tokyo2027_jpy_rate_v1";
+
+let expenses = [];
+try { expenses = JSON.parse(localStorage.getItem(EXP_KEY) || "[]"); } catch (e) {}
+
+const rateInput = document.getElementById("jpyRate");
+try {
+  const savedRate = localStorage.getItem(RATE_KEY);
+  if (savedRate) rateInput.value = savedRate;
+} catch (e) {}
+
+function getRate() {
+  const r = parseFloat(rateInput.value);
+  return (r && r > 0) ? r : 0.215;
+}
+
+rateInput.addEventListener("change", () => {
+  try { localStorage.setItem(RATE_KEY, String(getRate())); } catch (e) {}
+  renderExpenses();
+});
+
+function saveExpenses() {
+  try { localStorage.setItem(EXP_KEY, JSON.stringify(expenses)); } catch (e) {}
+}
+
+function renderExpenses() {
+  const rate = getRate();
+  let sumTwd = 0;
+  const paidByMember = {};
+  MEMBERS.forEach(m => paidByMember[m] = 0);
+
+  expenses.forEach(item => {
+    const twd = item.currency === "JPY" ? item.amount * rate : item.amount;
+    sumTwd += twd;
+    if (paidByMember[item.payer] !== undefined) {
+      paidByMember[item.payer] += twd;
+    }
+  });
+
+  const sumJpy = Math.round(sumTwd / rate);
+  const perPerson = sumTwd / MEMBERS.length;
+
+  document.getElementById("totalJpy").textContent = "¥" + sumJpy.toLocaleString();
+  document.getElementById("totalTwd").textContent = "NT$" + Math.round(sumTwd).toLocaleString();
+  document.getElementById("perPersonTwd").textContent = "NT$" + Math.round(perPerson).toLocaleString();
+
+  const payerGrid = document.getElementById("payerGrid");
+  payerGrid.innerHTML = "";
+  MEMBERS.forEach(m => {
+    const paid = paidByMember[m] || 0;
+    const diff = Math.round(paid - perPerson);
+    const card = document.createElement("div");
+    card.className = "payer-card";
+    const statusHtml = diff >= 0
+      ? `<span class="bal-pos">應收 +NT$${diff.toLocaleString()}</span>`
+      : `<span class="bal-neg">應補 -NT$${Math.abs(diff).toLocaleString()}</span>`;
+    card.innerHTML = `<b>${m}</b>已墊 NT$${Math.round(paid).toLocaleString()}<br>${statusHtml}`;
+    payerGrid.appendChild(card);
+  });
+
+  const list = document.getElementById("expenseList");
+  list.innerHTML = "";
+  if (expenses.length === 0) {
+    list.innerHTML = `<li class="expense-item" style="color:var(--muted);justify-content:center">目前尚無公費記帳紀錄，上方輸入即可自動均分給 6 人</li>`;
+    return;
+  }
+
+  expenses.slice().reverse().forEach((item, revIdx) => {
+    const origIdx = expenses.length - 1 - revIdx;
+    const twd = Math.round(item.currency === "JPY" ? item.amount * rate : item.amount);
+    const origStr = item.currency === "JPY" ? `¥${Number(item.amount).toLocaleString()}（約 NT$${twd.toLocaleString()}）` : `NT$${Number(item.amount).toLocaleString()}`;
+    const li = document.createElement("li");
+    li.className = "expense-item";
+    li.innerHTML = `
+      <div>
+        <b>${item.title}</b> · <span style="color:var(--blue)">${item.payer}</span><br>
+        <small style="color:var(--muted)">${origStr} ｜ 每人 NT$${Math.round(twd / 6).toLocaleString()}</small>
+      </div>
+      <button type="button" class="del-exp" data-del-exp="${origIdx}">刪除</button>
+    `;
+    list.appendChild(li);
+  });
+}
+
+document.getElementById("expForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const title = document.getElementById("expTitle").value.trim();
+  const amount = parseFloat(document.getElementById("expAmount").value);
+  const currency = document.getElementById("expCurrency").value;
+  const payer = document.getElementById("expPayer").value;
+  if (!title || !amount || amount <= 0) return;
+  expenses.push({ title, amount, currency, payer, ts: Date.now() });
+  saveExpenses();
+  renderExpenses();
+  document.getElementById("expTitle").value = "";
+  document.getElementById("expAmount").value = "";
+  showToast("已新增公費紀錄");
+});
+
+document.getElementById("expenseList").addEventListener("click", e => {
+  const btn = e.target.closest("[data-del-exp]");
+  if (!btn) return;
+  const idx = Number(btn.dataset.delExp);
+  expenses.splice(idx, 1);
+  saveExpenses();
+  renderExpenses();
+});
+
+document.getElementById("clearExpenses").addEventListener("click", () => {
+  if (expenses.length === 0) return;
+  expenses = [];
+  saveExpenses();
+  renderExpenses();
+  showToast("已清空公費紀錄");
+});
+
+document.getElementById("copySplitReport").addEventListener("click", () => {
+  const rate = getRate();
+  let sumTwd = 0;
+  const paidByMember = {};
+  MEMBERS.forEach(m => paidByMember[m] = 0);
+  const lines = ["📊 TOKYO TRIP 2027 公費分帳明細（匯率 " + rate + "）"];
+  expenses.forEach((item, idx) => {
+    const twd = item.currency === "JPY" ? item.amount * rate : item.amount;
+    sumTwd += twd;
+    paidByMember[item.payer] += twd;
+    lines.push(`${idx+1}. ${item.title}：${item.currency} ${item.amount}（約 NT$${Math.round(twd)}）｜${item.payer} 墊付`);
+  });
+  const perPerson = sumTwd / MEMBERS.length;
+  lines.push(`------------------`);
+  lines.push(`總支出：NT$${Math.round(sumTwd)}｜每人應攤：NT$${Math.round(perPerson)}`);
+  MEMBERS.forEach(m => {
+    const diff = Math.round(paidByMember[m] - perPerson);
+    lines.push(`• ${m}：已墊 NT$${Math.round(paidByMember[m])}（${diff >= 0 ? "應收 +" + diff : "應補 " + diff}）`);
+  });
+  copyText(lines.join("\n"));
+});
+
+renderExpenses();
 </script>
 </body>
 </html>
