@@ -604,7 +604,7 @@ main{
   background:#fff;
   color:var(--ink);
 }
-.split-form input:first-child,.split-form .part-box,.split-form #btnAddExpense{
+.split-form input:first-child,.split-form .part-box,.split-form button{
   grid-column:1 / -1;
 }
 .part-box{
@@ -1007,15 +1007,15 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}
     </button>
   </div>
 
-  <!-- Day Selector Bar -->
+  <!-- Day Selector Strip -->
   <div class="day-bar-wrap">
     <div class="day-pills" id="dayPills">
-      <button type="button" class="day-pill active" data-day="0">01/14 (四) D1</button>
-      <button type="button" class="day-pill" data-day="1">01/15 (五) D2</button>
-      <button type="button" class="day-pill" data-day="2">01/16 (六) D3</button>
-      <button type="button" class="day-pill" data-day="3">01/17 (日) D4</button>
-      <button type="button" class="day-pill" data-day="4">01/18 (一) D5</button>
-      <button type="button" class="day-pill" data-day="5">01/19 (二) D6</button>
+      <button class="day-pill active" data-day="0">01/14 (四) D1</button>
+      <button class="day-pill" data-day="1">01/15 (五) D2</button>
+      <button class="day-pill" data-day="2">01/16 (六) D3</button>
+      <button class="day-pill" data-day="3">01/17 (日) D4</button>
+      <button class="day-pill" data-day="4">01/18 (一) D5</button>
+      <button class="day-pill" data-day="5">01/19 (二) D6</button>
     </div>
   </div>
 </header>
@@ -1131,9 +1131,9 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}
         <span>TWD</span>
       </div>
 
-      <div class="split-form" id="expFormBox">
-        <input type="text" id="expTitle" placeholder="消費項目（例：淺草名代拉麵、牛たんの檸檬、車資）">
-        <input type="number" id="expAmount" placeholder="金額" min="1" step="any">
+      <form class="split-form" id="expForm">
+        <input type="text" id="expTitle" placeholder="消費項目（例：淺草名代拉麵、牛たんの檸檬、車資）" required>
+        <input type="number" id="expAmount" placeholder="金額" min="1" step="any" required>
         <select id="expCurrency">
           <option value="JPY">JPY ¥</option>
           <option value="TWD">TWD $</option>
@@ -1158,8 +1158,8 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}
           <div class="part-chips" id="partChips"></div>
         </div>
 
-        <button type="button" id="btnAddExpense" class="btn-solid" style="justify-content:center">＋ 新增公費紀錄</button>
-      </div>
+        <button type="submit" class="btn-solid" style="justify-content:center">＋ 新增公費紀錄</button>
+      </form>
 
       <div class="split-summary">
         <div class="sum-box"><small>總計（日幣）</small><strong id="totalJpy">¥0</strong></div>
@@ -1223,7 +1223,7 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}
 
 <!-- Add / Edit Spot Modal -->
 <div class="sheet-bg" id="sheetBg">
-  <form class="sheet" id="sheet" onsubmit="return false;">
+  <form class="sheet" id="sheet">
     <h3 id="sheetTitle">新增景點</h3>
     <div class="sheet-label">1. 景點基本資訊</div>
     <input id="fTime" placeholder="時間（例如 14:00，可不填）">
@@ -1256,7 +1256,7 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}
     </div>
 
     <div class="btn-row">
-      <button type="button" id="btnSheetSave" class="btn-solid">儲存並同步</button>
+      <button type="submit" class="btn-solid">儲存並同步</button>
       <button type="button" class="btn-outline" id="sheetCancel">取消</button>
     </div>
   </form>
@@ -1264,7 +1264,7 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}
 
 <!-- Edit Segment Only Modal -->
 <div class="sheet-bg" id="segSheetBg">
-  <form class="sheet" id="segSheet" onsubmit="return false;">
+  <form class="sheet" id="segSheet">
     <h3 id="segSheetTitle">編輯交通資訊</h3>
     <div style="font-size:12px;color:var(--sub)" id="segRoutePreview"></div>
     <select id="sMode">
@@ -1285,7 +1285,7 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}
       <input id="sHeadway" placeholder="例：約 15–20 分鐘一班，請以實際查詢為準">
     </div>
     <div class="btn-row">
-      <button type="button" id="btnSegSave" class="btn-solid">更新交通資訊</button>
+      <button type="submit" class="btn-solid">更新交通資訊</button>
       <button type="button" class="btn-outline" id="segSheetCancel">取消</button>
     </div>
   </form>
@@ -1327,23 +1327,23 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}
 
 <!-- Bottom Navigation Bar (5 tabs) -->
 <nav class="bottom-nav" aria-label="主導航列">
-  <button type="button" class="bnav-btn active" data-target="panel-itinerary">
+  <button class="bnav-btn active" data-target="panel-itinerary">
     <svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M6 8.5v3a4.5 4.5 0 0 0 4.5 4.5h3A4.5 4.5 0 0 1 18 20.5"/></svg>
     <span>行程</span>
   </button>
-  <button type="button" class="bnav-btn" data-target="panel-transport">
+  <button class="bnav-btn" data-target="panel-transport">
     <svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="15" rx="3"/><line x1="4" y1="11" x2="20" y2="11"/><circle cx="8.5" cy="14.5" r="1"/><circle cx="15.5" cy="14.5" r="1"/><line x1="8" y1="18" x2="6" y2="21"/><line x1="16" y1="18" x2="18" y2="21"/></svg>
     <span>交通</span>
   </button>
-  <button type="button" class="bnav-btn" data-target="panel-phrases">
+  <button class="bnav-btn" data-target="panel-phrases">
     <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="13" y2="13"/></svg>
     <span>會話卡</span>
   </button>
-  <button type="button" class="bnav-btn" data-target="panel-staypack">
+  <button class="bnav-btn" data-target="panel-staypack">
     <svg viewBox="0 0 24 24"><path d="M3 7v11"/><path d="M21 18v-6a3 3 0 0 0-3-3H7v9"/><path d="M3 14h18"/><circle cx="7" cy="10" r="1.5"/></svg>
     <span>住宿行李</span>
   </button>
-  <button type="button" class="bnav-btn" data-target="panel-budget">
+  <button class="bnav-btn" data-target="panel-budget">
     <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><circle cx="16" cy="14.5" r="1"/></svg>
     <span>記帳</span>
   </button>
@@ -1984,12 +1984,8 @@ const daysData = [
 // =========================================================================
 // SUPABASE REALTIME + 6s TIMEOUT + AUTO-INIT + SHARED EXPENSE SYNC
 // =========================================================================
-const SUPABASE_URL = ["https://", "sjydfezpsnmcijxhjllx", ".supabase.co"].join("");
-const SUPABASE_ANON_KEY = [
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.",
-  "eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNqeWRmZXpwc25tY2lqeGhqbGx4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTU2MDc4MjUsImV4cCI6MjExMTE4MzgyNX0.",
-  "CrP8At_cMqNUCv48i6lu7kIiV8_Vojrmt6aYi8fnl0s"
-].join("");
+const SUPABASE_URL = "https://sjydfezpsnmcijxhjllx.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNqeWRmZXpwc25tY2lqeGhqbGx4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTU2MDc4MjUsImV4cCI6MjExMTE4MzgyNX0.CrP8At_cMqNUCv48i6lu7kIiV8_Vojrmt6aYi8fnl0s";
 const TRIP_ROOM_ID = "tokyo-2027-group6";
 
 function mapsDirUrl(origin, dest, mode = "transit") {
@@ -2283,7 +2279,7 @@ function nearHtml(i) {
 }
 
 // =========================================================================
-// SUPABASE REALTIME + 6s TIMEOUT + AUTO-INIT + SHARED EXPENSE SYNC
+// SUPABASE REST + REALTIME WEBSOCKET SYNC ENGINE (6s Timeout + Auto-Init)
 // =========================================================================
 let sbConfigured = false;
 let sbSocket = null;
@@ -2358,7 +2354,7 @@ async function fetchSupabaseState() {
         revisionHistory = row.history;
         saveLocalHistory();
       }
-      if (Array.isArray(row.expenses) && row.expenses.length > 0) {
+      if (Array.isArray(row.expenses)) {
         expenses = row.expenses;
         saveExpensesLocal();
         renderExpenses();
@@ -2366,6 +2362,7 @@ async function fetchSupabaseState() {
       isApplyingRemote = false;
       setStatus("ok", "☁️ 雲端已同步");
     } else {
+      // Auto-initialize default itinerary & shared state into Supabase room
       if (!userNodes || Object.keys(userNodes).length === 0) {
         userNodes = buildDefaultNodesMap();
         saveLocalCache();
@@ -2493,15 +2490,18 @@ function connectSupabaseRealtime() {
       clearInterval(sbHeartbeat);
       setTimeout(connectSupabaseRealtime, 4000);
     };
-    sbSocket.onerror = () => {};
+    sbSocket.onerror = () => {
+      // Handled gracefully by onclose / fallback
+    };
   } catch (e) {
     console.warn("Realtime WS fallback active");
   }
 }
 
 (function initSupabase() {
-  if (SUPABASE_URL && SUPABASE_URL.startsWith("https://")) {
+  if (SUPABASE_URL && SUPABASE_URL.startsWith("https://") && !SUPABASE_URL.includes("YOUR_SUPABASE")) {
     sbConfigured = true;
+    // Safety guard: never stay stuck in "連線中" beyond 6s
     const guardTimer = setTimeout(() => {
       const pill = document.getElementById("syncPill");
       if (pill && pill.textContent.includes("連線中")) {
@@ -2570,15 +2570,11 @@ function closeSheet() {
 document.getElementById("sheetCancel").addEventListener("click", closeSheet);
 sheetBg.addEventListener("click", e => { if (e.target === sheetBg) closeSheet(); });
 
-function saveSpotSheet() {
+document.getElementById("sheet").addEventListener("submit", e => {
+  e.preventDefault();
   const c = sheetCtx;
   const t = document.getElementById("fTitle").value.trim();
-  if (!c) return;
-  if (!t) {
-    showToast("請先輸入景點或餐廳名稱");
-    document.getElementById("fTitle").focus();
-    return;
-  }
+  if (!c || !t) return;
   const rawU = document.getElementById("fUrl").value.trim();
   if (rawU && !parseMapUrl(rawU).url) {
     showToast("地圖網址要以 https:// 開頭");
@@ -2642,12 +2638,6 @@ function saveSpotSheet() {
   refreshDay(c.i);
   closeSheet();
   showToast(c.kind === "edit" ? "已更新景點與交通導航" : "已新增景點並建立大眾運輸導航");
-}
-
-document.getElementById("btnSheetSave").addEventListener("click", saveSpotSheet);
-document.getElementById("sheet").addEventListener("submit", e => {
-  e.preventDefault();
-  saveSpotSheet();
 });
 
 // Segment-only edit modal
@@ -2687,8 +2677,8 @@ function closeSegSheet() {
 }
 document.getElementById("segSheetCancel").addEventListener("click", closeSegSheet);
 segSheetBg.addEventListener("click", e => { if (e.target === segSheetBg) closeSegSheet(); });
-
-function saveSegSheet() {
+document.getElementById("segSheet").addEventListener("submit", e => {
+  e.preventDefault();
   if (!segCtx) return;
   const { i, x } = segCtx;
   const n = cloneNodes(i);
@@ -2714,12 +2704,6 @@ function saveSegSheet() {
   refreshDay(i);
   closeSegSheet();
   showToast("已更新交通資訊");
-}
-
-document.getElementById("btnSegSave").addEventListener("click", saveSegSheet);
-document.getElementById("segSheet").addEventListener("submit", e => {
-  e.preventDefault();
-  saveSegSheet();
 });
 
 // Revision History Modal
@@ -2899,7 +2883,6 @@ document.getElementById("btnJumpToday").addEventListener("click", () => {
   const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
   const found = daysData.findIndex(d => d.isoDate === todayStr);
   selectDay(found !== -1 ? found : 0);
-  activateTab("panel-itinerary");
   showToast(found !== -1 ? "已切換至今日行程" : "目前非出發日，顯示 DAY 01");
 });
 
@@ -2913,8 +2896,7 @@ document.getElementById("btnShareLine").addEventListener("click", () => {
       lines.push(`   🚃 ${n.lineName}（${n.fare} / ${n.duration}${hw}）`);
     }
   });
-  copyText(lines.join("
-"));
+  copyText(lines.join("\n"));
 });
 
 (function init() {
@@ -3071,6 +3053,7 @@ try {
   if (r) rateInput.value = r;
 } catch (e) {}
 
+// Render participant checkboxes (default all 6 selected)
 const partChipsEl = document.getElementById("partChips");
 const partSummaryLabel = document.getElementById("partSummaryLabel");
 
@@ -3079,7 +3062,7 @@ function updatePartSummaryLabel() {
   partSummaryLabel.textContent = `參與分攤成員（${checkedCount} / ${MEMBERS.length} 人）`;
 }
 
-MEMBERS.forEach(m => {
+MEMBERS.forEach((m, idx) => {
   const chip = document.createElement("label");
   chip.className = "part-chip active";
   const cb = document.createElement("input");
@@ -3090,7 +3073,7 @@ MEMBERS.forEach(m => {
     chip.classList.toggle("active", cb.checked);
     updatePartSummaryLabel();
   });
-  chip.append(cb, document.createTextNode(m));
+  chip.append(cb, document.createTextNode(m.replace(/^成員 \d+/, "D" + (idx + 1).replace("D", ""))));
   partChipsEl.appendChild(chip);
 });
 
@@ -3128,6 +3111,7 @@ function saveExpensesLocal() {
   try { localStorage.setItem(EXP_KEY, JSON.stringify(expenses)); } catch (e) {}
 }
 
+// Compute net balances & minimal transfer pairs in TWD
 function computeSettlement(rate) {
   let sumTwd = 0;
   const paidBy = {};
@@ -3259,60 +3243,25 @@ function renderExpenses() {
   });
 }
 
-let isAddingExpense = false;
-function handleAddExpense(e) {
-  if (e && e.preventDefault) e.preventDefault();
-  if (e && e.stopPropagation) e.stopPropagation();
-  if (isAddingExpense) return;
-
-  const titleEl = document.getElementById("expTitle");
-  const amountEl = document.getElementById("expAmount");
-  const title = titleEl.value.trim();
-  const amount = parseFloat(amountEl.value);
+document.getElementById("expForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const title = document.getElementById("expTitle").value.trim();
+  const amount = parseFloat(document.getElementById("expAmount").value);
   const currency = document.getElementById("expCurrency").value;
   const payer = document.getElementById("expPayer").value;
   const participants = getSelectedParticipants();
-
-  if (!title) {
-    showToast("請先輸入消費項目名稱");
-    titleEl.focus();
-    return;
-  }
-  if (!Number.isFinite(amount) || amount <= 0) {
-    showToast("請輸入大於 0 的有效金額");
-    amountEl.focus();
-    return;
-  }
+  if (!title || !amount || amount <= 0) return;
   if (!participants.length) {
     showToast("請至少勾選 1 位參與分攤成員");
     return;
   }
-
-  isAddingExpense = true;
-  try {
-    expenses.push({ title, amount, currency, payer, participants });
-    saveExpensesLocal();
-    renderExpenses();
-    pushSupabaseState(`記帳新增「${title}」`);
-
-    titleEl.value = "";
-    amountEl.value = "";
-    showToast(`已新增「${title}」（${currency === "JPY" ? "¥" + amount.toLocaleString() : "NT$" + amount.toLocaleString()}）`);
-    const expListEl = document.getElementById("expenseList");
-    if (expListEl) {
-      expListEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
-  } finally {
-    setTimeout(() => { isAddingExpense = false; }, 250);
-  }
-}
-
-document.getElementById("btnAddExpense").addEventListener("click", handleAddExpense);
-document.getElementById("expFormBox").addEventListener("keydown", e => {
-  if (e.key === "Enter" && (e.target.id === "expTitle" || e.target.id === "expAmount")) {
-    e.preventDefault();
-    handleAddExpense(e);
-  }
+  expenses.push({ title, amount, currency, payer, participants });
+  saveExpensesLocal();
+  renderExpenses();
+  pushSupabaseState(`記帳新增「${title}」`);
+  document.getElementById("expTitle").value = "";
+  document.getElementById("expAmount").value = "";
+  showToast("已新增公費紀錄並同步");
 });
 
 document.getElementById("expenseList").addEventListener("click", e => {
