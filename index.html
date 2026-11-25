@@ -1131,9 +1131,9 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}
         <span>TWD</span>
       </div>
 
-      <div class="split-form" id="expForm">
-        <input type="text" id="expTitle" placeholder="消費項目（例：淺草名代拉麵、牛たんの檸檬、車資）">
-        <input type="number" id="expAmount" placeholder="金額" min="1" step="any">
+      <form class="split-form" id="expForm">
+        <input type="text" id="expTitle" placeholder="消費項目（例：淺草名代拉麵、牛たんの檸檬、車資）" required>
+        <input type="number" id="expAmount" placeholder="金額" min="1" step="any" required>
         <select id="expCurrency">
           <option value="JPY">JPY ¥</option>
           <option value="TWD">TWD $</option>
@@ -1158,8 +1158,8 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}
           <div class="part-chips" id="partChips"></div>
         </div>
 
-        <button type="button" id="btnAddExpense" class="btn-solid" style="justify-content:center">＋ 新增公費紀錄</button>
-      </div>
+        <button type="submit" class="btn-solid" style="justify-content:center">＋ 新增公費紀錄</button>
+      </form>
 
       <div class="split-summary">
         <div class="sum-box"><small>總計（日幣）</small><strong id="totalJpy">¥0</strong></div>
@@ -2279,12 +2279,8 @@ function nearHtml(i) {
 }
 
 // =========================================================================
-// SUPABASE REALTIME + 6s TIMEOUT + AUTO-INIT + SHARED EXPENSE SYNC
+// SUPABASE REST + REALTIME WEBSOCKET SYNC ENGINE (6s Timeout + Auto-Init)
 // =========================================================================
-const SUPABASE_URL = "https://sjydfezpsnmcijxhjllx.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNqeWRmZXpwc25tY2lqeGhqbGx4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTU2MDc4MjUsImV4cCI6MjExMTE4MzgyNX0.CrP8At_cMqNUCv48i6lu7kIiV8_Vojrmt6aYi8fnl0s";
-const TRIP_ROOM_ID = "tokyo-2027-group6";
-
 let sbConfigured = false;
 let sbSocket = null;
 let sbHeartbeat = null;
@@ -2358,7 +2354,7 @@ async function fetchSupabaseState() {
         revisionHistory = row.history;
         saveLocalHistory();
       }
-      if (Array.isArray(row.expenses) && (row.expenses.length > 0 || expenses.length === 0)) {
+      if (Array.isArray(row.expenses)) {
         expenses = row.expenses;
         saveExpensesLocal();
         renderExpenses();
@@ -2366,6 +2362,7 @@ async function fetchSupabaseState() {
       isApplyingRemote = false;
       setStatus("ok", "☁️ 雲端已同步");
     } else {
+      // Auto-initialize default itinerary & shared state into Supabase room
       if (!userNodes || Object.keys(userNodes).length === 0) {
         userNodes = buildDefaultNodesMap();
         saveLocalCache();
@@ -2473,7 +2470,7 @@ function connectSupabaseRealtime() {
             revisionHistory = rec.history;
             saveLocalHistory();
           }
-          if (Array.isArray(rec.expenses) && (rec.expenses.length > 0 || expenses.length === 0) && JSON.stringify(rec.expenses) !== JSON.stringify(expenses)) {
+          if (Array.isArray(rec.expenses) && JSON.stringify(rec.expenses) !== JSON.stringify(expenses)) {
             expenses = rec.expenses;
             saveExpensesLocal();
             renderExpenses();
@@ -2493,7 +2490,9 @@ function connectSupabaseRealtime() {
       clearInterval(sbHeartbeat);
       setTimeout(connectSupabaseRealtime, 4000);
     };
-    sbSocket.onerror = () => {};
+    sbSocket.onerror = () => {
+      // Handled gracefully by onclose / fallback
+    };
   } catch (e) {
     console.warn("Realtime WS fallback active");
   }
@@ -2502,6 +2501,7 @@ function connectSupabaseRealtime() {
 (function initSupabase() {
   if (SUPABASE_URL && SUPABASE_URL.startsWith("https://") && !SUPABASE_URL.includes("YOUR_SUPABASE")) {
     sbConfigured = true;
+    // Safety guard: never stay stuck in "連線中" beyond 6s
     const guardTimer = setTimeout(() => {
       const pill = document.getElementById("syncPill");
       if (pill && pill.textContent.includes("連線中")) {
@@ -2620,8 +2620,8 @@ document.getElementById("sheet").addEventListener("submit", e => {
     if (oldName !== t && n[c.x + 1] && n[c.x + 1].type === "segment") {
       const nextSt = n[c.x + 2];
       Object.assign(n[c.x + 1], buildAutoSegment(t, nextSt ? nextSt.name : "下一站", {
-        mode: n[x + 1].platform || "電車／地鐵轉乘",
-        headwayNote: n[x + 1].headwayNote || ""
+        mode: n[c.x + 1].platform || "電車／地鐵轉乘",
+        headwayNote: n[c.x + 1].headwayNote || ""
       }));
     }
 
@@ -3053,6 +3053,7 @@ try {
   if (r) rateInput.value = r;
 } catch (e) {}
 
+// Render participant checkboxes (default all 6 selected)
 const partChipsEl = document.getElementById("partChips");
 const partSummaryLabel = document.getElementById("partSummaryLabel");
 
@@ -3110,6 +3111,7 @@ function saveExpensesLocal() {
   try { localStorage.setItem(EXP_KEY, JSON.stringify(expenses)); } catch (e) {}
 }
 
+// Compute net balances & minimal transfer pairs in TWD
 function computeSettlement(rate) {
   let sumTwd = 0;
   const paidBy = {};
@@ -3241,69 +3243,25 @@ function renderExpenses() {
   });
 }
 
-let isAddingExpense = false;
-function handleAddExpense(e) {
-  if (e) {
-    e.preventDefault();
-    e.stopPropagation();
+document.getElementById("expForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const title = document.getElementById("expTitle").value.trim();
+  const amount = parseFloat(document.getElementById("expAmount").value);
+  const currency = document.getElementById("expCurrency").value;
+  const payer = document.getElementById("expPayer").value;
+  const participants = getSelectedParticipants();
+  if (!title || !amount || amount <= 0) return;
+  if (!participants.length) {
+    showToast("請至少勾選 1 位參與分攤成員");
+    return;
   }
-  if (isAddingExpense) return;
-  isAddingExpense = true;
-
-  try {
-    const titleEl = document.getElementById("expTitle");
-    const amountEl = document.getElementById("expAmount");
-    const title = (titleEl.value || "").trim();
-    const amount = parseFloat(amountEl.value);
-    const currency = document.getElementById("expCurrency").value;
-    const payer = document.getElementById("expPayer").value;
-    const participants = getSelectedParticipants();
-
-    if (!title) {
-      showToast("請先輸入消費項目名稱");
-      titleEl.focus();
-      return;
-    }
-    if (!Number.isFinite(amount) || amount <= 0) {
-      showToast("請輸入大於 0 的有效金額");
-      amountEl.focus();
-      return;
-    }
-    if (!participants.length) {
-      showToast("請至少勾選 1 位參與分攤成員");
-      return;
-    }
-
-    expenses.push({ title, amount, currency, payer, participants });
-    saveExpensesLocal();
-    renderExpenses();
-
-    // Ensure staying on budget tab
-    const budgetTabBtn = document.querySelector('.bnav-btn[data-target="panel-budget"]');
-    const budgetPanel = document.getElementById("panel-budget");
-    if (budgetTabBtn && budgetPanel && !budgetPanel.classList.contains("active")) {
-      activateTab("panel-budget");
-    }
-
-    pushSupabaseState(`記帳新增「${title}」`);
-
-    titleEl.value = "";
-    amountEl.value = "";
-    showToast(`已新增「${title}」（${currency === "JPY" ? "¥" + amount.toLocaleString() : "NT$" + amount.toLocaleString()}）`);
-    const expListEl = document.getElementById("expenseList");
-    if (expListEl) {
-      expListEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
-  } finally {
-    setTimeout(() => { isAddingExpense = false; }, 120);
-  }
-}
-
-document.getElementById("btnAddExpense").addEventListener("click", handleAddExpense);
-document.getElementById("expForm").addEventListener("keydown", e => {
-  if (e.key === "Enter" && e.target.tagName !== "BUTTON") {
-    handleAddExpense(e);
-  }
+  expenses.push({ title, amount, currency, payer, participants });
+  saveExpensesLocal();
+  renderExpenses();
+  pushSupabaseState(`記帳新增「${title}」`);
+  document.getElementById("expTitle").value = "";
+  document.getElementById("expAmount").value = "";
+  showToast("已新增公費紀錄並同步");
 });
 
 document.getElementById("expenseList").addEventListener("click", e => {
