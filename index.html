@@ -837,6 +837,13 @@ main{
 }
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .place-box{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:12px}.place-row{display:flex;align-items:center;gap:10px;padding:11px 16px;border-top:1px solid var(--line);font-size:14px}.place-no{width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}.place-row .st-chevron{margin-left:auto}.flight{display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-top:1px solid var(--line);font-size:13px}.flight b{font-size:15px}
+.action-strip{grid-template-columns:repeat(2,1fr)}#btnToggleAll,.outline-banner-wrap,.st-mini-tabs{display:none!important}
+.hint{margin:0 14px 12px;padding:12px 14px;background:#fff8e6;border:1px solid #f0dca0;border-radius:8px;font-size:13px;line-height:1.7}.hint button{margin-top:6px}
+.add-btn{background:var(--navy);color:#fff;border-color:var(--navy)}.card-actions{display:flex;gap:6px}.card-actions button{border:1px solid var(--line-dark);background:#fff;border-radius:6px;padding:2px 8px;font-size:14px}.empty-near{padding:18px 16px;color:var(--muted);font-size:13px}
+.sheet-bg{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:3000;display:none;align-items:flex-end}.sheet-bg.show{display:flex}
+.sheet{background:#fff;width:100%;max-width:760px;margin:0 auto;padding:16px 16px calc(16px + env(safe-area-inset-bottom));border-radius:14px 14px 0 0;display:grid;gap:10px}.sheet h3{margin:0;font-size:16px}.sheet input{font-size:16px;padding:10px;border:1px solid var(--line-dark);border-radius:8px}
+.node-acts{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 4px}.node-acts a,.node-acts button{font-size:12px;border:1px solid var(--line-dark);background:#fff;border-radius:6px;padding:4px 8px;color:var(--ink)}.tl-foot{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line)}.card-add{border:1px solid var(--navy);color:var(--navy);background:#fff;border-radius:6px;padding:2px 8px;font-size:12px}
+body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncPill{margin-left:4px}
 </style>
 </head>
 <body>
@@ -849,7 +856,7 @@ main{
         <span>TOKYO TRIP 2027</span>
         <small>6天5夜・6位成人</small>
       </div>
-      <span class="topbar-badge" id="headerDayTag">DAY 01 · 01/14</span>
+      <span><span class="topbar-badge" id="headerDayTag">DAY 01 · 01/14</span><span class="topbar-badge" id="syncPill">⏳ 連線中</span></span>
     </div>
     <div class="topbar-sub" id="headerSubInfo">
       <span>2027/01/14 — 01/19</span>
@@ -890,6 +897,7 @@ main{
 <main>
   <!-- TAB 1: 路線與每日行程 (Navitime Vertical Transit Timeline Style) -->
   <section class="tab-panel active" id="panel-itinerary">
+    <div class="hint" id="hint"><b>👋 3 步上手</b><br>① 點上方日期切換每天<br>② 每個地點下方可 ✎ 修改、🗑 刪除、＋ 之後新增；新增後會附上「怎麼去」路線導航與地圖<br>③ 拿到這個連結的人都能編輯，修改約 4 秒內同步給所有人<br>④ 新增地點後，請按路段上的「怎麼去」用 Google Maps 查路線與票價<br><button type="button" class="btn-outline" id="hintOk">知道了</button></div>
     <div class="outline-banner-wrap">
       <button type="button" class="outline-banner-btn" id="btnCopyDaySummary">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
@@ -1068,17 +1076,20 @@ main{
   </section>
 </main>
 
+<div class="sheet-bg" id="sheetBg"><form class="sheet" id="sheet"><h3 id="sheetTitle">新增項目</h3>
+<input id="fTime" placeholder="時間（例如 14:00，可不填）"><input id="fTitle" placeholder="名稱（景點、餐廳…）" required><input id="fNote" placeholder="備註（可不填）">
+<div class="btn-row"><button type="submit" class="btn-solid">儲存</button><button type="button" class="btn-outline" id="sheetCancel">取消</button></div></form></div>
 <div class="toast" id="toast">已複製到剪貼簿</div>
 
 <!-- Clean Navitime-style Bottom Navigation Bar -->
 <nav class="bottom-nav" aria-label="主導航列">
   <button class="bnav-btn active" data-target="panel-itinerary">
     <svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M6 8.5v3a4.5 4.5 0 0 0 4.5 4.5h3A4.5 4.5 0 0 1 18 20.5"/></svg>
-    <span>路線行程</span>
+    <span>行程</span>
   </button>
   <button class="bnav-btn" data-target="panel-transport">
     <svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="15" rx="3"/><line x1="4" y1="11" x2="20" y2="11"/><circle cx="8.5" cy="14.5" r="1"/><circle cx="15.5" cy="14.5" r="1"/><line x1="8" y1="18" x2="6" y2="21"/><line x1="16" y1="18" x2="18" y2="21"/></svg>
-    <span>交通/日文</span>
+    <span>交通</span>
   </button>
   <button class="bnav-btn" data-target="panel-stay">
     <svg viewBox="0 0 24 24"><path d="M3 7v11"/><path d="M21 18v-6a3 3 0 0 0-3-3H7v9"/><path d="M3 14h18"/><circle cx="7" cy="10" r="1.5"/></svg>
@@ -1090,7 +1101,7 @@ main{
   </button>
   <button class="bnav-btn" data-target="panel-budget">
     <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><circle cx="16" cy="14.5" r="1"/></svg>
-    <span>分帳/車資</span>
+    <span>記帳</span>
   </button>
 </nav>
 
@@ -1770,6 +1781,133 @@ document.addEventListener("click", e => {
 });
 
 // Render Days in Navitime Station-Segment Style
+const EDIT_KEY="tokyo2027_edits_v2";
+let userNodes={};
+try{userNodes=JSON.parse(localStorage.getItem(EDIT_KEY)||"{}")}catch(e){}
+function saveEdits(){try{localStorage.setItem(EDIT_KEY,JSON.stringify(userNodes))}catch(e){}}
+function nodesOf(i){return userNodes[i]||daysData[i].nodes}
+function cloneNodes(i){return JSON.parse(JSON.stringify(nodesOf(i)))}
+function esc(t){return String(t==null?"":t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function lastStation(i){const n=nodesOf(i);for(let x=n.length-1;x>=0;x--)if(n[x].type==="station")return x;return -1}
+function genSeg(to){return {type:"segment",lineColor:"#37969e",axisClass:"",lineName:"前往 "+to,platform:"路線導航",details:"請按下方「怎麼去」用 Google Maps 查看路線、時間與票價",fare:"—",duration:"—",pending:true}}
+function addAfter(i,x,f){
+  const n=cloneNodes(i);
+  const st={type:"station",badge:"點",badgeClass:"transfer",topLine:"",bottomLine:"",depTime:f.time,name:f.title,sub:f.note,query:f.title+" 東京"};
+  if(f.url)st.url=f.url;
+  if(x<0){userNodes[i]=[st];return}
+  n.splice(x+1,0,genSeg(f.title),st);
+  if(n[x+3]&&n[x+3].type==="segment")Object.assign(n[x+3],genSeg(n[x+4]?n[x+4].name:"下一站"));
+  userNodes[i]=n;
+}
+function delStation(i,x){
+  const n=cloneNodes(i);
+  if(x>0){n.splice(x-1,2);if(n[x-1]&&n[x-1].type==="segment")Object.assign(n[x-1],genSeg(n[x]?n[x].name:"下一站"))}
+  else n.splice(x,2);
+  userNodes[i]=n;
+}
+function timelineHtml(i){
+  const nodes=nodesOf(i);const last=lastStation(i);const first=nodes.findIndex(z=>z.type==="station");
+  let h="";
+  nodes.forEach((node,x)=>{
+    if(node.type==="station"){
+      const tm=(node.arrTime&&node.depTime&&node.arrTime!==node.depTime)?`<span class="arr">${esc(node.arrTime)}</span><span class="dep">${esc(node.depTime)}</span>`:`<span class="dep">${esc(node.depTime||node.arrTime||"")}</span>`;
+      const top=x===first?"none":(node.topLine==="none"?"":node.topLine);
+      const bot=x===last?"none":(node.bottomLine==="none"?"":node.bottomLine);
+      const url=esc(node.url||mapsSearchUrl(node.query));
+      h+=`<div class="st-node"><div class="st-time-col">${tm}</div><div class="st-axis-col"><div class="st-line-top ${top==="none"?"none":top==="orange"?"orange":""}"></div><div class="st-badge ${node.badgeClass||""}">${node.badge}</div><div class="st-line-bottom ${bot==="none"?"none":bot==="orange"?"orange":""}"></div></div><div class="st-info-col"><a class="st-title-row" href="${url}" target="_blank" rel="noopener"><div><div class="st-name">${esc(node.name)}</div><div class="st-sub">${esc(node.sub)}</div></div><span class="st-chevron">›</span></a><div class="node-acts"><a href="${url}" target="_blank" rel="noopener">📍 地圖</a><button type="button" data-nedit="${i}:${x}">✎ 修改</button><button type="button" data-nadd="${i}:${x}">＋ 之後新增</button><button type="button" data-ndel="${i}:${x}">🗑 刪除</button></div></div></div>`;
+    }else{
+      const a=nodes[x-1],b=nodes[x+1];
+      const go=(a&&b&&a.type==="station"&&b.type==="station"&&!/^GK0/.test(node.platform))?`<a class="seg-promo-btn" href="${esc(mapsDirUrl(a.query,b.query))}" target="_blank" rel="noopener"><span class="seg-promo-left"><span class="seg-promo-tag">怎麼去</span><span>${esc(a.name)} → ${esc(b.name)}</span></span><span style="color:#9ca3af;font-size:16px">›</span></a>`:"";
+      h+=`<div class="seg-node"><div></div><div class="seg-axis-col"><div class="seg-axis-bar ${node.axisClass||""}"></div></div><div class="seg-body"><div class="seg-head"><div class="seg-line-name"><span class="line-dot" style="background:${node.lineColor||"#37969e"}"></span><span>${esc(node.lineName)}</span></div><span class="platform-pill">${esc(node.platform)}</span></div><div class="seg-details">${esc(node.details)}</div><div class="seg-fare-row"><span>${esc(node.fare)}</span><span class="dur">${esc(node.duration)}</span></div>${go}</div></div>`;
+    }
+  });
+  h+=`<div class="tl-foot"><button type="button" class="btn-solid" data-nadd="${i}:${last}">＋ 新增行程</button>${userNodes[i]?`<button type="button" class="btn-outline" data-nreset="${i}">還原此日預設</button>`:""}</div>`;
+  return h;
+}
+function placesHtml(i){
+  const st=nodesOf(i).filter(z=>z.type==="station");
+  return `<div class="nearby-header"><h4>📍 本日地點導航</h4><span>點擊開啟 Google Maps</span></div>`+st.map((p,j)=>`<a class="place-row" href="${esc(p.url||mapsSearchUrl(p.query))}" target="_blank" rel="noopener"><span class="place-no">${j+1}</span><span>${esc(p.name)}</span><span class="st-chevron">›</span></a>`).join("");
+}
+function nearHtml(i){
+  const list=daysData[i].nearbyCards||[];if(!list.length)return "";
+  return `<div class="nearby-header"><h4>附近推薦</h4><span>左右滑動 ›</span></div><div class="nearby-scroll">${list.map((c,k)=>`<a class="spot-card" href="${esc(c.url)}" target="_blank" rel="noopener"><div class="spot-banner ${c.style||""}"><span class="spot-time">${esc(c.time)}</span><span class="spot-cat">${esc(c.cat)}</span></div><div class="spot-card-body"><div><div class="spot-card-title">${esc(c.title)}</div><div class="spot-card-desc">${esc(c.desc)}</div></div><div class="spot-card-foot"><span>${esc(c.price)}</span><button type="button" class="card-add" data-cadd="${i}:${k}">＋ 加入行程</button></div></div></a>`).join("")}</div>`;
+}
+let DB=null;const writeQ={};
+function setStatus(v){const e=document.getElementById("syncPill");if(!e)return;e.textContent=document.body.classList.contains("ro")?"👀 唯讀":v===true?"☁️ 共享中":v==="slow"?"⏳ 連線中":"📱 個人模式"}
+function persistDay(i){
+  if(!syncOn()){saveEdits();return}
+  const url=SYNC_URL.replace(/\/$/,"")+"/plan/d"+i+".json",has=!!userNodes[i];
+  pendingW++;
+  writeQ[i]=(writeQ[i]||Promise.resolve()).then(()=>fetch(url,{method:has?"PUT":"DELETE",headers:{"Content-Type":"application/json"},body:has?JSON.stringify({nodes:JSON.stringify(userNodes[i]),at:Date.now()}):undefined})).then(r=>{if(!r.ok)throw 0}).catch(()=>showToast("同步失敗，請確認網路")).then(()=>{pendingW--});
+}
+async function estimateAll(i){
+  let sample=null;try{sample=await claude.use("sample")}catch(e){}
+  if(!sample)return;
+  const n=nodesOf(i);
+  for(let x=0;x<n.length;x++){
+    const sg=n[x];if(sg.type!=="segment"||!sg.pending)continue;
+    const a=n[x-1],b=n[x+1];if(!a||!b||a.type!=="station"||b.type!=="station")continue;
+    try{
+      const r=await sample.json(`你是東京交通助理。請估算從「${a.name}」到「${b.name}」的大眾運輸（電車／地鐵／步行）。只回傳 JSON：{"line":"路線或步行，例如 JR山手線→銀座線","minutes":數字,"fare_jpy":數字,"note":"一句提醒，可為空字串"}。不確定就給合理概估。`,{modelTier:"quick"});
+      const cur=cloneNodes(i);const k=cur.findIndex((z,y)=>y===x&&z.type==="segment"&&z.pending&&cur[y-1]&&cur[y-1].name===a.name&&cur[y+1]&&cur[y+1].name===b.name);
+      if(k<0)continue;
+      Object.assign(cur[k],{lineName:"【AI 預估】"+String(r.line||"電車／步行"),details:(r.note?r.note+"｜":"")+"預估值，請按「怎麼去」用 Google Maps 核對",fare:"約 ¥"+Math.round(Number(r.fare_jpy)||0),duration:"約 "+Math.round(Number(r.minutes)||0)+" 分",pending:false});
+      userNodes[i]=cur;persistDay(i);refreshDay(i);
+    }catch(e){if(e&&e.code==="not_granted")return}
+  }
+}
+const SYNC_URL="https://tokyo2027-66459-default-rtdb.firebaseio.com";
+let pendingW=0;
+function syncOn(){return /^https:\/\/.+/.test(SYNC_URL)}
+async function pull(){
+  if(pendingW>0||document.hidden)return;
+  try{
+    const r=await fetch(SYNC_URL.replace(/\/$/,"")+"/plan.json");if(!r.ok)throw 0;
+    const all=(await r.json())||{};
+    for(let i=0;i<daysData.length;i++){
+      const d=all["d"+i];let nodes=null;try{nodes=d&&JSON.parse(d.nodes)}catch(e){}
+      if((userNodes[i]?JSON.stringify(userNodes[i]):"")!==(nodes?JSON.stringify(nodes):"")){if(nodes)userNodes[i]=nodes;else delete userNodes[i];refreshDay(i)}
+    }
+    setStatus(true);
+  }catch(e){setStatus(false)}
+}
+(function initShared(){
+  if(!syncOn()){setStatus(false);return}
+  userNodes={};pull();setInterval(pull,4000);
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden)pull()});
+})();
+function refreshDay(i){document.getElementById("tl"+i).innerHTML=timelineHtml(i);document.getElementById("pl"+i).innerHTML=placesHtml(i)}
+const sheetBg=document.getElementById("sheetBg");let sheetCtx=null;
+function openSheet(ctx,v){
+  sheetCtx=ctx;document.getElementById("sheetTitle").textContent=ctx.title;
+  document.getElementById("fTime").value=v.time||"";document.getElementById("fTitle").value=v.title||"";document.getElementById("fNote").value=v.note||"";
+  sheetBg.classList.add("show");setTimeout(()=>document.getElementById("fTitle").focus(),50);
+}
+function closeSheet(){sheetBg.classList.remove("show");sheetCtx=null}
+document.getElementById("sheetCancel").addEventListener("click",closeSheet);
+sheetBg.addEventListener("click",e=>{if(e.target===sheetBg)closeSheet()});
+document.getElementById("sheet").addEventListener("submit",e=>{
+  e.preventDefault();const c=sheetCtx;const t=document.getElementById("fTitle").value.trim();if(!c||!t)return;
+  const time=document.getElementById("fTime").value.trim(),note=document.getElementById("fNote").value.trim();
+  if(c.kind==="edit"){
+    const n=cloneNodes(c.i),o=n[c.x];
+    if(o.name!==t){o.name=t;o.query=t+" 東京";delete o.url;if(n[c.x-1]&&n[c.x-1].type==="segment")Object.assign(n[c.x-1],genSeg(t));if(n[c.x+1]&&n[c.x+1].type==="segment")Object.assign(n[c.x+1],genSeg(n[c.x+2]?n[c.x+2].name:"下一站"))}
+    o.sub=note;if(time!==(o.depTime||o.arrTime||"")){o.depTime=time;o.arrTime=""}
+    userNodes[c.i]=n;
+  }else addAfter(c.i,c.x,{time,title:t,note,url:c.url});
+  persistDay(c.i);refreshDay(c.i);closeSheet();estimateAll(c.i);showToast(c.kind==="edit"?"已儲存":"已新增，點「怎麼去」查看路線");
+});
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-nedit],[data-ndel],[data-nadd],[data-nreset],[data-cadd]");if(!b)return;
+  e.preventDefault();const d=b.dataset;
+  if("nedit" in d){const [i,x]=d.nedit.split(":").map(Number);const o=nodesOf(i)[x];openSheet({kind:"edit",i,x,title:"修改「"+o.name+"」"},{time:o.depTime||o.arrTime||"",title:o.name,note:o.sub||""})}
+  else if("nadd" in d){const [i,x]=d.nadd.split(":").map(Number);const o=nodesOf(i)[x];openSheet({kind:"add",i,x,title:o?"新增行程（接在「"+o.name+"」之後）":"新增第一個行程"},{})}
+  else if("ndel" in d){const [i,x]=d.ndel.split(":").map(Number);delStation(i,x);persistDay(i);refreshDay(i);estimateAll(i);showToast("已刪除，可按「還原此日預設」找回")}
+  else if("nreset" in d){const i=Number(d.nreset);delete userNodes[i];persistDay(i);refreshDay(i);showToast("已還原此日預設")}
+  else if("cadd" in d){const [i,k]=d.cadd.split(":").map(Number);const c=daysData[i].nearbyCards[k];openSheet({kind:"add",i,x:lastStation(i),url:c.url,title:"加入行程（接在這天最後）"},{time:(c.time||"").split("–")[0],title:c.title,note:c.desc})}
+});
+(function(){const h=document.getElementById("hint");try{if(localStorage.getItem("tokyo2027_hint"))h.style.display="none"}catch(e){}
+document.getElementById("hintOk").addEventListener("click",()=>{h.style.display="none";try{localStorage.setItem("tokyo2027_hint","1")}catch(e){}})})();
 const daysContainer = document.getElementById("daysContainer");
 const mapInstances = [];
 let activeDayIdx = 0;
@@ -1787,117 +1925,11 @@ daysData.forEach((day, dIdx) => {
       <div class="day-heading">${day.title}</div>
       <div class="day-meta">${day.summaryMeta}</div>
     </div>
-    <div class="transit-card">
+    <div class="transit-card" id="tl${dIdx}">${timelineHtml(dIdx)}</div>
   `;
 
-  day.nodes.forEach(node => {
-    if (node.type === "station") {
-      const timeHtml = (node.arrTime && node.depTime && node.arrTime !== node.depTime)
-        ? `<span class="arr">${node.arrTime}</span><span class="dep">${node.depTime}</span>`
-        : `<span class="dep">${node.depTime || node.arrTime || ""}</span>`;
-      const topClass = node.topLine === "none" ? "none" : (node.topLine === "orange" ? "orange" : "");
-      const botClass = node.bottomLine === "none" ? "none" : (node.bottomLine === "orange" ? "orange" : "");
-      html += `
-        <div class="st-node">
-          <div class="st-time-col">${timeHtml}</div>
-          <div class="st-axis-col">
-            <div class="st-line-top ${topClass}"></div>
-            <div class="st-badge ${node.badgeClass || ""}">${node.badge}</div>
-            <div class="st-line-bottom ${botClass}"></div>
-          </div>
-          <div class="st-info-col">
-            <a class="st-title-row" href="${mapsSearchUrl(node.query)}" target="_blank" rel="noopener">
-              <div>
-                <div class="st-name">${node.name}</div>
-                <div class="st-sub">${node.sub}</div>
-              </div>
-              <span class="st-chevron">›</span>
-            </a>
-            <div class="st-mini-tabs">
-              <a class="st-mini-btn" href="${mapsSearchUrl(node.query)}" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
-                <span>地圖</span>
-              </a>
-              <a class="st-mini-btn" href="${mapsSearchUrl(node.query + " 周辺")}" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                <span>周邊</span>
-              </a>
-              <button type="button" class="st-mini-btn" data-copy="${node.query}">
-                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                <span>複製站名</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      `;
-    } else if (node.type === "segment") {
-      html += `
-        <div class="seg-node">
-          <div></div>
-          <div class="seg-axis-col">
-            <div class="seg-axis-bar ${node.axisClass || ""}"></div>
-          </div>
-          <div class="seg-body">
-            <div class="seg-head">
-              <div class="seg-line-name">
-                <span class="line-dot" style="background:${node.lineColor || "#37969e"}"></span>
-                <span>${node.lineName}</span>
-              </div>
-              <span class="platform-pill">${node.platform}</span>
-            </div>
-            <div class="seg-details">${node.details}</div>
-            <div class="seg-fare-row">
-              <span>${node.fare}</span>
-              <span class="dur">${node.duration}</span>
-            </div>
-            ${node.promoText ? `
-              <a class="seg-promo-btn" href="${mapsDirUrl(node.mapOrigin, node.mapDest)}" target="_blank" rel="noopener">
-                <span class="seg-promo-left">
-                  <span class="seg-promo-tag">${node.promoTag || "路線導航"}</span>
-                  <span>${node.promoText}</span>
-                </span>
-                <span style="color:#9ca3af;font-size:16px">›</span>
-              </a>
-            ` : ""}
-          </div>
-        </div>
-      `;
-    }
-  });
 
-  html += `</div>`; // close transit-card
-
-  // Horizontal Scroll Spot / Food Cards ("此站附近 / 行程重點卡片")
-  if (day.nearbyCards && day.nearbyCards.length) {
-    html += `
-      <div class="nearby-section">
-        <div class="nearby-header">
-          <h4>此日重點與附近店家</h4>
-          <span>左右滑動查看 ›</span>
-        </div>
-        <div class="nearby-scroll">
-          ${day.nearbyCards.map(c => `
-            <a class="spot-card" href="${c.url}" target="_blank" rel="noopener">
-              <div class="spot-banner ${c.style || ""}">
-                <span class="spot-time">${c.time}</span>
-                <span class="spot-cat">${c.cat}</span>
-              </div>
-              <div class="spot-card-body">
-                <div>
-                  <div class="spot-card-title">${c.title}</div>
-                  <div class="spot-card-desc">${c.desc}</div>
-                </div>
-                <div class="spot-card-foot">
-                  <span>${c.price}</span>
-                  <span>地圖 ↗</span>
-                </div>
-              </div>
-            </a>
-          `).join("")}
-        </div>
-      </div>
-    `;
-  }
+  html += `<div class="nearby-section" id="near${dIdx}">${nearHtml(dIdx)}</div>`;
 
   // Prev Day / Next Day Buttons (Matching "前1班 / 後1班" bottom pair in screenshot)
   html += `
@@ -1907,7 +1939,7 @@ daysData.forEach((day, dIdx) => {
     </div>
   `;
 
-  html += `<div class="place-box"><div class="nearby-header"><h4>📍 本日地點導航</h4><span>點擊開啟 Google Maps</span></div>${day.places.map((p,j)=>`<a class="place-row" href="${mapsSearchUrl(p[3]||p[0])}" target="_blank" rel="noopener"><span class="place-no">${j+1}</span><span>${p[0]}</span><span class="st-chevron">›</span></a>`).join("")}</div>`;
+  html += `<div class="place-box" id="pl${dIdx}">${placesHtml(dIdx)}</div>`;
 
   block.innerHTML = html;
   daysContainer.appendChild(block);
@@ -2013,7 +2045,7 @@ document.getElementById("btnJumpToday").addEventListener("click", () => {
 document.getElementById("btnShareLine").addEventListener("click", () => {
   const d = daysData[activeDayIdx];
   const lines = [`🗾 TOKYO TRIP 2027｜${d.dayTag} ${d.title}`, d.summaryMeta, "----------------"];
-  d.nodes.forEach(n => {
+  nodesOf(activeDayIdx).forEach(n => {
     if (n.type === "station") lines.push(`📍 [${n.depTime || n.arrTime || ""}] ${n.name}`);
     if (n.type === "segment") lines.push(`   🚃 ${n.lineName}（${n.fare} / ${n.duration}）`);
   });
