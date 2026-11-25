@@ -2279,7 +2279,7 @@ function nearHtml(i) {
 }
 
 // =========================================================================
-// SUPABASE REST + REALTIME WEBSOCKET SYNC ENGINE (6s Timeout + Auto-Init)
+// SUPABASE REALTIME + 6s TIMEOUT + AUTO-INIT + SHARED EXPENSE SYNC
 // =========================================================================
 let sbConfigured = false;
 let sbSocket = null;
@@ -2354,7 +2354,7 @@ async function fetchSupabaseState() {
         revisionHistory = row.history;
         saveLocalHistory();
       }
-      if (Array.isArray(row.expenses)) {
+      if (Array.isArray(row.expenses) && (row.expenses.length > 0 || expenses.length === 0)) {
         expenses = row.expenses;
         saveExpensesLocal();
         renderExpenses();
@@ -2470,7 +2470,7 @@ function connectSupabaseRealtime() {
             revisionHistory = rec.history;
             saveLocalHistory();
           }
-          if (Array.isArray(rec.expenses) && JSON.stringify(rec.expenses) !== JSON.stringify(expenses)) {
+          if (Array.isArray(rec.expenses) && (rec.expenses.length > 0 || expenses.length === 0) && JSON.stringify(rec.expenses) !== JSON.stringify(expenses)) {
             expenses = rec.expenses;
             saveExpensesLocal();
             renderExpenses();
@@ -3245,23 +3245,41 @@ function renderExpenses() {
 
 document.getElementById("expForm").addEventListener("submit", e => {
   e.preventDefault();
-  const title = document.getElementById("expTitle").value.trim();
-  const amount = parseFloat(document.getElementById("expAmount").value);
+  const titleEl = document.getElementById("expTitle");
+  const amountEl = document.getElementById("expAmount");
+  const title = titleEl.value.trim();
+  const amount = parseFloat(amountEl.value);
   const currency = document.getElementById("expCurrency").value;
   const payer = document.getElementById("expPayer").value;
   const participants = getSelectedParticipants();
-  if (!title || !amount || amount <= 0) return;
+
+  if (!title) {
+    showToast("請先輸入消費項目名稱");
+    titleEl.focus();
+    return;
+  }
+  if (!Number.isFinite(amount) || amount <= 0) {
+    showToast("請輸入大於 0 的有效金額");
+    amountEl.focus();
+    return;
+  }
   if (!participants.length) {
     showToast("請至少勾選 1 位參與分攤成員");
     return;
   }
+
   expenses.push({ title, amount, currency, payer, participants });
   saveExpensesLocal();
   renderExpenses();
   pushSupabaseState(`記帳新增「${title}」`);
-  document.getElementById("expTitle").value = "";
-  document.getElementById("expAmount").value = "";
-  showToast("已新增公費紀錄並同步");
+
+  titleEl.value = "";
+  amountEl.value = "";
+  showToast(`已新增「${title}」（${currency === "JPY" ? "¥" + amount.toLocaleString() : "NT$" + amount.toLocaleString()}）`);
+  const expListEl = document.getElementById("expenseList");
+  if (expListEl) {
+    expListEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
 });
 
 document.getElementById("expenseList").addEventListener("click", e => {
