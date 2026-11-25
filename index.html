@@ -33,7 +33,7 @@ body{
   color:var(--ink);
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI","Noto Sans TC",sans-serif;
   line-height:1.5;
-  padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom) + 20px);
+  padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom) + 24px);
 }
 a{color:inherit;text-decoration:none}
 
@@ -52,9 +52,10 @@ a{color:inherit;text-decoration:none}
 }
 .topbar-row1{
   display:flex;
-  align-items:baseline;
+  align-items:center;
   justify-content:space-between;
   gap:8px;
+  flex-wrap:wrap;
 }
 .topbar-title{
   font-size:20px;
@@ -69,6 +70,12 @@ a{color:inherit;text-decoration:none}
   font-size:13px;
   font-weight:500;
   color:var(--sub);
+}
+.topbar-badges{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-wrap:wrap;
 }
 .topbar-badge{
   font-size:11px;
@@ -88,7 +95,7 @@ a{color:inherit;text-decoration:none}
   flex-wrap:wrap;
 }
 
-/* 3-Column Utility Action Strip (like Screenshot / Calendar / Share in reference) */
+/* 3-Column Utility Action Strip */
 .action-strip{
   max-width:760px;
   margin:0 auto;
@@ -159,7 +166,6 @@ main{
 .tab-panel.active{display:block;animation:fadeIn .18s ease}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
-/* Full-width Outlined Action Button (like "儲存行程" in reference) */
 .outline-banner-wrap{
   padding:4px 14px 12px;
 }
@@ -215,7 +221,6 @@ main{
   border-bottom:1px solid var(--line);
 }
 
-/* Station / Stop Node (White Background) */
 .st-node{
   display:grid;
   grid-template-columns:64px 28px 1fr;
@@ -232,14 +237,7 @@ main{
   font-variant-numeric:tabular-nums;
   line-height:1.35;
 }
-.st-time-col .arr{
-  display:block;
-  color:var(--ink);
-}
-.st-time-col .dep{
-  display:block;
-  color:var(--ink);
-}
+.st-time-col .arr,.st-time-col .dep{display:block;color:var(--ink)}
 .st-axis-col{
   display:flex;
   flex-direction:column;
@@ -260,27 +258,14 @@ main{
   z-index:2;
   flex-shrink:0;
 }
-.st-badge.transfer{
+.st-badge.transfer,.st-badge.arrive{
   border-color:var(--orange);
   color:var(--orange);
 }
-.st-badge.arrive{
-  border-color:var(--orange);
-  color:var(--orange);
-}
-.st-line-top{
-  width:2px;
-  height:10px;
-  background:var(--teal);
-}
+.st-line-top{width:2px;height:10px;background:var(--teal)}
 .st-line-top.orange{background:var(--orange)}
 .st-line-top.none{background:transparent}
-.st-line-bottom{
-  width:2px;
-  flex:1;
-  min-height:14px;
-  background:var(--teal);
-}
+.st-line-bottom{width:2px;flex:1;min-height:14px;background:var(--teal)}
 .st-line-bottom.orange{background:var(--orange)}
 .st-line-bottom.none{background:transparent}
 
@@ -310,32 +295,7 @@ main{
   font-weight:400;
 }
 
-/* 3 Mini Sub-tabs under Station (地圖 | 周邊 | 複製站名) */
-.st-mini-tabs{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  border-top:1px solid var(--line);
-  margin-top:10px;
-  padding-top:7px;
-}
-.st-mini-btn{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:2px;
-  font-size:10.5px;
-  color:var(--sub);
-  background:none;
-  border:none;
-  border-right:1px solid var(--line);
-  padding:2px 4px;
-  cursor:pointer;
-}
-.st-mini-btn:last-child{border-right:none}
-.st-mini-btn svg{width:14px;height:14px;stroke:var(--sub);fill:none;stroke-width:1.7}
-
-/* Segment Block (Light Gray #f6f7f9 Background, matching Navitime ride leg) */
+/* Segment Block */
 .seg-node{
   display:grid;
   grid-template-columns:64px 28px 1fr;
@@ -344,24 +304,11 @@ main{
   border-top:1px solid #eceef2;
   border-bottom:1px solid #eceef2;
 }
-.seg-axis-col{
-  display:flex;
-  justify-content:center;
-}
-.seg-axis-bar{
-  width:2px;
-  height:100%;
-  background:var(--teal);
-}
+.seg-axis-col{display:flex;justify-content:center}
+.seg-axis-bar{width:2px;height:100%;background:var(--teal)}
 .seg-axis-bar.orange{background:var(--orange)}
-.seg-axis-bar.walk{
-  width:0;
-  border-left:2px dashed #9ca3af;
-  background:none;
-}
-.seg-body{
-  padding:12px 0 12px 8px;
-}
+.seg-axis-bar.walk{width:0;border-left:2px dashed #9ca3af;background:none}
+.seg-body{padding:12px 0 12px 8px}
 .seg-head{
   display:flex;
   align-items:flex-start;
@@ -411,38 +358,8 @@ main{
   gap:12px;
   flex-wrap:wrap;
 }
-.seg-fare-row span{font-variant-numeric:tabular-nums}
-.seg-fare-row .dur{color:var(--sub);font-weight:500}
 
-/* Action Banner inside Transit Card (like Klook / Map Route row in reference) */
-.seg-promo-btn{
-  margin-top:10px;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:6px;
-  padding:9px 12px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  font-size:12.5px;
-  font-weight:600;
-  color:var(--ink);
-}
-.seg-promo-left{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-.seg-promo-tag{
-  font-size:10.5px;
-  font-weight:700;
-  color:var(--teal);
-  background:#e6f4f5;
-  padding:2px 6px;
-  border-radius:4px;
-}
-
-/* Horizontal Scroll Spot / Food Cards (like "此目的地附近" in reference) */
+/* Horizontal Scroll Spot / Food Cards */
 .nearby-section{
   background:var(--surface);
   border-bottom:1px solid var(--line);
@@ -454,16 +371,8 @@ main{
   align-items:center;
   justify-content:space-between;
 }
-.nearby-header h4{
-  margin:0;
-  font-size:14.5px;
-  font-weight:700;
-  color:var(--ink);
-}
-.nearby-header span{
-  font-size:11.5px;
-  color:var(--muted);
-}
+.nearby-header h4{margin:0;font-size:14.5px;font-weight:700;color:var(--ink)}
+.nearby-header span{font-size:11.5px;color:var(--muted)}
 .nearby-scroll{
   display:flex;
   gap:12px;
@@ -500,10 +409,7 @@ main{
   border-radius:4px;
   align-self:flex-start;
 }
-.spot-banner .spot-cat{
-  font-size:11px;
-  opacity:.9;
-}
+.spot-banner .spot-cat{font-size:11px;opacity:.9}
 .spot-card-body{
   padding:10px 12px;
   flex:1;
@@ -511,18 +417,8 @@ main{
   flex-direction:column;
   justify-content:space-between;
 }
-.spot-card-title{
-  font-size:13.5px;
-  font-weight:700;
-  color:var(--ink);
-  margin-bottom:4px;
-}
-.spot-card-desc{
-  font-size:12px;
-  color:var(--sub);
-  line-height:1.45;
-  margin-bottom:8px;
-}
+.spot-card-title{font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.spot-card-desc{font-size:12px;color:var(--sub);line-height:1.45;margin-bottom:8px}
 .spot-card-foot{
   font-size:12px;
   font-weight:700;
@@ -532,7 +428,7 @@ main{
   justify-content:space-between;
 }
 
-/* Prev / Next Day Button Pair (like "前1班 / 後1班" in reference) */
+/* Prev / Next Day Button Pair */
 .day-pager{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -552,61 +448,7 @@ main{
   text-align:center;
   cursor:pointer;
 }
-.pager-btn:disabled{
-  opacity:.4;
-  cursor:default;
-}
-
-/* Compact Collapsible Map inside Day */
-.day-map-box{
-  background:var(--surface);
-  border-bottom:1px solid var(--line);
-  padding:12px 16px;
-}
-.map-bar-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:8px;
-  font-size:13px;
-  font-weight:700;
-}
-.map-container{
-  position:relative;
-  border-radius:8px;
-  overflow:hidden;
-  border:1px solid var(--line);
-}
-.map{height:240px;width:100%}
-.map-lock-overlay{
-  position:absolute;
-  inset:0;
-  z-index:500;
-  background:rgba(28,36,48,0.16);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-}
-.map-lock-overlay.unlocked{display:none}
-.map-lock-pill{
-  background:rgba(25,52,94,0.92);
-  color:#fff;
-  font-size:12px;
-  font-weight:600;
-  padding:7px 14px;
-  border-radius:6px;
-}
-.mini-pill-btn{
-  font-size:11.5px;
-  background:#f3f4f6;
-  border:1px solid var(--line-dark);
-  color:var(--ink);
-  border-radius:5px;
-  padding:3px 9px;
-  cursor:pointer;
-  font-weight:600;
-}
+.pager-btn:disabled{opacity:.4;cursor:default}
 
 /* Standard Cards for Other Tabs */
 .sec-card{
@@ -625,14 +467,8 @@ main{
   justify-content:space-between;
   gap:8px;
 }
-.sec-card p,.sec-card li{
-  font-size:13px;
-  color:var(--sub);
-}
-.sec-card ul{
-  margin:6px 0 0;
-  padding-left:18px;
-}
+.sec-card p,.sec-card li{font-size:13px;color:var(--sub)}
+.sec-card ul{margin:6px 0 0;padding-left:18px}
 .sec-card li{margin-bottom:6px}
 
 .jp-box{
@@ -659,6 +495,7 @@ main{
   font-weight:600;
   cursor:pointer;
 }
+.btn-solid:active{opacity:.9}
 .btn-outline{
   display:inline-flex;
   align-items:center;
@@ -672,6 +509,7 @@ main{
   font-weight:600;
   cursor:pointer;
 }
+.btn-outline:active{background:#f3f4f6}
 
 /* Japanese Phrase Cards */
 .phrase-item{
@@ -682,12 +520,75 @@ main{
   align-items:center;
   justify-content:space-between;
   gap:12px;
+  cursor:pointer;
+  transition:background .12s;
 }
+.phrase-item:active{background:#eef2f8}
 .phrase-zh{font-size:12px;font-weight:700;color:var(--navy)}
-.phrase-jp{font-size:16px;font-weight:700;color:var(--ink);margin:2px 0}
+.phrase-jp{font-size:16px;font-weight:700;color:var(--ink);margin:3px 0}
 .phrase-romaji{font-size:11.5px;color:var(--muted)}
+.phrase-actions{display:flex;gap:6px;flex-shrink:0}
 
-/* 6-Person Expense Splitter */
+/* Fullscreen Finger Phrase Modal */
+.finger-modal-bg{
+  position:fixed;
+  inset:0;
+  z-index:4500;
+  background:rgba(15,23,42,0.92);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
+.finger-modal-bg.show{display:flex;animation:fadeIn .15s ease}
+.finger-card{
+  width:100%;
+  max-width:640px;
+  background:#ffffff;
+  color:var(--ink);
+  border-radius:16px;
+  padding:22px 20px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.35);
+}
+.finger-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:14px;
+}
+.finger-zh-tag{
+  font-size:13px;
+  font-weight:700;
+  color:var(--navy);
+  background:var(--navy-soft);
+  padding:4px 10px;
+  border-radius:6px;
+}
+.finger-jp-big{
+  font-size:28px;
+  line-height:1.45;
+  font-weight:800;
+  color:#0f172a;
+  margin:14px 0 12px;
+  word-break:break-word;
+}
+.finger-romaji-big{
+  font-size:15px;
+  color:var(--sub);
+  background:var(--seg-bg);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:10px 14px;
+  margin-bottom:18px;
+}
+.finger-tip{
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:14px;
+}
+
+/* 6-Person Expense Splitter & Settlement */
 .split-form{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -703,9 +604,50 @@ main{
   background:#fff;
   color:var(--ink);
 }
-.split-form input:first-child,.split-form button{
+.split-form input:first-child,.split-form .part-box,.split-form button{
   grid-column:1 / -1;
 }
+.part-box{
+  background:var(--seg-bg);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:9px 10px;
+}
+.part-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  font-size:12px;
+  font-weight:700;
+  color:var(--navy);
+  margin-bottom:7px;
+}
+.part-chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+.part-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  background:#fff;
+  border:1px solid var(--line-dark);
+  border-radius:999px;
+  padding:4px 10px;
+  font-size:12px;
+  font-weight:600;
+  color:var(--ink);
+  cursor:pointer;
+  user-select:none;
+}
+.part-chip input{margin:0;accent-color:var(--navy);width:14px;height:14px}
+.part-chip.active{
+  background:var(--navy-soft);
+  border-color:var(--navy);
+  color:var(--navy);
+}
+
 .split-summary{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -720,6 +662,34 @@ main{
 }
 .sum-box small{display:block;font-size:11px;color:var(--sub)}
 .sum-box strong{font-size:14.5px;color:var(--ink);font-variant-numeric:tabular-nums}
+
+.settle-box{
+  background:#f8fafc;
+  border:1px solid #cbd5e1;
+  border-radius:8px;
+  padding:11px 12px;
+  margin-bottom:12px;
+}
+.settle-title{
+  font-size:13px;
+  font-weight:700;
+  color:var(--navy);
+  margin-bottom:6px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.settle-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:6px 0;
+  border-top:1px dashed #e2e8f0;
+  font-size:13px;
+}
+.settle-row:first-of-type{border-top:none}
+.settle-amt{font-weight:800;color:var(--navy);font-variant-numeric:tabular-nums}
+
 .payer-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
@@ -741,6 +711,7 @@ main{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  gap:8px;
   padding:10px 0;
   border-top:1px solid var(--line);
   font-size:13px;
@@ -753,6 +724,7 @@ main{
   padding:4px 8px;
   font-size:11.5px;
   cursor:pointer;
+  flex-shrink:0;
 }
 
 /* Fare Table */
@@ -780,7 +752,7 @@ main{
 }
 .pack-row input{width:17px;height:17px;accent-color:var(--navy);margin:0}
 
-/* Bottom Navigation Bar (Matching clean Navitime bottom bar icons + labels) */
+/* Bottom Navigation Bar (5 tabs) */
 .bottom-nav{
   position:fixed;
   left:0;
@@ -832,18 +804,28 @@ main{
   opacity:0;
   pointer-events:none;
   transition:all .18s ease;
-  z-index:2000;
+  z-index:5000;
   white-space:nowrap;
 }
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.place-box{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:12px}.place-row{display:flex;align-items:center;gap:10px;padding:11px 16px;border-top:1px solid var(--line);font-size:14px}.place-no{width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}.place-row .st-chevron{margin-left:auto}.flight{display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-top:1px solid var(--line);font-size:13px}.flight b{font-size:15px}
-.action-strip{grid-template-columns:repeat(2,1fr)}#btnToggleAll,.outline-banner-wrap,.st-mini-tabs{display:none!important}
-.hint{margin:0 14px 12px;padding:12px 14px;background:#fff8e6;border:1px solid #f0dca0;border-radius:8px;font-size:13px;line-height:1.7}.hint button{margin-top:6px}
-.add-btn{background:var(--navy);color:#fff;border-color:var(--navy)}.card-actions{display:flex;gap:6px}.card-actions button{border:1px solid var(--line-dark);background:#fff;border-radius:6px;padding:2px 8px;font-size:14px}.empty-near{padding:18px 16px;color:var(--muted);font-size:13px}
-.sheet-bg{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:3000;display:none;align-items:flex-end}.sheet-bg.show{display:flex}
-.sheet{background:#fff;width:100%;max-width:760px;margin:0 auto;padding:16px 16px calc(16px + env(safe-area-inset-bottom));border-radius:14px 14px 0 0;display:grid;gap:10px}.sheet h3{margin:0;font-size:16px}.sheet input{font-size:16px;padding:10px;border:1px solid var(--line-dark);border-radius:8px}
-.node-acts{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 4px}.node-acts a,.node-acts button{font-size:12px;border:1px solid var(--line-dark);background:#fff;border-radius:6px;padding:4px 8px;color:var(--ink)}.tl-foot{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line)}.card-add{border:1px solid var(--navy);color:var(--navy);background:#fff;border-radius:6px;padding:2px 8px;font-size:12px}
-body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncPill{margin-left:4px}
+
+.place-box{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:12px}
+.place-row{display:flex;align-items:center;gap:10px;padding:11px 16px;border-top:1px solid var(--line);font-size:14px}
+.place-no{width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.place-row .st-chevron{margin-left:auto}
+.flight{display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-top:1px solid var(--line);font-size:13px}
+.flight b{font-size:15px}
+.action-strip{grid-template-columns:repeat(3,1fr)}
+#btnToggleAll,.outline-banner-wrap,.st-mini-tabs{display:none!important}
+.hint{margin:0 14px 12px;padding:12px 14px;background:#fff8e6;border:1px solid #f0dca0;border-radius:8px;font-size:13px;line-height:1.7}
+.hint button{margin-top:6px}
+.card-actions{display:flex;gap:6px}
+.node-acts{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 4px}
+.node-acts a,.node-acts button{font-size:12px;border:1px solid var(--line-dark);background:#fff;border-radius:6px;padding:4px 8px;color:var(--ink);cursor:pointer}
+.tl-foot{display:flex;gap:8px;flex-wrap:wrap;padding:12px 14px;border-top:1px solid var(--line)}
+.card-add{border:1px solid var(--navy);color:var(--navy);background:#fff;border-radius:6px;padding:2px 8px;font-size:12px;cursor:pointer}
+body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}
+#syncPill{margin-left:0}
 
 /* Enhanced Transit & Supabase Co-editing Styles */
 .seg-transit-card{
@@ -859,12 +841,9 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncP
   justify-content:space-between;
   gap:8px;
   margin-bottom:6px;
-}
-.seg-mode-badges{
-  display:flex;
   flex-wrap:wrap;
-  gap:4px;
 }
+.seg-mode-badges{display:flex;flex-wrap:wrap;gap:4px}
 .mode-tag{
   font-size:10.5px;
   font-weight:700;
@@ -876,7 +855,7 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncP
 .mode-tag.walk{background:#f3f4f6;color:#4b5563}
 .mode-tag.bus{background:#fef3c7;color:#92400e}
 .seg-headway-box{
-  margin-top:6px;
+  margin-top:7px;
   padding:6px 9px;
   border-radius:6px;
   background:#f8fafc;
@@ -887,10 +866,6 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncP
   align-items:center;
   justify-content:space-between;
   gap:8px;
-}
-.seg-headway-box.empty{
-  border-left-color:#cbd5e1;
-  color:#64748b;
 }
 .seg-edit-btn{
   border:1px solid #cbd5e1;
@@ -919,6 +894,7 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncP
   display:flex;
   align-items:center;
   justify-content:space-between;
+  gap:6px;
 }
 .seg-walk-btn{
   background:#fff;
@@ -932,12 +908,33 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncP
   align-items:center;
   justify-content:center;
 }
-.sheet-label{
-  font-size:12px;
-  font-weight:700;
-  color:var(--navy);
-  margin-top:2px;
+
+.sheet-bg{position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:3000;display:none;align-items:flex-end}
+.sheet-bg.show{display:flex}
+.sheet{
+  background:#fff;
+  width:100%;
+  max-width:760px;
+  margin:0 auto;
+  padding:16px 16px calc(18px + env(safe-area-inset-bottom));
+  border-radius:14px 14px 0 0;
+  display:grid;
+  gap:10px;
+  max-height:88vh;
+  overflow-y:auto;
 }
+.sheet h3{margin:0;font-size:16px}
+.sheet input,.sheet select,.sheet textarea{
+  font-size:15px;
+  padding:9px 10px;
+  border:1px solid var(--line-dark);
+  border-radius:8px;
+  background:#fff;
+  color:var(--ink);
+  font-family:inherit;
+  width:100%;
+}
+.sheet-label{font-size:12px;font-weight:700;color:var(--navy);margin-top:2px}
 .sheet-section-box{
   background:#f8fafc;
   border:1px solid #e2e8f0;
@@ -946,21 +943,17 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncP
   display:grid;
   gap:8px;
 }
-.sheet select, .sheet textarea{
-  font-size:15px;
-  padding:9px 10px;
-  border:1px solid var(--line-dark);
-  border-radius:8px;
-  background:#fff;
-  color:var(--ink);
-  font-family:inherit;
+.headway-conditional-row{
+  display:none;
+  gap:6px;
+  background:#fffbeb;
+  border:1px solid #fde68a;
+  border-radius:7px;
+  padding:8px;
 }
-.hist-list{
-  max-height:52vh;
-  overflow-y:auto;
-  display:grid;
-  gap:8px;
-}
+.headway-conditional-row.show{display:grid}
+
+.hist-list{max-height:52vh;overflow-y:auto;display:grid;gap:8px}
 .hist-item{
   border:1px solid var(--line);
   border-radius:8px;
@@ -974,12 +967,11 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncP
 }
 .sync-pill-ok{background:#e6f4ea!important;color:#137333!important}
 .sync-pill-warn{background:#fef3c7!important;color:#92400e!important}
-
 </style>
 </head>
 <body>
 
-<!-- Navitime-style Clean App Top Bar -->
+<!-- Clean App Top Bar -->
 <header class="app-topbar">
   <div class="topbar-main">
     <div class="topbar-row1">
@@ -987,7 +979,10 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncP
         <span>TOKYO TRIP 2027</span>
         <small>6天5夜・6位成人</small>
       </div>
-      <span><span class="topbar-badge" id="headerDayTag">DAY 01 · 01/14</span><span class="topbar-badge" id="syncPill">⏳ 連線中</span></span>
+      <div class="topbar-badges">
+        <span class="topbar-badge" id="headerDayTag">DAY 01 · 01/14</span>
+        <span class="topbar-badge sync-pill-warn" id="syncPill">⏳ 連線中</span>
+      </div>
     </div>
     <div class="topbar-sub" id="headerSubInfo">
       <span>2027/01/14 — 01/19</span>
@@ -996,8 +991,8 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncP
     </div>
   </div>
 
-  <!-- 3-Column Utility Bar (截圖 / 日曆 / 分享) -->
-  <div class="action-strip" style="grid-template-columns:repeat(3,1fr)">
+  <!-- 3-Column Utility Bar -->
+  <div class="action-strip">
     <button type="button" class="action-cell" id="btnJumpToday">
       <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
       <span>今日行程</span>
@@ -1026,20 +1021,20 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncP
 </header>
 
 <main>
-  <!-- TAB 1: 路線與每日行程 (Navitime Vertical Transit Timeline Style) -->
+  <!-- TAB 1: 路線與每日行程 -->
   <section class="tab-panel active" id="panel-itinerary">
-    <div class="hint" id="hint"><b>👋 3 步上手（Supabase 公開共編版）</b><br>① 點上方日期切換每天，右側狀態顯示「☁️ 雲端已同步」代表 6 人即時連線<br>② 每個地點下方可 ✎ 修改、🗑 刪除、＋ 之後新增；系統會自動建立前後景點的 Google Maps 大眾運輸導航與轉乘資訊區塊，也可補充「班距備註」（如約 10–15 分鐘一班）<br>③ 怕誤刪或改亂？點每日下方的「🕒 修改紀錄與還原」可隨時一鍵回復到任意歷史版本<br><button type="button" class="btn-outline" id="hintOk">知道了</button></div>
-    <div class="outline-banner-wrap">
-      <button type="button" class="outline-banner-btn" id="btnCopyDaySummary">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-        <span>複製當日完整行程與車資摘要</span>
-      </button>
+    <div class="hint" id="hint">
+      <b>👋 3 步上手（6 人即時共編版）</b><br>
+      ① 點上方日期切換每天，右上角顯示「☁️ 雲端已同步」代表 6 人已即時連線（含 6 秒逾時防護與自動初始化）<br>
+      ② 每個地點下方可 ✎ 修改、🗑 刪除、＋ 之後新增；班距欄位預設收合，僅在選擇「路線公車」或「包車／計程車」時自動展開<br>
+      ③ 怕誤刪或改亂？點「修改紀錄」可隨時一鍵還原到歷史版本<br>
+      <button type="button" class="btn-outline" id="hintOk">知道了</button>
     </div>
 
     <div id="daysContainer"></div>
   </section>
 
-  <!-- TAB 2: 交通規則與日文問路卡 -->
+  <!-- TAB 2: 交通規則與航班 -->
   <section class="tab-panel" id="panel-transport">
     <div class="sec-card">
       <h3>✈️ 航班資訊（捷星日本 Jetstar）</h3>
@@ -1048,23 +1043,29 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncP
       <p style="margin:6px 0 0">廉航行李額較少，請在訂單的「行李詳情」確認；回程很早，所以 1/18 住成田。</p>
     </div>
     <div class="sec-card">
-      <h3>⚠️ 出發前確認與 Notion 校準摘要</h3>
+      <h3>⚠️ 出發前確認與行程摘要</h3>
       <ul>
         <li><b>D2（01/15）完整動線：</b>09:21–09:24 押上→淺草（都營淺草線特急 ¥180）→ 櫻花和服、淺草雷門、淺草名代拉麵 → 14:35–14:41 淺草→人形町（¥180）小網神社、美奈福（只收現金）→ 15:52–16:12 人形町→茅場町→飯田橋（日比谷線轉東西線 ¥180）東京大神宮 → 17:18–17:25 飯田橋→秋葉原（中央總武線 ¥160）→ 18:45–18:47 秋葉原→御徒町（¥160）逛上野、鳥貴族 → 晚間上野→淺草→押上（銀座線轉都營淺草線 ¥290）。</li>
         <li><b>D3（01/16）完整動線：</b>09:13–09:55 押上→春日部（東武伊勢崎線[晴空塔線]急行 ¥490）→ 蠟筆小新警察局/情報發信館/LaLa Garden、十勝亭（只營業到13:00）、春日部温泉 湯楽の里 → 16:16–16:25 公車至春日部車站東口（¥180）→ 16:48–17:48 春日部→大宮→新宿（東武野田線急行8號月台轉JR湘南新宿線4號月台 ¥860/IC ¥852）→ HOTEL LiVEMAX Shinjuku East、19:00 牛たんの檸檬。</li>
-        <li><b>D4（01/17）：</b>10:00–12:00 逛新宿、12:00–13:30 午餐，下午自由安排。</li><li><b>D5（01/18）：</b>08:00 新宿飯店包車出發，富士山（河口湖、忍野八海、新倉山），約 19:00 抵達成田東橫INN。</li><li><b>D3 行李待決定：</b>1/16 退房後直接春日部→新宿，不會回押上。請決定：帶著走／春日部站置物櫃／兩間飯店之間宅配。</li><li><b>D6（01/19）：</b>05:30 左右搭飯店接駁車，06:00 前到成田 T3。</li>
+        <li><b>D4（01/17）：</b>10:00–12:00 逛新宿、12:00–13:30 午餐，下午自由安排。</li>
+        <li><b>D5（01/18）：</b>08:00 新宿飯店包車出發，富士山（河口湖、忍野八海、新倉山），約 19:00 抵達成田東橫INN。</li>
+        <li><b>D3 行李待決定：</b>1/16 退房後直接春日部→新宿，不會回押上。請決定：帶著走／春日部站置物櫃／兩間飯店之間宅配。</li>
+        <li><b>D6（01/19）：</b>05:30 左右搭飯店接駁車，06:00 前到成田 T3。</li>
       </ul>
     </div>
+  </section>
 
+  <!-- TAB 3: 日文手指會話卡 -->
+  <section class="tab-panel" id="panel-phrases">
     <div class="sec-card" style="margin-bottom:0;border-bottom:none">
-      <h3>🗣️ 現場日文手指會話卡（點擊複製）</h3>
-      <p style="margin:0">購票、確認月台、飯店入住或餐廳候位時可直接出示給對方看。</p>
+      <h3>🗣️ 6 人團體日文手指會話卡</h3>
+      <p style="margin:0">點擊任一卡片即可<b>全螢幕放大顯示日文</b>給店員、站務或司機看，也可直接複製句子。</p>
     </div>
     <div id="phraseList"></div>
   </section>
 
-  <!-- TAB 3: 住宿與附近資訊 -->
-  <section class="tab-panel" id="panel-stay">
+  <!-- TAB 4: 住宿與行李 -->
+  <section class="tab-panel" id="panel-staypack">
     <div class="sec-card">
       <h3>01｜Wise Owl Nest <span class="topbar-badge">1/14–1/16 · 2晚</span></h3>
       <p><b>費用：</b>每人 NT$1,241（Agoda 訂房）<br>
@@ -1110,16 +1111,8 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncP
       </div>
     </div>
 
-    <div class="sec-card">
-      <h3>📌 入住與退房提醒</h3>
-      <p style="margin:0">日本飯店通常 15:00 後辦理 Check-in、10:00 前 Check-out（東橫INN 一般為 16:00 入住／10:00 退房）。6 人團體辦理入住時請提前備妥 6 本護照與三間住宿訂單確認單。</p>
-    </div>
-  </section>
-
-  <!-- TAB 4: 行前行李清單 -->
-  <section class="tab-panel" id="panel-packing">
     <div class="sec-card" style="margin-bottom:0">
-      <h3>🎒 行前準備與冬季清單 <span class="topbar-badge" id="packCount">0 / 16</span></h3>
+      <h3>🎒 行前準備與冬季清單 <span class="topbar-badge" id="packCount">0 / 19</span></h3>
       <p style="margin:0">勾選進度自動保存在手機瀏覽器中。</p>
     </div>
     <div id="packList"></div>
@@ -1131,10 +1124,10 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncP
   <!-- TAB 5: 車資明細與 6 人分帳 -->
   <section class="tab-panel" id="panel-budget">
     <div class="sec-card">
-      <h3>🧾 6 人共同支出分帳計算機</h3>
+      <h3>🧾 6 人共同支出分帳與自動結算</h3>
       <div style="display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--sub);margin-bottom:8px">
         <span>匯率 1 JPY =</span>
-        <input type="number" id="jpyRate" step="0.001" value="0.2" style="width:68px;padding:4px 6px;border:1px solid var(--line-dark);border-radius:4px;text-align:right">
+        <input type="number" id="jpyRate" step="0.001" value="0.2" style="width:74px;padding:4px 6px;border:1px solid var(--line-dark);border-radius:4px;text-align:right">
         <span>TWD</span>
       </div>
 
@@ -1153,20 +1146,41 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncP
           <option value="成員 5（恩郡）">墊付人：成員 5（恩郡）</option>
           <option value="成員 6（羽亭）">墊付人：成員 6（羽亭）</option>
         </select>
+
+        <div class="part-box">
+          <div class="part-head">
+            <span id="partSummaryLabel">參與分攤成員（6 / 6 人）</span>
+            <div style="display:flex;gap:8px">
+              <button type="button" class="mini-link-btn" id="selectAllPart" style="background:none;border:none;color:var(--navy);font-weight:700;font-size:12px;cursor:pointer;padding:0">全選</button>
+              <button type="button" class="mini-link-btn" id="clearAllPart" style="background:none;border:none;color:var(--sub);font-weight:600;font-size:12px;cursor:pointer;padding:0">取消全選</button>
+            </div>
+          </div>
+          <div class="part-chips" id="partChips"></div>
+        </div>
+
         <button type="submit" class="btn-solid" style="justify-content:center">＋ 新增公費紀錄</button>
       </form>
 
       <div class="split-summary">
         <div class="sum-box"><small>總計（日幣）</small><strong id="totalJpy">¥0</strong></div>
         <div class="sum-box"><small>總計（台幣）</small><strong id="totalTwd">NT$0</strong></div>
-        <div class="sum-box"><small>每人均分（÷6）</small><strong id="perPersonTwd">NT$0</strong></div>
+        <div class="sum-box"><small>6人平均（參考）</small><strong id="perPersonTwd">NT$0</strong></div>
+      </div>
+
+      <!-- 最小轉帳演算法結算區塊 -->
+      <div class="settle-box">
+        <div class="settle-title">
+          <span>💸 最小轉帳結算建議（台幣 TWD）</span>
+          <span style="font-size:11px;color:var(--sub);font-weight:500">自動抵銷多退少補</span>
+        </div>
+        <div id="settlementList"></div>
       </div>
 
       <div class="payer-grid" id="payerGrid"></div>
       <ul class="expense-list" id="expenseList"></ul>
 
       <div class="btn-row">
-        <button type="button" class="btn-solid" id="copySplitReport">複製分帳明細貼到 LINE</button>
+        <button type="button" class="btn-solid" id="copySplitReport">一鍵複製結算明細貼到 LINE</button>
         <button type="button" class="btn-outline" id="clearExpenses">清空紀錄</button>
       </div>
     </div>
@@ -1207,8 +1221,7 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncP
   </section>
 </main>
 
-
-<!-- Add / Edit Spot Modal with Transit & Headway Note -->
+<!-- Add / Edit Spot Modal -->
 <div class="sheet-bg" id="sheetBg">
   <form class="sheet" id="sheet">
     <h3 id="sheetTitle">新增景點</h3>
@@ -1219,23 +1232,27 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncP
     <input id="fNote" placeholder="景點備註（例如 預約代號、必點菜色，可不填）">
 
     <div class="sheet-section-box" id="transitEditBox">
-      <div class="sheet-label" style="margin:0">2. 交通資訊與班距備註（銜接前一站 → 此景點）</div>
+      <div class="sheet-label" style="margin:0">2. 交通資訊（銜接前一站 → 此景點）</div>
       <div style="font-size:11.5px;color:var(--sub);line-height:1.45">
-        儲存後會自動建立前後景點的 Google Maps 大眾運輸導航。實際即時班次請點「查詢路線」向官方／Google Maps 查證；可在此補充班距備註：
+        儲存後會自動建立前後景點的 Google Maps 大眾運輸導航。預設收合班距欄位，僅在選擇「路線公車」或「包車／計程車」時自動展開。
       </div>
       <select id="fMode">
         <option value="電車／地鐵轉乘">交通方式：電車／地鐵轉乘</option>
         <option value="JR／私鐵直達">交通方式：JR／私鐵直達</option>
-        <option value="路線公車">交通方式：路線公車</option>
         <option value="步行前往">交通方式：步行前往</option>
-        <option value="包車／計程車">交通方式：包車／計程車</option>
+        <option value="路線公車">交通方式：路線公車（自動展開班距）</option>
+        <option value="包車／計程車">交通方式：包車／計程車（自動展開班距）</option>
       </select>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
         <input id="fEstDur" placeholder="預估時間（例：約 25 分）">
         <input id="fEstFare" placeholder="預估車資（例：約 ¥220）">
       </div>
       <input id="fTransfer" placeholder="轉乘資訊（例：銀座線 → 淺草線，於新橋站轉乘）">
-      <input id="fHeadway" placeholder="班距備註（例：約 10–15 分鐘一班，依現場時刻表為準）">
+
+      <div class="headway-conditional-row" id="fHeadwayWrap">
+        <div class="sheet-label" style="margin:0;color:#92400e">🕒 班距／發車備註（公車或包車專用）</div>
+        <input id="fHeadway" placeholder="例：約 15–20 分鐘一班，末班車留意時刻表">
+      </div>
     </div>
 
     <div class="btn-row">
@@ -1248,14 +1265,14 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncP
 <!-- Edit Segment Only Modal -->
 <div class="sheet-bg" id="segSheetBg">
   <form class="sheet" id="segSheet">
-    <h3 id="segSheetTitle">編輯交通與班距備註</h3>
+    <h3 id="segSheetTitle">編輯交通資訊</h3>
     <div style="font-size:12px;color:var(--sub)" id="segRoutePreview"></div>
     <select id="sMode">
       <option value="電車／地鐵轉乘">電車／地鐵轉乘</option>
       <option value="JR／私鐵直達">JR／私鐵直達</option>
-      <option value="路線公車">路線公車</option>
       <option value="步行前往">步行前往</option>
-      <option value="包車／計程車">包車／計程車</option>
+      <option value="路線公車">路線公車（自動展開班距）</option>
+      <option value="包車／計程車">包車／計程車（自動展開班距）</option>
     </select>
     <input id="sLineName" placeholder="路線名稱（例：東京Metro銀座線 → 淺草線）">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
@@ -1263,7 +1280,10 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncP
       <input id="sFare" placeholder="預估車資（例：JPY 200）">
     </div>
     <input id="sTransfer" placeholder="轉乘與月台資訊（例：於上野站轉乘，3號月台）">
-    <input id="sHeadway" placeholder="班距備註（例：約 10–15 分鐘一班，請以實際查詢為準）">
+    <div class="headway-conditional-row" id="sHeadwayWrap">
+      <div class="sheet-label" style="margin:0;color:#92400e">🕒 班距／發車備註</div>
+      <input id="sHeadway" placeholder="例：約 15–20 分鐘一班，請以實際查詢為準">
+    </div>
     <div class="btn-row">
       <button type="submit" class="btn-solid">更新交通資訊</button>
       <button type="button" class="btn-outline" id="segSheetCancel">取消</button>
@@ -1285,9 +1305,27 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncP
   </div>
 </div>
 
+<!-- Fullscreen Finger Phrase Modal -->
+<div class="finger-modal-bg" id="fingerModalBg" role="dialog" aria-modal="true" aria-labelledby="fingerJpText">
+  <div class="finger-card">
+    <div class="finger-top">
+      <span class="finger-zh-tag" id="fingerZhText">中文情境</span>
+      <button type="button" class="btn-outline" id="fingerCloseBtn" style="padding:6px 12px">✕ 關閉</button>
+    </div>
+    <div class="finger-jp-big" id="fingerJpText">すみません</div>
+    <div class="finger-romaji-big" id="fingerRomajiText">Sumimasen</div>
+    <div class="finger-tip">💡 可直接將此畫面放大出示給店員、站務或司機看</div>
+    <div class="btn-row">
+      <button type="button" class="btn-solid" id="fingerCopyBtn">📋 複製日文</button>
+      <button type="button" class="btn-outline" id="fingerPrevBtn">‹ 上一句</button>
+      <button type="button" class="btn-outline" id="fingerNextBtn">下一句 ›</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast">已複製到剪貼簿</div>
 
-<!-- Clean Navitime-style Bottom Navigation Bar -->
+<!-- Bottom Navigation Bar (5 tabs) -->
 <nav class="bottom-nav" aria-label="主導航列">
   <button class="bnav-btn active" data-target="panel-itinerary">
     <svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M6 8.5v3a4.5 4.5 0 0 0 4.5 4.5h3A4.5 4.5 0 0 1 18 20.5"/></svg>
@@ -1297,13 +1335,13 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncP
     <svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="15" rx="3"/><line x1="4" y1="11" x2="20" y2="11"/><circle cx="8.5" cy="14.5" r="1"/><circle cx="15.5" cy="14.5" r="1"/><line x1="8" y1="18" x2="6" y2="21"/><line x1="16" y1="18" x2="18" y2="21"/></svg>
     <span>交通</span>
   </button>
-  <button class="bnav-btn" data-target="panel-stay">
-    <svg viewBox="0 0 24 24"><path d="M3 7v11"/><path d="M21 18v-6a3 3 0 0 0-3-3H7v9"/><path d="M3 14h18"/><circle cx="7" cy="10" r="1.5"/></svg>
-    <span>住宿</span>
+  <button class="bnav-btn" data-target="panel-phrases">
+    <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="13" y2="13"/></svg>
+    <span>會話卡</span>
   </button>
-  <button class="bnav-btn" data-target="panel-packing">
-    <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-    <span>行李清單</span>
+  <button class="bnav-btn" data-target="panel-staypack">
+    <svg viewBox="0 0 24 24"><path d="M3 7v11"/><path d="M21 18v-6a3 3 0 0 0-3-3H7v9"/><path d="M3 14h18"/><circle cx="7" cy="10" r="1.5"/></svg>
+    <span>住宿行李</span>
   </button>
   <button class="bnav-btn" data-target="panel-budget">
     <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><circle cx="16" cy="14.5" r="1"/></svg>
@@ -1319,7 +1357,6 @@ const daysData = [
     headerSub: "台中出發 → 桃機T1 → 東京成田 → 押上 WISE OWL NEST → 晴空塔商場",
     title: "抵達東京・押上入住・晴空塔商場",
     summaryMeta: "航班：捷星日本 GK014 ｜ 住宿：Wise Owl Nest（押上）",
-    // Navitime nodes: alternating 'station' and 'segment'
     nodes: [
       {
         type: "station",
@@ -1385,14 +1422,12 @@ const daysData = [
         lineColor: "#c97343",
         axisClass: "orange",
         lineName: "京成線 Access 特急｜成田機場 → 押上（免轉乘）",
-        platform: "京成線",
+        platform: "JR／私鐵直達",
         details: "18:00–19:30 從 T2 站搭京成線直達押上，再步行到 WISE OWL NEST；6 人行李多，建議走電梯",
         fare: "約 ¥1,300／人（出發前核實）",
         duration: "約 90 min（含步行）",
         mapOrigin: "成田国際空港",
-        mapDest: "Wise Owl Nest Tokyo",
-        promoText: "開啟機場 → 押上路線導航",
-        promoTag: "地圖路線"
+        mapDest: "Wise Owl Nest Tokyo"
       },
       {
         type: "station",
@@ -1455,8 +1490,8 @@ const daysData = [
         lineColor: "#e85298",
         axisClass: "",
         lineName: "都營淺草線特急",
-        platform: "2 站",
-        details: "09:21 發車 → 09:24 抵達淺草（無轉乘）",
+        platform: "JR／私鐵直達",
+        details: "09:21 發車 → 09:24 抵達淺草（無轉乘，2 站）",
         fare: "JPY 180（IC JPY 178）",
         duration: "3 min",
         mapOrigin: "押上駅",
@@ -1478,8 +1513,8 @@ const daysData = [
         type: "segment",
         lineColor: "#e85298",
         axisClass: "",
-        lineName: "都營淺草線（約 5 分鐘一班）",
-        platform: "市區線",
+        lineName: "都營淺草線",
+        platform: "電車／地鐵轉乘",
         details: "14:35 淺草出發 → 14:41 抵達人形町",
         fare: "JPY 180",
         duration: "6 min",
@@ -1503,7 +1538,7 @@ const daysData = [
         lineColor: "#c97343",
         axisClass: "orange",
         lineName: "東京Metro日比谷線 → 茅場町轉東西線",
-        platform: "轉乘 1 次",
+        platform: "電車／地鐵轉乘",
         details: "15:52 人形町出發，經茅場町轉乘東西線 → 16:12 抵達飯田橋",
         fare: "JPY 180",
         duration: "20 min",
@@ -1527,7 +1562,7 @@ const daysData = [
         lineColor: "#d99b00",
         axisClass: "",
         lineName: "JR 中央總武線（各停）",
-        platform: "JR 線",
+        platform: "JR／私鐵直達",
         details: "17:18 飯田橋出發 → 17:25 抵達秋葉原",
         fare: "JPY 160",
         duration: "7 min",
@@ -1551,8 +1586,8 @@ const daysData = [
         lineColor: "#65a30d",
         axisClass: "",
         lineName: "JR 京濱東北·根岸線 ／ 山手線",
-        platform: "1 站",
-        details: "18:45 秋葉原出發 → 18:47 抵達御徒町（兩條線皆可搭）",
+        platform: "JR／私鐵直達",
+        details: "18:45 秋葉原出發 → 18:47 抵達御徒町（1 站，兩條線皆可搭）",
         fare: "JPY 160",
         duration: "2 min",
         mapOrigin: "秋葉原駅",
@@ -1575,7 +1610,7 @@ const daysData = [
         lineColor: "#f59e0b",
         axisClass: "orange",
         lineName: "東京Metro銀座線 → 淺草轉都營淺草線",
-        platform: "轉乘 1 次",
+        platform: "電車／地鐵轉乘",
         details: "晚間自上野搭銀座線至淺草，轉乘都營淺草線返回押上住宿",
         fare: "JPY 290",
         duration: "約 15 min",
@@ -1682,7 +1717,7 @@ const daysData = [
         lineColor: "#37969e",
         axisClass: "",
         lineName: "東武伊勢崎線 [晴空塔線] 急行",
-        platform: "急行直達",
+        platform: "JR／私鐵直達",
         details: "09:13 押上發車 → 09:55 抵達春日部",
         fare: "JPY 490",
         duration: "42 min",
@@ -1703,13 +1738,14 @@ const daysData = [
       },
       {
         type: "segment",
-        lineColor: "#64748b",
+        lineColor: "#d97706",
         axisClass: "walk",
         lineName: "路線公車（幸松第二公民館 → 春日部車站東口）",
-        platform: "公車",
+        platform: "路線公車",
         details: "16:16 幸松第二公民館發車 → 16:25 抵達春日部車站東口",
         fare: "JPY 180",
         duration: "9 min",
+        headwayNote: "路線公車班次較少，請提前至站牌確認末班與發車時刻",
         mapOrigin: "幸松第二公民館",
         mapDest: "春日部駅東口"
       },
@@ -1721,7 +1757,7 @@ const daysData = [
         bottomLine: "",
         depTime: "16:48",
         name: "春日部 (TD10)",
-        sub: "東武野田線・車站（依 Navitime 截圖轉乘路線）",
+        sub: "東武野田線・車站（8 號月台）",
         query: "春日部駅"
       },
       {
@@ -1729,8 +1765,8 @@ const daysData = [
         lineColor: "#37969e",
         axisClass: "",
         lineName: "東武野田線 [Urban Park Line] 急行",
-        platform: "8 站（8號月台）",
-        details: "東武野田線アーバンパークライン急行｜往大宮(埼玉縣)｜站數：2｜出發：8 號月台",
+        platform: "電車／地鐵轉乘",
+        details: "東武野田線アーバンパークライン急行｜往大宮(埼玉縣)｜2 站｜8 號月台出發",
         fare: "JPY 330  IC JPY 324",
         duration: "15 min",
         mapOrigin: "春日部駅",
@@ -1753,14 +1789,12 @@ const daysData = [
         lineColor: "#c97343",
         axisClass: "orange",
         lineName: "JR 湘南新宿線",
-        platform: "4 站（4號月台）",
-        details: "JR湘南新宿ライン｜往逗子（經由新宿）｜站數：4｜出發：4 號月台",
+        platform: "電車／地鐵轉乘",
+        details: "JR湘南新宿ライン｜往逗子（經由新宿）｜4 站｜4 號月台出發",
         fare: "JPY 530  IC JPY 528  (合計 JPY 860 / IC JPY 852)",
         duration: "32 min",
         mapOrigin: "大宮駅 埼玉県",
-        mapDest: "新宿駅",
-        promoText: "開啟春日部 → 大宮 → 新宿路線導航",
-        promoTag: "Navitime 校準"
+        mapDest: "新宿駅"
       },
       {
         type: "station",
@@ -1843,7 +1877,7 @@ const daysData = [
     dayTag: "DAY 04 · 01/17",
     headerSub: "新宿自由活動（10:00–12:00 出門逛新宿、12:00–13:30 午餐自理）",
     title: "出門逛新宿・午餐自理",
-    summaryMeta: "Notion 行程表已排定上午逛街與午餐時段，其餘時間自由安排",
+    summaryMeta: "行程表已排定上午逛街與午餐時段，其餘時間自由安排",
     nodes: [
       {
         type: "station",
@@ -1861,7 +1895,7 @@ const daysData = [
         lineColor: "#37969e",
         axisClass: "walk",
         lineName: "出門逛新宿（自由活動・逛街）",
-        platform: "步行",
+        platform: "步行前往",
         details: "10:00–12:00 新宿東口／西口／南口百貨與藥妝商圈自由逛街",
         fare: "10:00 – 12:00",
         duration: "2 hours",
@@ -1895,7 +1929,7 @@ const daysData = [
         cat: "進餐廳",
         style: "food",
         title: "新宿午餐自理",
-        desc: "依 Notion 行程表安排 12:00–13:30 午餐時段。",
+        desc: "安排 12:00–13:30 午餐時段。",
         price: "午餐自理",
         url: "https://www.google.com/maps/search/?api=1&query=新宿+ランチ"
       }
@@ -1913,10 +1947,10 @@ const daysData = [
     summaryMeta: "包車 ¥72,000／6 人（每人約 ¥12,000）｜行李全部上車，終點成田",
     nodes: [
       { type: "station", badge: "發", badgeClass: "", topLine: "none", bottomLine: "", depTime: "08:00", name: "HOTEL LiVEMAX Shinjuku East", sub: "退房後包車接送，6 人行李一起上車", query: "HOTEL LiVEMAX Shinjuku East" },
-      { type: "segment", lineColor: "#37969e", axisClass: "", lineName: "富士山包車（5–14 座・10 小時）", platform: "包車", details: "新宿 → 河口湖（中央道約 2 小時）。含司機、油資、過路費；景點門票另計", fare: "¥72,000（每人約 ¥12,000）", duration: "約 2 hr", mapOrigin: "新宿駅", mapDest: "河口湖" },
+      { type: "segment", lineColor: "#37969e", axisClass: "", lineName: "富士山包車（5–14 座・10 小時）", platform: "包車／計程車", details: "新宿 → 河口湖（中央道約 2 小時）。含司機、油資、過路費；景點門票另計", fare: "¥72,000（每人約 ¥12,000）", duration: "約 2 hr", headwayNote: "包車 10 小時制，08:00 出發，18:00 前留意回程時間避免超時", mapOrigin: "新宿駅", mapDest: "河口湖" },
       { type: "station", badge: "轉", badgeClass: "transfer", topLine: "", bottomLine: "", arrTime: "10:00", depTime: "14:00", name: "河口湖・忍野八海", sub: "大石公園拍富士山 → 忍野八海 → 午餐（河口湖／忍野周邊）", query: "河口湖" },
-      { type: "segment", lineColor: "#37969e", axisClass: "", lineName: "新倉山淺間公園（忠靈塔）", platform: "包車", details: "14:00–15:30。1 月階梯可能結冰，請穿防滑鞋；天氣不佳可改去其他景點", fare: "門票／停車另計", duration: "約 1.5 hr", mapOrigin: "河口湖", mapDest: "新倉山浅間公園" },
-      { type: "segment", lineColor: "#c97343", axisClass: "orange", lineName: "返程：富士山 → 成田（高速道路）", platform: "包車", details: "約 15:30 離開，預計 19:00 前後抵達。超過 18:00 每小時 ¥5,000、22:00 後夜間費 ¥4,000（皆須現金付司機）", fare: "超時費現金", duration: "約 3–3.5 hr", mapOrigin: "新倉山浅間公園", mapDest: "東横INN成田空港本館" },
+      { type: "segment", lineColor: "#37969e", axisClass: "", lineName: "新倉山淺間公園（忠靈塔）", platform: "包車／計程車", details: "14:00–15:30。1 月階梯可能結冰，請穿防滑鞋；天氣不佳可改去其他景點", fare: "門票／停車另計", duration: "約 1.5 hr", headwayNote: "包車隨行前往，請與司機確認集合上車點", mapOrigin: "河口湖", mapDest: "新倉山浅間公園" },
+      { type: "segment", lineColor: "#c97343", axisClass: "orange", lineName: "返程：富士山 → 成田（高速道路）", platform: "包車／計程車", details: "約 15:30 離開，預計 19:00 前後抵達。超過 18:00 每小時 ¥5,000、22:00 後夜間費 ¥4,000（皆須現金付司機）", fare: "超時費現金", duration: "約 3–3.5 hr", headwayNote: "長途高速返程，逾 18:00 每小時 ¥5,000（現金）", mapOrigin: "新倉山浅間公園", mapDest: "東横INN成田空港本館" },
       { type: "station", badge: "到", badgeClass: "arrive", topLine: "orange", bottomLine: "none", arrTime: "19:00", name: "東橫INN成田機場本館", sub: "入住後早點休息；明早 08:30 班機，晚餐與早餐先買好", query: "東横INN成田空港本館" }
     ],
     nearbyCards: [
@@ -1935,9 +1969,9 @@ const daysData = [
     summaryMeta: "航班：捷星日本 GK013｜08:30 起飛、11:50 抵達桃園 T1",
     nodes: [
       { type: "station", badge: "發", badgeClass: "", topLine: "none", bottomLine: "orange", depTime: "05:30", name: "東橫INN成田機場本館", sub: "退房，搭免費接駁車（首班時間請現場確認）", query: "東横INN成田空港本館" },
-      { type: "segment", lineColor: "#c97343", axisClass: "orange", lineName: "飯店免費接駁 → 成田機場", platform: "接駁車", details: "確認是否停靠 T3；若停 T2，步行約 10–15 分鐘到 T3。建議 06:00 前抵達", fare: "免費", duration: "約 10–15 min", mapOrigin: "東横INN成田空港本館", mapDest: "成田国際空港 第3ターミナル" },
+      { type: "segment", lineColor: "#c97343", axisClass: "orange", lineName: "飯店免費接駁 → 成田機場", platform: "路線公車", details: "確認是否停靠 T3；若停 T2，步行約 10–15 分鐘到 T3。建議 06:00 前抵達", fare: "免費", duration: "約 10–15 min", headwayNote: "接駁車依飯店清晨固定班次發車，請提前到大廳排隊", mapOrigin: "東横INN成田空港本館", mapDest: "成田国際空港 第3ターミナル" },
       { type: "station", badge: "轉", badgeClass: "transfer", topLine: "orange", bottomLine: "orange", arrTime: "06:00", depTime: "08:30", name: "成田國際機場 T3", sub: "捷星日本櫃檯報到、託運、出境", query: "成田国際空港 第3ターミナル" },
-      { type: "segment", lineColor: "#c97343", axisClass: "orange", lineName: "捷星日本 GK013｜成田 T3 → 桃園 T1", platform: "GK013", details: "08:30 起飛 → 11:50 抵達桃園 T1（空中巴士 A321neo・經濟艙）", fare: "08:30 – 11:50", duration: "航程約 4h20m", mapOrigin: "成田国際空港", mapDest: "桃園國際機場第一航廈" },
+      { type: "segment", lineColor: "#c97343", axisClass: "orange", lineName: "捷星日本 GK013｜成田 T3 → 桃園 T1", platform: "GK013", details: "08:30 起飛 → 11:50 抵達桃園 T1（空中巴士 A321neo・經濟艙）", fare: "08:30 – 11:50", duration: "航程約 4h20m", mapOrigin: "成田國際機場", mapDest: "桃園國際機場第一航廈" },
       { type: "station", badge: "到", badgeClass: "arrive", topLine: "orange", bottomLine: "none", arrTime: "11:50", name: "桃園國際機場 T1", sub: "平安返台，結束六日五夜東京之旅", query: "桃園國際機場第一航廈" }
     ],
     nearbyCards: [
@@ -1947,12 +1981,9 @@ const daysData = [
   }
 ];
 
-
-
 // =========================================================================
-// SUPABASE PUBLIC REALTIME CO-EDITING + HISTORY CONFIG
+// SUPABASE REALTIME + 6s TIMEOUT + AUTO-INIT + SHARED EXPENSE SYNC
 // =========================================================================
-// 請將下方兩個常數替換為你在 Supabase 建立專案後的 Project URL 與 anon public key
 const SUPABASE_URL = "https://sjydfezpsnmcijxhjllx.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNqeWRmZXpwc25tY2lqeGhqbGx4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTU2MDc4MjUsImV4cCI6MjExMTE4MzgyNX0.CrP8At_cMqNUCv48i6lu7kIiV8_Vojrmt6aYi8fnl0s";
 const TRIP_ROOM_ID = "tokyo-2027-group6";
@@ -1991,7 +2022,10 @@ function fallbackCopy(text) {
 }
 document.addEventListener("click", e => {
   const btn = e.target.closest("[data-copy]");
-  if (btn) copyText(btn.dataset.copy);
+  if (btn) {
+    e.stopPropagation();
+    copyText(btn.dataset.copy);
+  }
 });
 
 // State & Local Fallback + Revision History
@@ -2022,6 +2056,9 @@ function lastStation(i) {
   for (let x = n.length - 1; x >= 0; x--) if (n[x].type === "station") return x;
   return -1;
 }
+function shouldShowHeadway(mode, existingNote) {
+  return mode === "路線公車" || mode === "包車／計程車" || Boolean((existingNote || "").trim());
+}
 
 function parseMapUrl(u) {
   u = (u || "").trim();
@@ -2042,15 +2079,15 @@ function parseMapUrl(u) {
   return { url: u, q };
 }
 
-// Build automatic transit segment connecting previous stop to new/edited stop
 function buildAutoSegment(fromName, toName, opts = {}) {
   const mode = opts.mode || "電車／地鐵轉乘";
   const isWalk = mode.includes("步行");
   const isBus = mode.includes("公車");
+  const isCharter = mode.includes("包車");
   const estDur = (opts.estDur || "").trim();
   const estFare = (opts.estFare || "").trim();
   const transferInfo = (opts.transferInfo || "").trim();
-  const headwayNote = (opts.headwayNote || "").trim();
+  const headwayNote = shouldShowHeadway(mode, opts.headwayNote) ? (opts.headwayNote || "").trim() : "";
 
   const detailParts = [];
   if (transferInfo) detailParts.push("轉乘：" + transferInfo);
@@ -2058,7 +2095,7 @@ function buildAutoSegment(fromName, toName, opts = {}) {
 
   return {
     type: "segment",
-    lineColor: isWalk ? "#64748b" : (isBus ? "#d97706" : "#37969e"),
+    lineColor: isWalk ? "#64748b" : ((isBus || isCharter) ? "#d97706" : "#37969e"),
     axisClass: isWalk ? "walk" : "",
     lineName: opts.lineName || (mode + "｜前往 " + toName),
     platform: mode,
@@ -2102,7 +2139,6 @@ function addAfter(i, x, f) {
   });
   n.splice(x + 1, 0, segToNew, st);
 
-  // If there is a subsequent station after this newly inserted station, update its connecting segment too
   if (n[x + 3] && n[x + 3].type === "segment") {
     const nextStation = n[x + 4];
     Object.assign(n[x + 3], buildAutoSegment(f.title, nextStation ? nextStation.name : "下一站", {
@@ -2177,15 +2213,13 @@ function timelineHtml(i) {
       const transitUrl = hasEndpoints ? esc(mapsDirUrl(a.query, b.query, "transit")) : "";
       const walkUrl = hasEndpoints ? esc(mapsDirUrl(a.query, b.query, "walking")) : "";
 
-      const headwayHtml = node.headwayNote
+      const showHeadway = shouldShowHeadway(node.platform, node.headwayNote);
+      const headwayHtml = showHeadway
         ? `<div class="seg-headway-box">
-             <span>🕒 <b>班距備註：</b>${esc(node.headwayNote)}</span>
+             <span>🕒 <b>班距備註：</b>${esc(node.headwayNote || "班次較少，請提前確認發車與末班時間")}</span>
              <button type="button" class="seg-edit-btn" data-sedit="${i}:${x}">編輯班距</button>
            </div>`
-        : `<div class="seg-headway-box empty">
-             <span>🕒 尚未填寫班距備註（即時班次以實際交通查詢為準）</span>
-             <button type="button" class="seg-edit-btn" data-sedit="${i}:${x}">＋ 補充班距</button>
-           </div>`;
+        : "";
 
       const navButtonsHtml = (hasEndpoints && !isFlight)
         ? `<div class="seg-route-links">
@@ -2211,12 +2245,8 @@ function timelineHtml(i) {
           </div>
           <div class="seg-transit-card">
             <div class="seg-transit-top">
-              <div class="seg-mode-badges">
-                <span class="mode-tag">電車/地鐵</span>
-                <span class="mode-tag bus">公車</span>
-                <span class="mode-tag walk">步行/轉乘</span>
-              </div>
               <span style="font-size:12px;font-weight:700;color:var(--navy)">${esc(node.duration)} ・ ${esc(node.fare)}</span>
+              <button type="button" class="seg-edit-btn" data-sedit="${i}:${x}">✎ 編輯交通</button>
             </div>
             <div class="seg-details" style="margin-top:2px">${esc(node.details)}</div>
             ${headwayHtml}
@@ -2249,12 +2279,13 @@ function nearHtml(i) {
 }
 
 // =========================================================================
-// SUPABASE REST + REALTIME WEBSOCKET SYNC ENGINE (Zero external SDK needed)
+// SUPABASE REST + REALTIME WEBSOCKET SYNC ENGINE (6s Timeout + Auto-Init)
 // =========================================================================
 let sbConfigured = false;
 let sbSocket = null;
 let sbHeartbeat = null;
 let sbRef = 1;
+let isApplyingRemote = false;
 
 function setStatus(state, customText) {
   const el = document.getElementById("syncPill");
@@ -2267,7 +2298,7 @@ function setStatus(state, customText) {
     el.textContent = customText || "⏳ 同步中...";
     el.classList.add("sync-pill-warn");
   } else {
-    el.textContent = customText || "📱 本機模式（未設 Supabase）";
+    el.textContent = customText || "📱 本機模式";
     el.classList.add("sync-pill-warn");
   }
 }
@@ -2281,79 +2312,124 @@ function sbHeaders() {
   };
 }
 
+function fetchWithTimeout(url, options = {}, timeoutMs = 6000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  return fetch(url, { ...options, signal: controller.signal }).finally(() => clearTimeout(timer));
+}
+
+function buildDefaultNodesMap() {
+  const map = {};
+  daysData.forEach((d, idx) => {
+    map[idx] = JSON.parse(JSON.stringify(d.nodes));
+  });
+  return map;
+}
+
 async function fetchSupabaseState() {
   if (!sbConfigured) return;
+  setStatus("syncing", "⏳ 連線中...");
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/trip_itinerary?room_id=eq.${encodeURIComponent(TRIP_ROOM_ID)}&select=*`, {
-      headers: sbHeaders()
-    });
+    const res = await fetchWithTimeout(
+      `${SUPABASE_URL}/rest/v1/trip_itinerary?room_id=eq.${encodeURIComponent(TRIP_ROOM_ID)}&select=*`,
+      { headers: sbHeaders() },
+      6000
+    );
     if (!res.ok) throw new Error("HTTP " + res.status);
     const rows = await res.json();
+
     if (rows && rows.length > 0) {
       const row = rows[0];
-      if (row.days_data && typeof row.days_data === "object") {
+      isApplyingRemote = true;
+      if (row.days_data && typeof row.days_data === "object" && Object.keys(row.days_data).length > 0) {
         userNodes = row.days_data;
         saveLocalCache();
         for (let i = 0; i < daysData.length; i++) refreshDay(i);
+      } else {
+        userNodes = buildDefaultNodesMap();
+        saveLocalCache();
+        await pushSupabaseState("自動初始化預設行程", true);
       }
       if (Array.isArray(row.history)) {
         revisionHistory = row.history;
         saveLocalHistory();
       }
+      if (Array.isArray(row.expenses)) {
+        expenses = row.expenses;
+        saveExpensesLocal();
+        renderExpenses();
+      }
+      isApplyingRemote = false;
+      setStatus("ok", "☁️ 雲端已同步");
     } else {
-      // Initialize room row in Supabase if empty
-      await pushSupabaseState("初始化共編行程");
+      // Auto-initialize default itinerary & shared state into Supabase room
+      if (!userNodes || Object.keys(userNodes).length === 0) {
+        userNodes = buildDefaultNodesMap();
+        saveLocalCache();
+      }
+      await pushSupabaseState("自動初始化預設行程", true);
+      setStatus("ok", "☁️ 雲端已同步");
     }
-    setStatus("ok");
   } catch (err) {
-    console.error("Supabase fetch error:", err);
-    setStatus("warn", "⚠️ 雲端連線異常（已存本機）");
+    isApplyingRemote = false;
+    const isTimeout = err && err.name === "AbortError";
+    console.warn("Supabase fetch issue:", err);
+    setStatus("warn", isTimeout ? "⚡ 連線逾時（已載入本機）" : "⚠️ 雲端離線（已載入本機）");
   }
 }
 
-async function pushSupabaseState(actionSummary) {
-  // Record snapshot into revisionHistory before saving
-  const nowStr = new Date().toLocaleString("zh-TW", { hour12: false, month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit" });
-  revisionHistory.unshift({
-    id: Date.now(),
-    time: nowStr,
-    summary: actionSummary || "更新行程",
-    snapshot: JSON.parse(JSON.stringify(userNodes))
-  });
-  if (revisionHistory.length > 25) revisionHistory.length = 25;
-  saveLocalHistory();
+async function pushSupabaseState(actionSummary, skipHistoryPush = false) {
+  if (!skipHistoryPush) {
+    const nowStr = new Date().toLocaleString("zh-TW", { hour12: false, month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit" });
+    revisionHistory.unshift({
+      id: Date.now(),
+      time: nowStr,
+      summary: actionSummary || "更新行程",
+      snapshot: JSON.parse(JSON.stringify(userNodes))
+    });
+    if (revisionHistory.length > 25) revisionHistory.length = 25;
+    saveLocalHistory();
+  }
   saveLocalCache();
+  saveExpensesLocal();
 
-  if (!sbConfigured) {
-    setStatus("warn", "📱 本機已儲存（尚未填 Supabase 金鑰）");
+  if (!sbConfigured || isApplyingRemote) {
+    if (!sbConfigured) setStatus("warn", "📱 本機已儲存");
     return;
   }
 
-  setStatus("syncing");
+  setStatus("syncing", "⏳ 同步中...");
   try {
     const payload = {
       room_id: TRIP_ROOM_ID,
       days_data: userNodes,
       history: revisionHistory,
+      expenses: expenses,
       updated_at: new Date().toISOString()
     };
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/trip_itinerary?on_conflict=room_id`, {
-      method: "POST",
-      headers: sbHeaders(),
-      body: JSON.stringify(payload)
-    });
+    const res = await fetchWithTimeout(
+      `${SUPABASE_URL}/rest/v1/trip_itinerary?on_conflict=room_id`,
+      {
+        method: "POST",
+        headers: sbHeaders(),
+        body: JSON.stringify(payload)
+      },
+      6000
+    );
     if (!res.ok) throw new Error("HTTP " + res.status);
-    setStatus("ok");
+    setStatus("ok", "☁️ 雲端已同步");
   } catch (err) {
-    console.error("Supabase push error:", err);
-    setStatus("warn", "⚠️ 同步失敗（暫存本機）");
-    showToast("雲端同步失敗，已暫存在手機本機");
+    console.warn("Supabase push error:", err);
+    setStatus("warn", "⚠️ 同步逾時（已存本機）");
   }
 }
 
 function connectSupabaseRealtime() {
   if (!sbConfigured) return;
   try {
+    if (sbSocket && (sbSocket.readyState === WebSocket.OPEN || sbSocket.readyState === WebSocket.CONNECTING)) {
+      return;
+    }
     const wsUrl = SUPABASE_URL.replace(/^http/, "ws") + `/realtime/v1/websocket?apikey=${encodeURIComponent(SUPABASE_ANON_KEY)}&vsn=1.0.0`;
     sbSocket = new WebSocket(wsUrl);
     sbSocket.onopen = () => {
@@ -2382,37 +2458,60 @@ function connectSupabaseRealtime() {
         const msg = JSON.parse(evt.data);
         if (msg.event === "postgres_changes" && msg.payload && msg.payload.data && msg.payload.data.record) {
           const rec = msg.payload.data.record;
-          if (rec.days_data) {
+          let updatedSomething = false;
+          isApplyingRemote = true;
+          if (rec.days_data && JSON.stringify(rec.days_data) !== JSON.stringify(userNodes)) {
             userNodes = rec.days_data;
             saveLocalCache();
             for (let i = 0; i < daysData.length; i++) refreshDay(i);
-            showToast("🔄 旅伴剛更新了行程，畫面已自動同步！");
+            updatedSomething = true;
           }
           if (Array.isArray(rec.history)) {
             revisionHistory = rec.history;
             saveLocalHistory();
           }
-          setStatus("ok");
+          if (Array.isArray(rec.expenses) && JSON.stringify(rec.expenses) !== JSON.stringify(expenses)) {
+            expenses = rec.expenses;
+            saveExpensesLocal();
+            renderExpenses();
+            updatedSomething = true;
+          }
+          isApplyingRemote = false;
+          setStatus("ok", "☁️ 雲端已同步");
+          if (updatedSomething) {
+            showToast("🔄 旅伴剛更新了內容，6 人畫面已同步！");
+          }
         }
-      } catch (e) {}
+      } catch (e) {
+        isApplyingRemote = false;
+      }
     };
     sbSocket.onclose = () => {
       clearInterval(sbHeartbeat);
       setTimeout(connectSupabaseRealtime, 4000);
     };
+    sbSocket.onerror = () => {
+      // Handled gracefully by onclose / fallback
+    };
   } catch (e) {
-    console.warn("Realtime WS fallback to polling");
+    console.warn("Realtime WS fallback active");
   }
 }
 
 (function initSupabase() {
   if (SUPABASE_URL && SUPABASE_URL.startsWith("https://") && !SUPABASE_URL.includes("YOUR_SUPABASE")) {
     sbConfigured = true;
-    setStatus("syncing");
-    fetchSupabaseState();
+    // Safety guard: never stay stuck in "連線中" beyond 6s
+    const guardTimer = setTimeout(() => {
+      const pill = document.getElementById("syncPill");
+      if (pill && pill.textContent.includes("連線中")) {
+        setStatus("warn", "⚡ 連線逾時（已載入本機）");
+      }
+    }, 6000);
+    fetchSupabaseState().finally(() => clearTimeout(guardTimer));
     connectSupabaseRealtime();
   } else {
-    setStatus("warn", "📱 本機模式（待設定 Supabase）");
+    setStatus("warn", "📱 本機模式");
   }
 })();
 
@@ -2424,10 +2523,20 @@ function refreshDay(i) {
 }
 
 // =========================================================================
-// MODALS: ADD/EDIT SPOT, EDIT TRANSIT SEGMENT, REVISION HISTORY
+// MODALS: ADD/EDIT SPOT (Conditional Headway), EDIT SEGMENT, HISTORY
 // =========================================================================
 const sheetBg = document.getElementById("sheetBg");
+const fModeEl = document.getElementById("fMode");
+const fHeadwayWrap = document.getElementById("fHeadwayWrap");
+const fHeadwayEl = document.getElementById("fHeadway");
 let sheetCtx = null;
+
+function syncFormHeadwayVisibility() {
+  const show = shouldShowHeadway(fModeEl.value, fHeadwayEl.value);
+  fHeadwayWrap.classList.toggle("show", show);
+}
+fModeEl.addEventListener("change", syncFormHeadwayVisibility);
+fHeadwayEl.addEventListener("input", syncFormHeadwayVisibility);
 
 function openSheet(ctx, v) {
   sheetCtx = ctx;
@@ -2442,11 +2551,13 @@ function openSheet(ctx, v) {
     transitBox.style.display = "none";
   } else {
     transitBox.style.display = "grid";
-    document.getElementById("fMode").value = v.mode || "電車／地鐵轉乘";
+    const allowedModes = ["電車／地鐵轉乘", "JR／私鐵直達", "步行前往", "路線公車", "包車／計程車"];
+    fModeEl.value = allowedModes.includes(v.mode) ? v.mode : "電車／地鐵轉乘";
     document.getElementById("fEstDur").value = v.estDur || "";
     document.getElementById("fEstFare").value = v.estFare || "";
     document.getElementById("fTransfer").value = v.transferInfo || "";
-    document.getElementById("fHeadway").value = v.headwayNote || "";
+    fHeadwayEl.value = v.headwayNote || "";
+    syncFormHeadwayVisibility();
   }
 
   sheetBg.classList.add("show");
@@ -2471,11 +2582,11 @@ document.getElementById("sheet").addEventListener("submit", e => {
   }
   const time = document.getElementById("fTime").value.trim();
   const note = document.getElementById("fNote").value.trim();
-  const mode = document.getElementById("fMode").value;
+  const mode = fModeEl.value;
   const estDur = document.getElementById("fEstDur").value.trim();
   const estFare = document.getElementById("fEstFare").value.trim();
   const transferInfo = document.getElementById("fTransfer").value.trim();
-  const headwayNote = document.getElementById("fHeadway").value.trim();
+  const headwayNote = shouldShowHeadway(mode, fHeadwayEl.value) ? fHeadwayEl.value.trim() : "";
 
   if (c.kind === "edit") {
     const n = cloneNodes(c.i);
@@ -2500,14 +2611,12 @@ document.getElementById("sheet").addEventListener("submit", e => {
       o.arrTime = "";
     }
 
-    // Update preceding transit segment connecting previous stop -> edited stop
     if (n[c.x - 1] && n[c.x - 1].type === "segment") {
       const prevSt = n[c.x - 2];
       Object.assign(n[c.x - 1], buildAutoSegment(prevSt ? prevSt.name : "前一站", t, {
         mode, estDur, estFare, transferInfo, headwayNote
       }));
     }
-    // Update following transit segment if station name changed
     if (oldName !== t && n[c.x + 1] && n[c.x + 1].type === "segment") {
       const nextSt = n[c.x + 2];
       Object.assign(n[c.x + 1], buildAutoSegment(t, nextSt ? nextSt.name : "下一站", {
@@ -2533,7 +2642,18 @@ document.getElementById("sheet").addEventListener("submit", e => {
 
 // Segment-only edit modal
 const segSheetBg = document.getElementById("segSheetBg");
+const sModeEl = document.getElementById("sMode");
+const sHeadwayWrap = document.getElementById("sHeadwayWrap");
+const sHeadwayEl = document.getElementById("sHeadway");
 let segCtx = null;
+
+function syncSegHeadwayVisibility() {
+  const show = shouldShowHeadway(sModeEl.value, sHeadwayEl.value);
+  sHeadwayWrap.classList.toggle("show", show);
+}
+sModeEl.addEventListener("change", syncSegHeadwayVisibility);
+sHeadwayEl.addEventListener("input", syncSegHeadwayVisibility);
+
 function openSegSheet(i, x) {
   const n = nodesOf(i);
   const seg = n[x];
@@ -2541,12 +2661,14 @@ function openSegSheet(i, x) {
   if (!seg || seg.type !== "segment") return;
   segCtx = { i, x };
   document.getElementById("segRoutePreview").textContent = (a && b) ? `起點：${a.name} → 終點：${b.name}` : "";
-  document.getElementById("sMode").value = ["電車／地鐵轉乘", "JR／私鐵直達", "路線公車", "步行前往", "包車／計程車"].includes(seg.platform) ? seg.platform : "電車／地鐵轉乘";
+  const allowedModes = ["電車／地鐵轉乘", "JR／私鐵直達", "步行前往", "路線公車", "包車／計程車"];
+  sModeEl.value = allowedModes.includes(seg.platform) ? seg.platform : "電車／地鐵轉乘";
   document.getElementById("sLineName").value = seg.lineName || "";
   document.getElementById("sDur").value = seg.duration || "";
   document.getElementById("sFare").value = seg.fare || "";
   document.getElementById("sTransfer").value = seg.transferInfo || "";
-  document.getElementById("sHeadway").value = seg.headwayNote || "";
+  sHeadwayEl.value = seg.headwayNote || "";
+  syncSegHeadwayVisibility();
   segSheetBg.classList.add("show");
 }
 function closeSegSheet() {
@@ -2561,12 +2683,12 @@ document.getElementById("segSheet").addEventListener("submit", e => {
   const { i, x } = segCtx;
   const n = cloneNodes(i);
   const seg = n[x];
-  const mode = document.getElementById("sMode").value;
+  const mode = sModeEl.value;
   const lineName = document.getElementById("sLineName").value.trim();
   const dur = document.getElementById("sDur").value.trim();
   const fare = document.getElementById("sFare").value.trim();
   const transferInfo = document.getElementById("sTransfer").value.trim();
-  const headwayNote = document.getElementById("sHeadway").value.trim();
+  const headwayNote = shouldShowHeadway(mode, sHeadwayEl.value) ? sHeadwayEl.value.trim() : "";
 
   seg.platform = mode;
   if (lineName) seg.lineName = lineName;
@@ -2578,10 +2700,10 @@ document.getElementById("segSheet").addEventListener("submit", e => {
     seg.details = "轉乘：" + transferInfo + "｜即時班次以實際交通查詢為準";
   }
   userNodes[i] = n;
-  pushSupabaseState(`D${i + 1} 更新交通與班距備註`);
+  pushSupabaseState(`D${i + 1} 更新交通資訊`);
   refreshDay(i);
   closeSegSheet();
-  showToast("已更新交通與班距備註");
+  showToast("已更新交通資訊");
 });
 
 // Revision History Modal
@@ -2670,7 +2792,7 @@ document.addEventListener("click", e => {
     delStation(i, x);
     pushSupabaseState(`D${i + 1} 刪除「${targetName}」`);
     refreshDay(i);
-    showToast("已刪除，可點「修改紀錄與還原」找回");
+    showToast("已刪除，可點「修改紀錄」找回");
   } else if ("nreset" in d) {
     const i = Number(d.nreset);
     delete userNodes[i];
@@ -2696,10 +2818,10 @@ document.addEventListener("click", e => {
 
 (function () {
   const h = document.getElementById("hint");
-  try { if (localStorage.getItem("tokyo2027_hint_sb")) h.style.display = "none"; } catch (e) {}
+  try { if (localStorage.getItem("tokyo2027_hint_sb_v2")) h.style.display = "none"; } catch (e) {}
   document.getElementById("hintOk").addEventListener("click", () => {
     h.style.display = "none";
-    try { localStorage.setItem("tokyo2027_hint_sb", "1"); } catch (e) {}
+    try { localStorage.setItem("tokyo2027_hint_sb_v2", "1"); } catch (e) {}
   });
 })();
 
@@ -2785,17 +2907,22 @@ document.getElementById("btnShareLine").addEventListener("click", () => {
 })();
 
 // Bottom Navigation Tabs
-document.querySelectorAll(".bnav-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".bnav-btn").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    const target = btn.dataset.target;
-    document.querySelectorAll(".tab-panel").forEach(p => p.classList.toggle("active", p.id === target));
-    window.scrollTo({ top: 0, behavior: "smooth" });
+function activateTab(targetId) {
+  document.querySelectorAll(".bnav-btn").forEach(b => {
+    b.classList.toggle("active", b.dataset.target === targetId);
   });
+  document.querySelectorAll(".tab-panel").forEach(p => {
+    p.classList.toggle("active", p.id === targetId);
+  });
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+document.querySelectorAll(".bnav-btn").forEach(btn => {
+  btn.addEventListener("click", () => activateTab(btn.dataset.target));
 });
 
-// Japanese Point-and-Talk Phrases
+// =========================================================================
+// 6-PERSON JAPANESE FINGER PHRASE CARDS + FULLSCREEN MODAL
+// =========================================================================
 const phrases = [
   { zh: "確認電車是否停靠押上", jp: "すみません、この電車は「押上（おしあげ）」に止まりますか？", romaji: "Sumimasen, kono densha wa Oshiage ni tomarimasu ka?" },
   { zh: "確認前往淺草的月台（都營淺草線特急）", jp: "すみません、浅草に行く都営浅草線のホームはどこですか？", romaji: "Sumimasen, Asakusa ni iku Toei Asakusa-sen no hōmu wa doko desu ka?" },
@@ -2803,24 +2930,62 @@ const phrases = [
   { zh: "飯店辦理入住（6 位大人）", jp: "チェックインをお願いします。大人6名で予約しています。", romaji: "Chekku-in o onegai shimasu. Otona roku-mei de yoyaku shite imasu." },
   { zh: "確認春日部經大宮往新宿的電車", jp: "すみません、春日部から大宮経由で新宿に行くには、どの電車に乗ればいいですか？", romaji: "Sumimasen, Kasukabe kara Ōmiya keiyu de Shinjuku ni iku ni wa, dono densha ni noreba ī desu ka?" },
   { zh: "確認現金支付與 6 人座位（美奈福等）", jp: "すみません、現金で支払います。大人6名ですが大丈夫ですか？", romaji: "Sumimasen, genkin de shiharaimasu. Otona roku-mei desu ga daijōbu desu ka?" },
-  { zh: "餐廳候位（6 位大人可分桌）", jp: "大人6名です。席は空いていますか？分かれて座っても大丈夫です。", romaji: "Otona roku-mei desu. Seki wa aite imasu ka? Wakarete suwatte mo daijōbu desu." }
+  { zh: "餐廳候位（6 位大人可分桌）", jp: "大人6名です。席は空いていますか？分かれて座っても大丈夫です。", romaji: "Otona roku-mei desu. Seki wa aite imasu ka? Wakarete suwatte mo daijōbu desu." },
+  { zh: "富士山包車確認回程時間與超時費", jp: "すみません、今の時間から成田までどれくらいかかりますか？延長料金も教えてください。", romaji: "Sumimasen, ima no jikan kara Narita made dore kurai kakarimasu ka? Enchō ryōkin mo oshiete kudasai." },
+  { zh: "6 人份餐點與是否可分食", jp: "大人6名です。料理をシェアして食べても大丈夫ですか？", romaji: "Otona roku-mei desu. Ryōri o shie shite tabete mo daijōbu desu ka?" },
+  { zh: "詢問免稅服務與退稅櫃檯", jp: "すみません、免税（タックスフリー）はできますか？手続きはどこですか？", romaji: "Sumimasen, menzei (takkusu furī) wa dekimasu ka? Tetsuzuki wa doko desu ka?" }
 ];
+
 const phraseList = document.getElementById("phraseList");
-phrases.forEach(p => {
+const fingerModalBg = document.getElementById("fingerModalBg");
+const fingerZhText = document.getElementById("fingerZhText");
+const fingerJpText = document.getElementById("fingerJpText");
+const fingerRomajiText = document.getElementById("fingerRomajiText");
+let activePhraseIdx = 0;
+
+function openFingerModal(idx) {
+  activePhraseIdx = (idx + phrases.length) % phrases.length;
+  const p = phrases[activePhraseIdx];
+  fingerZhText.textContent = p.zh;
+  fingerJpText.textContent = p.jp;
+  fingerRomajiText.textContent = p.romaji;
+  fingerModalBg.classList.add("show");
+}
+
+function closeFingerModal() {
+  fingerModalBg.classList.remove("show");
+}
+
+document.getElementById("fingerCloseBtn").addEventListener("click", closeFingerModal);
+fingerModalBg.addEventListener("click", e => { if (e.target === fingerModalBg) closeFingerModal(); });
+document.getElementById("fingerCopyBtn").addEventListener("click", () => copyText(phrases[activePhraseIdx].jp));
+document.getElementById("fingerPrevBtn").addEventListener("click", () => openFingerModal(activePhraseIdx - 1));
+document.getElementById("fingerNextBtn").addEventListener("click", () => openFingerModal(activePhraseIdx + 1));
+
+phrases.forEach((p, idx) => {
   const row = document.createElement("div");
   row.className = "phrase-item";
   row.innerHTML = `
     <div>
-      <div class="phrase-zh">${p.zh}</div>
-      <div class="phrase-jp">${p.jp}</div>
-      <div class="phrase-romaji">${p.romaji}</div>
+      <div class="phrase-zh">${esc(p.zh)}</div>
+      <div class="phrase-jp">${esc(p.jp)}</div>
+      <div class="phrase-romaji">${esc(p.romaji)}</div>
     </div>
-    <button type="button" class="btn-outline" data-copy="${p.jp}" style="flex-shrink:0">複製</button>
+    <div class="phrase-actions">
+      <button type="button" class="btn-solid" data-finger="${idx}" style="padding:7px 10px">放大出示</button>
+      <button type="button" class="btn-outline" data-copy="${esc(p.jp)}" style="padding:7px 10px">複製</button>
+    </div>
   `;
+  row.addEventListener("click", e => {
+    if (e.target.closest("[data-copy]")) return;
+    openFingerModal(idx);
+  });
   phraseList.appendChild(row);
 });
 
-// Packing Checklist
+// =========================================================================
+// PACKING CHECKLIST
+// =========================================================================
 const packItems = [
   "護照（確認效期 6 個月以上）",
   "去回程電子機票（確認航廈與時間）",
@@ -2874,7 +3039,9 @@ document.getElementById("resetPack").addEventListener("click", () => {
   updatePackCount();
 });
 
-// 6-Person Expense Splitter
+// =========================================================================
+// 6-PERSON EXPENSE SPLITTER + PARTICIPANTS + MIN-CASH-FLOW SETTLEMENT
+// =========================================================================
 const MEMBERS = ["成員 1（易謙）", "成員 2（育任）", "成員 3（唯瑄）", "成員 4（祈全）", "成員 5（恩郡）", "成員 6（羽亭）"];
 const EXP_KEY = "tokyo2027_expenses_navitime_v1";
 const RATE_KEY = "tokyo2027_rate_navitime_v1";
@@ -2885,6 +3052,53 @@ try {
   const r = localStorage.getItem(RATE_KEY);
   if (r) rateInput.value = r;
 } catch (e) {}
+
+// Render participant checkboxes (default all 6 selected)
+const partChipsEl = document.getElementById("partChips");
+const partSummaryLabel = document.getElementById("partSummaryLabel");
+
+function updatePartSummaryLabel() {
+  const checkedCount = partChipsEl.querySelectorAll("input[type=checkbox]:checked").length;
+  partSummaryLabel.textContent = `參與分攤成員（${checkedCount} / ${MEMBERS.length} 人）`;
+}
+
+MEMBERS.forEach((m, idx) => {
+  const chip = document.createElement("label");
+  chip.className = "part-chip active";
+  const cb = document.createElement("input");
+  cb.type = "checkbox";
+  cb.value = m;
+  cb.checked = true;
+  cb.addEventListener("change", () => {
+    chip.classList.toggle("active", cb.checked);
+    updatePartSummaryLabel();
+  });
+  chip.append(cb, document.createTextNode(m.replace(/^成員 \d+/, "D" + (idx + 1).replace("D", ""))));
+  partChipsEl.appendChild(chip);
+});
+
+document.getElementById("selectAllPart").addEventListener("click", () => {
+  partChipsEl.querySelectorAll("label.part-chip").forEach(lbl => {
+    const cb = lbl.querySelector("input[type=checkbox]");
+    cb.checked = true;
+    lbl.classList.add("active");
+  });
+  updatePartSummaryLabel();
+});
+
+document.getElementById("clearAllPart").addEventListener("click", () => {
+  partChipsEl.querySelectorAll("label.part-chip").forEach(lbl => {
+    const cb = lbl.querySelector("input[type=checkbox]");
+    cb.checked = false;
+    lbl.classList.remove("active");
+  });
+  updatePartSummaryLabel();
+});
+
+function getSelectedParticipants() {
+  return Array.from(partChipsEl.querySelectorAll("input[type=checkbox]:checked")).map(cb => cb.value);
+}
+
 function getRate() {
   const v = parseFloat(rateInput.value);
   return (v && v > 0) ? v : 0.2;
@@ -2893,33 +3107,106 @@ rateInput.addEventListener("change", () => {
   try { localStorage.setItem(RATE_KEY, String(getRate())); } catch (e) {}
   renderExpenses();
 });
-function saveExpenses() {
+function saveExpensesLocal() {
   try { localStorage.setItem(EXP_KEY, JSON.stringify(expenses)); } catch (e) {}
 }
-function renderExpenses() {
-  const rate = getRate();
+
+// Compute net balances & minimal transfer pairs in TWD
+function computeSettlement(rate) {
   let sumTwd = 0;
   const paidBy = {};
-  MEMBERS.forEach(m => paidBy[m] = 0);
+  const owedBy = {};
+  MEMBERS.forEach(m => {
+    paidBy[m] = 0;
+    owedBy[m] = 0;
+  });
+
   expenses.forEach(item => {
     const twd = item.currency === "JPY" ? item.amount * rate : item.amount;
     sumTwd += twd;
-    if (paidBy[item.payer] !== undefined) paidBy[item.payer] += twd;
+    if (paidBy[item.payer] !== undefined) {
+      paidBy[item.payer] += twd;
+    }
+    const parts = (Array.isArray(item.participants) && item.participants.length > 0)
+      ? item.participants.filter(p => owedBy[p] !== undefined)
+      : MEMBERS;
+    const share = twd / parts.length;
+    parts.forEach(p => {
+      owedBy[p] += share;
+    });
   });
+
+  const netBalances = {};
+  const debtors = [];
+  const creditors = [];
+  MEMBERS.forEach(m => {
+    const net = Math.round(paidBy[m] - owedBy[m]);
+    netBalances[m] = net;
+    if (net < 0) debtors.push({ name: m, amt: -net });
+    else if (net > 0) creditors.push({ name: m, amt: net });
+  });
+
+  debtors.sort((a, b) => b.amt - a.amt);
+  creditors.sort((a, b) => b.amt - a.amt);
+
+  const transfers = [];
+  let i = 0, j = 0;
+  while (i < debtors.length && j < creditors.length) {
+    const payAmt = Math.min(debtors[i].amt, creditors[j].amt);
+    if (payAmt > 0) {
+      transfers.push({
+        from: debtors[i].name,
+        to: creditors[j].name,
+        amount: payAmt
+      });
+    }
+    debtors[i].amt -= payAmt;
+    creditors[j].amt -= payAmt;
+    if (debtors[i].amt === 0) i++;
+    if (creditors[j].amt === 0) j++;
+  }
+
+  return { sumTwd, paidBy, owedBy, netBalances, transfers };
+}
+
+function renderExpenses() {
+  const rate = getRate();
+  const { sumTwd, paidBy, netBalances, transfers } = computeSettlement(rate);
   const sumJpy = Math.round(sumTwd / rate);
-  const perPerson = sumTwd / MEMBERS.length;
+  const perPersonAll = sumTwd / MEMBERS.length;
+
   document.getElementById("totalJpy").textContent = "¥" + sumJpy.toLocaleString();
   document.getElementById("totalTwd").textContent = "NT$" + Math.round(sumTwd).toLocaleString();
-  document.getElementById("perPersonTwd").textContent = "NT$" + Math.round(perPerson).toLocaleString();
+  document.getElementById("perPersonTwd").textContent = "NT$" + Math.round(perPersonAll).toLocaleString();
+
+  const settleEl = document.getElementById("settlementList");
+  if (expenses.length === 0) {
+    settleEl.innerHTML = `<div style="font-size:12.5px;color:var(--muted);padding:4px 0">新增公費紀錄後，系統會自動計算最小轉帳方案</div>`;
+  } else if (transfers.length === 0) {
+    settleEl.innerHTML = `<div style="font-size:12.5px;color:var(--green);font-weight:700;padding:4px 0">✅ 目前帳目已平衡，無人需轉帳</div>`;
+  } else {
+    settleEl.innerHTML = transfers.map(t => `
+      <div class="settle-row">
+        <span><b>${esc(t.from)}</b> → <b>${esc(t.to)}</b></span>
+        <span class="settle-amt">NT$${t.amount.toLocaleString()}</span>
+      </div>
+    `).join("");
+  }
 
   const payerGrid = document.getElementById("payerGrid");
   payerGrid.innerHTML = "";
   MEMBERS.forEach(m => {
-    const paid = paidBy[m] || 0;
-    const diff = Math.round(paid - perPerson);
+    const paid = Math.round(paidBy[m] || 0);
+    const diff = netBalances[m] || 0;
     const card = document.createElement("div");
     card.className = "payer-card";
-    card.innerHTML = `<b>${m}</b>已墊 NT$${Math.round(paid).toLocaleString()}<br>${diff >= 0 ? `<span class="bal-pos">應收 +NT$${diff.toLocaleString()}</span>` : `<span class="bal-neg">應補 -NT$${Math.abs(diff).toLocaleString()}</span>`}`;
+    card.innerHTML = `<b>${esc(m)}</b>已墊 NT$${paid.toLocaleString()}<br>${
+      diff > 0
+        ? `<span class="bal-pos">淨應收 +NT$${diff.toLocaleString()}</span>`
+        : diff < 0
+          ? `<span class="bal-neg">淨應付 -NT$${Math.abs(diff).toLocaleString()}</span>`
+          : `<span style="color:var(--sub);font-weight:600">已扯平 NT$0</span>`
+    }`;
     payerGrid.appendChild(card);
   });
 
@@ -2932,63 +3219,111 @@ function renderExpenses() {
   expenses.slice().reverse().forEach((item, revIdx) => {
     const origIdx = expenses.length - 1 - revIdx;
     const twd = Math.round(item.currency === "JPY" ? item.amount * rate : item.amount);
-    const origStr = item.currency === "JPY" ? `¥${Number(item.amount).toLocaleString()}（約 NT$${twd.toLocaleString()}）` : `NT$${Number(item.amount).toLocaleString()}`;
+    const origStr = item.currency === "JPY"
+      ? `¥${Number(item.amount).toLocaleString()}（約 NT$${twd.toLocaleString()}）`
+      : `NT$${Number(item.amount).toLocaleString()}`;
+    const parts = (Array.isArray(item.participants) && item.participants.length > 0)
+      ? item.participants
+      : MEMBERS;
+    const shareTwd = Math.round(twd / parts.length);
+    const partText = parts.length === MEMBERS.length
+      ? "6人均分"
+      : `${parts.length}人分攤（${parts.map(p => p.replace(/^成員 \d+（|）$/g, "")).join("、")}）`;
+
     const li = document.createElement("li");
     li.className = "expense-item";
-    li.innerHTML = `<div><b>${item.title}</b> · <span style="color:var(--navy)">${item.payer}</span><br><small style="color:var(--sub)">${origStr} ｜ 每人 NT$${Math.round(twd/6).toLocaleString()}</small></div><button type="button" class="del-exp" data-del-exp="${origIdx}">刪除</button>`;
+    li.innerHTML = `
+      <div>
+        <b>${esc(item.title)}</b> · <span style="color:var(--navy)">${esc(item.payer)}</span><br>
+        <small style="color:var(--sub)">${origStr} ｜ ${esc(partText)}（每人約 NT$${shareTwd.toLocaleString()}）</small>
+      </div>
+      <button type="button" class="del-exp" data-del-exp="${origIdx}">刪除</button>
+    `;
     list.appendChild(li);
   });
 }
+
 document.getElementById("expForm").addEventListener("submit", e => {
   e.preventDefault();
   const title = document.getElementById("expTitle").value.trim();
   const amount = parseFloat(document.getElementById("expAmount").value);
   const currency = document.getElementById("expCurrency").value;
   const payer = document.getElementById("expPayer").value;
+  const participants = getSelectedParticipants();
   if (!title || !amount || amount <= 0) return;
-  expenses.push({ title, amount, currency, payer });
-  saveExpenses();
+  if (!participants.length) {
+    showToast("請至少勾選 1 位參與分攤成員");
+    return;
+  }
+  expenses.push({ title, amount, currency, payer, participants });
+  saveExpensesLocal();
   renderExpenses();
+  pushSupabaseState(`記帳新增「${title}」`);
   document.getElementById("expTitle").value = "";
   document.getElementById("expAmount").value = "";
-  showToast("已新增公費紀錄");
+  showToast("已新增公費紀錄並同步");
 });
+
 document.getElementById("expenseList").addEventListener("click", e => {
   const btn = e.target.closest("[data-del-exp]");
   if (!btn) return;
+  const removed = expenses[Number(btn.dataset.delExp)];
   expenses.splice(Number(btn.dataset.delExp), 1);
-  saveExpenses();
+  saveExpensesLocal();
   renderExpenses();
+  pushSupabaseState(`記帳刪除「${removed ? removed.title : "項目"}」`);
+  showToast("已刪除公費紀錄");
 });
+
 document.getElementById("clearExpenses").addEventListener("click", () => {
   expenses = [];
-  saveExpenses();
+  saveExpensesLocal();
   renderExpenses();
+  pushSupabaseState("清空公費記帳紀錄");
   showToast("已清空公費紀錄");
 });
+
 document.getElementById("copySplitReport").addEventListener("click", () => {
   const rate = getRate();
-  let sumTwd = 0;
-  const paidBy = {};
-  MEMBERS.forEach(m => paidBy[m] = 0);
-  const lines = ["📊 TOKYO TRIP 2027 公費分帳明細（匯率 " + rate + "）"];
-  expenses.forEach((item, idx) => {
-    const twd = item.currency === "JPY" ? item.amount * rate : item.amount;
-    sumTwd += twd;
-    paidBy[item.payer] += twd;
-    lines.push(`${idx+1}. ${item.title}：${item.currency} ${item.amount}（約 NT$${Math.round(twd)}）｜${item.payer} 墊付`);
-  });
-  const perPerson = sumTwd / MEMBERS.length;
-  lines.push("------------------");
-  lines.push(`總支出：NT$${Math.round(sumTwd)}｜每人應攤：NT$${Math.round(perPerson)}`);
-  MEMBERS.forEach(m => {
-    const diff = Math.round(paidBy[m] - perPerson);
-    lines.push(`• ${m}：已墊 NT$${Math.round(paidBy[m])}（${diff >= 0 ? "應收 +" + diff : "應補 " + diff}）`);
-  });
+  const { sumTwd, paidBy, netBalances, transfers } = computeSettlement(rate);
+  const lines = [
+    `📊 TOKYO TRIP 2027 六人公費分帳與結算（匯率 ${rate}）`,
+    "======================"
+  ];
+
+  if (expenses.length === 0) {
+    lines.push("目前尚無支出紀錄");
+  } else {
+    expenses.forEach((item, idx) => {
+      const twd = Math.round(item.currency === "JPY" ? item.amount * rate : item.amount);
+      const parts = (Array.isArray(item.participants) && item.participants.length > 0) ? item.participants : MEMBERS;
+      const pNames = parts.length === MEMBERS.length ? "全員6人" : parts.map(p => p.replace(/^成員 \d+（|）$/g, "")).join("、");
+      lines.push(`${idx + 1}. ${item.title}：${item.currency === "JPY" ? "¥" + Number(item.amount).toLocaleString() : "NT$" + Number(item.amount).toLocaleString()}（約 NT$${twd.toLocaleString()}）｜${item.payer} 墊付｜分攤：${pNames}`);
+    });
+    lines.push("----------------------");
+    lines.push(`公費總支出：約 NT$${Math.round(sumTwd).toLocaleString()}`);
+    lines.push("");
+    lines.push("💸 最小轉帳結算明細（台幣）：");
+    if (transfers.length === 0) {
+      lines.push("• 帳目已平衡，無人需轉帳");
+    } else {
+      transfers.forEach(t => {
+        lines.push(`• ${t.from} 轉帳給 ${t.to}：NT$${t.amount.toLocaleString()}`);
+      });
+    }
+    lines.push("");
+    lines.push("📌 各成員收支摘要：");
+    MEMBERS.forEach(m => {
+      const diff = netBalances[m] || 0;
+      const statusStr = diff > 0 ? `淨應收 +NT$${diff.toLocaleString()}` : diff < 0 ? `淨應付 -NT$${Math.abs(diff).toLocaleString()}` : "已扯平";
+      lines.push(`• ${m}：已墊 NT$${Math.round(paidBy[m] || 0).toLocaleString()}（${statusStr}）`);
+    });
+  }
+
   copyText(lines.join("\n"));
 });
-renderExpenses();
 
+renderExpenses();
 </script>
 </body>
 </html>
