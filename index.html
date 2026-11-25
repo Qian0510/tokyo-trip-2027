@@ -88,7 +88,7 @@ a{color:inherit;text-decoration:none}
   flex-wrap:wrap;
 }
 
-/* 3-Column Utility Action Strip */
+/* 3-Column Utility Action Strip (like Screenshot / Calendar / Share in reference) */
 .action-strip{
   max-width:760px;
   margin:0 auto;
@@ -159,6 +159,7 @@ main{
 .tab-panel.active{display:block;animation:fadeIn .18s ease}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
+/* Full-width Outlined Action Button (like "儲存行程" in reference) */
 .outline-banner-wrap{
   padding:4px 14px 12px;
 }
@@ -214,6 +215,7 @@ main{
   border-bottom:1px solid var(--line);
 }
 
+/* Station / Stop Node (White Background) */
 .st-node{
   display:grid;
   grid-template-columns:64px 28px 1fr;
@@ -308,6 +310,7 @@ main{
   font-weight:400;
 }
 
+/* 3 Mini Sub-tabs under Station (地圖 | 周邊 | 複製站名) */
 .st-mini-tabs{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -332,6 +335,7 @@ main{
 .st-mini-btn:last-child{border-right:none}
 .st-mini-btn svg{width:14px;height:14px;stroke:var(--sub);fill:none;stroke-width:1.7}
 
+/* Segment Block (Light Gray #f6f7f9 Background, matching Navitime ride leg) */
 .seg-node{
   display:grid;
   grid-template-columns:64px 28px 1fr;
@@ -410,6 +414,7 @@ main{
 .seg-fare-row span{font-variant-numeric:tabular-nums}
 .seg-fare-row .dur{color:var(--sub);font-weight:500}
 
+/* Action Banner inside Transit Card (like Klook / Map Route row in reference) */
 .seg-promo-btn{
   margin-top:10px;
   background:#fff;
@@ -437,6 +442,7 @@ main{
   border-radius:4px;
 }
 
+/* Horizontal Scroll Spot / Food Cards (like "此目的地附近" in reference) */
 .nearby-section{
   background:var(--surface);
   border-bottom:1px solid var(--line);
@@ -526,6 +532,7 @@ main{
   justify-content:space-between;
 }
 
+/* Prev / Next Day Button Pair (like "前1班 / 後1班" in reference) */
 .day-pager{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -550,6 +557,7 @@ main{
   cursor:default;
 }
 
+/* Compact Collapsible Map inside Day */
 .day-map-box{
   background:var(--surface);
   border-bottom:1px solid var(--line);
@@ -600,6 +608,7 @@ main{
   font-weight:600;
 }
 
+/* Standard Cards for Other Tabs */
 .sec-card{
   background:var(--surface);
   border-top:1px solid var(--line);
@@ -664,6 +673,7 @@ main{
   cursor:pointer;
 }
 
+/* Japanese Phrase Cards */
 .phrase-item{
   background:var(--surface);
   border-bottom:1px solid var(--line);
@@ -677,6 +687,7 @@ main{
 .phrase-jp{font-size:16px;font-weight:700;color:var(--ink);margin:2px 0}
 .phrase-romaji{font-size:11.5px;color:var(--muted)}
 
+/* 6-Person Expense Splitter */
 .split-form{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -744,6 +755,7 @@ main{
   cursor:pointer;
 }
 
+/* Fare Table */
 .fare-table{width:100%;border-collapse:collapse}
 .fare-table th,.fare-table td{
   padding:10px 12px;
@@ -755,6 +767,7 @@ main{
 .fare-table td:last-child,.fare-table th:last-child{text-align:right;font-variant-numeric:tabular-nums}
 .fare-table tr.total td{font-weight:700;background:var(--seg-bg)}
 
+/* Checklist */
 .pack-row{
   display:flex;
   align-items:center;
@@ -767,6 +780,7 @@ main{
 }
 .pack-row input{width:17px;height:17px;accent-color:var(--navy);margin:0}
 
+/* Bottom Navigation Bar (Matching clean Navitime bottom bar icons + labels) */
 .bottom-nav{
   position:fixed;
   left:0;
@@ -803,6 +817,7 @@ main{
 .bnav-btn.active{color:var(--navy)}
 .bnav-btn.active svg{stroke:var(--navy);stroke-width:2.2}
 
+/* Toast */
 .toast{
   position:fixed;
   left:50%;
@@ -822,17 +837,149 @@ main{
 }
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .place-box{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:12px}.place-row{display:flex;align-items:center;gap:10px;padding:11px 16px;border-top:1px solid var(--line);font-size:14px}.place-no{width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}.place-row .st-chevron{margin-left:auto}.flight{display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-top:1px solid var(--line);font-size:13px}.flight b{font-size:15px}
-.action-strip{grid-template-columns:repeat(3,1fr)}#btnToggleAll,.outline-banner-wrap,.st-mini-tabs{display:none!important}
+.action-strip{grid-template-columns:repeat(2,1fr)}#btnToggleAll,.outline-banner-wrap,.st-mini-tabs{display:none!important}
 .hint{margin:0 14px 12px;padding:12px 14px;background:#fff8e6;border:1px solid #f0dca0;border-radius:8px;font-size:13px;line-height:1.7}.hint button{margin-top:6px}
 .add-btn{background:var(--navy);color:#fff;border-color:var(--navy)}.card-actions{display:flex;gap:6px}.card-actions button{border:1px solid var(--line-dark);background:#fff;border-radius:6px;padding:2px 8px;font-size:14px}.empty-near{padding:18px 16px;color:var(--muted);font-size:13px}
 .sheet-bg{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:3000;display:none;align-items:flex-end}.sheet-bg.show{display:flex}
 .sheet{background:#fff;width:100%;max-width:760px;margin:0 auto;padding:16px 16px calc(16px + env(safe-area-inset-bottom));border-radius:14px 14px 0 0;display:grid;gap:10px}.sheet h3{margin:0;font-size:16px}.sheet input{font-size:16px;padding:10px;border:1px solid var(--line-dark);border-radius:8px}
 .node-acts{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 4px}.node-acts a,.node-acts button{font-size:12px;border:1px solid var(--line-dark);background:#fff;border-radius:6px;padding:4px 8px;color:var(--ink)}.tl-foot{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line)}.card-add{border:1px solid var(--navy);color:var(--navy);background:#fff;border-radius:6px;padding:2px 8px;font-size:12px}
 body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncPill{margin-left:4px}
+
+/* Enhanced Transit & Supabase Co-editing Styles */
+.seg-transit-card{
+  margin-top:8px;
+  background:#ffffff;
+  border:1px solid #d8e1ee;
+  border-radius:8px;
+  padding:10px 12px;
+}
+.seg-transit-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-bottom:6px;
+}
+.seg-mode-badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:4px;
+}
+.mode-tag{
+  font-size:10.5px;
+  font-weight:700;
+  padding:2px 6px;
+  border-radius:4px;
+  background:#eef2f8;
+  color:#19345e;
+}
+.mode-tag.walk{background:#f3f4f6;color:#4b5563}
+.mode-tag.bus{background:#fef3c7;color:#92400e}
+.seg-headway-box{
+  margin-top:6px;
+  padding:6px 9px;
+  border-radius:6px;
+  background:#f8fafc;
+  border-left:3px solid #37969e;
+  font-size:12px;
+  color:#334155;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+.seg-headway-box.empty{
+  border-left-color:#cbd5e1;
+  color:#64748b;
+}
+.seg-edit-btn{
+  border:1px solid #cbd5e1;
+  background:#fff;
+  color:#19345e;
+  border-radius:5px;
+  padding:3px 8px;
+  font-size:11.5px;
+  font-weight:600;
+  cursor:pointer;
+  flex-shrink:0;
+}
+.seg-route-links{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:6px;
+  margin-top:8px;
+}
+.seg-gmaps-btn{
+  background:#19345e;
+  color:#fff;
+  border-radius:6px;
+  padding:8px 11px;
+  font-size:12.5px;
+  font-weight:600;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.seg-walk-btn{
+  background:#fff;
+  color:#1c2430;
+  border:1px solid #cbd5e1;
+  border-radius:6px;
+  padding:8px 10px;
+  font-size:12px;
+  font-weight:600;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.sheet-label{
+  font-size:12px;
+  font-weight:700;
+  color:var(--navy);
+  margin-top:2px;
+}
+.sheet-section-box{
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  border-radius:8px;
+  padding:10px;
+  display:grid;
+  gap:8px;
+}
+.sheet select, .sheet textarea{
+  font-size:15px;
+  padding:9px 10px;
+  border:1px solid var(--line-dark);
+  border-radius:8px;
+  background:#fff;
+  color:var(--ink);
+  font-family:inherit;
+}
+.hist-list{
+  max-height:52vh;
+  overflow-y:auto;
+  display:grid;
+  gap:8px;
+}
+.hist-item{
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:10px 12px;
+  background:#f9fafb;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  font-size:12.5px;
+}
+.sync-pill-ok{background:#e6f4ea!important;color:#137333!important}
+.sync-pill-warn{background:#fef3c7!important;color:#92400e!important}
+
 </style>
 </head>
 <body>
 
+<!-- Navitime-style Clean App Top Bar -->
 <header class="app-topbar">
   <div class="topbar-main">
     <div class="topbar-row1">
@@ -840,7 +987,7 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncP
         <span>TOKYO TRIP 2027</span>
         <small>6天5夜・6位成人</small>
       </div>
-      <span><span class="topbar-badge" id="headerDayTag">DAY 01 · 01/14</span><span class="topbar-badge" id="syncPill">🔗 連結共用可編</span></span>
+      <span><span class="topbar-badge" id="headerDayTag">DAY 01 · 01/14</span><span class="topbar-badge" id="syncPill">⏳ 連線中</span></span>
     </div>
     <div class="topbar-sub" id="headerSubInfo">
       <span>2027/01/14 — 01/19</span>
@@ -849,22 +996,21 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncP
     </div>
   </div>
 
-  <!-- 3-Column Utility Bar (今日行程 / 複製共用連結 / 分享文字) -->
-  <div class="action-strip">
+  <!-- 3-Column Utility Bar (截圖 / 日曆 / 分享) -->
+  <div class="action-strip" style="grid-template-columns:repeat(3,1fr)">
     <button type="button" class="action-cell" id="btnJumpToday">
       <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
       <span>今日行程</span>
     </button>
-    <button type="button" class="action-cell" id="btnCopyShareUrl">
-      <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-      <span>複製共用連結</span>
-    </button>
     <button type="button" class="action-cell" id="btnShareLine">
       <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-      <span>分享文字</span>
+      <span>分享行程</span>
+    </button>
+    <button type="button" class="action-cell" id="btnOpenHistory">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+      <span>修改紀錄</span>
     </button>
   </div>
-  <button type="button" id="btnToggleAll" style="display:none"><span id="toggleAllLabel">展開全6天</span></button>
 
   <!-- Day Selector Strip -->
   <div class="day-bar-wrap">
@@ -880,9 +1026,9 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncP
 </header>
 
 <main>
-  <!-- TAB 1: 路線與每日行程 -->
+  <!-- TAB 1: 路線與每日行程 (Navitime Vertical Transit Timeline Style) -->
   <section class="tab-panel active" id="panel-itinerary">
-    <div class="hint" id="hint"><b>👋 3 步上手</b><br>① 點上方日期切換每天<br>② 每個地點下方可 ✎ 修改、🗑 刪除、＋ 之後新增；新增後會附上「怎麼去」路線導航與地圖<br>③ 任何人開啟共用連結都能直接新增／修改／刪除行程，修改會自動編進網址連結並存於瀏覽器，按上方「複製共用連結」即可傳給同行夥伴<br>④ 新增地點後可直接按「怎麼去」開啟 Google Maps 路線與車資導航<br><button type="button" class="btn-outline" id="hintOk">知道了</button></div>
+    <div class="hint" id="hint"><b>👋 3 步上手（Supabase 公開共編版）</b><br>① 點上方日期切換每天，右側狀態顯示「☁️ 雲端已同步」代表 6 人即時連線<br>② 每個地點下方可 ✎ 修改、🗑 刪除、＋ 之後新增；系統會自動建立前後景點的 Google Maps 大眾運輸導航與轉乘資訊區塊，也可補充「班距備註」（如約 10–15 分鐘一班）<br>③ 怕誤刪或改亂？點每日下方的「🕒 修改紀錄與還原」可隨時一鍵回復到任意歷史版本<br><button type="button" class="btn-outline" id="hintOk">知道了</button></div>
     <div class="outline-banner-wrap">
       <button type="button" class="outline-banner-btn" id="btnCopyDaySummary">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
@@ -973,8 +1119,8 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncP
   <!-- TAB 4: 行前行李清單 -->
   <section class="tab-panel" id="panel-packing">
     <div class="sec-card" style="margin-bottom:0">
-      <h3>🎒 行前準備與冬季清單 <span class="topbar-badge" id="packCount">0 / 19</span></h3>
-      <p style="margin:0">勾選進度自動保存在瀏覽器與共用連結中。</p>
+      <h3>🎒 行前準備與冬季清單 <span class="topbar-badge" id="packCount">0 / 16</span></h3>
+      <p style="margin:0">勾選進度自動保存在手機瀏覽器中。</p>
     </div>
     <div id="packList"></div>
     <div style="padding:12px 16px">
@@ -1061,11 +1207,87 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncP
   </section>
 </main>
 
-<div class="sheet-bg" id="sheetBg"><form class="sheet" id="sheet"><h3 id="sheetTitle">新增項目</h3>
-<input id="fTime" placeholder="時間（例如 14:00，可不填）"><input id="fTitle" placeholder="名稱（景點、餐廳…）" required><input id="fUrl" type="url" inputmode="url" placeholder="地圖網址（Google Maps 分享連結，可不填）"><input id="fNote" placeholder="備註（可不填）"><div style="font-size:12px;color:var(--sub)">在 Google Maps 按「分享」→「複製連結」後貼上，之後就能直接點開地圖與導航</div>
-<div class="btn-row"><button type="submit" class="btn-solid">儲存</button><button type="button" class="btn-outline" id="sheetCancel">取消</button></div></form></div>
+
+<!-- Add / Edit Spot Modal with Transit & Headway Note -->
+<div class="sheet-bg" id="sheetBg">
+  <form class="sheet" id="sheet">
+    <h3 id="sheetTitle">新增景點</h3>
+    <div class="sheet-label">1. 景點基本資訊</div>
+    <input id="fTime" placeholder="時間（例如 14:00，可不填）">
+    <input id="fTitle" placeholder="景點或餐廳名稱（必填，例如 澀谷 SKY）" required>
+    <input id="fUrl" type="url" inputmode="url" placeholder="Google Maps 分享連結（貼上後導航更精準，可不填）">
+    <input id="fNote" placeholder="景點備註（例如 預約代號、必點菜色，可不填）">
+
+    <div class="sheet-section-box" id="transitEditBox">
+      <div class="sheet-label" style="margin:0">2. 交通資訊與班距備註（銜接前一站 → 此景點）</div>
+      <div style="font-size:11.5px;color:var(--sub);line-height:1.45">
+        儲存後會自動建立前後景點的 Google Maps 大眾運輸導航。實際即時班次請點「查詢路線」向官方／Google Maps 查證；可在此補充班距備註：
+      </div>
+      <select id="fMode">
+        <option value="電車／地鐵轉乘">交通方式：電車／地鐵轉乘</option>
+        <option value="JR／私鐵直達">交通方式：JR／私鐵直達</option>
+        <option value="路線公車">交通方式：路線公車</option>
+        <option value="步行前往">交通方式：步行前往</option>
+        <option value="包車／計程車">交通方式：包車／計程車</option>
+      </select>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <input id="fEstDur" placeholder="預估時間（例：約 25 分）">
+        <input id="fEstFare" placeholder="預估車資（例：約 ¥220）">
+      </div>
+      <input id="fTransfer" placeholder="轉乘資訊（例：銀座線 → 淺草線，於新橋站轉乘）">
+      <input id="fHeadway" placeholder="班距備註（例：約 10–15 分鐘一班，依現場時刻表為準）">
+    </div>
+
+    <div class="btn-row">
+      <button type="submit" class="btn-solid">儲存並同步</button>
+      <button type="button" class="btn-outline" id="sheetCancel">取消</button>
+    </div>
+  </form>
+</div>
+
+<!-- Edit Segment Only Modal -->
+<div class="sheet-bg" id="segSheetBg">
+  <form class="sheet" id="segSheet">
+    <h3 id="segSheetTitle">編輯交通與班距備註</h3>
+    <div style="font-size:12px;color:var(--sub)" id="segRoutePreview"></div>
+    <select id="sMode">
+      <option value="電車／地鐵轉乘">電車／地鐵轉乘</option>
+      <option value="JR／私鐵直達">JR／私鐵直達</option>
+      <option value="路線公車">路線公車</option>
+      <option value="步行前往">步行前往</option>
+      <option value="包車／計程車">包車／計程車</option>
+    </select>
+    <input id="sLineName" placeholder="路線名稱（例：東京Metro銀座線 → 淺草線）">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <input id="sDur" placeholder="預估時間（例：約 18 分）">
+      <input id="sFare" placeholder="預估車資（例：JPY 200）">
+    </div>
+    <input id="sTransfer" placeholder="轉乘與月台資訊（例：於上野站轉乘，3號月台）">
+    <input id="sHeadway" placeholder="班距備註（例：約 10–15 分鐘一班，請以實際查詢為準）">
+    <div class="btn-row">
+      <button type="submit" class="btn-solid">更新交通資訊</button>
+      <button type="button" class="btn-outline" id="segSheetCancel">取消</button>
+    </div>
+  </form>
+</div>
+
+<!-- Revision History & Rollback Modal -->
+<div class="sheet-bg" id="histSheetBg">
+  <div class="sheet">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h3 style="margin:0">🕒 修改紀錄與還原（防誤刪）</h3>
+      <button type="button" class="btn-outline" id="histClose" style="padding:4px 10px">關閉</button>
+    </div>
+    <div style="font-size:12px;color:var(--sub)">
+      每次新增、修改或刪除都會自動保留快照。若 6 人共編時不小心改亂或誤刪，可直接點擊「還原此版本」。
+    </div>
+    <div class="hist-list" id="histList"></div>
+  </div>
+</div>
+
 <div class="toast" id="toast">已複製到剪貼簿</div>
 
+<!-- Clean Navitime-style Bottom Navigation Bar -->
 <nav class="bottom-nav" aria-label="主導航列">
   <button class="bnav-btn active" data-target="panel-itinerary">
     <svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M6 8.5v3a4.5 4.5 0 0 0 4.5 4.5h3A4.5 4.5 0 0 1 18 20.5"/></svg>
@@ -1097,6 +1319,7 @@ const daysData = [
     headerSub: "台中出發 → 桃機T1 → 東京成田 → 押上 WISE OWL NEST → 晴空塔商場",
     title: "抵達東京・押上入住・晴空塔商場",
     summaryMeta: "航班：捷星日本 GK014 ｜ 住宿：Wise Owl Nest（押上）",
+    // Navitime nodes: alternating 'station' and 'segment'
     nodes: [
       {
         type: "station",
@@ -1724,20 +1947,31 @@ const daysData = [
   }
 ];
 
-function mapsDirUrl(origin, dest) {
-  return "https://www.google.com/maps/dir/?api=1&origin=" + encodeURIComponent(origin) + "&destination=" + encodeURIComponent(dest) + "&travelmode=transit";
+
+
+// =========================================================================
+// SUPABASE PUBLIC REALTIME CO-EDITING + HISTORY CONFIG
+// =========================================================================
+// 請將下方兩個常數替換為你在 Supabase 建立專案後的 Project URL 與 anon public key
+const SUPABASE_URL = "https://sjydfezpsnmcijxjllx.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNqeWRmZXpwc25tY2lqeGhqbGx4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTU2MDc4MjUsImV4cCI6MjExMTE4MzgyNX0.CrP8At_cMqNUCv48i6lu7kIiV8_Vojrmt6aYi8fnl0s";
+const TRIP_ROOM_ID = "tokyo-2027-group6";
+
+function mapsDirUrl(origin, dest, mode = "transit") {
+  return "https://www.google.com/maps/dir/?api=1&origin=" + encodeURIComponent(origin) + "&destination=" + encodeURIComponent(dest) + "&travelmode=" + encodeURIComponent(mode);
 }
 function mapsSearchUrl(q) {
   return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
 }
 
+// Toast & Clipboard
 const toastEl = document.getElementById("toast");
 let toastTimer = null;
 function showToast(msg) {
   toastEl.textContent = msg;
   toastEl.classList.add("show");
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => toastEl.classList.remove("show"), 2000);
+  toastTimer = setTimeout(() => toastEl.classList.remove("show"), 2300);
 }
 function copyText(text) {
   if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -1755,198 +1989,722 @@ function fallbackCopy(text) {
   document.body.removeChild(ta);
   showToast("已複製：" + text);
 }
-
 document.addEventListener("click", e => {
   const btn = e.target.closest("[data-copy]");
   if (btn) copyText(btn.dataset.copy);
 });
 
-const EDIT_KEY="tokyo2027_edits_v2";
-let userNodes={};
-try{userNodes=JSON.parse(localStorage.getItem(EDIT_KEY)||"{}")}catch(e){}
-function saveEdits(){try{localStorage.setItem(EDIT_KEY,JSON.stringify(userNodes))}catch(e){}}
-function nodesOf(i){return userNodes[i]||daysData[i].nodes}
-function cloneNodes(i){return JSON.parse(JSON.stringify(nodesOf(i)))}
-function esc(t){return String(t==null?"":t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
-function lastStation(i){const n=nodesOf(i);for(let x=n.length-1;x>=0;x--)if(n[x].type==="station")return x;return -1}
-function parseMapUrl(u){
-  u=(u||"").trim();if(!/^https:\/\//i.test(u))return {url:"",q:""};
-  let q="";
-  try{
-    const m=u.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/)||u.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/);
-    if(m)q=m[1]+","+m[2];
-    else{const pl=u.match(/\/maps\/place\/([^\/?@]+)/);if(pl)q=decodeURIComponent(pl[1].replace(/\+/g," "));else{const x=new URL(u).searchParams;q=x.get("q")||x.get("query")||""}}
-  }catch(e){}
-  return {url:u,q};
+// State & Local Fallback + Revision History
+const EDIT_KEY = "tokyo2027_supabase_cache_v1";
+const HIST_KEY = "tokyo2027_history_v1";
+let userNodes = {};
+let revisionHistory = [];
+try { userNodes = JSON.parse(localStorage.getItem(EDIT_KEY) || "{}"); } catch (e) {}
+try { revisionHistory = JSON.parse(localStorage.getItem(HIST_KEY) || "[]"); } catch (e) {}
+
+function saveLocalCache() {
+  try { localStorage.setItem(EDIT_KEY, JSON.stringify(userNodes)); } catch (e) {}
 }
-function genSeg(to){return {type:"segment",lineColor:"#37969e",axisClass:"",lineName:"前往 "+to,platform:"路線導航",details:"尚未填入固定班次與票價，請點下方「怎麼去」查詢",fare:"—",duration:"—",pending:true}}
-function addAfter(i,x,f){
-  const n=cloneNodes(i);
-  const st={type:"station",badge:"點",badgeClass:"transfer",topLine:"",bottomLine:"",depTime:f.time,name:f.title,sub:f.note,query:f.title+" 東京"};
-  if(f.url&&f.url.url){st.url=f.url.url;if(f.url.q)st.query=f.url.q}
-  if(x<0){userNodes[i]=[st];return}
-  n.splice(x+1,0,genSeg(f.title),st);
-  if(n[x+3]&&n[x+3].type==="segment")Object.assign(n[x+3],genSeg(n[x+4]?n[x+4].name:"下一站"));
-  userNodes[i]=n;
+function saveLocalHistory() {
+  try { localStorage.setItem(HIST_KEY, JSON.stringify(revisionHistory.slice(0, 30))); } catch (e) {}
 }
-function delStation(i,x){
-  const n=cloneNodes(i);
-  if(x>0){n.splice(x-1,2);if(n[x-1]&&n[x-1].type==="segment")Object.assign(n[x-1],genSeg(n[x]?n[x].name:"下一站"))}
-  else n.splice(x,2);
-  userNodes[i]=n;
+function nodesOf(i) {
+  return userNodes[i] || daysData[i].nodes;
 }
-function timelineHtml(i){
-  const nodes=nodesOf(i);const last=lastStation(i);const first=nodes.findIndex(z=>z.type==="station");
-  let h="";
-  nodes.forEach((node,x)=>{
-    if(node.type==="station"){
-      const tm=(node.arrTime&&node.depTime&&node.arrTime!==node.depTime)?`<span class="arr">${esc(node.arrTime)}</span><span class="dep">${esc(node.depTime)}</span>`:`<span class="dep">${esc(node.depTime||node.arrTime||"")}</span>`;
-      const top=x===first?"none":(node.topLine==="none"?"":node.topLine);
-      const bot=x===last?"none":(node.bottomLine==="none"?"":node.bottomLine);
-      const url=esc(node.url||mapsSearchUrl(node.query));
-      h+=`<div class="st-node"><div class="st-time-col">${tm}</div><div class="st-axis-col"><div class="st-line-top ${top==="none"?"none":top==="orange"?"orange":""}"></div><div class="st-badge ${node.badgeClass||""}">${node.badge}</div><div class="st-line-bottom ${bot==="none"?"none":bot==="orange"?"orange":""}"></div></div><div class="st-info-col"><a class="st-title-row" href="${url}" target="_blank" rel="noopener"><div><div class="st-name">${esc(node.name)}</div><div class="st-sub">${esc(node.sub)}</div></div><span class="st-chevron">›</span></a><div class="node-acts"><a href="${url}" target="_blank" rel="noopener">📍 地圖</a><button type="button" data-nedit="${i}:${x}">✎ 修改</button><button type="button" data-nadd="${i}:${x}">＋ 之後新增</button><button type="button" data-ndel="${i}:${x}">🗑 刪除</button></div></div></div>`;
-    }else{
-      const a=nodes[x-1],b=nodes[x+1];
-      const go=(a&&b&&a.type==="station"&&b.type==="station"&&!/^GK0/.test(node.platform))?`<a class="seg-promo-btn" href="${esc(mapsDirUrl(a.query,b.query))}" target="_blank" rel="noopener"><span class="seg-promo-left"><span class="seg-promo-tag">怎麼去</span><span>${esc(a.name)} → ${esc(b.name)}</span></span><span style="color:#9ca3af;font-size:16px">›</span></a>`:"";
-      h+=`<div class="seg-node"><div></div><div class="seg-axis-col"><div class="seg-axis-bar ${node.axisClass||""}"></div></div><div class="seg-body"><div class="seg-head"><div class="seg-line-name"><span class="line-dot" style="background:${node.lineColor||"#37969e"}"></span><span>${esc(node.lineName)}</span></div><span class="platform-pill">${esc(node.platform)}</span></div><div class="seg-details">${esc(node.details)}</div><div class="seg-fare-row"><span>${esc(node.fare)}</span><span class="dur">${esc(node.duration)}</span></div>${go}</div></div>`;
+function cloneNodes(i) {
+  return JSON.parse(JSON.stringify(nodesOf(i)));
+}
+function esc(t) {
+  return String(t == null ? "" : t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+}
+function lastStation(i) {
+  const n = nodesOf(i);
+  for (let x = n.length - 1; x >= 0; x--) if (n[x].type === "station") return x;
+  return -1;
+}
+
+function parseMapUrl(u) {
+  u = (u || "").trim();
+  if (!/^https:\/\//i.test(u)) return { url: "", q: "" };
+  let q = "";
+  try {
+    const m = u.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/) || u.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/);
+    if (m) q = m[1] + "," + m[2];
+    else {
+      const pl = u.match(/\/maps\/place\/([^\/?@]+)/);
+      if (pl) q = decodeURIComponent(pl[1].replace(/\+/g, " "));
+      else {
+        const x = new URL(u).searchParams;
+        q = x.get("q") || x.get("query") || "";
+      }
+    }
+  } catch (e) {}
+  return { url: u, q };
+}
+
+// Build automatic transit segment connecting previous stop to new/edited stop
+function buildAutoSegment(fromName, toName, opts = {}) {
+  const mode = opts.mode || "電車／地鐵轉乘";
+  const isWalk = mode.includes("步行");
+  const isBus = mode.includes("公車");
+  const estDur = (opts.estDur || "").trim();
+  const estFare = (opts.estFare || "").trim();
+  const transferInfo = (opts.transferInfo || "").trim();
+  const headwayNote = (opts.headwayNote || "").trim();
+
+  const detailParts = [];
+  if (transferInfo) detailParts.push("轉乘：" + transferInfo);
+  detailParts.push("起點「" + fromName + "」→ 終點「" + toName + "」｜即時班次與轉乘月台請點下方「查詢路線」以官方／Google Maps 資料為準");
+
+  return {
+    type: "segment",
+    lineColor: isWalk ? "#64748b" : (isBus ? "#d97706" : "#37969e"),
+    axisClass: isWalk ? "walk" : "",
+    lineName: opts.lineName || (mode + "｜前往 " + toName),
+    platform: mode,
+    details: detailParts.join("；"),
+    fare: estFare || "票價依查詢為準",
+    duration: estDur || "時間依查詢為準",
+    headwayNote: headwayNote,
+    transferInfo: transferInfo,
+    isAutoGenerated: true
+  };
+}
+
+function addAfter(i, x, f) {
+  const n = cloneNodes(i);
+  const st = {
+    type: "station",
+    badge: "點",
+    badgeClass: "transfer",
+    topLine: "",
+    bottomLine: "",
+    depTime: f.time,
+    name: f.title,
+    sub: f.note || "新增景點",
+    query: f.title + " 東京"
+  };
+  if (f.url && f.url.url) {
+    st.url = f.url.url;
+    if (f.url.q) st.query = f.url.q;
+  }
+  if (x < 0) {
+    userNodes[i] = [st];
+    return;
+  }
+  const prevStation = n[x];
+  const segToNew = buildAutoSegment(prevStation ? prevStation.name : "前一站", f.title, {
+    mode: f.mode,
+    estDur: f.estDur,
+    estFare: f.estFare,
+    transferInfo: f.transferInfo,
+    headwayNote: f.headwayNote
+  });
+  n.splice(x + 1, 0, segToNew, st);
+
+  // If there is a subsequent station after this newly inserted station, update its connecting segment too
+  if (n[x + 3] && n[x + 3].type === "segment") {
+    const nextStation = n[x + 4];
+    Object.assign(n[x + 3], buildAutoSegment(f.title, nextStation ? nextStation.name : "下一站", {
+      mode: n[x + 3].platform || "電車／地鐵轉乘",
+      headwayNote: n[x + 3].headwayNote || ""
+    }));
+  }
+  userNodes[i] = n;
+}
+
+function delStation(i, x) {
+  const n = cloneNodes(i);
+  if (x > 0) {
+    const prevSt = n[x - 2];
+    n.splice(x - 1, 2);
+    if (n[x - 1] && n[x - 1].type === "segment") {
+      const nextSt = n[x];
+      Object.assign(n[x - 1], buildAutoSegment(prevSt ? prevSt.name : "起點", nextSt ? nextSt.name : "下一站", {
+        mode: n[x - 1].platform || "電車／地鐵轉乘",
+        headwayNote: n[x - 1].headwayNote || ""
+      }));
+    }
+  } else {
+    n.splice(x, 2);
+  }
+  userNodes[i] = n;
+}
+
+function timelineHtml(i) {
+  const nodes = nodesOf(i);
+  const last = lastStation(i);
+  const first = nodes.findIndex(z => z.type === "station");
+  let h = "";
+
+  nodes.forEach((node, x) => {
+    if (node.type === "station") {
+      const tm = (node.arrTime && node.depTime && node.arrTime !== node.depTime)
+        ? `<span class="arr">${esc(node.arrTime)}</span><span class="dep">${esc(node.depTime)}</span>`
+        : `<span class="dep">${esc(node.depTime || node.arrTime || "")}</span>`;
+      const top = x === first ? "none" : (node.topLine === "none" ? "" : node.topLine);
+      const bot = x === last ? "none" : (node.bottomLine === "none" ? "" : node.bottomLine);
+      const url = esc(node.url || mapsSearchUrl(node.query));
+
+      h += `
+      <div class="st-node">
+        <div class="st-time-col">${tm}</div>
+        <div class="st-axis-col">
+          <div class="st-line-top ${top === "none" ? "none" : top === "orange" ? "orange" : ""}"></div>
+          <div class="st-badge ${node.badgeClass || ""}">${node.badge}</div>
+          <div class="st-line-bottom ${bot === "none" ? "none" : bot === "orange" ? "orange" : ""}"></div>
+        </div>
+        <div class="st-info-col">
+          <a class="st-title-row" href="${url}" target="_blank" rel="noopener">
+            <div>
+              <div class="st-name">${esc(node.name)}</div>
+              <div class="st-sub">${esc(node.sub)}</div>
+            </div>
+            <span class="st-chevron">›</span>
+          </a>
+          <div class="node-acts">
+            <a href="${url}" target="_blank" rel="noopener">📍 地圖</a>
+            <button type="button" data-nedit="${i}:${x}">✎ 修改</button>
+            <button type="button" data-nadd="${i}:${x}">＋ 之後新增</button>
+            <button type="button" data-ndel="${i}:${x}">🗑 刪除</button>
+          </div>
+        </div>
+      </div>`;
+    } else {
+      const a = nodes[x - 1], b = nodes[x + 1];
+      const hasEndpoints = a && b && a.type === "station" && b.type === "station";
+      const isFlight = /^GK0/.test(node.platform || "");
+      const transitUrl = hasEndpoints ? esc(mapsDirUrl(a.query, b.query, "transit")) : "";
+      const walkUrl = hasEndpoints ? esc(mapsDirUrl(a.query, b.query, "walking")) : "";
+
+      const headwayHtml = node.headwayNote
+        ? `<div class="seg-headway-box">
+             <span>🕒 <b>班距備註：</b>${esc(node.headwayNote)}</span>
+             <button type="button" class="seg-edit-btn" data-sedit="${i}:${x}">編輯班距</button>
+           </div>`
+        : `<div class="seg-headway-box empty">
+             <span>🕒 尚未填寫班距備註（即時班次以實際交通查詢為準）</span>
+             <button type="button" class="seg-edit-btn" data-sedit="${i}:${x}">＋ 補充班距</button>
+           </div>`;
+
+      const navButtonsHtml = (hasEndpoints && !isFlight)
+        ? `<div class="seg-route-links">
+             <a class="seg-gmaps-btn" href="${transitUrl}" target="_blank" rel="noopener">
+               <span>🚃 大眾運輸查詢：${esc(a.name)} → ${esc(b.name)}</span>
+               <span>›</span>
+             </a>
+             <a class="seg-walk-btn" href="${walkUrl}" target="_blank" rel="noopener" title="步行路線">🚶 步行</a>
+           </div>`
+        : "";
+
+      h += `
+      <div class="seg-node">
+        <div></div>
+        <div class="seg-axis-col"><div class="seg-axis-bar ${node.axisClass || ""}"></div></div>
+        <div class="seg-body">
+          <div class="seg-head">
+            <div class="seg-line-name">
+              <span class="line-dot" style="background:${node.lineColor || "#37969e"}"></span>
+              <span>${esc(node.lineName)}</span>
+            </div>
+            <span class="platform-pill">${esc(node.platform)}</span>
+          </div>
+          <div class="seg-transit-card">
+            <div class="seg-transit-top">
+              <div class="seg-mode-badges">
+                <span class="mode-tag">電車/地鐵</span>
+                <span class="mode-tag bus">公車</span>
+                <span class="mode-tag walk">步行/轉乘</span>
+              </div>
+              <span style="font-size:12px;font-weight:700;color:var(--navy)">${esc(node.duration)} ・ ${esc(node.fare)}</span>
+            </div>
+            <div class="seg-details" style="margin-top:2px">${esc(node.details)}</div>
+            ${headwayHtml}
+            ${navButtonsHtml}
+          </div>
+        </div>
+      </div>`;
     }
   });
-  h+=`<div class="tl-foot"><button type="button" class="btn-solid" data-nadd="${i}:${last}">＋ 新增行程</button>${userNodes[i]?`<button type="button" class="btn-outline" data-nreset="${i}">還原此日預設</button>`:""}</div>`;
+
+  h += `
+  <div class="tl-foot">
+    <button type="button" class="btn-solid" data-nadd="${i}:${last}">＋ 新增景點</button>
+    <button type="button" class="btn-outline" data-openhist="${i}">🕒 修改紀錄與還原</button>
+    ${userNodes[i] ? `<button type="button" class="btn-outline" data-nreset="${i}">還原預設</button>` : ""}
+  </div>`;
   return h;
 }
-function placesHtml(i){
-  const st=nodesOf(i).filter(z=>z.type==="station");
-  return `<div class="nearby-header"><h4>📍 本日地點導航</h4><span>點擊開啟 Google Maps</span></div>`+st.map((p,j)=>`<a class="place-row" href="${esc(p.url||mapsSearchUrl(p.query))}" target="_blank" rel="noopener"><span class="place-no">${j+1}</span><span>${esc(p.name)}</span><span class="st-chevron">›</span></a>`).join("");
+
+function placesHtml(i) {
+  const st = nodesOf(i).filter(z => z.type === "station");
+  return `<div class="nearby-header"><h4>📍 本日地點導航</h4><span>點擊開啟 Google Maps</span></div>` +
+    st.map((p, j) => `<a class="place-row" href="${esc(p.url || mapsSearchUrl(p.query))}" target="_blank" rel="noopener"><span class="place-no">${j + 1}</span><span>${esc(p.name)}</span><span class="st-chevron">›</span></a>`).join("");
 }
-function nearHtml(i){
-  const list=daysData[i].nearbyCards||[];if(!list.length)return "";
-  return `<div class="nearby-header"><h4>附近推薦</h4><span>左右滑動 ›</span></div><div class="nearby-scroll">${list.map((c,k)=>`<a class="spot-card" href="${esc(c.url)}" target="_blank" rel="noopener"><div class="spot-banner ${c.style||""}"><span class="spot-time">${esc(c.time)}</span><span class="spot-cat">${esc(c.cat)}</span></div><div class="spot-card-body"><div><div class="spot-card-title">${esc(c.title)}</div><div class="spot-card-desc">${esc(c.desc)}</div></div><div class="spot-card-foot"><span>${esc(c.price)}</span><button type="button" class="card-add" data-cadd="${i}:${k}">＋ 加入行程</button></div></div></a>`).join("")}</div>`;
+
+function nearHtml(i) {
+  const list = daysData[i].nearbyCards || [];
+  if (!list.length) return "";
+  return `<div class="nearby-header"><h4>附近推薦</h4><span>左右滑動 ›</span></div><div class="nearby-scroll">${list.map((c, k) => `<a class="spot-card" href="${esc(c.url)}" target="_blank" rel="noopener"><div class="spot-banner ${c.style || ""}"><span class="spot-time">${esc(c.time)}</span><span class="spot-cat">${esc(c.cat)}</span></div><div class="spot-card-body"><div><div class="spot-card-title">${esc(c.title)}</div><div class="spot-card-desc">${esc(c.desc)}</div></div><div class="spot-card-foot"><span>${esc(c.price)}</span><button type="button" class="card-add" data-cadd="${i}:${k}">＋ 加入行程</button></div></div></a>`).join("")}</div>`;
 }
-let DB=null;const writeQ={};
-function setStatus(v){
-  const e=document.getElementById("syncPill");
-  if(!e)return;
-  if(document.body.classList.contains("ro")){e.textContent="👀 唯讀";return;}
-  if(v===true){e.textContent="☁️ 雲端共用";return;}
-  if(v==="slow"){e.textContent="⏳ 連線中";return;}
-  e.textContent="🔗 連結共用可編";
-}
-function encodeStateToHash(){
-  try{
-    const payload={u:userNodes,p:savedChecks,e:expenses,r:getRate()};
-    const jsonStr=JSON.stringify(payload);
-    const bytes=new TextEncoder().encode(jsonStr);
-    let bin="";
-    for(let i=0;i<bytes.length;i++)bin+=String.fromCharCode(bytes[i]);
-    const b64=btoa(bin).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
-    if(b64.length < 32000){
-      history.replaceState(null,"","#state="+b64);
-    }
-  }catch(err){}
-}
-function decodeStateFromHash(){
-  try{
-    const h=location.hash||"";
-    const m=h.match(/#state=([A-Za-z0-9\-_]+)/);
-    if(!m)return false;
-    let b64=m[1].replace(/-/g,"+").replace(/_/g,"/");
-    while(b64.length%4)b64+="=";
-    const bin=atob(b64);
-    const bytes=new Uint8Array(bin.length);
-    for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);
-    const jsonStr=new TextDecoder().decode(bytes);
-    const payload=JSON.parse(jsonStr);
-    if(payload && typeof payload==="object"){
-      if(payload.u && typeof payload.u==="object"){userNodes=payload.u;saveEdits();}
-      if(payload.p && typeof payload.p==="object"){savedChecks=payload.p;try{localStorage.setItem(PACK_KEY,JSON.stringify(savedChecks));}catch(e){}}
-      if(Array.isArray(payload.e)){expenses=payload.e;saveExpenses();}
-      if(payload.r && Number(payload.r)>0){rateInput.value=String(payload.r);try{localStorage.setItem(RATE_KEY,String(payload.r));}catch(e){}}
-      return true;
-    }
-  }catch(err){}
-  return false;
-}
-function persistDay(i){
-  saveEdits();
-  encodeStateToHash();
-  if(!DB)return;
-  const doc=DB.doc("plan/d"+i),body=userNodes[i]?{nodes:JSON.stringify(userNodes[i]),at:Date.now()}:null;
-  writeQ[i]=(writeQ[i]||Promise.resolve()).then(()=>body?doc.set(body):doc.delete()).catch(err=>{
-    if(err&&err.code==="invalid_argument"){document.body.classList.add("ro");setStatus(true);showToast("你目前沒有編輯權限，請請房主改成可編輯")}else showToast("已存至連結與本機")});
-}
-async function estimateAll(i){
-  const n=nodesOf(i);
-  let changed=false;
-  for(let x=0;x<n.length;x++){
-    const sg=n[x];
-    if(sg.type!=="segment"||!sg.pending)continue;
-    const a=n[x-1],b=n[x+1];
-    if(!a||!b||a.type!=="station"||b.type!=="station")continue;
-    Object.assign(sg,{
-      lineName:"建議查詢大眾運輸（" + a.name + " → " + b.name + "）",
-      details:"尚未填入固定班次與票價，請直接點下方「怎麼去」開啟 Google Maps 路線與車資",
-      fare:"依實際搭乘為準",
-      duration:"依路線為準",
-      pending:false
-    });
-    changed=true;
+
+// =========================================================================
+// SUPABASE REST + REALTIME WEBSOCKET SYNC ENGINE (Zero external SDK needed)
+// =========================================================================
+let sbConfigured = false;
+let sbSocket = null;
+let sbHeartbeat = null;
+let sbRef = 1;
+
+function setStatus(state, customText) {
+  const el = document.getElementById("syncPill");
+  if (!el) return;
+  el.classList.remove("sync-pill-ok", "sync-pill-warn");
+  if (state === "ok") {
+    el.textContent = customText || "☁️ 雲端已同步";
+    el.classList.add("sync-pill-ok");
+  } else if (state === "syncing") {
+    el.textContent = customText || "⏳ 同步中...";
+    el.classList.add("sync-pill-warn");
+  } else {
+    el.textContent = customText || "📱 本機模式（未設 Supabase）";
+    el.classList.add("sync-pill-warn");
   }
-  if(changed){userNodes[i]=n;persistDay(i);refreshDay(i);}
 }
-(async function initShared(){
-  decodeStateFromHash();
-  setStatus(false);
-  try{
-    if(!window.claude||!claude.use)return;
-    const db=await claude.use("db"),user=await claude.use("user");
-    if(!db)return;
-    if(user){try{if(await user.can("data.write")===false)document.body.classList.add("ro")}catch(e){}}
-    DB=db;setStatus("slow");
-    db.collection("plan").onSnapshot(snap=>{
-      const seen={};
-      snap.docs.forEach(d=>{const m=/^d(\d)$/.exec(d.id);if(!m||!d.exists)return;try{userNodes[+m[1]]=JSON.parse(d.data().nodes);seen[+m[1]]=1}catch(e){}});
-      for(let i=0;i<daysData.length;i++){if(!seen[i]&&!decodeStateFromHash())delete userNodes[i];refreshDay(i)}
-      setStatus(true);
-    },()=>{DB=null;setStatus(false)});
-  }catch(e){setStatus(false)}
+
+function sbHeaders() {
+  return {
+    "apikey": SUPABASE_ANON_KEY,
+    "Authorization": "Bearer " + SUPABASE_ANON_KEY,
+    "Content-Type": "application/json",
+    "Prefer": "resolution=merge-duplicates,return=representation"
+  };
+}
+
+async function fetchSupabaseState() {
+  if (!sbConfigured) return;
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/trip_itinerary?room_id=eq.${encodeURIComponent(TRIP_ROOM_ID)}&select=*`, {
+      headers: sbHeaders()
+    });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const rows = await res.json();
+    if (rows && rows.length > 0) {
+      const row = rows[0];
+      if (row.days_data && typeof row.days_data === "object") {
+        userNodes = row.days_data;
+        saveLocalCache();
+        for (let i = 0; i < daysData.length; i++) refreshDay(i);
+      }
+      if (Array.isArray(row.history)) {
+        revisionHistory = row.history;
+        saveLocalHistory();
+      }
+    } else {
+      // Initialize room row in Supabase if empty
+      await pushSupabaseState("初始化共編行程");
+    }
+    setStatus("ok");
+  } catch (err) {
+    console.error("Supabase fetch error:", err);
+    setStatus("warn", "⚠️ 雲端連線異常（已存本機）");
+  }
+}
+
+async function pushSupabaseState(actionSummary) {
+  // Record snapshot into revisionHistory before saving
+  const nowStr = new Date().toLocaleString("zh-TW", { hour12: false, month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit" });
+  revisionHistory.unshift({
+    id: Date.now(),
+    time: nowStr,
+    summary: actionSummary || "更新行程",
+    snapshot: JSON.parse(JSON.stringify(userNodes))
+  });
+  if (revisionHistory.length > 25) revisionHistory.length = 25;
+  saveLocalHistory();
+  saveLocalCache();
+
+  if (!sbConfigured) {
+    setStatus("warn", "📱 本機已儲存（尚未填 Supabase 金鑰）");
+    return;
+  }
+
+  setStatus("syncing");
+  try {
+    const payload = {
+      room_id: TRIP_ROOM_ID,
+      days_data: userNodes,
+      history: revisionHistory,
+      updated_at: new Date().toISOString()
+    };
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/trip_itinerary?on_conflict=room_id`, {
+      method: "POST",
+      headers: sbHeaders(),
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    setStatus("ok");
+  } catch (err) {
+    console.error("Supabase push error:", err);
+    setStatus("warn", "⚠️ 同步失敗（暫存本機）");
+    showToast("雲端同步失敗，已暫存在手機本機");
+  }
+}
+
+function connectSupabaseRealtime() {
+  if (!sbConfigured) return;
+  try {
+    const wsUrl = SUPABASE_URL.replace(/^http/, "ws") + `/realtime/v1/websocket?apikey=${encodeURIComponent(SUPABASE_ANON_KEY)}&vsn=1.0.0`;
+    sbSocket = new WebSocket(wsUrl);
+    sbSocket.onopen = () => {
+      const topic = `realtime:public:trip_itinerary:room_id=eq.${TRIP_ROOM_ID}`;
+      sbSocket.send(JSON.stringify({
+        topic,
+        event: "phx_join",
+        payload: {
+          config: {
+            broadcast: { self: false },
+            presence: { key: "" },
+            postgres_changes: [{ event: "*", schema: "public", table: "trip_itinerary", filter: `room_id=eq.${TRIP_ROOM_ID}` }]
+          }
+        },
+        ref: String(sbRef++)
+      }));
+      clearInterval(sbHeartbeat);
+      sbHeartbeat = setInterval(() => {
+        if (sbSocket && sbSocket.readyState === WebSocket.OPEN) {
+          sbSocket.send(JSON.stringify({ topic: "phoenix", event: "heartbeat", payload: {}, ref: String(sbRef++) }));
+        }
+      }, 25000);
+    };
+    sbSocket.onmessage = (evt) => {
+      try {
+        const msg = JSON.parse(evt.data);
+        if (msg.event === "postgres_changes" && msg.payload && msg.payload.data && msg.payload.data.record) {
+          const rec = msg.payload.data.record;
+          if (rec.days_data) {
+            userNodes = rec.days_data;
+            saveLocalCache();
+            for (let i = 0; i < daysData.length; i++) refreshDay(i);
+            showToast("🔄 旅伴剛更新了行程，畫面已自動同步！");
+          }
+          if (Array.isArray(rec.history)) {
+            revisionHistory = rec.history;
+            saveLocalHistory();
+          }
+          setStatus("ok");
+        }
+      } catch (e) {}
+    };
+    sbSocket.onclose = () => {
+      clearInterval(sbHeartbeat);
+      setTimeout(connectSupabaseRealtime, 4000);
+    };
+  } catch (e) {
+    console.warn("Realtime WS fallback to polling");
+  }
+}
+
+(function initSupabase() {
+  if (SUPABASE_URL && SUPABASE_URL.startsWith("https://") && !SUPABASE_URL.includes("YOUR_SUPABASE")) {
+    sbConfigured = true;
+    setStatus("syncing");
+    fetchSupabaseState();
+    connectSupabaseRealtime();
+  } else {
+    setStatus("warn", "📱 本機模式（待設定 Supabase）");
+  }
 })();
-function refreshDay(i){document.getElementById("tl"+i).innerHTML=timelineHtml(i);document.getElementById("pl"+i).innerHTML=placesHtml(i)}
-const sheetBg=document.getElementById("sheetBg");let sheetCtx=null;
-function openSheet(ctx,v){
-  sheetCtx=ctx;document.getElementById("sheetTitle").textContent=ctx.title;
-  document.getElementById("fTime").value=v.time||"";document.getElementById("fTitle").value=v.title||"";document.getElementById("fNote").value=v.note||"";document.getElementById("fUrl").value=v.url||"";
-  sheetBg.classList.add("show");setTimeout(()=>document.getElementById("fTitle").focus(),50);
+
+function refreshDay(i) {
+  const tl = document.getElementById("tl" + i);
+  const pl = document.getElementById("pl" + i);
+  if (tl) tl.innerHTML = timelineHtml(i);
+  if (pl) pl.innerHTML = placesHtml(i);
 }
-function closeSheet(){sheetBg.classList.remove("show");sheetCtx=null}
-document.getElementById("sheetCancel").addEventListener("click",closeSheet);
-sheetBg.addEventListener("click",e=>{if(e.target===sheetBg)closeSheet()});
-document.getElementById("sheet").addEventListener("submit",e=>{
-  e.preventDefault();const c=sheetCtx;const t=document.getElementById("fTitle").value.trim();if(!c||!t)return;const rawU=document.getElementById("fUrl").value.trim();if(rawU&&!parseMapUrl(rawU).url){showToast("地圖網址要以 https:// 開頭");return}
-  const time=document.getElementById("fTime").value.trim(),note=document.getElementById("fNote").value.trim();
-  if(c.kind==="edit"){
-    const n=cloneNodes(c.i),o=n[c.x];
-    if(o.name!==t){o.name=t;o.query=t+" 東京";delete o.url;if(n[c.x-1]&&n[c.x-1].type==="segment")Object.assign(n[c.x-1],genSeg(t));if(n[c.x+1]&&n[c.x+1].type==="segment")Object.assign(n[c.x+1],genSeg(n[c.x+2]?n[c.x+2].name:"下一站"))}
-    const mu=parseMapUrl(document.getElementById("fUrl").value);if(mu.url){o.url=mu.url;if(mu.q)o.query=mu.q}else if(o.url){delete o.url;o.query=t+" 東京"}
-    o.sub=note;if(time!==(o.depTime||o.arrTime||"")){o.depTime=time;o.arrTime=""}
-    userNodes[c.i]=n;
-  }else addAfter(c.i,c.x,{time,title:t,note,url:parseMapUrl(document.getElementById("fUrl").value)});
-  persistDay(c.i);refreshDay(c.i);closeSheet();estimateAll(c.i);showToast(c.kind==="edit"?"已儲存":"已新增，點「怎麼去」查看路線");
+
+// =========================================================================
+// MODALS: ADD/EDIT SPOT, EDIT TRANSIT SEGMENT, REVISION HISTORY
+// =========================================================================
+const sheetBg = document.getElementById("sheetBg");
+let sheetCtx = null;
+
+function openSheet(ctx, v) {
+  sheetCtx = ctx;
+  document.getElementById("sheetTitle").textContent = ctx.title;
+  document.getElementById("fTime").value = v.time || "";
+  document.getElementById("fTitle").value = v.title || "";
+  document.getElementById("fNote").value = v.note || "";
+  document.getElementById("fUrl").value = v.url || "";
+
+  const transitBox = document.getElementById("transitEditBox");
+  if (ctx.hideTransit) {
+    transitBox.style.display = "none";
+  } else {
+    transitBox.style.display = "grid";
+    document.getElementById("fMode").value = v.mode || "電車／地鐵轉乘";
+    document.getElementById("fEstDur").value = v.estDur || "";
+    document.getElementById("fEstFare").value = v.estFare || "";
+    document.getElementById("fTransfer").value = v.transferInfo || "";
+    document.getElementById("fHeadway").value = v.headwayNote || "";
+  }
+
+  sheetBg.classList.add("show");
+  setTimeout(() => document.getElementById("fTitle").focus(), 50);
+}
+function closeSheet() {
+  sheetBg.classList.remove("show");
+  sheetCtx = null;
+}
+document.getElementById("sheetCancel").addEventListener("click", closeSheet);
+sheetBg.addEventListener("click", e => { if (e.target === sheetBg) closeSheet(); });
+
+document.getElementById("sheet").addEventListener("submit", e => {
+  e.preventDefault();
+  const c = sheetCtx;
+  const t = document.getElementById("fTitle").value.trim();
+  if (!c || !t) return;
+  const rawU = document.getElementById("fUrl").value.trim();
+  if (rawU && !parseMapUrl(rawU).url) {
+    showToast("地圖網址要以 https:// 開頭");
+    return;
+  }
+  const time = document.getElementById("fTime").value.trim();
+  const note = document.getElementById("fNote").value.trim();
+  const mode = document.getElementById("fMode").value;
+  const estDur = document.getElementById("fEstDur").value.trim();
+  const estFare = document.getElementById("fEstFare").value.trim();
+  const transferInfo = document.getElementById("fTransfer").value.trim();
+  const headwayNote = document.getElementById("fHeadway").value.trim();
+
+  if (c.kind === "edit") {
+    const n = cloneNodes(c.i);
+    const o = n[c.x];
+    const oldName = o.name;
+    o.name = t;
+    if (oldName !== t) {
+      o.query = t + " 東京";
+      delete o.url;
+    }
+    const mu = parseMapUrl(rawU);
+    if (mu.url) {
+      o.url = mu.url;
+      if (mu.q) o.query = mu.q;
+    } else if (o.url) {
+      delete o.url;
+      o.query = t + " 東京";
+    }
+    o.sub = note;
+    if (time !== (o.depTime || o.arrTime || "")) {
+      o.depTime = time;
+      o.arrTime = "";
+    }
+
+    // Update preceding transit segment connecting previous stop -> edited stop
+    if (n[c.x - 1] && n[c.x - 1].type === "segment") {
+      const prevSt = n[c.x - 2];
+      Object.assign(n[c.x - 1], buildAutoSegment(prevSt ? prevSt.name : "前一站", t, {
+        mode, estDur, estFare, transferInfo, headwayNote
+      }));
+    }
+    // Update following transit segment if station name changed
+    if (oldName !== t && n[c.x + 1] && n[c.x + 1].type === "segment") {
+      const nextSt = n[c.x + 2];
+      Object.assign(n[c.x + 1], buildAutoSegment(t, nextSt ? nextSt.name : "下一站", {
+        mode: n[c.x + 1].platform || "電車／地鐵轉乘",
+        headwayNote: n[c.x + 1].headwayNote || ""
+      }));
+    }
+
+    userNodes[c.i] = n;
+    pushSupabaseState(`D${c.i + 1} 修改景點「${t}」`);
+  } else {
+    addAfter(c.i, c.x, {
+      time, title: t, note, url: parseMapUrl(rawU),
+      mode, estDur, estFare, transferInfo, headwayNote
+    });
+    pushSupabaseState(`D${c.i + 1} 新增景點「${t}」`);
+  }
+
+  refreshDay(c.i);
+  closeSheet();
+  showToast(c.kind === "edit" ? "已更新景點與交通導航" : "已新增景點並建立大眾運輸導航");
 });
-document.addEventListener("click",e=>{
-  const b=e.target.closest("[data-nedit],[data-ndel],[data-nadd],[data-nreset],[data-cadd]");if(!b)return;
-  e.preventDefault();const d=b.dataset;
-  if("nedit" in d){const [i,x]=d.nedit.split(":").map(Number);const o=nodesOf(i)[x];openSheet({kind:"edit",i,x,title:"修改「"+o.name+"」"},{time:o.depTime||o.arrTime||"",title:o.name,note:o.sub||"",url:o.url||""})}
-  else if("nadd" in d){const [i,x]=d.nadd.split(":").map(Number);const o=nodesOf(i)[x];openSheet({kind:"add",i,x,title:o?"新增行程（接在「"+o.name+"」之後）":"新增第一個行程"},{})}
-  else if("ndel" in d){const [i,x]=d.ndel.split(":").map(Number);delStation(i,x);persistDay(i);refreshDay(i);estimateAll(i);showToast("已刪除，可按「還原此日預設」找回")}
-  else if("nreset" in d){const i=Number(d.nreset);delete userNodes[i];persistDay(i);refreshDay(i);showToast("已還原此日預設")}
-  else if("cadd" in d){const [i,k]=d.cadd.split(":").map(Number);const c=daysData[i].nearbyCards[k];openSheet({kind:"add",i,x:lastStation(i),url:c.url,title:"加入行程（接在這天最後）"},{time:(c.time||"").split("–")[0],title:c.title,note:c.desc,url:c.url})}
+
+// Segment-only edit modal
+const segSheetBg = document.getElementById("segSheetBg");
+let segCtx = null;
+function openSegSheet(i, x) {
+  const n = nodesOf(i);
+  const seg = n[x];
+  const a = n[x - 1], b = n[x + 1];
+  if (!seg || seg.type !== "segment") return;
+  segCtx = { i, x };
+  document.getElementById("segRoutePreview").textContent = (a && b) ? `起點：${a.name} → 終點：${b.name}` : "";
+  document.getElementById("sMode").value = ["電車／地鐵轉乘", "JR／私鐵直達", "路線公車", "步行前往", "包車／計程車"].includes(seg.platform) ? seg.platform : "電車／地鐵轉乘";
+  document.getElementById("sLineName").value = seg.lineName || "";
+  document.getElementById("sDur").value = seg.duration || "";
+  document.getElementById("sFare").value = seg.fare || "";
+  document.getElementById("sTransfer").value = seg.transferInfo || "";
+  document.getElementById("sHeadway").value = seg.headwayNote || "";
+  segSheetBg.classList.add("show");
+}
+function closeSegSheet() {
+  segSheetBg.classList.remove("show");
+  segCtx = null;
+}
+document.getElementById("segSheetCancel").addEventListener("click", closeSegSheet);
+segSheetBg.addEventListener("click", e => { if (e.target === segSheetBg) closeSegSheet(); });
+document.getElementById("segSheet").addEventListener("submit", e => {
+  e.preventDefault();
+  if (!segCtx) return;
+  const { i, x } = segCtx;
+  const n = cloneNodes(i);
+  const seg = n[x];
+  const mode = document.getElementById("sMode").value;
+  const lineName = document.getElementById("sLineName").value.trim();
+  const dur = document.getElementById("sDur").value.trim();
+  const fare = document.getElementById("sFare").value.trim();
+  const transferInfo = document.getElementById("sTransfer").value.trim();
+  const headwayNote = document.getElementById("sHeadway").value.trim();
+
+  seg.platform = mode;
+  if (lineName) seg.lineName = lineName;
+  if (dur) seg.duration = dur;
+  if (fare) seg.fare = fare;
+  seg.transferInfo = transferInfo;
+  seg.headwayNote = headwayNote;
+  if (transferInfo) {
+    seg.details = "轉乘：" + transferInfo + "｜即時班次以實際交通查詢為準";
+  }
+  userNodes[i] = n;
+  pushSupabaseState(`D${i + 1} 更新交通與班距備註`);
+  refreshDay(i);
+  closeSegSheet();
+  showToast("已更新交通與班距備註");
 });
-(function(){const h=document.getElementById("hint");try{if(localStorage.getItem("tokyo2027_hint"))h.style.display="none"}catch(e){}
-document.getElementById("hintOk").addEventListener("click",()=>{h.style.display="none";try{localStorage.setItem("tokyo2027_hint","1")}catch(e){}})})();
+
+// Revision History Modal
+const histSheetBg = document.getElementById("histSheetBg");
+function openHistoryModal() {
+  const listEl = document.getElementById("histList");
+  if (!revisionHistory.length) {
+    listEl.innerHTML = `<div style="padding:18px;text-align:center;color:var(--muted);font-size:13px">目前尚無修改紀錄</div>`;
+  } else {
+    listEl.innerHTML = revisionHistory.map((h, idx) => `
+      <div class="hist-item">
+        <div>
+          <div style="font-weight:700;color:var(--ink)">${esc(h.summary)}</div>
+          <div style="font-size:11px;color:var(--sub);margin-top:2px">${esc(h.time)}</div>
+        </div>
+        <button type="button" class="btn-outline" data-restore="${idx}" style="padding:5px 10px;font-size:12px">還原此版本</button>
+      </div>
+    `).join("");
+  }
+  histSheetBg.classList.add("show");
+}
+document.getElementById("btnOpenHistory").addEventListener("click", openHistoryModal);
+document.getElementById("histClose").addEventListener("click", () => histSheetBg.classList.remove("show"));
+histSheetBg.addEventListener("click", e => { if (e.target === histSheetBg) histSheetBg.classList.remove("show"); });
+
+document.addEventListener("click", e => {
+  const rb = e.target.closest("[data-restore]");
+  if (rb) {
+    const idx = Number(rb.dataset.restore);
+    const entry = revisionHistory[idx];
+    if (entry && entry.snapshot) {
+      userNodes = JSON.parse(JSON.stringify(entry.snapshot));
+      for (let i = 0; i < daysData.length; i++) refreshDay(i);
+      pushSupabaseState(`還原至「${entry.time}」版本`);
+      histSheetBg.classList.remove("show");
+      showToast("已還原至選定版本並同步雲端");
+    }
+    return;
+  }
+
+  const b = e.target.closest("[data-nedit],[data-ndel],[data-nadd],[data-nreset],[data-cadd],[data-sedit],[data-openhist]");
+  if (!b) return;
+  e.preventDefault();
+  const d = b.dataset;
+
+  if ("openhist" in d) {
+    openHistoryModal();
+  } else if ("sedit" in d) {
+    const [i, x] = d.sedit.split(":").map(Number);
+    openSegSheet(i, x);
+  } else if ("nedit" in d) {
+    const [i, x] = d.nedit.split(":").map(Number);
+    const nodes = nodesOf(i);
+    const o = nodes[x];
+    const prevSeg = (x > 0 && nodes[x - 1].type === "segment") ? nodes[x - 1] : null;
+    openSheet({
+      kind: "edit",
+      i,
+      x,
+      hideTransit: !prevSeg,
+      title: "修改「" + o.name + "」"
+    }, {
+      time: o.depTime || o.arrTime || "",
+      title: o.name,
+      note: o.sub || "",
+      url: o.url || "",
+      mode: prevSeg ? prevSeg.platform : "電車／地鐵轉乘",
+      estDur: prevSeg ? prevSeg.duration : "",
+      estFare: prevSeg ? prevSeg.fare : "",
+      transferInfo: prevSeg ? (prevSeg.transferInfo || "") : "",
+      headwayNote: prevSeg ? (prevSeg.headwayNote || "") : ""
+    });
+  } else if ("nadd" in d) {
+    const [i, x] = d.nadd.split(":").map(Number);
+    const o = nodesOf(i)[x];
+    openSheet({
+      kind: "add",
+      i,
+      x,
+      hideTransit: x < 0,
+      title: o ? "新增景點（接在「" + o.name + "」之後）" : "新增第一個景點"
+    }, {});
+  } else if ("ndel" in d) {
+    const [i, x] = d.ndel.split(":").map(Number);
+    const targetName = nodesOf(i)[x] ? nodesOf(i)[x].name : "景點";
+    delStation(i, x);
+    pushSupabaseState(`D${i + 1} 刪除「${targetName}」`);
+    refreshDay(i);
+    showToast("已刪除，可點「修改紀錄與還原」找回");
+  } else if ("nreset" in d) {
+    const i = Number(d.nreset);
+    delete userNodes[i];
+    pushSupabaseState(`D${i + 1} 還原為預設行程`);
+    refreshDay(i);
+    showToast("已還原此日預設行程");
+  } else if ("cadd" in d) {
+    const [i, k] = d.cadd.split(":").map(Number);
+    const c = daysData[i].nearbyCards[k];
+    openSheet({
+      kind: "add",
+      i,
+      x: lastStation(i),
+      title: "加入行程（接在這天最後）"
+    }, {
+      time: (c.time || "").split("–")[0],
+      title: c.title,
+      note: c.desc,
+      url: c.url
+    });
+  }
+});
+
+(function () {
+  const h = document.getElementById("hint");
+  try { if (localStorage.getItem("tokyo2027_hint_sb")) h.style.display = "none"; } catch (e) {}
+  document.getElementById("hintOk").addEventListener("click", () => {
+    h.style.display = "none";
+    try { localStorage.setItem("tokyo2027_hint_sb", "1"); } catch (e) {}
+  });
+})();
+
 const daysContainer = document.getElementById("daysContainer");
-const mapInstances = [];
 let activeDayIdx = 0;
-let showAllDays = false;
 
 daysData.forEach((day, dIdx) => {
   const block = document.createElement("div");
@@ -1960,70 +2718,21 @@ daysData.forEach((day, dIdx) => {
       <div class="day-meta">${day.summaryMeta}</div>
     </div>
     <div class="transit-card" id="tl${dIdx}">${timelineHtml(dIdx)}</div>
-  `;
-
-  html += `<div class="nearby-section" id="near${dIdx}">${nearHtml(dIdx)}</div>`;
-
-  html += `
+    <div class="nearby-section" id="near${dIdx}">${nearHtml(dIdx)}</div>
     <div class="day-pager">
       <button type="button" class="pager-btn" data-nav-day="${dIdx - 1}" ${dIdx === 0 ? "disabled" : ""}>‹ 前一天（${dIdx > 0 ? "D" + dIdx : "首日"}）</button>
       <button type="button" class="pager-btn" data-nav-day="${dIdx + 1}" ${dIdx === daysData.length - 1 ? "disabled" : ""}>後一天（${dIdx < daysData.length - 1 ? "D" + (dIdx + 2) : "最終日"}） ›</button>
     </div>
+    <div class="place-box" id="pl${dIdx}">${placesHtml(dIdx)}</div>
   `;
-
-  html += `<div class="place-box" id="pl${dIdx}">${placesHtml(dIdx)}</div>`;
-
   block.innerHTML = html;
   daysContainer.appendChild(block);
 });
 
-function drawMaps() {
-  if (!window.L) return;
-  daysData.forEach((d, i) => {
-    const map = L.map("map" + i, { scrollWheelZoom: false, dragging: false, touchZoom: false }).setView([d.places[0][1], d.places[0][2]], 12);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: '&copy; OpenStreetMap'
-    }).addTo(map);
-    const bounds = [];
-    d.places.forEach((p, j) => {
-      const pos = [p[1], p[2]];
-      bounds.push(pos);
-      L.marker(pos).addTo(map).bindPopup(`<b>${j+1}. ${p[0]}</b><br><a href="${mapsSearchUrl(p[3] || p[0])}" target="_blank">開啟 Google Maps</a>`);
-    });
-    if (bounds.length > 1) map.fitBounds(bounds, { padding: [24, 24] });
-    else map.setView(bounds[0], 14);
-    mapInstances[i] = map;
-
-    const overlay = document.getElementById("lock" + i);
-    overlay.addEventListener("click", () => {
-      overlay.classList.add("unlocked");
-      map.dragging.enable();
-      map.touchZoom.enable();
-    });
-  });
-}
-if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", drawMaps);
-else drawMaps();
-
 document.addEventListener("click", e => {
-  const lockBtn = e.target.closest("[data-lock-idx]");
-  if (lockBtn) {
-    const idx = Number(lockBtn.dataset.lockIdx);
-    const overlay = document.getElementById("lock" + idx);
-    const map = mapInstances[idx];
-    if (overlay && map) {
-      overlay.classList.remove("unlocked");
-      map.dragging.disable();
-      map.touchZoom.disable();
-      showToast("已鎖定地圖");
-    }
-  }
   const navDayBtn = e.target.closest("[data-nav-day]");
   if (navDayBtn && !navDayBtn.disabled) {
-    const targetIdx = Number(navDayBtn.dataset.navDay);
-    showAllDays = false;
-    document.getElementById("toggleAllLabel").textContent = "展開全6天";
-    selectDay(targetIdx);
+    selectDay(Number(navDayBtn.dataset.navDay));
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 });
@@ -2034,49 +2743,25 @@ function selectDay(idx) {
   document.getElementById("headerDayTag").textContent = d.dayTag;
   document.getElementById("headerSubInfo").innerHTML = `<span>${d.headerSub}</span>`;
   document.querySelectorAll(".day-pill").forEach(p => {
-    p.classList.toggle("active", !showAllDays && Number(p.dataset.day) === idx);
+    p.classList.toggle("active", Number(p.dataset.day) === idx);
   });
   document.querySelectorAll(".day-block").forEach(b => {
-    b.style.display = (showAllDays || Number(b.dataset.dayIdx) === idx) ? "block" : "none";
+    b.style.display = Number(b.dataset.dayIdx) === idx ? "block" : "none";
   });
-  setTimeout(() => mapInstances.forEach(m => m && m.invalidateSize()), 80);
 }
 
 document.getElementById("dayPills").addEventListener("click", e => {
   const pill = e.target.closest(".day-pill");
   if (!pill) return;
-  showAllDays = false;
-  document.getElementById("toggleAllLabel").textContent = "展開全6天";
   selectDay(Number(pill.dataset.day));
-});
-
-document.getElementById("btnToggleAll").addEventListener("click", () => {
-  showAllDays = !showAllDays;
-  document.getElementById("toggleAllLabel").textContent = showAllDays ? "單日檢視" : "展開全6天";
-  if (showAllDays) {
-    document.getElementById("headerDayTag").textContent = "全 6 天總覽";
-    document.querySelectorAll(".day-pill").forEach(p => p.classList.remove("active"));
-    document.querySelectorAll(".day-block").forEach(b => b.style.display = "block");
-    setTimeout(() => mapInstances.forEach(m => m && m.invalidateSize()), 80);
-  } else {
-    selectDay(activeDayIdx);
-  }
 });
 
 document.getElementById("btnJumpToday").addEventListener("click", () => {
   const now = new Date();
-  const todayStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}-${String(now.getDate()).padStart(2,"0")}`;
+  const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
   const found = daysData.findIndex(d => d.isoDate === todayStr);
-  showAllDays = false;
-  document.getElementById("toggleAllLabel").textContent = "展開全6天";
   selectDay(found !== -1 ? found : 0);
   showToast(found !== -1 ? "已切換至今日行程" : "目前非出發日，顯示 DAY 01");
-});
-
-document.getElementById("btnCopyShareUrl").addEventListener("click", () => {
-  encodeStateToHash();
-  const baseUrl = (location.href && location.href.startsWith("http")) ? location.href : "https://tokyo-trip-2027.example.com/shared.html" + location.hash;
-  copyText(baseUrl);
 });
 
 document.getElementById("btnShareLine").addEventListener("click", () => {
@@ -2084,23 +2769,22 @@ document.getElementById("btnShareLine").addEventListener("click", () => {
   const lines = [`🗾 TOKYO TRIP 2027｜${d.dayTag} ${d.title}`, d.summaryMeta, "----------------"];
   nodesOf(activeDayIdx).forEach(n => {
     if (n.type === "station") lines.push(`📍 [${n.depTime || n.arrTime || ""}] ${n.name}`);
-    if (n.type === "segment") lines.push(`   🚃 ${n.lineName}（${n.fare} / ${n.duration}）`);
+    if (n.type === "segment") {
+      const hw = n.headwayNote ? `｜班距：${n.headwayNote}` : "";
+      lines.push(`   🚃 ${n.lineName}（${n.fare} / ${n.duration}${hw}）`);
+    }
   });
-  copyText(lines.join("
-"));
-});
-
-document.getElementById("btnCopyDaySummary").addEventListener("click", () => {
-  document.getElementById("btnShareLine").click();
+  copyText(lines.join("\n"));
 });
 
 (function init() {
   const now = new Date();
-  const todayStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}-${String(now.getDate()).padStart(2,"0")}`;
+  const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
   const found = daysData.findIndex(d => d.isoDate === todayStr);
   selectDay(found !== -1 ? found : 0);
 })();
 
+// Bottom Navigation Tabs
 document.querySelectorAll(".bnav-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     document.querySelectorAll(".bnav-btn").forEach(b => b.classList.remove("active"));
@@ -2108,12 +2792,10 @@ document.querySelectorAll(".bnav-btn").forEach(btn => {
     const target = btn.dataset.target;
     document.querySelectorAll(".tab-panel").forEach(p => p.classList.toggle("active", p.id === target));
     window.scrollTo({ top: 0, behavior: "smooth" });
-    if (target === "panel-itinerary") {
-      setTimeout(() => mapInstances.forEach(m => m && m.invalidateSize()), 80);
-    }
   });
 });
 
+// Japanese Point-and-Talk Phrases
 const phrases = [
   { zh: "確認電車是否停靠押上", jp: "すみません、この電車は「押上（おしあげ）」に止まりますか？", romaji: "Sumimasen, kono densha wa Oshiage ni tomarimasu ka?" },
   { zh: "確認前往淺草的月台（都營淺草線特急）", jp: "すみません、浅草に行く都営浅草線のホームはどこですか？", romaji: "Sumimasen, Asakusa ni iku Toei Asakusa-sen no hōmu wa doko desu ka?" },
@@ -2138,6 +2820,7 @@ phrases.forEach(p => {
   phraseList.appendChild(row);
 });
 
+// Packing Checklist
 const packItems = [
   "護照（確認效期 6 個月以上）",
   "去回程電子機票（確認航廈與時間）",
@@ -2178,7 +2861,6 @@ packItems.forEach((text, i) => {
   cb.addEventListener("change", () => {
     savedChecks[i] = cb.checked;
     try { localStorage.setItem(PACK_KEY, JSON.stringify(savedChecks)); } catch (e) {}
-    encodeStateToHash();
     updatePackCount();
   });
   label.append(cb, document.createTextNode(text));
@@ -2188,11 +2870,11 @@ updatePackCount();
 document.getElementById("resetPack").addEventListener("click", () => {
   savedChecks = {};
   try { localStorage.removeItem(PACK_KEY); } catch (e) {}
-  encodeStateToHash();
   packList.querySelectorAll("input[type=checkbox]").forEach(cb => cb.checked = false);
   updatePackCount();
 });
 
+// 6-Person Expense Splitter
 const MEMBERS = ["成員 1（易謙）", "成員 2（育任）", "成員 3（唯瑄）", "成員 4（祈全）", "成員 5（恩郡）", "成員 6（羽亭）"];
 const EXP_KEY = "tokyo2027_expenses_navitime_v1";
 const RATE_KEY = "tokyo2027_rate_navitime_v1";
@@ -2209,12 +2891,10 @@ function getRate() {
 }
 rateInput.addEventListener("change", () => {
   try { localStorage.setItem(RATE_KEY, String(getRate())); } catch (e) {}
-  encodeStateToHash();
   renderExpenses();
 });
 function saveExpenses() {
   try { localStorage.setItem(EXP_KEY, JSON.stringify(expenses)); } catch (e) {}
-  encodeStateToHash();
 }
 function renderExpenses() {
   const rate = getRate();
@@ -2305,10 +2985,10 @@ document.getElementById("copySplitReport").addEventListener("click", () => {
     const diff = Math.round(paidBy[m] - perPerson);
     lines.push(`• ${m}：已墊 NT$${Math.round(paidBy[m])}（${diff >= 0 ? "應收 +" + diff : "應補 " + diff}）`);
   });
-  copyText(lines.join("
-"));
+  copyText(lines.join("\n"));
 });
 renderExpenses();
+
 </script>
 </body>
 </html>
