@@ -897,7 +897,7 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncP
 <main>
   <!-- TAB 1: 路線與每日行程 (Navitime Vertical Transit Timeline Style) -->
   <section class="tab-panel active" id="panel-itinerary">
-    <div class="hint" id="hint"><b>👋 3 步上手</b><br>① 點上方日期切換每天<br>② 每個地點下方可 ✎ 修改、🗑 刪除、＋ 之後新增；新增後會附上「怎麼去」路線導航與地圖<br>③ 拿到這個連結的人都能編輯，修改約 4 秒內同步給所有人<br>④ 新增地點後，請按路段上的「怎麼去」用 Google Maps 查路線與票價<br><button type="button" class="btn-outline" id="hintOk">知道了</button></div>
+    <div class="hint" id="hint"><b>👋 3 步上手</b><br>① 點上方日期切換每天<br>② 每個地點下方可 ✎ 修改、🗑 刪除、＋ 之後新增；新增後會附上「怎麼去」路線導航與地圖<br>③ 登入 Claude 後，修改會即時同步給所有人；未登入則只存在你的手機<br>④ 新增地點後會先顯示 AI 預估的時間與車資，請再按「怎麼去」用 Google Maps 核對<br><button type="button" class="btn-outline" id="hintOk">知道了</button></div>
     <div class="outline-banner-wrap">
       <button type="button" class="outline-banner-btn" id="btnCopyDaySummary">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
@@ -1077,7 +1077,7 @@ body.ro .node-acts button,body.ro .tl-foot,body.ro .card-add{display:none}#syncP
 </main>
 
 <div class="sheet-bg" id="sheetBg"><form class="sheet" id="sheet"><h3 id="sheetTitle">新增項目</h3>
-<input id="fTime" placeholder="時間（例如 14:00，可不填）"><input id="fTitle" placeholder="名稱（景點、餐廳…）" required><input id="fNote" placeholder="備註（可不填）">
+<input id="fTime" placeholder="時間（例如 14:00，可不填）"><input id="fTitle" placeholder="名稱（景點、餐廳…）" required><input id="fUrl" type="url" inputmode="url" placeholder="地圖網址（Google Maps 分享連結，可不填）"><input id="fNote" placeholder="備註（可不填）"><div style="font-size:12px;color:var(--sub)">在 Google Maps 按「分享」→「複製連結」後貼上，之後就能直接點開地圖與導航</div>
 <div class="btn-row"><button type="submit" class="btn-solid">儲存</button><button type="button" class="btn-outline" id="sheetCancel">取消</button></div></form></div>
 <div class="toast" id="toast">已複製到剪貼簿</div>
 
@@ -1789,11 +1789,21 @@ function nodesOf(i){return userNodes[i]||daysData[i].nodes}
 function cloneNodes(i){return JSON.parse(JSON.stringify(nodesOf(i)))}
 function esc(t){return String(t==null?"":t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 function lastStation(i){const n=nodesOf(i);for(let x=n.length-1;x>=0;x--)if(n[x].type==="station")return x;return -1}
-function genSeg(to){return {type:"segment",lineColor:"#37969e",axisClass:"",lineName:"前往 "+to,platform:"路線導航",details:"請按下方「怎麼去」用 Google Maps 查看路線、時間與票價",fare:"—",duration:"—",pending:true}}
+function parseMapUrl(u){
+  u=(u||"").trim();if(!/^https:\/\//i.test(u))return {url:"",q:""};
+  let q="";
+  try{
+    const m=u.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/)||u.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/);
+    if(m)q=m[1]+","+m[2];
+    else{const pl=u.match(/\/maps\/place\/([^\/?@]+)/);if(pl)q=decodeURIComponent(pl[1].replace(/\+/g," "));else{const x=new URL(u).searchParams;q=x.get("q")||x.get("query")||""}}
+  }catch(e){}
+  return {url:u,q};
+}
+function genSeg(to){return {type:"segment",lineColor:"#37969e",axisClass:"",lineName:"前往 "+to,platform:"路線導航",details:"AI 預估中…（請再按下方「怎麼去」用 Google Maps 核對）",fare:"—",duration:"—",pending:true}}
 function addAfter(i,x,f){
   const n=cloneNodes(i);
   const st={type:"station",badge:"點",badgeClass:"transfer",topLine:"",bottomLine:"",depTime:f.time,name:f.title,sub:f.note,query:f.title+" 東京"};
-  if(f.url)st.url=f.url;
+  if(f.url&&f.url.url){st.url=f.url.url;if(f.url.q)st.query=f.url.q}
   if(x<0){userNodes[i]=[st];return}
   n.splice(x+1,0,genSeg(f.title),st);
   if(n[x+3]&&n[x+3].type==="segment")Object.assign(n[x+3],genSeg(n[x+4]?n[x+4].name:"下一站"));
@@ -1835,10 +1845,10 @@ function nearHtml(i){
 let DB=null;const writeQ={};
 function setStatus(v){const e=document.getElementById("syncPill");if(!e)return;e.textContent=document.body.classList.contains("ro")?"👀 唯讀":v===true?"☁️ 共享中":v==="slow"?"⏳ 連線中":"📱 個人模式"}
 function persistDay(i){
-  if(!syncOn()){saveEdits();return}
-  const url=SYNC_URL.replace(/\/$/,"")+"/plan/d"+i+".json",has=!!userNodes[i];
-  pendingW++;
-  writeQ[i]=(writeQ[i]||Promise.resolve()).then(()=>fetch(url,{method:has?"PUT":"DELETE",headers:{"Content-Type":"application/json"},body:has?JSON.stringify({nodes:JSON.stringify(userNodes[i]),at:Date.now()}):undefined})).then(r=>{if(!r.ok)throw 0}).catch(()=>showToast("同步失敗，請確認網路")).then(()=>{pendingW--});
+  if(!DB){saveEdits();return}
+  const doc=DB.doc("plan/d"+i),body=userNodes[i]?{nodes:JSON.stringify(userNodes[i]),at:Date.now()}:null;
+  writeQ[i]=(writeQ[i]||Promise.resolve()).then(()=>body?doc.set(body):doc.delete()).catch(err=>{
+    if(err&&err.code==="invalid_argument"){document.body.classList.add("ro");setStatus(true);showToast("你目前沒有編輯權限，請請房主改成可編輯")}else showToast("同步失敗，請稍後再試")});
 }
 async function estimateAll(i){
   let sample=null;try{sample=await claude.use("sample")}catch(e){}
@@ -1856,55 +1866,51 @@ async function estimateAll(i){
     }catch(e){if(e&&e.code==="not_granted")return}
   }
 }
-const SYNC_URL="https://tokyo2027-66459-default-rtdb.firebaseio.com";
-let pendingW=0;
-function syncOn(){return /^https:\/\/.+/.test(SYNC_URL)}
-async function pull(){
-  if(pendingW>0||document.hidden)return;
+(async function initShared(){
   try{
-    const r=await fetch(SYNC_URL.replace(/\/$/,"")+"/plan.json");if(!r.ok)throw 0;
-    const all=(await r.json())||{};
-    for(let i=0;i<daysData.length;i++){
-      const d=all["d"+i];let nodes=null;try{nodes=d&&JSON.parse(d.nodes)}catch(e){}
-      if((userNodes[i]?JSON.stringify(userNodes[i]):"")!==(nodes?JSON.stringify(nodes):"")){if(nodes)userNodes[i]=nodes;else delete userNodes[i];refreshDay(i)}
-    }
-    setStatus(true);
+    if(!window.claude||!claude.use){setStatus(false);return}
+    const db=await claude.use("db"),user=await claude.use("user");
+    if(!db){setStatus(false);return}
+    if(user){try{if(await user.can("data.write")===false)document.body.classList.add("ro")}catch(e){}}
+    DB=db;userNodes={};setStatus("slow");
+    db.collection("plan").onSnapshot(snap=>{
+      const seen={};
+      snap.docs.forEach(d=>{const m=/^d(\d)$/.exec(d.id);if(!m||!d.exists)return;try{userNodes[+m[1]]=JSON.parse(d.data().nodes);seen[+m[1]]=1}catch(e){}});
+      for(let i=0;i<daysData.length;i++){if(!seen[i])delete userNodes[i];refreshDay(i)}
+      setStatus(true);
+    },()=>{DB=null;setStatus(false)});
   }catch(e){setStatus(false)}
-}
-(function initShared(){
-  if(!syncOn()){setStatus(false);return}
-  userNodes={};pull();setInterval(pull,4000);
-  document.addEventListener("visibilitychange",()=>{if(!document.hidden)pull()});
 })();
 function refreshDay(i){document.getElementById("tl"+i).innerHTML=timelineHtml(i);document.getElementById("pl"+i).innerHTML=placesHtml(i)}
 const sheetBg=document.getElementById("sheetBg");let sheetCtx=null;
 function openSheet(ctx,v){
   sheetCtx=ctx;document.getElementById("sheetTitle").textContent=ctx.title;
-  document.getElementById("fTime").value=v.time||"";document.getElementById("fTitle").value=v.title||"";document.getElementById("fNote").value=v.note||"";
+  document.getElementById("fTime").value=v.time||"";document.getElementById("fTitle").value=v.title||"";document.getElementById("fNote").value=v.note||"";document.getElementById("fUrl").value=v.url||"";
   sheetBg.classList.add("show");setTimeout(()=>document.getElementById("fTitle").focus(),50);
 }
 function closeSheet(){sheetBg.classList.remove("show");sheetCtx=null}
 document.getElementById("sheetCancel").addEventListener("click",closeSheet);
 sheetBg.addEventListener("click",e=>{if(e.target===sheetBg)closeSheet()});
 document.getElementById("sheet").addEventListener("submit",e=>{
-  e.preventDefault();const c=sheetCtx;const t=document.getElementById("fTitle").value.trim();if(!c||!t)return;
+  e.preventDefault();const c=sheetCtx;const t=document.getElementById("fTitle").value.trim();if(!c||!t)return;const rawU=document.getElementById("fUrl").value.trim();if(rawU&&!parseMapUrl(rawU).url){showToast("地圖網址要以 https:// 開頭");return}
   const time=document.getElementById("fTime").value.trim(),note=document.getElementById("fNote").value.trim();
   if(c.kind==="edit"){
     const n=cloneNodes(c.i),o=n[c.x];
     if(o.name!==t){o.name=t;o.query=t+" 東京";delete o.url;if(n[c.x-1]&&n[c.x-1].type==="segment")Object.assign(n[c.x-1],genSeg(t));if(n[c.x+1]&&n[c.x+1].type==="segment")Object.assign(n[c.x+1],genSeg(n[c.x+2]?n[c.x+2].name:"下一站"))}
+    const mu=parseMapUrl(document.getElementById("fUrl").value);if(mu.url){o.url=mu.url;if(mu.q)o.query=mu.q}else if(o.url){delete o.url;o.query=t+" 東京"}
     o.sub=note;if(time!==(o.depTime||o.arrTime||"")){o.depTime=time;o.arrTime=""}
     userNodes[c.i]=n;
-  }else addAfter(c.i,c.x,{time,title:t,note,url:c.url});
+  }else addAfter(c.i,c.x,{time,title:t,note,url:parseMapUrl(document.getElementById("fUrl").value)});
   persistDay(c.i);refreshDay(c.i);closeSheet();estimateAll(c.i);showToast(c.kind==="edit"?"已儲存":"已新增，點「怎麼去」查看路線");
 });
 document.addEventListener("click",e=>{
   const b=e.target.closest("[data-nedit],[data-ndel],[data-nadd],[data-nreset],[data-cadd]");if(!b)return;
   e.preventDefault();const d=b.dataset;
-  if("nedit" in d){const [i,x]=d.nedit.split(":").map(Number);const o=nodesOf(i)[x];openSheet({kind:"edit",i,x,title:"修改「"+o.name+"」"},{time:o.depTime||o.arrTime||"",title:o.name,note:o.sub||""})}
+  if("nedit" in d){const [i,x]=d.nedit.split(":").map(Number);const o=nodesOf(i)[x];openSheet({kind:"edit",i,x,title:"修改「"+o.name+"」"},{time:o.depTime||o.arrTime||"",title:o.name,note:o.sub||"",url:o.url||""})}
   else if("nadd" in d){const [i,x]=d.nadd.split(":").map(Number);const o=nodesOf(i)[x];openSheet({kind:"add",i,x,title:o?"新增行程（接在「"+o.name+"」之後）":"新增第一個行程"},{})}
   else if("ndel" in d){const [i,x]=d.ndel.split(":").map(Number);delStation(i,x);persistDay(i);refreshDay(i);estimateAll(i);showToast("已刪除，可按「還原此日預設」找回")}
   else if("nreset" in d){const i=Number(d.nreset);delete userNodes[i];persistDay(i);refreshDay(i);showToast("已還原此日預設")}
-  else if("cadd" in d){const [i,k]=d.cadd.split(":").map(Number);const c=daysData[i].nearbyCards[k];openSheet({kind:"add",i,x:lastStation(i),url:c.url,title:"加入行程（接在這天最後）"},{time:(c.time||"").split("–")[0],title:c.title,note:c.desc})}
+  else if("cadd" in d){const [i,k]=d.cadd.split(":").map(Number);const c=daysData[i].nearbyCards[k];openSheet({kind:"add",i,x:lastStation(i),url:c.url,title:"加入行程（接在這天最後）"},{time:(c.time||"").split("–")[0],title:c.title,note:c.desc,url:c.url})}
 });
 (function(){const h=document.getElementById("hint");try{if(localStorage.getItem("tokyo2027_hint"))h.style.display="none"}catch(e){}
 document.getElementById("hintOk").addEventListener("click",()=>{h.style.display="none";try{localStorage.setItem("tokyo2027_hint","1")}catch(e){}})})();
