@@ -2290,6 +2290,22 @@ let sbSocket = null;
 let sbHeartbeat = null;
 let sbRef = 1;
 let isApplyingRemote = false;
+let lastKnownRemoteUpdatedAt = null;
+let lastRemoteToastAt = 0;
+
+function canonicalJson(val) {
+  if (val === null || typeof val !== "object") return JSON.stringify(val);
+  if (Array.isArray(val)) return "[" + val.map(canonicalJson).join(",") + "]";
+  const keys = Object.keys(val).sort();
+  return "{" + keys.map(k => JSON.stringify(k) + ":" + canonicalJson(val[k])).join(",") + "}";
+}
+
+function notifyRemoteUpdate(msg) {
+  const now = Date.now();
+  if (now - lastRemoteToastAt < 8000) return;
+  lastRemoteToastAt = now;
+  showToast(msg);
+}
 
 function setStatus(state, customText) {
   const el = document.getElementById("syncPill");
@@ -2344,6 +2360,7 @@ async function fetchSupabaseState() {
 
     if (rows && rows.length > 0) {
       const row = rows[0];
+      if (row.updated_at) lastKnownRemoteUpdatedAt = row.updated_at;
       isApplyingRemote = true;
       if (row.days_data && typeof row.days_data === "object" && Object.keys(row.days_data).length > 0) {
         userNodes = row.days_data;
@@ -2421,6 +2438,7 @@ async function pushSupabaseState(actionSummary, skipHistoryPush = false) {
       6000
     );
     if (!res.ok) throw new Error("HTTP " + res.status);
+    lastKnownRemoteUpdatedAt = payload.updated_at;
     setStatus("ok", "☁️ 雲端已同步");
   } catch (err) {
     console.warn("Supabase push error:", err);
@@ -2464,9 +2482,11 @@ function connectSupabaseRealtime() {
         const msg = JSON.parse(evt.data);
         if (msg.event === "postgres_changes" && msg.payload && msg.payload.data && msg.payload.data.record) {
           const rec = msg.payload.data.record;
+          if (rec.updated_at && rec.updated_at === lastKnownRemoteUpdatedAt) return;
+          if (rec.updated_at) lastKnownRemoteUpdatedAt = rec.updated_at;
           let updatedSomething = false;
           isApplyingRemote = true;
-          if (rec.days_data && JSON.stringify(rec.days_data) !== JSON.stringify(userNodes)) {
+          if (rec.days_data && Object.keys(rec.days_data).length > 0 && canonicalJson(rec.days_data) !== canonicalJson(userNodes)) {
             userNodes = rec.days_data;
             saveLocalCache();
             for (let i = 0; i < daysData.length; i++) refreshDay(i);
@@ -2476,7 +2496,7 @@ function connectSupabaseRealtime() {
             revisionHistory = rec.history;
             saveLocalHistory();
           }
-          if (Array.isArray(rec.expenses) && JSON.stringify(rec.expenses) !== JSON.stringify(expenses)) {
+          if (Array.isArray(rec.expenses) && canonicalJson(rec.expenses) !== canonicalJson(expenses)) {
             expenses = rec.expenses;
             saveExpensesLocal();
             renderExpenses();
@@ -2485,7 +2505,7 @@ function connectSupabaseRealtime() {
           isApplyingRemote = false;
           setStatus("ok", "☁️ 雲端已同步");
           if (updatedSomething) {
-            showToast("🔄 旅伴剛更新了內容，6 人畫面已同步！");
+            notifyRemoteUpdate("🔄 旅伴剛更新了內容，畫面已同步");
           }
         }
       } catch (e) {
@@ -3373,6 +3393,7 @@ async function dayOp(i, opFn, summary) {
       done = payload;
     }
     userNodes = done.days_data; revisionHistory = done.history;
+    if (done.updated_at) lastKnownRemoteUpdatedAt = done.updated_at;
     saveLocalCache(); saveLocalHistory();
     for (let d = 0; d < daysData.length; d++) refreshDay(d);
     setStatus("ok", "☁️ 雲端已同步");
@@ -3396,14 +3417,20 @@ async function expOp(fn) {
       const next = fn(Array.isArray(row.expenses) ? row.expenses : []);
       const p = await fetchWithTimeout(base + "&updated_at=eq." + encodeURIComponent(row.updated_at), { method: "PATCH", headers: sbHeaders(), body: JSON.stringify({ expenses: next, updated_at: new Date().toISOString() }) }, 6000);
       const out = await p.json();
-      if (Array.isArray(out) && out.length) { expenses = out[0].expenses || next; ok = true; }
+      if (Array.isArray(out) && out.length) {
+        expenses = out[0].expenses || next;
+        if (out[0].updated_at) lastKnownRemoteUpdatedAt = out[0].updated_at;
+        ok = true;
+      }
     }
     if (!ok) {
       const g = await fetchWithTimeout(base + "&select=expenses", { headers: sbHeaders() }, 6000);
       const row = ((await g.json()) || [])[0];
       const next = fn(row && Array.isArray(row.expenses) ? row.expenses : []);
-      const p = await fetchWithTimeout(`${SUPABASE_URL}/rest/v1/trip_itinerary?on_conflict=room_id`, { method: "POST", headers: sbHeaders(), body: JSON.stringify({ room_id: TRIP_ROOM_ID, expenses: next, updated_at: new Date().toISOString() }) }, 6000);
+      const nowIso = new Date().toISOString();
+      const p = await fetchWithTimeout(`${SUPABASE_URL}/rest/v1/trip_itinerary?on_conflict=room_id`, { method: "POST", headers: sbHeaders(), body: JSON.stringify({ room_id: TRIP_ROOM_ID, expenses: next, updated_at: nowIso }) }, 6000);
       if (!p.ok) throw new Error("HTTP " + p.status);
+      lastKnownRemoteUpdatedAt = nowIso;
       expenses = next;
     }
     saveExpensesLocal(); renderExpenses(); setStatus("ok", "☁️ 雲端已同步");
@@ -3416,26 +3443,31 @@ async function pollRemote() {
   if (!sbConfigured || document.hidden || sbBusy > 0 || isApplyingRemote) return;
   if (document.querySelector(".sheet-bg.show")) return;
   try {
-    const res = await fetchWithTimeout(`${SUPABASE_URL}/rest/v1/trip_itinerary?room_id=eq.${encodeURIComponent(TRIP_ROOM_ID)}&select=days_data,expenses`, { headers: sbHeaders() }, 6000);
+    const res = await fetchWithTimeout(`${SUPABASE_URL}/rest/v1/trip_itinerary?room_id=eq.${encodeURIComponent(TRIP_ROOM_ID)}&select=days_data,expenses,updated_at`, { headers: sbHeaders() }, 6000);
     if (!res.ok) throw new Error("HTTP " + res.status);
     const r = ((await res.json()) || [])[0];
     if (!r || sbBusy > 0) return;
+    if (r.updated_at && r.updated_at === lastKnownRemoteUpdatedAt) {
+      setStatus("ok", "☁️ 雲端已同步");
+      return;
+    }
+    if (r.updated_at) lastKnownRemoteUpdatedAt = r.updated_at;
     let changed = false;
     isApplyingRemote = true;
-    if (r.days_data && Object.keys(r.days_data).length && JSON.stringify(r.days_data) !== JSON.stringify(userNodes)) {
+    if (r.days_data && Object.keys(r.days_data).length && canonicalJson(r.days_data) !== canonicalJson(userNodes)) {
       userNodes = r.days_data; saveLocalCache();
       for (let i = 0; i < daysData.length; i++) refreshDay(i);
       changed = true;
     }
-    if (Array.isArray(r.expenses) && JSON.stringify(r.expenses) !== JSON.stringify(expenses)) {
+    if (Array.isArray(r.expenses) && canonicalJson(r.expenses) !== canonicalJson(expenses)) {
       expenses = r.expenses; saveExpensesLocal(); renderExpenses(); changed = true;
     }
     isApplyingRemote = false;
     setStatus("ok", "☁️ 雲端已同步");
-    if (changed) showToast("🔄 已更新旅伴的修改");
+    if (changed) notifyRemoteUpdate("🔄 已更新旅伴的修改");
   } catch (e) { isApplyingRemote = false; }
 }
-setInterval(pollRemote, 5000);
+setInterval(pollRemote, 15000);
 document.addEventListener("visibilitychange", () => { if (!document.hidden) pollRemote(); });
 window.addEventListener("focus", pollRemote);
 
