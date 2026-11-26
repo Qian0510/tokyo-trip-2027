@@ -2043,7 +2043,9 @@ function saveLocalHistory() {
   try { localStorage.setItem(HIST_KEY, JSON.stringify(revisionHistory.slice(0, 30))); } catch (e) {}
 }
 function nodesOf(i) {
-  return userNodes[i] || daysData[i].nodes;
+  const n = userNodes[i] || daysData[i].nodes;
+  for (let x = 0; x < n.length; x++) if (!n[x].id) n[x].id = "s" + x;
+  return n;
 }
 function cloneNodes(i) {
   return JSON.parse(JSON.stringify(nodesOf(i)));
@@ -2111,6 +2113,7 @@ function buildAutoSegment(fromName, toName, opts = {}) {
 function addAfter(i, x, f) {
   const n = cloneNodes(i);
   const st = {
+    id: f.newId || newNodeId(),
     type: "station",
     badge: "點",
     badgeClass: "transfer",
@@ -2137,6 +2140,7 @@ function addAfter(i, x, f) {
     transferInfo: f.transferInfo,
     headwayNote: f.headwayNote
   });
+  segToNew.id = st.id + "g";
   n.splice(x + 1, 0, segToNew, st);
 
   if (n[x + 3] && n[x + 3].type === "segment") {
@@ -2399,12 +2403,12 @@ async function pushSupabaseState(actionSummary, skipHistoryPush = false) {
   }
 
   setStatus("syncing", "⏳ 同步中...");
+  sbBusy++;
   try {
     const payload = {
       room_id: TRIP_ROOM_ID,
       days_data: userNodes,
       history: revisionHistory,
-      expenses: expenses,
       updated_at: new Date().toISOString()
     };
     const res = await fetchWithTimeout(
@@ -2421,6 +2425,8 @@ async function pushSupabaseState(actionSummary, skipHistoryPush = false) {
   } catch (err) {
     console.warn("Supabase push error:", err);
     setStatus("warn", "⚠️ 同步逾時（已存本機）");
+  } finally {
+    sbBusy--;
   }
 }
 
@@ -2589,8 +2595,11 @@ document.getElementById("sheet").addEventListener("submit", e => {
   const headwayNote = shouldShowHeadway(mode, fHeadwayEl.value) ? fHeadwayEl.value.trim() : "";
 
   if (c.kind === "edit") {
-    const n = cloneNodes(c.i);
-    const o = n[c.x];
+    dayOp(c.i, () => {
+      const n = cloneNodes(c.i);
+      const xx = n.findIndex(z => z.id === c.sid);
+      if (xx < 0) return;
+      const o = n[xx];
     const oldName = o.name;
     o.name = t;
     if (oldName !== t) {
@@ -2611,28 +2620,29 @@ document.getElementById("sheet").addEventListener("submit", e => {
       o.arrTime = "";
     }
 
-    if (n[c.x - 1] && n[c.x - 1].type === "segment") {
-      const prevSt = n[c.x - 2];
-      Object.assign(n[c.x - 1], buildAutoSegment(prevSt ? prevSt.name : "前一站", t, {
+    if (n[xx - 1] && n[xx - 1].type === "segment") {
+      const prevSt = n[xx - 2];
+      Object.assign(n[xx - 1], buildAutoSegment(prevSt ? prevSt.name : "前一站", t, {
         mode, estDur, estFare, transferInfo, headwayNote
       }));
     }
-    if (oldName !== t && n[c.x + 1] && n[c.x + 1].type === "segment") {
-      const nextSt = n[c.x + 2];
-      Object.assign(n[c.x + 1], buildAutoSegment(t, nextSt ? nextSt.name : "下一站", {
-        mode: n[c.x + 1].platform || "電車／地鐵轉乘",
-        headwayNote: n[c.x + 1].headwayNote || ""
+    if (oldName !== t && n[xx + 1] && n[xx + 1].type === "segment") {
+      const nextSt = n[xx + 2];
+      Object.assign(n[xx + 1], buildAutoSegment(t, nextSt ? nextSt.name : "下一站", {
+        mode: n[xx + 1].platform || "電車／地鐵轉乘",
+        headwayNote: n[xx + 1].headwayNote || ""
       }));
     }
 
-    userNodes[c.i] = n;
-    pushSupabaseState(`D${c.i + 1} 修改景點「${t}」`);
+      userNodes[c.i] = n;
+    }, `D${c.i + 1} 修改景點「${t}」`);
   } else {
-    addAfter(c.i, c.x, {
-      time, title: t, note, url: parseMapUrl(rawU),
-      mode, estDur, estFare, transferInfo, headwayNote
-    });
-    pushSupabaseState(`D${c.i + 1} 新增景點「${t}」`);
+    const newId = newNodeId();
+    dayOp(c.i, () => {
+      let xx = c.sid ? indexOfId(c.i, c.sid) : -1;
+      if (xx < 0 && nodesOf(c.i).length) xx = lastStation(c.i);
+      addAfter(c.i, xx, { time, title: t, note, url: parseMapUrl(rawU), mode, estDur, estFare, transferInfo, headwayNote, newId });
+    }, `D${c.i + 1} 新增景點「${t}」`);
   }
 
   refreshDay(c.i);
@@ -2659,7 +2669,7 @@ function openSegSheet(i, x) {
   const seg = n[x];
   const a = n[x - 1], b = n[x + 1];
   if (!seg || seg.type !== "segment") return;
-  segCtx = { i, x };
+  segCtx = { i, x, id: seg.id };
   document.getElementById("segRoutePreview").textContent = (a && b) ? `起點：${a.name} → 終點：${b.name}` : "";
   const allowedModes = ["電車／地鐵轉乘", "JR／私鐵直達", "步行前往", "路線公車", "包車／計程車"];
   sModeEl.value = allowedModes.includes(seg.platform) ? seg.platform : "電車／地鐵轉乘";
@@ -2681,8 +2691,7 @@ document.getElementById("segSheet").addEventListener("submit", e => {
   e.preventDefault();
   if (!segCtx) return;
   const { i, x } = segCtx;
-  const n = cloneNodes(i);
-  const seg = n[x];
+  const segId = segCtx.id;
   const mode = sModeEl.value;
   const lineName = document.getElementById("sLineName").value.trim();
   const dur = document.getElementById("sDur").value.trim();
@@ -2690,7 +2699,11 @@ document.getElementById("segSheet").addEventListener("submit", e => {
   const transferInfo = document.getElementById("sTransfer").value.trim();
   const headwayNote = shouldShowHeadway(mode, sHeadwayEl.value) ? sHeadwayEl.value.trim() : "";
 
-  seg.platform = mode;
+  dayOp(i, () => {
+    const n = cloneNodes(i);
+    const seg = n.find(z => z.id === segId);
+    if (!seg) return;
+    seg.platform = mode;
   if (lineName) seg.lineName = lineName;
   if (dur) seg.duration = dur;
   if (fare) seg.fare = fare;
@@ -2699,8 +2712,8 @@ document.getElementById("segSheet").addEventListener("submit", e => {
   if (transferInfo) {
     seg.details = "轉乘：" + transferInfo + "｜即時班次以實際交通查詢為準";
   }
-  userNodes[i] = n;
-  pushSupabaseState(`D${i + 1} 更新交通資訊`);
+    userNodes[i] = n;
+  }, `D${i + 1} 更新交通資訊`);
   refreshDay(i);
   closeSegSheet();
   showToast("已更新交通資訊");
@@ -2763,6 +2776,7 @@ document.addEventListener("click", e => {
       kind: "edit",
       i,
       x,
+      sid: o.id,
       hideTransit: !prevSeg,
       title: "修改「" + o.name + "」"
     }, {
@@ -2783,21 +2797,19 @@ document.addEventListener("click", e => {
       kind: "add",
       i,
       x,
+      sid: o ? o.id : null,
       hideTransit: x < 0,
       title: o ? "新增景點（接在「" + o.name + "」之後）" : "新增第一個景點"
     }, {});
   } else if ("ndel" in d) {
     const [i, x] = d.ndel.split(":").map(Number);
     const targetName = nodesOf(i)[x] ? nodesOf(i)[x].name : "景點";
-    delStation(i, x);
-    pushSupabaseState(`D${i + 1} 刪除「${targetName}」`);
-    refreshDay(i);
+    const delId = nodesOf(i)[x] && nodesOf(i)[x].id;
+    dayOp(i, () => { const xx = indexOfId(i, delId); if (xx >= 0) delStation(i, xx); }, `D${i + 1} 刪除「${targetName}」`);
     showToast("已刪除，可點「修改紀錄」找回");
   } else if ("nreset" in d) {
     const i = Number(d.nreset);
-    delete userNodes[i];
-    pushSupabaseState(`D${i + 1} 還原為預設行程`);
-    refreshDay(i);
+    dayOp(i, () => { delete userNodes[i]; }, `D${i + 1} 還原為預設行程`);
     showToast("已還原此日預設行程");
   } else if ("cadd" in d) {
     const [i, k] = d.cadd.split(":").map(Number);
@@ -2806,6 +2818,7 @@ document.addEventListener("click", e => {
       kind: "add",
       i,
       x: lastStation(i),
+      sid: (nodesOf(i)[lastStation(i)] || {}).id,
       title: "加入行程（接在這天最後）"
     }, {
       time: (c.time || "").split("–")[0],
@@ -3255,10 +3268,8 @@ document.getElementById("expForm").addEventListener("submit", e => {
     showToast("請至少勾選 1 位參與分攤成員");
     return;
   }
-  expenses.push({ title, amount, currency, payer, participants });
-  saveExpensesLocal();
-  renderExpenses();
-  pushSupabaseState(`記帳新增「${title}」`);
+  const item = { id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), title, amount, currency, payer, participants };
+  expOp(list => list.concat([item]));
   document.getElementById("expTitle").value = "";
   document.getElementById("expAmount").value = "";
   showToast("已新增公費紀錄並同步");
@@ -3268,18 +3279,15 @@ document.getElementById("expenseList").addEventListener("click", e => {
   const btn = e.target.closest("[data-del-exp]");
   if (!btn) return;
   const removed = expenses[Number(btn.dataset.delExp)];
-  expenses.splice(Number(btn.dataset.delExp), 1);
-  saveExpensesLocal();
-  renderExpenses();
-  pushSupabaseState(`記帳刪除「${removed ? removed.title : "項目"}」`);
+  if (!removed) return;
+  const key = JSON.stringify(removed);
+  expOp(list => list.filter(x => removed.id ? x.id !== removed.id : JSON.stringify(x) !== key));
   showToast("已刪除公費紀錄");
 });
 
 document.getElementById("clearExpenses").addEventListener("click", () => {
-  expenses = [];
-  saveExpensesLocal();
-  renderExpenses();
-  pushSupabaseState("清空公費記帳紀錄");
+  if (!confirm("確定清空所有人的公費紀錄？")) return;
+  expOp(() => []);
   showToast("已清空公費紀錄");
 });
 
@@ -3322,6 +3330,114 @@ document.getElementById("copySplitReport").addEventListener("click", () => {
 
   copyText(lines.join("\n"));
 });
+
+function indexOfId(i, id) { return nodesOf(i).findIndex(z => z.id === id); }
+function newNodeId() { return "n" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+function replayDay(i, fresh, opFn) {
+  const had = (i in userNodes), save = userNodes[i];
+  userNodes[i] = fresh;
+  opFn();
+  const out = userNodes[i];
+  if (had) userNodes[i] = save; else delete userNodes[i];
+  return out;
+}
+async function dayOp(i, opFn, summary) {
+  opFn(); saveLocalCache(); refreshDay(i);
+  if (!sbConfigured) return;
+  sbBusy++; setStatus("syncing", "⏳ 同步中...");
+  try {
+    const base = `${SUPABASE_URL}/rest/v1/trip_itinerary?room_id=eq.${encodeURIComponent(TRIP_ROOM_ID)}`;
+    const nowStr = new Date().toLocaleString("zh-TW", { hour12: false, month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit" });
+    const compose = async () => {
+      const g = await fetchWithTimeout(base + "&select=days_data,history,updated_at", { headers: sbHeaders() }, 6000);
+      const row = ((await g.json()) || [])[0] || {};
+      const days = (row.days_data && typeof row.days_data === "object" && Object.keys(row.days_data).length) ? row.days_data : buildDefaultNodesMap();
+      const fresh = JSON.parse(JSON.stringify(days[i] || daysData[i].nodes));
+      const out = replayDay(i, fresh, opFn);
+      if (out) days[i] = out; else delete days[i];
+      const hist = [{ id: Date.now(), time: nowStr, summary, snapshot: JSON.parse(JSON.stringify(days)) }].concat(Array.isArray(row.history) ? row.history : []).slice(0, 25);
+      return { row, payload: { days_data: days, history: hist, updated_at: new Date().toISOString() } };
+    };
+    let done = null;
+    for (let k = 0; k < 4 && !done; k++) {
+      const { row, payload } = await compose();
+      if (!row.updated_at) break;
+      const p = await fetchWithTimeout(base + "&updated_at=eq." + encodeURIComponent(row.updated_at), { method: "PATCH", headers: sbHeaders(), body: JSON.stringify(payload) }, 6000);
+      const res = await p.json();
+      if (Array.isArray(res) && res.length) done = payload;
+    }
+    if (!done) {
+      const { payload } = await compose();
+      const p = await fetchWithTimeout(`${SUPABASE_URL}/rest/v1/trip_itinerary?on_conflict=room_id`, { method: "POST", headers: sbHeaders(), body: JSON.stringify(Object.assign({ room_id: TRIP_ROOM_ID }, payload)) }, 6000);
+      if (!p.ok) throw new Error("HTTP " + p.status);
+      done = payload;
+    }
+    userNodes = done.days_data; revisionHistory = done.history;
+    saveLocalCache(); saveLocalHistory();
+    for (let d = 0; d < daysData.length; d++) refreshDay(d);
+    setStatus("ok", "☁️ 雲端已同步");
+  } catch (e) {
+    console.warn(e); setStatus("warn", "⚠️ 同步失敗");
+    showToast("雲端同步失敗，這項修改可能沒存到，請稍後重新確認");
+  } finally { sbBusy--; }
+}
+var sbBusy = 0;
+async function expOp(fn) {
+  expenses = fn(expenses); saveExpensesLocal(); renderExpenses();
+  if (!sbConfigured) return;
+  sbBusy++; setStatus("syncing", "⏳ 同步中...");
+  try {
+    const base = `${SUPABASE_URL}/rest/v1/trip_itinerary?room_id=eq.${encodeURIComponent(TRIP_ROOM_ID)}`;
+    let ok = false;
+    for (let k = 0; k < 4 && !ok; k++) {
+      const g = await fetchWithTimeout(base + "&select=expenses,updated_at", { headers: sbHeaders() }, 6000);
+      const row = ((await g.json()) || [])[0];
+      if (!row) break;
+      const next = fn(Array.isArray(row.expenses) ? row.expenses : []);
+      const p = await fetchWithTimeout(base + "&updated_at=eq." + encodeURIComponent(row.updated_at), { method: "PATCH", headers: sbHeaders(), body: JSON.stringify({ expenses: next, updated_at: new Date().toISOString() }) }, 6000);
+      const out = await p.json();
+      if (Array.isArray(out) && out.length) { expenses = out[0].expenses || next; ok = true; }
+    }
+    if (!ok) {
+      const g = await fetchWithTimeout(base + "&select=expenses", { headers: sbHeaders() }, 6000);
+      const row = ((await g.json()) || [])[0];
+      const next = fn(row && Array.isArray(row.expenses) ? row.expenses : []);
+      const p = await fetchWithTimeout(`${SUPABASE_URL}/rest/v1/trip_itinerary?on_conflict=room_id`, { method: "POST", headers: sbHeaders(), body: JSON.stringify({ room_id: TRIP_ROOM_ID, expenses: next, updated_at: new Date().toISOString() }) }, 6000);
+      if (!p.ok) throw new Error("HTTP " + p.status);
+      expenses = next;
+    }
+    saveExpensesLocal(); renderExpenses(); setStatus("ok", "☁️ 雲端已同步");
+  } catch (e) {
+    console.warn(e); setStatus("warn", "⚠️ 同步失敗");
+    showToast("雲端同步失敗，這筆可能沒存到，請稍後重新確認");
+  } finally { sbBusy--; }
+}
+async function pollRemote() {
+  if (!sbConfigured || document.hidden || sbBusy > 0 || isApplyingRemote) return;
+  if (document.querySelector(".sheet-bg.show")) return;
+  try {
+    const res = await fetchWithTimeout(`${SUPABASE_URL}/rest/v1/trip_itinerary?room_id=eq.${encodeURIComponent(TRIP_ROOM_ID)}&select=days_data,expenses`, { headers: sbHeaders() }, 6000);
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const r = ((await res.json()) || [])[0];
+    if (!r || sbBusy > 0) return;
+    let changed = false;
+    isApplyingRemote = true;
+    if (r.days_data && Object.keys(r.days_data).length && JSON.stringify(r.days_data) !== JSON.stringify(userNodes)) {
+      userNodes = r.days_data; saveLocalCache();
+      for (let i = 0; i < daysData.length; i++) refreshDay(i);
+      changed = true;
+    }
+    if (Array.isArray(r.expenses) && JSON.stringify(r.expenses) !== JSON.stringify(expenses)) {
+      expenses = r.expenses; saveExpensesLocal(); renderExpenses(); changed = true;
+    }
+    isApplyingRemote = false;
+    setStatus("ok", "☁️ 雲端已同步");
+    if (changed) showToast("🔄 已更新旅伴的修改");
+  } catch (e) { isApplyingRemote = false; }
+}
+setInterval(pollRemote, 5000);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) pollRemote(); });
+window.addEventListener("focus", pollRemote);
 
 renderExpenses();
 </script>
