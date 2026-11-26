@@ -3073,7 +3073,7 @@ MEMBERS.forEach((m, idx) => {
     chip.classList.toggle("active", cb.checked);
     updatePartSummaryLabel();
   });
-  chip.append(cb, document.createTextNode(m.replace(/^成員 \d+/, "D" + (idx + 1).replace("D", ""))));
+  chip.append(cb, document.createTextNode(m.replace(/^成員 \d+（|）$/g, "")));
   partChipsEl.appendChild(chip);
 });
 
