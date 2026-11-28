@@ -1995,18 +1995,18 @@ const daysData = [
     title: "清晨返台（GK013）・包車回台中",
     summaryMeta: "航班：捷星日本 GK013｜08:30 起飛、11:50 抵達桃園 T1｜11:50–13:50 包車回台中",
     nodes: [
-      { type: "station", badge: "發", badgeClass: "", topLine: "none", bottomLine: "orange", depTime: "05:30", name: "東橫INN成田機場本館", sub: "退房，搭免費接駁車（05:30 發車；05:50 也有一班）", query: "東横INN成田空港本館" },
-      { type: "segment", lineColor: "#c97343", axisClass: "orange", lineName: "飯店免費接駁 → 成田機場", platform: "路線公車", details: "05:30–05:55 搭接駁車前往機場，05:50 也有一班。確認是否停靠 T3；若停 T2，步行約 10–15 分鐘到 T3", fare: "免費", duration: "約 25 min（05:30–05:55）", headwayNote: "接駁車依飯店清晨固定班次發車，請提前到大廳排隊", mapOrigin: "東横INN成田空港本館", mapDest: "成田国際空港 第3ターミナル" },
-      { type: "station", badge: "轉", badgeClass: "transfer", topLine: "orange", bottomLine: "orange", arrTime: "06:00", depTime: "08:30", name: "成田國際機場 T3", sub: "06:00–08:30 成田機場闖關（不要跟丟了）：捷星櫃檯報到、託運、出境", query: "成田国際空港 第3ターミナル" },
-      { type: "segment", lineColor: "#c97343", axisClass: "orange", lineName: "捷星日本 GK013｜成田 T3 → 桃園 T1", platform: "GK013", details: "08:30 起飛 → 11:50 抵達桃園 T1（空中巴士 A321neo・經濟艙）", fare: "08:30 – 11:50", duration: "航程約 4h20m", mapOrigin: "成田國際機場", mapDest: "桃園國際機場第一航廈" },
+      { type: "station", badge: "發", badgeClass: "", topLine: "none", bottomLine: "orange", depTime: "05:30", name: "東橫INN成田機場本館", sub: "退房，搭免費接駁車（05:30 發車；05:50 也有一班）", query: "Toyoko Inn Narita Airport Honkan", mapQuery: "東横INN成田空港本館" },
+      { type: "segment", lineColor: "#c97343", axisClass: "orange", lineName: "飯店免費接駁 → 成田機場", platform: "包車／計程車", details: "05:30–05:55 搭接駁車前往機場，05:50 也有一班。確認是否停靠 T3；若停 T2，步行約 10–15 分鐘到 T3", fare: "免費", duration: "約 25 min（05:30–05:55）", headwayNote: "飯店免費接駁車為固定班次（05:30、05:50），Google Maps 無收錄此接駁路線，已改為開車／路線導航", mapOrigin: "Toyoko Inn Narita Airport Honkan", mapDest: "Narita International Airport", navMode: "driving" },
+      { type: "station", badge: "轉", badgeClass: "transfer", topLine: "orange", bottomLine: "orange", arrTime: "06:00", depTime: "08:30", name: "成田國際機場 T3", sub: "06:00–08:30 成田機場闖關（不要跟丟了）：捷星櫃檯報到、託運、出境（請先完成免稅海關確認再託運）", query: "Narita International Airport Terminal 3", mapQuery: "Narita International Airport" },
+      { type: "segment", lineColor: "#c97343", axisClass: "orange", lineName: "捷星日本 GK013｜成田 T3 → 桃園 T1", platform: "GK013", details: "08:30 起飛 → 11:50 抵達桃園 T1（空中巴士 A321neo・經濟艙）", fare: "08:30 – 11:50", duration: "航程約 4h20m", mapOrigin: "Narita International Airport", mapDest: "Taoyuan International Airport Terminal 1" },
       { type: "station", badge: "轉", badgeClass: "transfer", topLine: "orange", bottomLine: "", arrTime: "11:50", depTime: "11:50", name: "桃園國際機場 T1", sub: "11:50 抵達、入境領行李，接著包車回台中", query: "桃園國際機場第一航廈" },
-      { type: "segment", lineColor: "#37969e", axisClass: "", lineName: "包車回台中", platform: "包車／計程車", details: "11:50–13:50 從桃園機場包車回台中", fare: "—（依包車報價）", duration: "約 2 hr（11:50–13:50）", mapOrigin: "桃園國際機場第一航廈", mapDest: "台中車站" },
+      { type: "segment", lineColor: "#37969e", axisClass: "", lineName: "包車回台中", platform: "包車／計程車", details: "11:50–13:50 從桃園機場包車回台中（高速公路直達）", fare: "—（依包車報價）", duration: "約 2 hr（11:50–13:50）", headwayNote: "包車直接走國道南下，導航已設為開車路線模式", mapOrigin: "桃園國際機場第一航廈", mapDest: "台中車站", navMode: "driving" },
       { type: "station", badge: "到", badgeClass: "arrive", topLine: "", bottomLine: "none", arrTime: "13:50", name: "台中（解散）", sub: "要結束了各位😦 平安回家，這趟東京之旅圓滿結束！", query: "台中車站" }
     ],
     nearbyCards: [
-      { time: "1/17 前", cat: "伴手禮", style: "", title: "伴手禮提早買", desc: "T3 商店少、開店晚，Tokyo Banana、ROYCE 等先在市區買好。", price: "自理", url: "https://www.google.com/maps/search/?api=1&query=成田国際空港+第3ターミナル" }
+      { time: "1/17 前", cat: "伴手禮", style: "", title: "伴手禮提早買", desc: "T3 商店少、開店晚，Tokyo Banana、ROYCE 等先在市區買好。", price: "自理", url: "https://www.google.com/maps/search/?api=1&query=Narita+International+Airport+Terminal+3" }
     ],
-    places: [["東橫INN成田機場本館", 0, 0, "東横INN成田空港本館"], ["成田國際機場 T3", 0, 0, "成田国際空港 第3ターミナル"], ["桃園國際機場 T1", 0, 0, "桃園國際機場第一航廈"], ["台中車站", 0, 0, "台中車站"]]
+    places: [["東橫INN成田機場本館", 0, 0, "Toyoko Inn Narita Airport Honkan"], ["成田國際機場 T3", 0, 0, "Narita International Airport Terminal 3"], ["桃園國際機場 T1", 0, 0, "桃園國際機場第一航廈"], ["台中車站", 0, 0, "台中車站"]]
   }
 ];
 
@@ -2071,7 +2071,7 @@ function saveLocalCache() {
 function saveLocalHistory() {
   try { localStorage.setItem(HIST_KEY, JSON.stringify(revisionHistory.slice(0, 30))); } catch (e) {}
 }
-const DEFAULTS_VERSION = "2026-11-28-notion";
+const DEFAULTS_VERSION = "2026-11-28-day6-nav-fix";
 const MIGRATE_DAYS = [0, 3, 5];
 function applyDefaultsMigration() {
   if (!userNodes || typeof userNodes !== "object" || userNodes._v === DEFAULTS_VERSION) return false;
@@ -2254,8 +2254,22 @@ function timelineHtml(i) {
       const a = nodes[x - 1], b = nodes[x + 1];
       const hasEndpoints = a && b && a.type === "station" && b.type === "station";
       const isFlight = /^GK0/.test(node.platform || "");
-      const transitUrl = hasEndpoints ? esc(mapsDirUrl(a.query, b.query, "transit")) : "";
-      const walkUrl = hasEndpoints ? esc(mapsDirUrl(a.query, b.query, "walking")) : "";
+      const originQ = node.mapOrigin || (a && (a.mapQuery || a.query)) || "";
+      const destQ = node.mapDest || (b && (b.mapQuery || b.query)) || "";
+      const isCharterOrShuttle = node.navMode === "driving" || (node.platform || "").includes("包車") || (node.lineName || "").includes("接駁");
+      const isWalkOnly = (node.platform || "").includes("步行");
+
+      const primaryMode = isCharterOrShuttle ? "driving" : (isWalkOnly ? "walking" : "transit");
+      const primaryUrl = hasEndpoints ? esc(mapsDirUrl(originQ, destQ, primaryMode)) : "";
+      const secondaryUrl = hasEndpoints
+        ? esc(isCharterOrShuttle ? mapsSearchUrl(destQ) : mapsDirUrl(originQ, destQ, "walking"))
+        : "";
+      const primaryLabel = isCharterOrShuttle
+        ? `🚗 路線導航（接駁／包車）：${esc(a.name)} → ${esc(b.name)}`
+        : (isWalkOnly
+            ? `🚶 步行導航：${esc(a.name)} → ${esc(b.name)}`
+            : `🚃 大眾運輸查詢：${esc(a.name)} → ${esc(b.name)}`);
+      const secondaryLabel = isCharterOrShuttle ? "📍 終點位置" : "🚶 步行";
 
       const showHeadway = shouldShowHeadway(node.platform, node.headwayNote);
       const headwayHtml = showHeadway
@@ -2267,11 +2281,11 @@ function timelineHtml(i) {
 
       const navButtonsHtml = (hasEndpoints && !isFlight)
         ? `<div class="seg-route-links">
-             <a class="seg-gmaps-btn" href="${transitUrl}" target="_blank" rel="noopener">
-               <span>🚃 大眾運輸查詢：${esc(a.name)} → ${esc(b.name)}</span>
+             <a class="seg-gmaps-btn" href="${primaryUrl}" target="_blank" rel="noopener">
+               <span>${primaryLabel}</span>
                <span>›</span>
              </a>
-             <a class="seg-walk-btn" href="${walkUrl}" target="_blank" rel="noopener" title="步行路線">🚶 步行</a>
+             <a class="seg-walk-btn" href="${secondaryUrl}" target="_blank" rel="noopener">${secondaryLabel}</a>
            </div>`
         : "";
 
